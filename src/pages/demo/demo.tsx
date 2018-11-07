@@ -1,7 +1,5 @@
 import * as React from 'react'
 
-declare const $http: any
-
 export class Demo extends React.Component {
 
   componentDidMount() {
