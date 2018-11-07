@@ -1,14 +1,16 @@
 import * as React from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
-import { Demo } from './demo/demo'
+import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import NotFound from '@components/notFound'
+import Login from '@pages/login/login'
+import Home from '@pages/home/home'
 
 const App = () => {
   return (
       <Router>
         <Switch>
-          <Route path="/" exact={true} component={Demo}></Route>
-          <Route component={NotFound}></Route>
+          <Route path="" exact component={Home}></Route>
+          <Route path="/login" exact component={Login}></Route>
+          {/* <Route component={NotFound}></Route> */}
         </Switch>
       </Router>
   );
