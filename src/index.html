@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>CMS</title>
+  <script>
+    var _html = document.documentElement;
+    function getSize() {
+      var w = _html.clientWidth;
+      if(w <= 320) {
+        _html.style.fontSize = '17px';
+      } else if(w >= 750) {
+        _html.style.fontSize = '40px';
+      } else {
+        _html.style.fontSize = w/750*40 + 'px';
+      }
+    }
+    getSize();
+
+    var timer;
+    window.addEventListener('resize', function(e) {
+      clearTimeout(timer);
+      timer = setTimeout(function(){getSize()}, 300);
+    })
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div id="app"></div>
+  </div>
+</body>
+</html>
