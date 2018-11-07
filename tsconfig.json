@@ -17,13 +17,13 @@
     "typeRoots": [
       "./node_modules/@types/"
     ],
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "paths": {
-      "@src/*": ["src/*"],
-      "@assets/*": ["src/assets/*"],
-      "@components/*": ["src/components/*"],
-      "@pages/*": ["src/pages/*"],
-      "@utils/*": ["src/utils/*"]
+      "@/*": ["/*"],
+      "@assets/*": ["assets/*"],
+      "@components/*": ["components/*"],
+      "@pages/*": ["pages/*"],
+      "@utils/*": ["utils/*"]
     }
   },
   "compileOnSave": false,

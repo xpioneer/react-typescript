@@ -1,19 +1,9 @@
 const path = require('path'),
-  webpack = require('webpack');
+  webpack = require('webpack'),
+  styleRules = require('./styleLoaderConf'),
+  MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const _PROD_ = process.env.NODE_ENV === 'production';
-
-const postCSSLoader = {
-  loader: "postcss-loader",
-  options: {
-    plugins: () => [
-      require("autoprefixer")({
-          browsers: ["Android 4.1", "iOS 7.1", "Chrome > 31", "ff > 31", "ie >= 11"]
-      })
-    ],
-    sourceMap: true
-  }
-};
 
 module.exports = {
   entry: {
@@ -30,10 +20,10 @@ module.exports = {
     // libraryTarget: "umd", // 通用模块定义
     // 导出库(exported library)的类型
 
-    publicPath: '/',
+    // publicPath: '/', // root Dir
     sourceMapFilename: '[name].map',
-    chunkFilename: '[id].chunk.[hash].js',
-    filename: './[name].bundle.[hash:8].js'
+    chunkFilename: 'static/js/[id].chunk.[hash].js',
+    filename: 'static/js/[name].bundle.[hash:8].js'
   },
 
   module: {
@@ -48,17 +38,12 @@ module.exports = {
           // useBabel: true,
         }
       },
-      {
-        test: /\.css?$/,
-        include: [
-          path.resolve(process.cwd(), "src")
-        ]
-      },
+      ...styleRules,
       {
         test: /\.(eot|woff|woff2|ttf)(\?\S*)?$/,
         loader: "url-loader",
         options: {
-          name: "assets/[name]-[hash:8].[ext]",
+          name: "assets/fonts/[name].[hash:8].[ext]",
           limit: 2048
         }
       },
@@ -66,7 +51,7 @@ module.exports = {
         test: /\.(svg|png|jpe?g|gif)(\?\S*)?$/,
         loader: "url-loader",
         options: {
-          name: "assets/[name]-[hash:8].[ext]",
+          name: "assets/imgs/[name].[hash:8].[ext]",
           limit: 2048
         }
       }
@@ -152,6 +137,9 @@ module.exports = {
     //   },
     //   _DEV_: JSON.stringify(_DEV_),
     // }),
+    new MiniCssExtractPlugin({
+      filename: "static/css/[name].[contenthash].css",
+    }),
     new webpack.ProvidePlugin({
       $http: [path.resolve(process.cwd(), 'src/utils/http.ts'), 'default']
   }),

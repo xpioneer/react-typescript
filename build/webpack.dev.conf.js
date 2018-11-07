@@ -14,7 +14,7 @@ module.exports = merge(webpackConfig, {
       '/api': 'http://127.0.0.1:9202'
     },
     contentBase: path.join(__dirname, '../dist'), // boolean | string | array, static file location
-    publicPath: '/',
+    // publicPath: '/',
     stats: {
       color: true
     },
