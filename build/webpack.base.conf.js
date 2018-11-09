@@ -1,17 +1,22 @@
 const path = require('path'),
   webpack = require('webpack'),
   styleRules = require('./styleLoaderConf'),
+  CopyWebpackPlugin = require('copy-webpack-plugin'),
   MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const _PROD_ = process.env.NODE_ENV === 'production';
 
+const resolve = (dir) => {
+  return path.resolve(process.cwd(), dir)
+}
+
 module.exports = {
   entry: {
-    app: path.resolve(__dirname, "../src/index.tsx"),
+    app: resolve("src/index.tsx"),
   },
 
   output: {
-    path: path.resolve(__dirname, "../dist"), // string
+    path: resolve("dist"), // string
     // 所有输出文件的目标路径
     // publicPath: "/assets/", // string
     // // 输出解析文件的目录，url 相对于 HTML 页面
@@ -31,7 +36,7 @@ module.exports = {
       {
         test: /\.tsx?$/,
         include: [
-          path.resolve(process.cwd(), "src")
+          resolve("src")
         ],
         loader: "awesome-typescript-loader",
         options: {
@@ -63,18 +68,18 @@ module.exports = {
     // （不适用于对 loader 解析）
     modules: [
       "node_modules",
-      path.resolve(__dirname, "../src")
+      resolve("src")
     ],
     // 用于查找模块的目录
 
     extensions: [".js", ".ts", ".tsx"],
 
     alias: {
-      '@src': path.resolve(process.cwd(), 'src'),
-      '@assets': path.resolve(process.cwd(), 'src/assets'),
-      '@components': path.resolve(process.cwd(), 'src/components'),
-      '@pages': path.resolve(process.cwd(), 'src/pages'),
-      '@pages': path.resolve(process.cwd(), 'src/pages')
+      '@src': resolve('src'),
+      '@assets': resolve('src/assets'),
+      '@components': resolve('src/components'),
+      '@pages': resolve('src/pages'),
+      '@pages': resolve('src/pages')
     }
   },
 
@@ -141,7 +146,11 @@ module.exports = {
       filename: "static/css/[name].[contenthash].css",
     }),
     new webpack.ProvidePlugin({
-      $http: [path.resolve(process.cwd(), 'src/utils/http.ts'), 'default']
-  }),
+      $http: [resolve('src/utils/http.ts'), 'default']
+    }),
+    new CopyWebpackPlugin([{
+      from: resolve('statics'),
+      ignore: ['.*']
+    }])
   ]
 }

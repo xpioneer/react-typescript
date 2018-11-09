@@ -5,6 +5,15 @@ interface IParamsData {
   [key: string]: any
 }
 
+const fmtGetParams = (params: object) => {
+  let data = ''
+  for(let k in params) {
+    data += k + '=' + params[k] + '&'
+  }
+  data = data.substring(0, data.length - 1)
+  return data
+}
+
 class DemoStore {
   @observable count: number = 90
   @observable apiUrl = ''
@@ -42,7 +51,10 @@ class DemoStore {
   @action testApi = () => {
     let jsonData = {}, error = null
     try {
-      jsonData = JSON.parse(this.apiParams)
+      if(this.apiParams) {
+        console.log(this.apiParams)
+        jsonData = JSON.parse(this.apiParams)
+      }
     } catch(e) {
       error = e
     }
@@ -50,10 +62,32 @@ class DemoStore {
       message.error('参数请使用json格式')
       return
     }
-    // if(this.apiType === '/api')
-    $http.post(this.apiType + this.apiUrl).then(res => {
-      console.log(res)
-    })
+    if(this.apiType === '/api') {
+      if(this.apiMethod === 'GET'){
+        $http.get(this.apiType + this.apiUrl + fmtGetParams(jsonData)).then(res => {
+          runInAction(() => this.apiResult = JSON.stringify(res, null, '    '))
+        })
+      } else if (this.apiMethod === 'POST') {
+        $http.post(this.apiType + this.apiUrl).then(res => {
+          runInAction(() => this.apiResult = JSON.stringify(res, null, '    '))
+        })
+      } else if (this.apiMethod === 'PUT') {
+        $http.post(this.apiType + this.apiUrl, jsonData).then(res => {
+          runInAction(() => this.apiResult = JSON.stringify(res, null, '    '))
+        })
+      } else if (this.apiMethod === 'DELETE') {
+        $http.post(this.apiType + this.apiUrl, jsonData).then(res => {
+          runInAction(() => this.apiResult = JSON.stringify(res, null, '    '))
+        })
+      }
+      
+    } else {
+      $http.post(this.apiType, jsonData).then(res => {
+        runInAction(() => this.apiResult = JSON.stringify(res, null, '    '))
+      }, err => {
+        runInAction(() => this.apiResult = JSON.stringify(err.data, null, '    '))
+      })
+    }
   }
 
 }

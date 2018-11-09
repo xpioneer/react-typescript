@@ -75,7 +75,7 @@ export class Demo extends React.Component<IProps> {
                   </Col>
                   {
                     apiType === '/api' ?
-                    <Col span={2}>
+                    <Col span={3}>
                       <Select value={apiMethod}
                         onChange={methodChange}>
                         <Option value="GET">GET</Option>
@@ -85,20 +85,20 @@ export class Demo extends React.Component<IProps> {
                       </Select>
                     </Col> : ''
                   }
-                  <Col span={4}>
+                  <Col span={3}>
                     <Select value={apiType}
                       onChange={typeChange}>
                       <Option value="/api">RESTFul</Option>
                       <Option value="/graphql">GraphQL</Option>
                     </Select>
                   </Col>
-                  <Col span={4}>
+                  <Col span={6}>
                     <Button type="primary" onClick={testApi}>发送</Button>
                   </Col>
                 </Row>
               </FormItem>
               <FormItem label="参数(json格式)" labelCol={{span: 4}} wrapperCol={{span: 12}}>
-                <TextArea rows={4} onChange={inputParams} value={apiParams}/>
+                <TextArea rows={4} onChange={e => inputParams(e.target.value)}/>
               </FormItem>
               <FormItem label="结果" labelCol={{span: 4}} wrapperCol={{span: 18}}>
                 <TextArea rows={20} value={apiResult}/>

@@ -11,7 +11,8 @@ module.exports = merge(webpackConfig, {
     port: '8022',
     host: 'localhost',
     proxy: {
-      '/api': 'http://127.0.0.1:9202'
+      '/api': 'http://127.0.0.1:8020',
+      '/graphql': 'http://127.0.0.1:8020'
     },
     contentBase: path.join(__dirname, '../dist'), // boolean | string | array, static file location
     // publicPath: '/',
