@@ -1,13 +1,20 @@
 import * as React from 'react'
+import { NavLink, Link, withRouter, RouteComponentProps } from 'react-router-dom'
 import { Layout, Menu, Icon } from 'antd'
 
 const { Sider } = Layout
 
-interface ISiderProps {
+interface ISiderProps extends RouteComponentProps {
   collapsed?: boolean
 }
 
-export default class SiderComponent extends React.Component<ISiderProps> {
+class SiderComponent extends React.Component<ISiderProps> {
+
+  goPage = (e: any) => {
+    console.log(e, this.props)
+    this.props.history.push('/demo')
+  }
+
   render(){
     const {collapsed} = this.props
     
@@ -27,12 +34,16 @@ export default class SiderComponent extends React.Component<ISiderProps> {
           <Icon type="video-camera" />
           <span>图表</span>
         </Menu.Item>
-        <Menu.Item key="3">
-          <Icon type="bulb" />
-          <span>测试</span>
+        
+        <Menu.Item key="3" onClick={this.goPage}>
+          {/* <NavLink to="/demo"> */}
+            <Icon type="bulb" />
+            <span>测试</span>
+          {/* </NavLink>     */}
         </Menu.Item>
       </Menu>
     </Sider>)
   }
 }
 
+export default withRouter(SiderComponent)

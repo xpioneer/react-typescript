@@ -21,9 +21,9 @@ const styles = {
   }
 }
 
-interface IProps{
-  demoStore?: any
-}
+// interface IProps{
+//   demoStore?: any
+// }
 
 @inject('demoStore')
 @observer

@@ -26,8 +26,9 @@ export default class Home extends React.Component<IProps> {
           <Content style={{ margin: '16px 12px', padding: 16, background: '#fff', minHeight: 480 }}>
             <Router>
               <Switch>
-                <Route path="/" exact component={Dashboard}></Route>
-                <Route path="/demo" exact component={Demo}></Route>
+                <Route path="/home" component={Dashboard}></Route>
+                {/* <Redirect from="/" to="/home"></Redirect> */}
+                <Route path="/demo" component={Demo}></Route>
                 <Route component={NotFound}></Route>
               </Switch>
             </Router>
@@ -39,6 +40,6 @@ export default class Home extends React.Component<IProps> {
   }
 }
 
-interface IProps {
-  homeStore: any
-}
+// interface IProps {
+//   homeStore: any
+// }
