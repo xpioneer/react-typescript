@@ -7,5 +7,6 @@ declare global {
   export interface IProps extends RouteComponentProps {
     demoStore?: any
     homeStore?: any
+    loginStore?: any
   }
 }
