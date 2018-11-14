@@ -93,10 +93,10 @@ export class Demo extends React.Component<IProps> {
                 </Row>
               </FormItem>
               <FormItem label="参数(json格式)" labelCol={{span: 4}} wrapperCol={{span: 12}}>
-                <TextArea rows={4} onChange={e => inputParams(e.target.value)}/>
+                <TextArea rows={6} onChange={e => inputParams(e.target.value)} value={apiParams}/>
               </FormItem>
               <FormItem label="结果" labelCol={{span: 4}} wrapperCol={{span: 18}}>
-                <TextArea rows={20} value={apiResult}/>
+                <TextArea rows={24} value={apiResult}/>
               </FormItem>
             </Form>
           </Col>

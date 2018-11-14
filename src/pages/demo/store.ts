@@ -14,9 +14,15 @@ const fmtGetParams = (params: object) => {
   return data
 }
 
+const defaultParams: IParamsData = {
+  query: '{}',
+  varibles: '{}',
+  operationName: null
+}
+
 class DemoStore {
   @observable count: number = 90
-  @observable apiUrl = ''
+  @observable apiUrl = '/api'
   @observable apiType = '/api'
   @observable apiMethod = 'GET'
   @observable apiParams = ''
@@ -38,6 +44,12 @@ class DemoStore {
 
   @action typeChange = (type: string) => {
     this.apiType = type
+    this.apiUrl = type
+    if(this.apiType === '/graphql') {
+      this.apiParams = JSON.stringify(defaultParams, null, '    ')
+    } else {
+      this.apiParams = ''
+    }
   }
 
   @action methodChange = (type: string) => {
@@ -52,7 +64,6 @@ class DemoStore {
     let jsonData = {}, error = null
     try {
       if(this.apiParams) {
-        console.log(this.apiParams)
         jsonData = JSON.parse(this.apiParams)
       }
     } catch(e) {
@@ -64,25 +75,25 @@ class DemoStore {
     }
     if(this.apiType === '/api') {
       if(this.apiMethod === 'GET'){
-        $http.get(this.apiType + this.apiUrl + fmtGetParams(jsonData)).then(res => {
+        $http.get(this.apiUrl + fmtGetParams(jsonData)).then(res => {
           runInAction(() => this.apiResult = JSON.stringify(res, null, '    '))
         })
       } else if (this.apiMethod === 'POST') {
-        $http.post(this.apiType + this.apiUrl).then(res => {
+        $http.post(this.apiUrl).then(res => {
           runInAction(() => this.apiResult = JSON.stringify(res, null, '    '))
         })
       } else if (this.apiMethod === 'PUT') {
-        $http.post(this.apiType + this.apiUrl, jsonData).then(res => {
+        $http.post(this.apiUrl, jsonData).then(res => {
           runInAction(() => this.apiResult = JSON.stringify(res, null, '    '))
         })
       } else if (this.apiMethod === 'DELETE') {
-        $http.post(this.apiType + this.apiUrl, jsonData).then(res => {
+        $http.post(this.apiUrl, jsonData).then(res => {
           runInAction(() => this.apiResult = JSON.stringify(res, null, '    '))
         })
       }
       
     } else {
-      $http.post(this.apiType, jsonData).then(res => {
+      $http.post(this.apiUrl, jsonData).then(res => {
         runInAction(() => this.apiResult = JSON.stringify(res, null, '    '))
       }, err => {
         runInAction(() => this.apiResult = JSON.stringify(err.data, null, '    '))
