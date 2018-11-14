@@ -42,11 +42,6 @@ export class Demo extends React.Component<IProps> {
     }} = this.props
     
     return <div>
-      <Row style={styles.padding}>
-        <Col span={24}>
-          hello, world! this is demo page.
-        </Col>
-      </Row>
       <section style={styles.block}>
         <h3>mini测试</h3>
         <Row style={styles.padding}>
@@ -88,7 +83,7 @@ export class Demo extends React.Component<IProps> {
                   <Col span={3}>
                     <Select value={apiType}
                       onChange={typeChange}>
-                      <Option value="/api">RESTFul</Option>
+                      <Option value="/api">RESTful</Option>
                       <Option value="/graphql">GraphQL</Option>
                     </Select>
                   </Col>

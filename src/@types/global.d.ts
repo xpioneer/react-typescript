@@ -5,8 +5,6 @@ declare global {
   export const $http: AxiosInstance
   
   export interface IProps extends RouteComponentProps {
-    demoStore?: any
-    homeStore?: any
-    loginStore?: any
+    [key: string]: any
   }
 }

@@ -8,11 +8,26 @@ interface ISiderProps extends RouteComponentProps {
   collapsed?: boolean
 }
 
+const MenuList = [{
+  key:'1', title:'首页', path:'/', icon:'user'
+},{
+  key:'2', title:'图表', path:'/charts', icon:'video-camera'
+},{
+  key:'3', title:'测试', path:'/demos', icon:'bulb'
+}]
+
 class SiderComponent extends React.Component<ISiderProps> {
 
-  goPage = (e: any) => {
-    console.log(e, this.props)
-    this.props.history.push('/demo')
+  componentWillReceiveProps() {
+    // console.log('willReceiveProps')
+  }
+
+  componentWillUpdate(props: any){
+    // console.log('willUpdate')
+  }
+
+  componentDidMount(){
+    // console.log('didMount')
   }
 
   render(){
@@ -26,21 +41,14 @@ class SiderComponent extends React.Component<ISiderProps> {
         <div></div>
       </div>
       <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-        <Menu.Item key="1">
-          <Icon type="user" />
-          <span>首页</span>
-        </Menu.Item>
-        <Menu.Item key="2">
-          <Icon type="video-camera" />
-          <span>图表</span>
-        </Menu.Item>
-        
-        <Menu.Item key="3" onClick={this.goPage}>
-          {/* <NavLink to="/demo"> */}
-            <Icon type="bulb" />
-            <span>测试</span>
-          {/* </NavLink>     */}
-        </Menu.Item>
+        {
+          MenuList.map(m => <Menu.Item key={m.key}>
+            <Link to={m.path}>
+              <Icon type={m.icon} />
+              <span>{m.title}</span>
+            </Link>
+          </Menu.Item>)
+        }
       </Menu>
     </Sider>)
   }

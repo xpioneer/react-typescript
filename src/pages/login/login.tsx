@@ -19,9 +19,7 @@ export default class Login extends React.Component<IProps> {
       'maxWidth': '300px',
       'margin': '0 auto',
       'paddingTop': '15%'}}>
-    <FormItem>
-      <h2>管理后台</h2>
-    </FormItem>  
+    <h2>管理后台</h2>
     <FormItem>
       <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username"
         onChange={e => inputChange(e.target.value, 'username')}/>

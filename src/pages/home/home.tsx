@@ -1,8 +1,9 @@
 import * as React from 'react'
-import { BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
-import { Layout, Menu, Icon } from 'antd';
-import {inject, observer} from 'mobx-react'
+import { BrowserRouter as Router, Route, Switch, withRouter} from 'react-router-dom';
+import { Layout } from 'antd';
+import { inject, observer } from 'mobx-react'
 import Dashboard from '@pages/dashboard/dashboard'
+import Chart from '@pages/charts'
 import NotFound from '@components/notFound'
 import { Demo } from '../demo/demo'
 import Sider from '@components/shared/sider'
@@ -13,7 +14,7 @@ const { Content } = Layout
 
 @inject('homeStore')
 @observer
-export default class Home extends React.Component<IProps> {
+class Home extends React.Component<IProps> {
 
   render(){
     const {homeStore} = this.props
@@ -22,16 +23,14 @@ export default class Home extends React.Component<IProps> {
       <Layout>
         <Sider {...homeStore}/>
         <Layout>
-          <Header {...homeStore}/>
-          <Content style={{ margin: '16px 12px', padding: 16, background: '#fff', minHeight: 480 }}>
-            <Router>
-              <Switch>
-                <Route path="/home" component={Dashboard}></Route>
-                {/* <Redirect from="/" to="/home"></Redirect> */}
-                <Route path="/demo" component={Demo}></Route>
-                <Route component={NotFound}></Route>
-              </Switch>
-            </Router>
+          <Header props={homeStore}/>
+          <Content style={{ margin: '16px 12px', padding: 16, background: '#fff', minHeight: 520 }}>
+            <Switch>
+              <Route exact path="/" component={Dashboard}></Route>
+              <Route exact path="/charts" component={Chart}></Route>
+              <Route exact path="/demos" component={Demo}></Route>
+              <Route path="*" component={NotFound}></Route>
+            </Switch>
           </Content>
           <Footer/>
         </Layout>
@@ -40,6 +39,4 @@ export default class Home extends React.Component<IProps> {
   }
 }
 
-// interface IProps {
-//   homeStore: any
-// }
+export default Home
