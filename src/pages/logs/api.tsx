@@ -99,7 +99,7 @@ export default class APILog extends React.Component<IProps> {
             <Button onClick={() => {}}>
               清空
             </Button>
-            <Button type="primary" onClick={() => {}}>
+            <Button type="primary" onClick={search}>
               搜索
             </Button>
           </Col>

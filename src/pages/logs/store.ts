@@ -23,7 +23,7 @@ class apiLogStore {
     //   return
     // }
 
-    $http.post('/api/log-api', {
+    $http.get('/api/log-api', {
       // username: this.username,
       // password: this.password
     }).then((res: any) => {
