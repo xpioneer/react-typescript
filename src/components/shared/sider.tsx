@@ -3,6 +3,7 @@ import { NavLink, Link, withRouter, RouteComponentProps } from 'react-router-dom
 import { Layout, Menu, Icon } from 'antd'
 
 const { Sider } = Layout
+const {Item, SubMenu} = Menu
 
 interface ISiderProps extends RouteComponentProps {
   collapsed?: boolean
@@ -11,9 +12,16 @@ interface ISiderProps extends RouteComponentProps {
 const MenuList = [{
   key:'1', title:'首页', path:'/', icon:'user'
 },{
-  key:'2', title:'图表', path:'/charts', icon:'video-camera'
+  key:'2', title:'图表', path:'/charts', icon:'area-chart'
 },{
-  key:'3', title:'测试', path:'/demos', icon:'bulb'
+  key:'3', title:'日志', icon:'file-search',
+  children: [{
+    key: '3-0', title: 'API', path: '/log-api', icon: ''
+  },{
+    key: '3-1', title: 'Errors', path: '/log-errors', icon: ''
+  }]
+},{
+  key:'99', title:'测试', path:'/demos', icon:'bulb'
 }]
 
 class SiderComponent extends React.Component<ISiderProps> {
@@ -42,12 +50,25 @@ class SiderComponent extends React.Component<ISiderProps> {
       </div>
       <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
         {
-          MenuList.map(m => <Menu.Item key={m.key}>
-            <Link to={m.path}>
-              <Icon type={m.icon} />
-              <span>{m.title}</span>
-            </Link>
-          </Menu.Item>)
+          MenuList.map(m => {
+            return m.children ? <SubMenu key={m.key} title={<span><Icon type={m.icon} /><span>{m.title}</span></span>}>
+              {
+                m.children.map(mc => {
+                  return <Item key={mc.key}>
+                    <Link to={mc.path}>
+                      <Icon type={mc.icon} />
+                      <span>{mc.title}</span>
+                    </Link>
+                  </Item>
+                })
+              }
+            </SubMenu> : <Item key={m.key}>
+              <Link to={m.path}>
+                <Icon type={m.icon} />
+                <span>{m.title}</span>
+              </Link>
+            </Item>
+          })
         }
       </Menu>
     </Sider>)
