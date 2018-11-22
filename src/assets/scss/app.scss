@@ -33,3 +33,20 @@
     }
   }
 }
+
+/* search-form */
+.ant-form.search-form {
+  padding-bottom: 20px;
+
+  .ant-form-item{
+    margin-bottom: 12px;
+  }
+
+  .search-btn-w{
+    text-align: right;
+    
+    .ant-btn{
+      margin-left: 8px;
+    }
+  }
+}

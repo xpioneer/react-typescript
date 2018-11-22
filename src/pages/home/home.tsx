@@ -4,6 +4,7 @@ import { Layout } from 'antd';
 import { inject, observer } from 'mobx-react'
 import Dashboard from '@pages/dashboard/dashboard'
 import Chart from '@pages/charts'
+import LogApi from '@pages/logs/api'
 import NotFound from '@components/notFound'
 import { Demo } from '../demo/demo'
 import Sider from '@components/shared/sider'
@@ -28,6 +29,7 @@ class Home extends React.Component<IProps> {
             <Switch>
               <Route exact path="/" component={Dashboard}></Route>
               <Route exact path="/charts" component={Chart}></Route>
+              <Route exact path="/log-api" component={LogApi}></Route>
               <Route exact path="/demos" component={Demo}></Route>
               <Route path="*" component={NotFound}></Route>
             </Switch>
