@@ -1,54 +1,124 @@
 import * as React from 'react'
 import {inject, observer} from 'mobx-react'
-import { Row, Col, Form, Icon, Input, Button, Checkbox, Table } from 'antd';
+import { Row, Col, Form, Icon, Input, Button, DatePicker, Table, Modal } from 'antd';
 
 const FormItem = Form.Item;
-
-const columns = [{
-  title: 'ID',
-  dataIndex: 'id',
-  sorter: true,
-  // render: (name: any) => `${name.first} ${name.last}`,
-  width: '20%',
-}, {
-  title: 'Path',
-  dataIndex: 'path',
-  // filters: [
-  //   { text: 'Male', value: 'male' },
-  //   { text: 'Female', value: 'female' },
-  // ],
-  width: '20%',
-}, {
-  title: '参数',
-  dataIndex: 'params',
-}, {
-  title: '创建时间',
-  dataIndex: 'createdAt',
-}, {
-  title: '耗时',
-  dataIndex: 'time'
-}];
 
 
 @inject('apiLogStore')
 @observer
 export default class APILog extends React.Component<IProps> {
 
-  handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  state = {
+    visible: false,
+    modalTxt: '',
+    visibleLog: false,
+    detailInfo: {}
+  }
+
+  columns = [{
+    title: 'ID',
+    dataIndex: 'id',
+    sorter: true,
+    // render: (name: any) => `${name.first} ${name.last}`,
+    width: '20%',
+  }, {
+    title: 'Path',
+    dataIndex: 'path',
+    // filters: [
+    //   { text: 'Male', value: 'male' },
+    //   { text: 'Female', value: 'female' },
+    // ],
+    width: '20%',
+  }, {
+    title: '参数',
+    dataIndex: 'params',
+    render: (text: string, record: any, index: number) => <div onClick={() => this.showParamsDetail(record.params)} className="textflow-4"> {text} </div>,
+  }, {
+    title: '创建时间',
+    width: '200px',
+    dataIndex: 'createdAt',
+  }, {
+    title: '耗时(ms)',
+    dataIndex: 'time',
+    width: '80px',
+  }, {
+    title: '操作',
+    dataIndex: '',
+    width: '80px',
+    render: (text: string, record: any, index: number) => <Button type="primary" onClick={() => this.viewDetail(record)}>详情</Button>,
+  }]
+
+  // 查看参数详情
+  showParamsDetail = (str: any) => {
+    this.setState({
+      visible: !this.state.visible,
+      modalTxt: str
+    })
+  }
+
+  // 查看日志详情
+  viewDetail = (data: any) => {
+    this.setState({
+      visibleLog: !this.state.visibleLog,
+      detailInfo: data
+    })
+  }
+
+  wrapHtml = (data: any) => {
+    if(data !== null && Object.keys(data).length > 0) {
+      return <React.Fragment>
+        <div className="row">
+          <p>ID：</p><p>{data.id}</p>
+        </div>
+        <div className="row">
+          <p>IP：</p><p>{data.ip}</p>
+        </div>
+        <div className="row">
+          <p>Url：</p><p>{data.url}</p>
+        </div>
+        <div className="row">
+          <p>Path：</p><p>{data.path}</p>
+        </div>
+        <div className="row">
+          <p>参数：</p><p>{data.params}</p>
+        </div>
+        <div className="row">
+          <p>创建时间：</p><p>{data.createdAt}</p>
+        </div>
+        <div className="row">
+          <p>状态：</p><p>{data.status}</p>
+        </div>
+        <div className="row">
+          <p>耗时：</p><p>{data.time}</p>
+        </div>
+      </React.Fragment>
+    } else {
+      return ''
+    }
   }
 
   render(){
-    const { loading, list, meta, inputChange, search } = this.props.apiLogStore
-    
-    // return <div>
-    //   <Row>
-    //     <Col>
-
-    //     </Col>
-    //   </Row>
-    // </div>
+    const { visible, modalTxt, visibleLog, detailInfo } = this.state
+    const { dateChange, loading, list, meta, inputChange, search } = this.props.apiLogStore
+ 
     return <React.Fragment>
+      <Modal
+        title="参数详情"
+        keyboard={true}
+        visible={visible}
+        onOk={() => this.showParamsDetail('')}
+        onCancel={() => this.showParamsDetail('')}
+      > {modalTxt} </Modal>
+      <Modal
+        className="large-modal"
+        title="日志详情"
+        style={{ top: 40 }}
+        keyboard={true}
+        visible={visibleLog}
+        onOk={() => this.viewDetail('')}
+        onCancel={() => this.viewDetail('')}
+      > {this.wrapHtml(detailInfo)} </Modal>
       <Form className="search-form">
         <Row gutter={24}>
           <Col span={6}>
@@ -80,17 +150,12 @@ export default class APILog extends React.Component<IProps> {
           </Col>
           <Col span={6}>
             <FormItem>
-              <Input placeholder="api" onChange={e => inputChange(e.target.value, 'pwd')}/>
+              <DatePicker.RangePicker/>
             </FormItem>
           </Col>
           <Col span={6}>
             <FormItem>
-              <Input placeholder="id" onChange={e => inputChange(e.target.value, 'username')}/>
-            </FormItem>
-          </Col>
-          <Col span={6}>
-            <FormItem>
-              <Input placeholder="api" onChange={e => inputChange(e.target.value, 'pwd')}/>
+            <DatePicker.RangePicker onChange={dateChange} />
             </FormItem>
           </Col>
         </Row>
@@ -106,7 +171,9 @@ export default class APILog extends React.Component<IProps> {
         </Row>
       </Form>
       <Table
-        columns={columns}
+        bordered
+        className="table-list"
+        columns={this.columns}
         rowKey={(record: any) => record.id}
         dataSource={list}
         pagination={meta}

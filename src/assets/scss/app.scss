@@ -50,3 +50,38 @@
     }
   }
 }
+
+/* table-list */
+.table-list {
+  @for $i from 1 to 10{
+    .textflow-#{$i} {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: #{$i};
+      -webkit-box-orient: vertical;
+    }
+  }
+
+  .ant-table-thead > tr > th, .ant-table-tbody > tr > td{
+    padding: 6px;
+  }
+}
+
+/* row-flex */
+
+.large-modal {
+  width: 80% !important;
+  
+  .row{
+    display: flex;
+
+    p{
+      word-break: break-all;
+
+      &:first-child{
+        min-width: 100px
+      }
+    }
+  }
+}

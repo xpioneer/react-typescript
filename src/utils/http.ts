@@ -21,7 +21,8 @@ $http.interceptors.request.use(config => {
 $http.interceptors.response.use(response => {
   return Promise.resolve(response.data)
 }, error => {
-  return Promise.reject(error.response)
+  console.log(error, 'error')
+  return Promise.reject(error.response.data)
 })
 
 export default $http

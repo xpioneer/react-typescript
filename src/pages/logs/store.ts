@@ -1,32 +1,32 @@
 import { observable, action, autorun, runInAction } from 'mobx';
 import { message } from 'antd'
+import { serialize } from '@utils/params'
+import * as moment from 'moment'
+import {Moment} from 'moment'
 
 class apiLogStore {
   @observable loading: boolean = false
   @observable list: [] = []
   @observable meta: object = {}
+  @observable createdAt: string = ''
   
   
-  // @action search = (): void => {
-  //   if(type === 'pwd') {
-  //     this.password = value
-  //   } else {
-  //     this.username = value.trim()
-  //   }
-  // }
+  @action dateChange = (range: [Moment, Moment]) => {
+    this.createdAt = range.map((d: Moment, index) => {
+      return index > 0 ? d.format('YYYY/MM/DD 23:59:59:999') : d.format('YYYY/MM/DD 00:00:00:000')
+    }).join(',')
+  }
 
-  @action search = () => {
+  @action search = (data: any) => {
+    let params = {
+      'createdAt': this.createdAt,
+      'path':  '',
+      'page': data.page,
+      'pageSize': data.pageSize
+    }
     this.loading = true
-    // console.log('login:', this.username, this.password)
-    // if(this.password.length < 6 || this.username.length < 3) {
-    //   message.error('请输入正确格式的用户名和密码')
-    //   return
-    // }
 
-    $http.get('/api/log-api', {
-      // username: this.username,
-      // password: this.password
-    }).then((res: any) => {
+    $http.get('/api/log-api?' + serialize.fmtGet(params)).then((res: any) => {
       runInAction(() => {
         this.loading = false
         this.list = res.data
@@ -38,7 +38,7 @@ class apiLogStore {
       runInAction(() => {
         this.loading = false
       })
-      message.error('用户名和密码错误!')
+      message.error(err.msg)
       console.log(err)
     })
   }
