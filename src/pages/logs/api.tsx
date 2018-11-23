@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {inject, observer} from 'mobx-react'
-import { Row, Col, Form, Icon, Input, Button, DatePicker, Table, Modal } from 'antd';
+import { Row, Col, Form, Icon, Input, Button, DatePicker, Table, Modal, Badge } from 'antd';
 
 const FormItem = Form.Item;
 
@@ -10,6 +10,7 @@ const FormItem = Form.Item;
 export default class APILog extends React.Component<IProps> {
 
   state = {
+    modalTitle: '参数详情',
     visible: false,
     modalTxt: '',
     visibleLog: false,
@@ -29,19 +30,33 @@ export default class APILog extends React.Component<IProps> {
     //   { text: 'Male', value: 'male' },
     //   { text: 'Female', value: 'female' },
     // ],
-    width: '20%',
+    width: '100px',
+  }, {
+    title: 'Url',
+    dataIndex: 'url',
+    width: '120px',
+    render: (text: string, record: any, index: number) => <div onClick={() => this.showParamsDetail(record.url, 'url')} className="textflow-4" style={{cursor: 'pointer'}}> {text} </div>,
+  }, {
+    title: '请求方式',
+    dataIndex: 'method',
+    width: '60px',
   }, {
     title: '参数',
     dataIndex: 'params',
-    render: (text: string, record: any, index: number) => <div onClick={() => this.showParamsDetail(record.params)} className="textflow-4"> {text} </div>,
+    render: (text: string, record: any, index: number) => <div onClick={() => this.showParamsDetail(record.params, 'params')} className="textflow-4" style={{cursor: 'pointer'}}> {text} </div>,
+  }, {
+    title: '状态',
+    dataIndex: 'status',
+    width: '60px',
+    render: (text: string, record: any, index: number) => <Badge status={this.getStatus(text)} text={text}/>,
   }, {
     title: '创建时间',
-    width: '200px',
+    width: '120px',
     dataIndex: 'createdAt',
   }, {
     title: '耗时(ms)',
     dataIndex: 'time',
-    width: '80px',
+    width: '60px',
   }, {
     title: '操作',
     dataIndex: '',
@@ -49,10 +64,11 @@ export default class APILog extends React.Component<IProps> {
     render: (text: string, record: any, index: number) => <Button type="primary" onClick={() => this.viewDetail(record)}>详情</Button>,
   }]
 
-  // 查看参数详情
-  showParamsDetail = (str: any) => {
+  // 查看Url/参数详情
+  showParamsDetail = (str: any, type?: string) => {
     if(str) {
       this.setState({
+        modalTitle: type === 'url' ? 'Url详情' : '参数详情',
         visible: !this.state.visible,
         modalTxt: str
       })
@@ -113,13 +129,49 @@ export default class APILog extends React.Component<IProps> {
     }
   }
 
+  // 获取状态badge
+  getStatus = (status: any): "default"|"success"|"warning"|"error" => {
+    let info: "default"|"success"|"warning"|"error" = "default";
+    switch (status) {
+      case 200:
+      case 201:
+        info = 'success';
+        break;
+      case 400:
+      case 401:
+      case 403:
+      case 404:
+      case 405:
+      case 406:
+        info = 'warning';
+        break;
+      case 500:
+      case 501:
+      case 502:
+      case 503:
+      case 504:
+      case 505:
+        info = 'error';
+        break;
+
+      default:
+        info = 'default';
+        break;
+    }
+    return info;
+  }
+  
+  componentDidMount() {
+    this.props.apiLogStore.search()
+  }
+
   render(){
-    const { visible, modalTxt, visibleLog, detailInfo } = this.state
-    const { dateChange, loading, list, meta, inputChange, search } = this.props.apiLogStore
+    const { modalTitle, visible, modalTxt, visibleLog, detailInfo } = this.state
+    const { value, loading, list, meta, inputChange, search } = this.props.apiLogStore
  
     return <React.Fragment>
       <Modal
-        title="参数详情"
+        title={modalTitle}
         keyboard={true}
         visible={visible}
         onOk={() => this.showParamsDetail('')}
@@ -138,39 +190,22 @@ export default class APILog extends React.Component<IProps> {
         <Row gutter={24}>
           <Col span={6}>
             <FormItem>
-              <Input placeholder="id" onChange={e => inputChange(e.target.value, 'username')}/>
+              <Input placeholder="path" onChange={e => inputChange(e.target.value, 'path')} value={value.path}/>
             </FormItem>
           </Col>
           <Col span={6}>
             <FormItem>
-              <Input placeholder="api" onChange={e => inputChange(e.target.value, 'pwd')}/>
+              <Input placeholder="url" onChange={e => inputChange(e.target.value, 'url')} value={value.url}/>
             </FormItem>
           </Col>
           <Col span={6}>
             <FormItem>
-              <Input placeholder="id" onChange={e => inputChange(e.target.value, 'username')}/>
-            </FormItem>
-          </Col>
-          <Col span={6}>
-            <FormItem>
-              <Input placeholder="api" onChange={e => inputChange(e.target.value, 'pwd')}/>
-            </FormItem>
-          </Col>
-        </Row>
-        <Row gutter={24}>
-          <Col span={6}>
-            <FormItem>
-              <Input placeholder="id" onChange={e => inputChange(e.target.value, 'username')}/>
+              <DatePicker.RangePicker onChange={(e) => inputChange(e, 'createdAt')} />
             </FormItem>
           </Col>
           <Col span={6}>
             <FormItem>
               <DatePicker.RangePicker/>
-            </FormItem>
-          </Col>
-          <Col span={6}>
-            <FormItem>
-            <DatePicker.RangePicker onChange={dateChange} />
             </FormItem>
           </Col>
         </Row>
