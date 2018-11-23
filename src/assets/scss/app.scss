@@ -55,6 +55,7 @@
 .table-list {
   @for $i from 1 to 10{
     .textflow-#{$i} {
+      cursor: pointer;
       overflow: hidden;
       text-overflow: ellipsis;
       display: -webkit-box;
@@ -75,8 +76,9 @@
   
   .row{
     display: flex;
+    padding-bottom: 10px;
 
-    p{
+    div{
       word-break: break-all;
 
       &:first-child{

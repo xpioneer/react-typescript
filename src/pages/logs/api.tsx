@@ -35,7 +35,7 @@ export default class APILog extends React.Component<IProps> {
     title: 'Url',
     dataIndex: 'url',
     width: '120px',
-    render: (text: string, record: any, index: number) => <div onClick={() => this.showParamsDetail(record.url, 'url')} className="textflow-4" style={{cursor: 'pointer'}}> {text} </div>,
+    render: (text: string, record: any, index: number) => <div onClick={() => this.showParamsDetail(record.url, 'url')} className="textflow-4"> {text} </div>,
   }, {
     title: '请求方式',
     dataIndex: 'method',
@@ -43,7 +43,7 @@ export default class APILog extends React.Component<IProps> {
   }, {
     title: '参数',
     dataIndex: 'params',
-    render: (text: string, record: any, index: number) => <div onClick={() => this.showParamsDetail(record.params, 'params')} className="textflow-4" style={{cursor: 'pointer'}}> {text} </div>,
+    render: (text: string, record: any, index: number) => <div onClick={() => this.showParamsDetail(record.params, 'params')} className="textflow-4"> {text} </div>,
   }, {
     title: '状态',
     dataIndex: 'status',
@@ -61,7 +61,7 @@ export default class APILog extends React.Component<IProps> {
     title: '操作',
     dataIndex: '',
     width: '80px',
-    render: (text: string, record: any, index: number) => <Button type="primary" onClick={() => this.viewDetail(record)}>详情</Button>,
+    render: (text: string, record: any, index: number) => <Button size="small" type="primary" onClick={() => this.viewDetail(record)}>详情</Button>,
   }]
 
   // 查看Url/参数详情
@@ -97,31 +97,31 @@ export default class APILog extends React.Component<IProps> {
     if(data !== null && Object.keys(data).length > 0) {
       return <React.Fragment>
         <div className="row">
-          <p>ID：</p><p>{data.id}</p>
+          <div>ID：</div><div>{data.id}</div>
         </div>
         <div className="row">
-          <p>IP：</p><p>{data.ip}</p>
+          <div>IP：</div><div>{data.ip}</div>
         </div>
         <div className="row">
-          <p>Url：</p><p>{data.url}</p>
+          <div>Url：</div><div>{data.url}</div>
         </div>
         <div className="row">
-          <p>Path：</p><p>{data.path}</p>
+          <div>Path：</div><div>{data.path}</div>
         </div>
         <div className="row">
-          <p>参数：</p><p>{data.params}</p>
+          <div>参数：</div><div>{data.params}</div>
         </div>
         <div className="row">
-          <p>请求头：</p><p>{data.headers}</p>
+          <div>请求头：</div><div>{data.headers}</div>
         </div>
         <div className="row">
-          <p>创建时间：</p><p>{data.createdAt}</p>
+          <div>创建时间：</div><div>{data.createdAt}</div>
         </div>
         <div className="row">
-          <p>状态：</p><p>{data.status}</p>
+          <div>状态：</div><div>{data.status}</div>
         </div>
         <div className="row">
-          <p>耗时：</p><p>{data.time}</p>
+          <div>耗时：</div><div>{data.time}ms</div>
         </div>
       </React.Fragment>
     } else {
@@ -167,7 +167,7 @@ export default class APILog extends React.Component<IProps> {
 
   render(){
     const { modalTitle, visible, modalTxt, visibleLog, detailInfo } = this.state
-    const { value, loading, list, meta, inputChange, search } = this.props.apiLogStore
+    const { value, loading, list, meta, inputChange, search, clear } = this.props.apiLogStore
  
     return <React.Fragment>
       <Modal
@@ -187,6 +187,7 @@ export default class APILog extends React.Component<IProps> {
         onCancel={() => this.viewDetail('')}
       > {this.wrapHtml(detailInfo)} </Modal>
       <Form className="search-form">
+        <h3>API请求日志</h3>
         <Row gutter={24}>
           <Col span={6}>
             <FormItem>
@@ -211,7 +212,7 @@ export default class APILog extends React.Component<IProps> {
         </Row>
         <Row className="search-btn-w">
           <Col span={24}>
-            <Button onClick={() => {}}>
+            <Button onClick={clear}>
               清空
             </Button>
             <Button type="primary" onClick={search}>
