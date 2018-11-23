@@ -51,18 +51,30 @@ export default class APILog extends React.Component<IProps> {
 
   // 查看参数详情
   showParamsDetail = (str: any) => {
-    this.setState({
-      visible: !this.state.visible,
-      modalTxt: str
-    })
+    if(str) {
+      this.setState({
+        visible: !this.state.visible,
+        modalTxt: str
+      })
+    } else {
+      this.setState({ visible: false })
+    }
+    
   }
 
   // 查看日志详情
   viewDetail = (data: any) => {
-    this.setState({
-      visibleLog: !this.state.visibleLog,
-      detailInfo: data
-    })
+    if(data) {
+      this.setState({
+        visibleLog: true,
+        detailInfo: data
+      })
+    } else {
+      this.setState({
+        visibleLog: false,
+      })
+    }
+    
   }
 
   wrapHtml = (data: any) => {
@@ -82,6 +94,9 @@ export default class APILog extends React.Component<IProps> {
         </div>
         <div className="row">
           <p>参数：</p><p>{data.params}</p>
+        </div>
+        <div className="row">
+          <p>请求头：</p><p>{data.headers}</p>
         </div>
         <div className="row">
           <p>创建时间：</p><p>{data.createdAt}</p>

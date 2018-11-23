@@ -17,11 +17,12 @@ class apiLogStore {
     }).join(',')
   }
 
-  @action search = (data: any) => {
+  @action search = (data: any = {}) => {
+    console.log(data, '-----data')
     let params = {
       'createdAt': this.createdAt,
       'path':  '',
-      'page': data.page,
+      'page': data.current,
       'pageSize': data.pageSize
     }
     this.loading = true
@@ -32,8 +33,6 @@ class apiLogStore {
         this.list = res.data
         this.meta = res.meta
       })
-      
-      console.log(res)
     }, err => {
       runInAction(() => {
         this.loading = false
