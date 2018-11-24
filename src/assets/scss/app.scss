@@ -87,3 +87,16 @@
     }
   }
 }
+
+/* user-menu */
+.user-menu{
+  div{
+    padding: 4px 0;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+
+    &:last-child{
+      border-bottom: none;
+    }
+  }
+}

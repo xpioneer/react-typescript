@@ -1,8 +1,7 @@
 import { observable, action, autorun, runInAction } from 'mobx';
 import { message } from 'antd'
 import { serialize } from '@utils/params'
-import * as moment from 'moment'
-import {Moment} from 'moment'
+import { Moment } from 'moment'
 
 class errorLogStore {
   @observable value = {

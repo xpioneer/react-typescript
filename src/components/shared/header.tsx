@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Layout, Icon } from 'antd'
+import { Layout, Icon, Popover } from 'antd'
 
 const { Header } = Layout
 
@@ -11,7 +11,7 @@ export default class HeaderComponent extends React.Component<IHeaderProps> {
 
 
   render(){
-    const {collapsed, toggleMenu} = this.props.props
+    const {collapsed, toggleMenu, lang, toggleLang} = this.props.props
     
     return (<Header style={{
       background: '#fff',
@@ -26,9 +26,16 @@ export default class HeaderComponent extends React.Component<IHeaderProps> {
           onClick={toggleMenu}/>
       </div>
       <div style={{paddingRight: 12}}>
-        <Icon
-          style={{cursor: 'pointer', fontSize: 24}}
-          type='user'/>
+        <Popover trigger="click" placement="bottomRight" content={
+          <div className="user-menu">
+            <div onClick={() => toggleLang(lang)}>{lang ? 'English' : '中文'}</div>
+            <div>退出登录</div>
+          </div>
+        }>
+          <Icon
+            style={{cursor: 'pointer', fontSize: 24}}
+            type='user'/>
+        </Popover>
       </div>
     </Header>)
   }

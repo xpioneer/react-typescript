@@ -11,6 +11,7 @@ import { Demo } from '../demo/demo'
 import Sider from '@components/shared/sider'
 import Header from '@components/shared/header'
 import Footer from '@components/shared/footer'
+import { LocaleProvider } from 'antd'
 
 const { Content } = Layout
 
@@ -22,6 +23,7 @@ class Home extends React.Component<IProps> {
     const {homeStore} = this.props
     
     return (
+      <LocaleProvider locale={homeStore.lang}>
       <Layout>
         <Sider {...homeStore}/>
         <Layout>
@@ -39,6 +41,7 @@ class Home extends React.Component<IProps> {
           <Footer/>
         </Layout>
       </Layout>
+      </LocaleProvider>
     )
   }
 }

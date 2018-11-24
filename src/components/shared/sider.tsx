@@ -16,9 +16,9 @@ const MenuList = [{
 },{
   key:'3', title:'日志', icon:'file-search',
   children: [{
-    key: '3-0', title: 'API', path: '/log-api', icon: ''
+    key: '3-0', title: 'API', path: '/log-api', icon: 'meh'
   },{
-    key: '3-1', title: 'Errors', path: '/log-errors', icon: ''
+    key: '3-1', title: 'Errors', path: '/log-errors', icon: 'frown'
   }]
 },{
   key:'99', title:'测试', path:'/demos', icon:'bulb'
