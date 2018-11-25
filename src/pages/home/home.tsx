@@ -6,6 +6,7 @@ import Dashboard from '@pages/dashboard/dashboard'
 import Chart from '@pages/charts'
 import LogApi from '@pages/logs/api'
 import LogErrors from '@pages/logs/errors'
+import ArticleList from '@pages/article/articleList'
 import NotFound from '@components/notFound'
 import { Demo } from '../demo/demo'
 import Sider from '@components/shared/sider'
@@ -34,6 +35,7 @@ class Home extends React.Component<IProps> {
               <Route exact path="/charts" component={Chart}></Route>
               <Route exact path="/log-api" component={LogApi}></Route>
               <Route exact path="/log-errors" component={LogErrors}></Route>
+              <Route exact path="/blog-article" component={ArticleList}></Route>
               <Route exact path="/demos" component={Demo}></Route>
               <Route path="*" component={NotFound}></Route>
             </Switch>

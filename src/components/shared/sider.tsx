@@ -10,7 +10,7 @@ interface ISiderProps extends RouteComponentProps {
 }
 
 const MenuList = [{
-  key:'1', title:'首页', path:'/', icon:'user'
+  key:'1', title:'首页', path:'/', icon:'home'
 },{
   key:'2', title:'图表', path:'/charts', icon:'area-chart'
 },{
@@ -19,6 +19,21 @@ const MenuList = [{
     key: '3-0', title: 'API', path: '/log-api', icon: 'meh'
   },{
     key: '3-1', title: 'Errors', path: '/log-errors', icon: 'frown'
+  }]
+},{
+  key:'4', title:'博客', icon:'book',
+  children: [{
+    key: '4-0', title: '文章', path: '/blog-article', icon: 'form'
+  },{
+    key: '4-1', title: '文章类型', path: '/blog-type', icon: 'form'
+  },{
+    key: '4-2', title: '标签', path: '/blog-tag', icon: 'form'
+  },{
+    key: '4-3', title: '评论', path: '/blog-comment', icon: 'form'
+  },{
+    key: '4-4', title: '留言', path: '/blog-message', icon: 'form'
+  },{
+    key: '4-5', title: '用户', path: '/blog-user', icon: 'user'
   }]
 },{
   key:'99', title:'测试', path:'/demos', icon:'bulb'

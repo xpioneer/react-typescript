@@ -2,26 +2,23 @@
 class Params {
   constructor () {}
 
-  public format (data: any) {
-    const arr = [];
-    for (const i in data) {
-      if (data[i] !== undefined && data[i] !== '' && data[i] !== null) {
-        const s = encodeURIComponent(i) + '=' + encodeURIComponent(data[i]);
-        arr.push(s);
+  public fmtPost (data: any) {
+    const obj = {};
+    for (const key in data) {
+      if (data[key] !== undefined && data[key] !== '' && data[key] !== null) {
+        obj[key] = data[key]
       }
     }
-    arr.push('_=' + Date.now());
-    return arr.join('&');
+    return obj;
   }
 
   public fmtGet (data: any) {
     const arr: any = [];
-    let n: number = 0;
     if (data !== null && typeof data === 'object') {
-      for (const i in data) {
-        if (data[i] !== undefined && data[i] !== '' && data[i] !== null) {
-          const s = encodeURIComponent(i) + '=' + encodeURIComponent(data[i]);
-          arr.push(s);
+      for (const key in data) {
+        if (data[key] !== undefined && data[key] !== '' && data[key] !== null) {
+          const str = encodeURIComponent(key) + '=' + encodeURIComponent(data[key]);
+          arr.push(str);
         }
       }
     }

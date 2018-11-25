@@ -22,7 +22,7 @@ export default class APILog extends React.Component<IProps> {
     dataIndex: 'id',
     sorter: true,
     // render: (name: any) => `${name.first} ${name.last}`,
-    width: '20%',
+    width: '12%',
   }, {
     title: 'Path',
     dataIndex: 'path',

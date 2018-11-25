@@ -22,7 +22,7 @@ export default class ErrorsLog extends React.Component<IProps> {
     dataIndex: 'id',
     sorter: true,
     // render: (name: any) => `${name.first} ${name.last}`,
-    width: '100px',
+    width: '120px',
   }, {
     title: 'Path',
     dataIndex: 'path',
@@ -72,9 +72,9 @@ export default class ErrorsLog extends React.Component<IProps> {
   showParamsDetail = (record: any, type?: string) => {
     if(record) {
       let str = record.url, title = 'Url'
-      if(type === 'path') {
-        title = 'Path'
-        str = record.path
+      if(type === 'params') {
+        title = 'Params'
+        str = record.params
       }
       if(type === 'msg') {
         title = '错误'
@@ -107,12 +107,19 @@ export default class ErrorsLog extends React.Component<IProps> {
   }
 
   // 错误堆栈信息
-  errorStack = (errs: [string]) => {
+  errorStack = (errs: [string|{[key: string]: any}]) => {
     return <React.Fragment>
-      {errs.map((e, index) => {
-        const r = e.match(/^\s*[^\w]/)
-        const paddingLeft = r ? r[0].length * 8 : 0
-        return <div style={{paddingLeft, color: 'red'}} key={index}>{e}</div>})
+      {
+        typeof(errs[0]) === 'string' ?errs.map((e, index) => {
+          const r = e.match(/^\s*[^\w]/)
+          const paddingLeft = r ? r[0].length * 8 : 0
+          return <div style={{paddingLeft, color: 'red'}} key={index}>{e}</div>
+        }) : errs.map((obj: {[key: string]: any}, index) => {
+          const keys = Object.keys(obj).map((key, i) => {
+            return <div key={i}>{key}：{typeof(obj[key]) === 'object' ? JSON.stringify(obj[key]) : obj[key]}</div>
+          })
+          return <div style={{color: 'red'}} key={index}>{keys}</div>
+        })
       }
     </React.Fragment>
   }
