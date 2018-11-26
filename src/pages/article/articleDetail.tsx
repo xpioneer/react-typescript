@@ -1,6 +1,7 @@
 import * as React from 'react'
 import {inject, observer} from 'mobx-react'
 import { Row, Col, Form, Icon, Input, Button, DatePicker, Select, Modal, Badge } from 'antd';
+import Editor from '@components/editor'
 
 const FormItem = Form.Item;
 
