@@ -21,14 +21,6 @@ class articleEditStore {
   @observable tagList: any[] = [] // all tag list
   @observable createdAt: string = ''
 
-  @computed get showTag () {
-    const tag = this.tagList.filter((t: any) => {
-      return t.id == this.mainData.typeId
-    })[0] || {}
-    return tag.name
-  }
-  
-
   @action getDetail = (id: string) => {
     this.loading = true
 
@@ -56,6 +48,11 @@ class articleEditStore {
 
   @action changeType = (value: string) => {
     this.mainData.typeId = value
+  }
+
+  @action inputChange = (value: string, type: string) => {
+    console.log('onchange:', value, type)
+    // this.mainData[type] = value
   }
 
   @action edit = () => {

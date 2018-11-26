@@ -31,7 +31,8 @@ export default class ArticleDetail extends React.Component<IProps> {
   }
 
   render(){
-    const { mainData, typeList, tagList, showTag, changeType, edit } = this.props.articleEditStore
+    const { mainData, typeList, tagList, showTag, changeType, inputChange, edit } = this.props.articleEditStore
+    // console.log('mainData:', mainData)
  
     return <React.Fragment>
       <Form className="search-form" layout="horizontal">
@@ -51,7 +52,7 @@ export default class ArticleDetail extends React.Component<IProps> {
         <Row gutter={24}>
           <Col span={10}>
             <FormItem label="文章类型" labelCol={{sm: {span: 8}}} wrapperCol={{sm: { span: 16 }}}>
-              <Select disabled value={mainData.typeId} onChange={changeType}>
+              <Select value={mainData.typeId} onChange={changeType}>
                 {
                   typeList.map((t:any, i:number) => <Select.Option value={t.id} key={t.id}>{t.name}</Select.Option>)
                 }
@@ -60,7 +61,7 @@ export default class ArticleDetail extends React.Component<IProps> {
           </Col>
           <Col span={10}>
             <FormItem label="是否置顶" labelCol={{sm: {span: 8}}} wrapperCol={{sm: { span: 16 }}}>
-              <Select disabled value={mainData.isTop}>
+              <Select value={mainData.isTop}>
                 <Select.Option value="1">是</Select.Option>
                 <Select.Option value="0">否</Select.Option>
               </Select>
@@ -77,6 +78,13 @@ export default class ArticleDetail extends React.Component<IProps> {
             {/* <FormItem label="摘要" {...formItemLayout}>
               <Input placeholder="摘要" defaultValue={mainData.abstract}/>
             </FormItem> */}
+          </Col>
+        </Row>
+        <Row gutter={24}>
+          <Col span={24}>
+            <FormItem label="内容" labelCol={{sm: {span: 3}}} wrapperCol={{sm: { span: 21 }}}>
+              <Editor onChange={(e: any) => inputChange(e, 'description')} value={mainData.description}/>
+            </FormItem>
           </Col>
         </Row>
         <Row className="search-btn-w">
