@@ -43,11 +43,11 @@ export default class APILog extends React.Component<IProps> {
     title: '操作',
     dataIndex: '',
     width: '80px',
-    render: (text: string, record: any, index: number) => <Button size="small" type="primary" onClick={() => this.viewDetail(record)}>详情</Button>,
+    render: (text: string, record: any, index: number) => <Button size="small" type="primary" href={`/blog-articleDetail/${record.id}`}>详情</Button>,
   }]
 
   viewDetail(data: any) {
-    console.log(data, this.props)
+    this.props.history.push('/blog-articleDetail', {id: data.id})
   }
   
   componentDidMount() {
@@ -55,7 +55,6 @@ export default class APILog extends React.Component<IProps> {
   }
 
   render(){
-    const { modalTitle, visible, modalTxt, visibleLog, detailInfo } = this.state
     const { value, loading, list, meta, inputChange, search, clear } = this.props.articleListStore
  
     return <React.Fragment>

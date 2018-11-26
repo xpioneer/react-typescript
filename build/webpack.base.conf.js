@@ -25,7 +25,7 @@ module.exports = {
     // libraryTarget: "umd", // 通用模块定义
     // 导出库(exported library)的类型
 
-    // publicPath: '/', // root Dir
+    publicPath: '/', // root Dir
     sourceMapFilename: '[name].map',
     chunkFilename: 'static/js/[id].chunk.[hash].js',
     filename: 'static/js/[name].bundle.[hash:8].js'
