@@ -1,6 +1,7 @@
 import * as React from 'react'
 import {inject, observer} from 'mobx-react'
 import { Row, Col, Form, Icon, Input, Button, DatePicker, Select, Modal, Badge } from 'antd';
+import Editor from '@components/editor'
 
 const FormItem = Form.Item;
 
@@ -15,7 +16,7 @@ const formItemLayout = {
   },
 }
 
-@inject('articleDetailStore')
+@inject('articleEditStore')
 @observer
 export default class ArticleDetail extends React.Component<IProps> {
 
@@ -26,11 +27,11 @@ export default class ArticleDetail extends React.Component<IProps> {
   
   componentDidMount() {
     const {id}: any = this.props.match.params
-    this.props.articleDetailStore.getDetail(id)
+    this.props.articleEditStore.getDetail(id)
   }
 
   render(){
-    const { mainData, typeList, tagList, showTag, changeType, edit } = this.props.articleDetailStore
+    const { mainData, typeList, tagList, showTag, changeType, edit } = this.props.articleEditStore
  
     return <React.Fragment>
       <Form className="search-form" layout="horizontal">

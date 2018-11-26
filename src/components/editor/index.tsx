@@ -1,5 +1,7 @@
 import * as React from 'react'
-import * as Quill from 'quill'
+// import * as Quill from 'quill'
+
+const Quill = require('quill')
 
 export default class QuillEditor extends React.Component<IProps> {
 
