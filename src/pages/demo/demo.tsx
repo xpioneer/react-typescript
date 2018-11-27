@@ -27,7 +27,7 @@ const styles = {
 
 @inject('demoStore')
 @observer
-export class Demo extends React.Component<IProps> {
+export default class Demo extends React.Component<IProps> {
 
   componentDidMount() {
     // console.log($http)

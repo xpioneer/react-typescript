@@ -27,8 +27,8 @@ module.exports = {
 
     publicPath: '/', // root Dir
     sourceMapFilename: '[name].map',
-    chunkFilename: 'static/js/[id].chunk.[hash].js',
-    filename: 'static/js/[name].bundle.[hash:8].js'
+    chunkFilename: 'static/js/[name].chunk.[chunkhash].js',
+    filename: 'static/js/[name].bundle.[hash].js'
   },
 
   module: {
@@ -123,6 +123,24 @@ module.exports = {
           name: 'vendor',
           test: /[\\/]node_modules[\\/]/,
           priority: -10,
+          chunks: "initial"
+        },
+        react: {
+          name: 'vendor1',
+          test: /[\\/]node_modules\/react(\w)*[\\/]/,
+          priority: 20,
+          chunks: "initial"
+        },
+        antd: {
+          name: 'vendor2',
+          test: /[\\/]node_modules\/antd[\\/]/,
+          priority: 10,
+          chunks: "initial"
+        },
+        editor: {
+          name: 'vendor3',
+          test: /[\\/]node_modules\/quill[\\/]/,
+          priority: 10,
           chunks: "initial"
         },
         default: {

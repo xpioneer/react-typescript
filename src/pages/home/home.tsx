@@ -22,7 +22,7 @@ class Home extends React.Component<IProps> {
         <Layout>
           <Header props={homeStore}/>
           <Content style={{ margin: '16px 12px', padding: 16, background: '#fff', minHeight: 520 }}>
-          { Routes() }
+          { Routes }
           </Content>
           <Footer/>
         </Layout>

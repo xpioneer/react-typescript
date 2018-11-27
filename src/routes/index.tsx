@@ -1,16 +1,18 @@
 import * as React from 'react'
-import { Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { RouteProps } from 'react-router-dom'
-import Dashboard from '@pages/dashboard/dashboard'
-import Chart from '@pages/charts'
-import LogApi from '@pages/logs/api'
-import LogErrors from '@pages/logs/errors'
-import ArticleList from '@pages/article/articleList'
-import ArticleEdit from '@pages/article/articleEdit'
-import ArticleCreate from '@pages/article/articleCreate'
-import NotFound from '@components/notFound'
+import NotFound  from '@components/notFound'
 
-import { Demo } from '@pages/demo/demo'
+const {lazy, Suspense} = React
+
+const Dashboard = lazy(() => import('@pages/dashboard/dashboard'))
+const Chart = lazy(() => import('@pages/charts'))
+const LogApi = lazy(() => import('@pages/logs/api'))
+const LogErrors = lazy(() => import('@pages/logs/errors'))
+const ArticleList = lazy(() => import('@pages/article/articleList'))
+const ArticleEdit = lazy(() => import('@pages/article/articleEdit'))
+const ArticleCreate = lazy(() => import('@pages/article/articleCreate'))
+const Demo = lazy(() => import('@pages/demo/demo'))
 
 
 export const routes: RouteProps[] = [
@@ -60,10 +62,22 @@ export const routes: RouteProps[] = [
   },
 ]
 
-const Routes = () => <Switch>
-{
-  ...routes.map(r => <Route key={r.path + ''} exact={r.exact} path={r.path} component={r.component}/>)
-}
-</Switch>
+console.log('Demo-----', Demo)
+
+const Routes = <Suspense fallback={<div>loading...</div>}>
+  <Switch>
+  {
+    ...routes.map(r => {
+      const {path, exact, component} = r
+      const LazyCom = component
+      return <Route key={path + ''} exact={exact} path={path} render={(props: any) => <LazyCom {...props}/>}/>
+    })
+  }
+    {/* <Route exact path="/" component={Dashboard}/>
+    <Route exact path="/log-api" component={LogApi}/>
+    <Route exact path="/demos" component={Demo}/>
+    <Route path="*" component={NotFound}/> */}
+  </Switch>
+</Suspense>
 
 export default Routes

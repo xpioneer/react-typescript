@@ -32,7 +32,7 @@ interface IEditor {
 
 export default class QuillEditor extends React.Component<IEditor> {
   value: string = this.props.value
-  oldVal: string
+  oldVal: string = this.props.value
 
   quillEditor: any = null
   
