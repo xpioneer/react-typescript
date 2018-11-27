@@ -8,6 +8,7 @@
     "removeComments": false,
     "noImplicitAny": true,
     "suppressImplicitAnyIndexErrors": true,
+    "allowSyntheticDefaultImports": true,
     "jsx": "react",
     "lib": [
       "dom",

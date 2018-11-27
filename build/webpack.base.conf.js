@@ -111,7 +111,7 @@ module.exports = {
       name: "manifest"
     },
     splitChunks: {
-      chunks: "async",
+      chunks: "all",
       minSize: 30000,
       minChunks: 1,
       maxAsyncRequests: 5,
@@ -122,28 +122,29 @@ module.exports = {
         vendors: {
           name: 'vendor',
           test: /[\\/]node_modules[\\/]/,
-          priority: -10,
-          chunks: "initial"
+          priority: 1,
+          chunks: "all"
         },
         react: {
           name: 'vendor1',
           test: /[\\/]node_modules\/react(\w)*[\\/]/,
           priority: 20,
-          chunks: "initial"
+          chunks: "all"
         },
         antd: {
           name: 'vendor2',
           test: /[\\/]node_modules\/antd[\\/]/,
           priority: 10,
-          chunks: "initial"
+          chunks: "all"
         },
         editor: {
           name: 'vendor3',
           test: /[\\/]node_modules\/quill[\\/]/,
           priority: 10,
-          chunks: "initial"
+          chunks: "all"
         },
         default: {
+          name: 'common',
           minChunks: 2,
           priority: -20,
           reuseExistingChunk: true
