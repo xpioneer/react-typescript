@@ -3,7 +3,7 @@ import { message } from 'antd'
 
 const getArticleById = `query article($id: String){
   article(id: $id){
-    id,title,abstract,description,isTop,createdAt,createdBy,
+    id,title,abstract,description,isTop,tag,createdAt,createdBy,
     typeId,articleType{id,name}
   }
   articleTypes(page: 1, pageSize: 99){
@@ -36,7 +36,7 @@ class articleEditStore {
         this.loading = false
         this.mainData = article || {}
         this.typeList = typeList
-        this.tagList = tagList
+        this.tagList = tagList.map((t: any) => ({label: t.name, value: t.name}))
       })
     }, err => {
       runInAction(() => {
@@ -51,12 +51,15 @@ class articleEditStore {
   }
 
   @action inputChange = (value: string, type: string) => {
-    console.log('onchange:', value, type)
-    // this.mainData[type] = value
+    this.mainData[type] = value
+  }
+
+  @action tagChange = (value: string[]) => {
+    this.mainData['tag'] = value.join(',')
   }
 
   @action edit = () => {
-    console.log(this.mainData.typeId, this.typeList)
+    console.log(this.mainData.description)
   }
 
 }
