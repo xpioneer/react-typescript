@@ -7,7 +7,7 @@ import LogApi from '@pages/logs/api'
 import LogErrors from '@pages/logs/errors'
 import ArticleList from '@pages/article/articleList'
 import ArticleEdit from '@pages/article/articleEdit'
-import ArticleDetail from '@pages/article/articleDetail'
+import ArticleCreate from '@pages/article/articleCreate'
 import NotFound from '@components/notFound'
 
 import { Demo } from '@pages/demo/demo'
@@ -45,9 +45,9 @@ export const routes: RouteProps[] = [
     component: ArticleEdit
   },
   {
-    path: '/blog-articleDetail/:id',
+    path: '/blog-articleCreate',
     exact: true,
-    component: ArticleDetail
+    component: ArticleCreate
   },
   {
     path: '/demos',

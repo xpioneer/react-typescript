@@ -43,11 +43,15 @@ export default class APILog extends React.Component<IProps> {
     title: '操作',
     dataIndex: '',
     width: '80px',
-    render: (text: string, record: any, index: number) => <Button size="small" type="primary" href={`/blog-articleDetail/${record.id}`}>详情</Button>,
+    render: (text: string, record: any, index: number) => <Button size="small" type="primary" href={`/blog-articleEdit/${record.id}`}>详情</Button>,
   }]
 
-  viewDetail(data: any) {
-    this.props.history.push('/blog-articleDetail', {id: data.id})
+  // viewDetail(data: any) {
+  //   this.props.history.push('/blog-articleEdit', {id: data.id})
+  // }
+
+  create = () => {
+    this.props.history.push('/blog-articleCreate')
   }
   
   componentDidMount() {
@@ -84,12 +88,9 @@ export default class APILog extends React.Component<IProps> {
         </Row>
         <Row className="search-btn-w">
           <Col span={24}>
-            <Button onClick={clear}>
-              清空
-            </Button>
-            <Button type="primary" onClick={search}>
-              搜索
-            </Button>
+            <Button onClick={clear}>清空</Button>
+            <Button onClick={this.create} icon="edit">创建</Button>
+            <Button type="primary" onClick={search}>搜索</Button>
           </Col>
         </Row>
       </Form>

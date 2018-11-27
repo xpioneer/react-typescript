@@ -25,8 +25,9 @@ const toolbarOptions = [
 ];
 
 interface IEditor {
+  disabled?: boolean
   value: string
-  onChange: Function
+  onChange(text: string): Function
 }
 
 export default class QuillEditor extends React.Component<IEditor> {
@@ -60,7 +61,7 @@ export default class QuillEditor extends React.Component<IEditor> {
       }
       if(this.oldVal !== _html) {
         this.oldVal = _html
-        onChange(_html);
+        onChange && onChange(_html);
       }
       // console.log('text value:', this.oldVal)
     });
@@ -77,9 +78,13 @@ export default class QuillEditor extends React.Component<IEditor> {
   }
 
   render(){
+    const { disabled } = this.props
     this.changeEditorText()
 
-    return <div style={{minHeight: '600px'}} ref="editor"></div>
+    return <div className="editor-wrap">
+      <div style={{minHeight: '600px'}} ref="editor"></div>
+      {disabled ? <div className="editor-mask"></div> : ''}
+    </div>
     
   }
 }

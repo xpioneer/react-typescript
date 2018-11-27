@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { message } from 'antd'
 
 const $http = axios.create({
   baseURL: '',
@@ -19,6 +20,10 @@ $http.interceptors.request.use(config => {
 })
 
 $http.interceptors.response.use(response => {
+  const {config: {url}, data: {errors}} = response
+  if(url === '/graphql' && errors) {
+    message.error(errors[0].message)
+  }
   return Promise.resolve(response.data)
 }, error => {
   return Promise.reject(error.response.data)

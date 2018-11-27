@@ -97,7 +97,7 @@ export default class ArticleDetail extends React.Component<IProps> {
         </Row>
         <Row>
           <Col span={24} offset={3}>
-            <Button onClick={edit} type="primary">保存</Button>
+            <Button onClick={edit} type="primary">保存编辑</Button>
             <Button onClick={this.back}>取消</Button>
           </Col>
         </Row>

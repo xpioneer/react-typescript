@@ -4,7 +4,7 @@ import apiLogStore from '../pages/logs/store';
 import errorLogStore from '../pages/logs/errorStore';
 import articleListStore from '../pages/article/articleListStore';
 import articleEditStore from '../pages/article/articleEditStore';
-import articleDetailStore from '../pages/article/articleDetailStore';
+import articleCreateStore from '../pages/article/articleCreateStore';
 
 import demoStore from '../pages/demo/store';
 
@@ -17,7 +17,7 @@ export default {
   errorLogStore,
   articleListStore,
   articleEditStore,
-  articleDetailStore,
+  articleCreateStore,
 
   demoStore
 }
