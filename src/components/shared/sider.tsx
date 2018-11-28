@@ -10,33 +10,33 @@ interface ISiderProps extends RouteComponentProps {
 }
 
 const MenuList = [{
-  key:'1', title:'首页', path:'/', icon:'home'
+  key:'1', title:'首页', path: '/home', icon:'home'
 },{
-  key:'2', title:'图表', path:'/charts', icon:'area-chart'
+  key:'2', title:'图表', path: '/home/charts', icon:'area-chart'
 },{
   key:'3', title:'日志', icon:'file-search',
   children: [{
-    key: '3-0', title: 'API', path: '/log-api', icon: 'meh'
+    key: '3-0', title: 'API', path: '/home/log-api', icon: 'meh'
   },{
-    key: '3-1', title: 'Errors', path: '/log-errors', icon: 'frown'
+    key: '3-1', title: 'Errors', path: '/home/log-errors', icon: 'frown'
   }]
 },{
   key:'4', title:'博客', icon:'book',
   children: [{
-    key: '4-0', title: '文章', path: '/blog-article', icon: 'form'
+    key: '4-0', title: '文章', path: '/home/blog-article', icon: 'form'
   },{
-    key: '4-1', title: '文章类型', path: '/blog-type', icon: 'form'
+    key: '4-1', title: '文章类型', path: '/home/blog-type', icon: 'form'
   },{
-    key: '4-2', title: '标签', path: '/blog-tag', icon: 'form'
+    key: '4-2', title: '标签', path: '/home/blog-tag', icon: 'form'
   },{
-    key: '4-3', title: '评论', path: '/blog-comment', icon: 'form'
+    key: '4-3', title: '评论', path: '/home/blog-comment', icon: 'form'
   },{
-    key: '4-4', title: '留言', path: '/blog-message', icon: 'form'
+    key: '4-4', title: '留言', path: '/home/blog-message', icon: 'form'
   },{
-    key: '4-5', title: '用户', path: '/blog-user', icon: 'user'
+    key: '4-5', title: '用户', path: '/home/blog-user', icon: 'user'
   }]
 },{
-  key:'99', title:'测试', path:'/demos', icon:'bulb'
+  key:'99', title:'测试', path: '/home/demos', icon:'bulb'
 }]
 
 class SiderComponent extends React.Component<ISiderProps> {

@@ -17,42 +17,42 @@ const Demo = lazy(() => import('@pages/demo/demo'))
 
 export const routes: RouteProps[] = [
   {
-    path: '/',
+    path: '/home',
     exact: true,
     component: Dashboard
   },
   {
-    path: '/charts',
+    path: '/home/charts',
     exact: true,
     component: Chart
   },
   {
-    path: '/log-api',
+    path: '/home/log-api',
     exact: true,
     component: LogApi
   },
   {
-    path: '/log-errors',
+    path: '/home/log-errors',
     exact: true,
     component: LogErrors
   },
   {
-    path: '/blog-article',
+    path: '/home/blog-article',
     exact: true,
     component: ArticleList
   },
   {
-    path: '/blog-articleEdit/:id',
+    path: '/home/blog-articleEdit/:id',
     exact: true,
     component: ArticleEdit
   },
   {
-    path: '/blog-articleCreate',
+    path: '/home/blog-articleCreate',
     exact: true,
     component: ArticleCreate
   },
   {
-    path: '/demos',
+    path: '/home/demos',
     exact: true,
     component: Demo
   },
@@ -62,7 +62,7 @@ export const routes: RouteProps[] = [
   },
 ]
 
-console.log('Demo-----', Demo)
+console.log('Demo-----', Demo, NotFound)
 
 const Routes = <Suspense fallback={<div>loading...</div>}>
   <Switch>
@@ -73,10 +73,10 @@ const Routes = <Suspense fallback={<div>loading...</div>}>
       return <Route key={path + ''} exact={exact} path={path} render={(props: any) => <LazyCom {...props}/>}/>
     })
   } */}
-    <Route exact path="/" component={(props: any) => <Dashboard {...props}/>}/>
-    <Route exact path="/log-api" component={(props: any) => <LogApi {...props}/>}/>
-    <Route exact path="/charts" component={(props: any) => <Chart {...props}/>}/>
-    <Route exact path="/demos" component={(props: any) => <Demo {...props}/>}/>
+    <Route exact path="/home" component={(props: any) => <Dashboard {...props}/>}/>
+    <Route exact path="/home/log-api" component={(props: any) => <LogApi {...props}/>}/>
+    <Route exact path="/home/charts" component={(props: any) => <Chart {...props}/>}/>
+    <Route exact path="/home/demos" component={(props: any) => <Demo {...props}/>}/>
     <Route path="*" component={(props: any) => <NotFound {...props}/>}/>
   </Switch>
 </Suspense>
