@@ -24,14 +24,14 @@ export default class ErrorsLog extends React.Component<IProps> {
     // render: (name: any) => `${name.first} ${name.last}`,
     width: '120px',
   }, {
-    title: 'Path',
-    dataIndex: 'path',
-    // filters: [
-    //   { text: 'Male', value: 'male' },
-    //   { text: 'Female', value: 'female' },
-    // ],
-    width: '100px',
-  }, {
+  //   title: 'Path',
+  //   dataIndex: 'path',
+  //   // filters: [
+  //   //   { text: 'Male', value: 'male' },
+  //   //   { text: 'Female', value: 'female' },
+  //   // ],
+  //   width: '100px',
+  // }, {
     title: 'Url',
     dataIndex: 'url',
     width: '120px',
@@ -124,6 +124,10 @@ export default class ErrorsLog extends React.Component<IProps> {
     </React.Fragment>
   }
 
+  formatHeader = (data: any) => {
+    return typeof(data) === 'object' ? JSON.stringify(data) : data
+  }
+
   // 日志详情页面
   wrapHtml = (data: any) => {
     if(data !== null && Object.keys(data).length > 0) {
@@ -150,7 +154,10 @@ export default class ErrorsLog extends React.Component<IProps> {
           <div>参数：</div><div>{data.params}</div>
         </div>
         <div className="row">
-          <div>请求头：</div><div>{data.headers}</div>
+          <div>请求头：</div><div>{this.formatHeader(data.headers)}</div>
+        </div>
+        <div className="row">
+          <div>响应头：</div><div>{this.formatHeader(data.responseHeaders)}</div>
         </div>
         <div className="row">
           <div>创建时间：</div><div>{data.createdAt}</div>

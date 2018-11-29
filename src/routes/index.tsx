@@ -66,18 +66,19 @@ console.log('Demo-----', Demo, NotFound)
 
 const Routes = <Suspense fallback={<div>loading...</div>}>
   <Switch>
-  {/* {
+  {
     ...routes.map(r => {
       const {path, exact, component} = r
       const LazyCom = component
       return <Route key={path + ''} exact={exact} path={path} render={(props: any) => <LazyCom {...props}/>}/>
     })
-  } */}
-    <Route exact path="/home" component={(props: any) => <Dashboard {...props}/>}/>
-    <Route exact path="/home/log-api" component={(props: any) => <LogApi {...props}/>}/>
-    <Route exact path="/home/charts" component={(props: any) => <Chart {...props}/>}/>
-    <Route exact path="/home/demos" component={(props: any) => <Demo {...props}/>}/>
-    <Route path="*" component={(props: any) => <NotFound {...props}/>}/>
+  }
+    {/* <Route exact path="/home" render={(props: any) => <Suspense fallback={<div>loading...</div>}><Dashboard {...props}/></Suspense>}/>
+    <Route exact path="/home/blog-article" render={(props: any) => <Suspense fallback={<div>loading...</div>}><ArticleList {...props}/></Suspense>}/>
+    <Route exact path="/home/log-api" render={(props: any) => <Suspense fallback={<div>loading...</div>}><LogApi {...props}/></Suspense>}/>
+    <Route exact path="/home/charts" render={(props: any) => <Suspense fallback={<div>loading...</div>}><Chart {...props}/></Suspense>}/>
+    <Route exact path="/home/demos" render={(props: any) => <Suspense fallback={<div>loading...</div>}><Demo {...props}/></Suspense>}/>
+    <Route path="*" component={(props: any) => <NotFound {...props}/>}/> */}
   </Switch>
 </Suspense>
 
