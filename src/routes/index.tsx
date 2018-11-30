@@ -71,12 +71,6 @@ const Routes = <Suspense fallback={<div>loading...</div>}>
       return <Route key={path + ''} exact={exact} path={path} render={(props: any) => <LazyCom {...props}/>}/>
     })
   }
-    {/* <Route exact path="/home" render={(props: any) => <Suspense fallback={<div>loading...</div>}><Dashboard {...props}/></Suspense>}/>
-    <Route exact path="/home/blog-article" render={(props: any) => <Suspense fallback={<div>loading...</div>}><ArticleList {...props}/></Suspense>}/>
-    <Route exact path="/home/log-api" render={(props: any) => <Suspense fallback={<div>loading...</div>}><LogApi {...props}/></Suspense>}/>
-    <Route exact path="/home/charts" render={(props: any) => <Suspense fallback={<div>loading...</div>}><Chart {...props}/></Suspense>}/>
-    <Route exact path="/home/demos" render={(props: any) => <Suspense fallback={<div>loading...</div>}><Demo {...props}/></Suspense>}/>
-    <Route path="*" component={(props: any) => <NotFound {...props}/>}/> */}
   </Switch>
 </Suspense>
 
