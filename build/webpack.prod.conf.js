@@ -16,7 +16,7 @@ const webpackConfig = merge(baseWebpackConfig, {
   plugins: [
     new CleanWebpackPlugin(['dist'], {root: path.resolve(__dirname, '../')}),
     new OptimizeCSSAssetsPlugin({
-      cssProcessor: require('cssnano')({ autoprefixer: false })
+      // cssProcessor: require('cssnano')({ autoprefixer: false })
     }),
     new UglifyJsPlugin({
       uglifyOptions: {
