@@ -1,4 +1,5 @@
-const path = require('path')
+const path = require('path'),
+  MiniCssExtractPlugin = require("mini-css-extract-plugin")
 
 const _DEV_ = process.env.NODE_ENV === 'development'
 
@@ -40,10 +41,10 @@ const styleRules = [
   },
 ]
 
-// if(!_DEV_) {
-//   styleRules.forEach(rule => {
-//     rule.use.splice(0, 1, MiniCssExtractPlugin.loader)
-//   })
-// }
+if(!_DEV_) {
+  styleRules.forEach(rule => {
+    rule.use.splice(0, 1, MiniCssExtractPlugin.loader)
+  })
+}
 
 module.exports = styleRules

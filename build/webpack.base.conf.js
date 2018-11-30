@@ -119,28 +119,28 @@ module.exports = {
       automaticNameDelimiter: '~',
       name: true,
       cacheGroups: {
-        vendors: {
-          name: 'vendor',
-          test: /[\\/]node_modules[\\/]/,
-          priority: 1,
-          chunks: "all"
-        },
         react: {
-          name: 'vendor1',
+          name: 'vendor',
           test: /[\\/]node_modules\/react(\w)*[\\/]/,
           priority: 20,
           chunks: "all"
         },
         antd: {
-          name: 'vendor2',
+          name: 'vendor1',
           test: /[\\/]node_modules\/antd[\\/]/,
           priority: 10,
           chunks: "all"
         },
         editor: {
-          name: 'vendor3',
+          name: 'vendor2',
           test: /[\\/]node_modules\/quill[\\/]/,
           priority: 10,
+          chunks: "all"
+        },
+        vendors: {
+          name: 'vendor3',
+          test: /[\\/]node_modules[\\/]/,
+          priority: 5,
           chunks: "all"
         },
         default: {
