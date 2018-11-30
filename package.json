@@ -8,7 +8,7 @@
   "scripts": {
     "start": "npm run dev",
     "dev": "NODE_ENV=development webpack-dev-server --config build/webpack.dev.conf.js",
-    "build": "NODE_ENV=production node build/build.js"
+    "build": "NODE_ENV=production webpack --config build/webpack.prod.conf.js"
   },
   "dependencies": {
     "antd": "^3.10.4",

@@ -125,7 +125,19 @@ export default class ErrorsLog extends React.Component<IProps> {
   }
 
   formatHeader = (data: any) => {
-    return typeof(data) === 'object' ? JSON.stringify(data) : data
+    const type = typeof(data)
+    if(type === 'string') {
+      const headerObj = JSON.parse(data)
+      return Object.keys(headerObj).map(h => {
+        return <div>{h} : {headerObj[h]}</div>
+      })
+    } else if(type === 'object') {
+      return Object.keys(data).map(h => {
+        return <div>{h} : {data[h]}</div>
+      })
+    } else {
+      return ''
+    }
   }
 
   // 日志详情页面
