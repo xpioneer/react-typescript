@@ -43,7 +43,7 @@ export default class APILog extends React.Component<IProps> {
     title: '操作',
     dataIndex: '',
     width: '80px',
-    render: (text: string, record: any, index: number) => <Button size="small" type="primary" href={`/blog-articleEdit/${record.id}`}>详情</Button>,
+    render: (text: string, record: any, index: number) => <Button size="small" type="primary" href={`/home/blog-articleEdit/${record.id}`}>详情</Button>,
   }]
 
   // viewDetail(data: any) {
@@ -51,7 +51,7 @@ export default class APILog extends React.Component<IProps> {
   // }
 
   create = () => {
-    this.props.history.push('/blog-articleCreate')
+    this.props.history.push('/home/blog-articleCreate')
   }
   
   componentDidMount() {

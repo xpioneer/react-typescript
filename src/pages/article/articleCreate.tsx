@@ -23,7 +23,7 @@ export default class ArticleDetail extends React.Component<IProps> {
 
   edit() {
     const { match:{ params:{ id } }, history }: any = this.props
-    history.push(`/blog-articleEdit/${id}`)
+    history.push(`/home/blog-articleEdit/${id}`)
   }
 
   back = () => {
@@ -31,7 +31,7 @@ export default class ArticleDetail extends React.Component<IProps> {
   }
 
   goDetail = (id: string) => {
-    this.props.history.push(`/blog-articleEdit/${id}`)
+    this.props.history.push(`/home/blog-articleEdit/${id}`)
   }
   
   componentDidMount() {

@@ -10,18 +10,18 @@ interface ISiderProps extends RouteComponentProps {
 }
 
 const MenuList = [{
-  key:'1', title:'首页', path: '/home', icon:'home'
+  key:'1', title:'Home', path: '/home', icon:'home'
 },{
-  key:'2', title:'图表', path: '/home/charts', icon:'area-chart'
+  key:'2', title:'Charts', path: '/home/charts', icon:'area-chart'
 },{
-  key:'3', title:'日志', icon:'file-search',
+  key:'3', title:'Log', icon:'file-search',
   children: [{
     key: '3-0', title: 'API', path: '/home/log-api', icon: 'meh'
   },{
     key: '3-1', title: 'Errors', path: '/home/log-errors', icon: 'frown'
   }]
 },{
-  key:'4', title:'博客', icon:'book',
+  key:'4', title:'Essay', icon:'book',
   children: [{
     key: '4-0', title: '文章', path: '/home/blog-article', icon: 'form'
   },{
@@ -36,7 +36,7 @@ const MenuList = [{
     key: '4-5', title: '用户', path: '/home/blog-user', icon: 'user'
   }]
 },{
-  key:'99', title:'测试', path: '/home/demos', icon:'bulb'
+  key:'99', title:'Demo', path: '/home/demos', icon:'bulb'
 }]
 
 class SiderComponent extends React.Component<ISiderProps> {

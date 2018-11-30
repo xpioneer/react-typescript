@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { RouteProps } from 'react-router-dom'
 import NotFound  from '@components/notFound'
 
@@ -61,8 +61,6 @@ export const routes: RouteProps[] = [
     component: NotFound
   },
 ]
-
-console.log('Demo-----', Demo, NotFound)
 
 const Routes = <Suspense fallback={<div>loading...</div>}>
   <Switch>

@@ -32,8 +32,6 @@ export default class ArticleDetail extends React.Component<IProps> {
 
   render(){
     const { mainData, typeList, tagList, tagChange, changeType, inputChange, edit } = this.props.articleEditStore
-
-    console.log('tagList:', mainData.tag)
  
     return <React.Fragment>
       <Form className="search-form" layout="horizontal">
