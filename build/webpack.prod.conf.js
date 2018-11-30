@@ -6,6 +6,7 @@ const baseWebpackConfig = require('./webpack.base.conf')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin")
 
 const _PROD_ = process.env.NODE_ENV === 'production'
 
@@ -14,9 +15,9 @@ const webpackConfig = merge(baseWebpackConfig, {
   devtool: false,
   plugins: [
     new CleanWebpackPlugin(['dist'], {root: path.resolve(__dirname, '../')}),
-    // new OptimizeCSSAssetsPlugin({
-    //   cssProcessor: require('cssnano')({ autoprefixer: false })
-    // }),
+    new OptimizeCSSAssetsPlugin({
+      cssProcessor: require('cssnano')({ autoprefixer: false })
+    }),
     new UglifyJsPlugin({
       uglifyOptions: {
         compress: {
