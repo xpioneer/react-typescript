@@ -79,7 +79,7 @@ class DemoStore {
           runInAction(() => this.apiResult = JSON.stringify(res, null, '    '))
         })
       } else if (this.apiMethod === 'POST') {
-        $http.post(this.apiUrl).then(res => {
+        $http.post(this.apiUrl, jsonData).then(res => {
           runInAction(() => this.apiResult = JSON.stringify(res, null, '    '))
         })
       } else if (this.apiMethod === 'PUT') {
