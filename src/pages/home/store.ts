@@ -1,20 +1,30 @@
 import { observable, action, autorun, runInAction } from 'mobx';
 import * as zh_CN from 'antd/lib/locale-provider/zh_CN'
-import { store } from '@utils/tools'
+import { storage } from '@utils/tools'
+import { JWT_TOKEN, SYS_LANG } from '@constants/index'
 
 const zhCN: any = zh_CN
 
 class HomeStore {
   @observable collapsed: boolean = false
-  @observable lang: any = store.get('Lang') === 'CN' ? zhCN : undefined
+  @observable lang: any = storage.get(SYS_LANG) === 'CN' ? zhCN : undefined
   
   @action toggleMenu = (): void => {
     this.collapsed = !this.collapsed
   }
 
   @action toggleLang = (value: any) => {
-    store.set('Lang', !value ? 'CN' : 'EN')
+    storage.set(SYS_LANG, !value ? 'CN' : 'EN')
     this.lang = !value ? zhCN : undefined
+  }
+
+  @action logout = () => {
+    $http.post('/api/logout', {}).then((res: any) => {
+      // storage.remove(JWT_TOKEN)
+      // location.replace('/login')
+    }, err => {
+      $msg.error(err.msg)
+    })
   }
 
 }

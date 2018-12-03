@@ -77,6 +77,7 @@ module.exports = {
     alias: {
       '@assets': resolve('src/assets'),
       '@components': resolve('src/components'),
+      '@constants': resolve('src/constants'),
       '@pages': resolve('src/pages'),
       '@utils': resolve('src/utils')
     }
@@ -164,7 +165,8 @@ module.exports = {
       filename: "static/css/[name].[contenthash].css",
     }),
     new webpack.ProvidePlugin({
-      $http: [resolve('src/utils/http.ts'), 'default']
+      $http: [resolve('src/utils/http.ts'), 'default'],
+      $msg: [resolve('node_modules/antd/es/message/index.js'), 'default']
     }),
     new CopyWebpackPlugin([{
       from: resolve('statics'),

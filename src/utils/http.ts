@@ -1,5 +1,6 @@
 import axios from 'axios'
-import { message } from 'antd'
+import { storage } from '@utils/tools'
+import { JWT_TOKEN } from '@constants/index'
 
 const $http = axios.create({
   baseURL: '',
@@ -13,7 +14,7 @@ const $http = axios.create({
 })
 
 $http.interceptors.request.use(config => {
-  // config.headers['SourceHead'] = 'H5'
+  config.headers['Authorization'] = 'Bearer ' + storage.get(JWT_TOKEN)
   return config
 }, error => {
   return Promise.reject(error)
@@ -22,7 +23,7 @@ $http.interceptors.request.use(config => {
 $http.interceptors.response.use(response => {
   const {config: {url}, data: {errors}} = response
   if(url === '/graphql' && errors) {
-    message.error(errors[0].message)
+    $msg.error(errors[0].message)
   }
   return Promise.resolve(response.data)
 }, error => {
