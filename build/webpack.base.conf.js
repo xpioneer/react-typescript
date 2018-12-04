@@ -41,6 +41,32 @@ module.exports = {
         loader: "awesome-typescript-loader",
         options: {
           // useBabel: true,
+          // babelOptions: {
+          //   "babelrc": false, /* Important line */
+          //   "presets": [
+          //     ["@babel/preset-env", {
+          //       // no longer works with IE 9
+          //       targets: {
+          //         ie: 9,
+          //       },
+          //       // Users cannot override this behavior because this Babel
+          //       // configuration is highly tuned for ES5 support
+          //       ignoreBrowserslistConfig: true,
+          //       // If users import all core-js they're probably not concerned with
+          //       // bundle size. We shouldn't rely on magic to try and shrink it.
+          //       useBuiltIns: false,
+          //       // Do not transform modules to CJS
+          //       modules: false,
+          //       // Exclude transforms that make all code slower
+          //       exclude: ['transform-typeof-symbol'],
+          //     }],
+          //     ["@babel/preset-react", {
+          //       "targets": "last 2 versions, ie 11", "modules": false
+          //     }],
+          //     ["@babel/preset-typescript"]
+          //   ]
+          // },
+          // babelCore: "@babel/core",
         }
       },
       ...styleRules,
