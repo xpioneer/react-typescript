@@ -18,8 +18,8 @@ class App extends React.Component {
         <Router>
           <Suspense fallback={<div>loading...</div>}>
             <Switch>
-              <Route path="/home" component={Home}/>
-              <Route path="/login" exact component={Login}/>
+              <Route path="/home" component={(props: any) => <Home {...props}/>}/>
+              <Route path="/login" exact component={(props: any) => <Login {...props}/>}/>
               <Redirect to="/home"/>
             </Switch>
           </Suspense>
