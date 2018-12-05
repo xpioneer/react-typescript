@@ -23,7 +23,7 @@ class HomeStore {
       // storage.remove(JWT_TOKEN)
       // location.replace('/login')
     }, err => {
-      $msg.error(err.msg)
+      // $msg.error(err.msg)
     })
   }
 

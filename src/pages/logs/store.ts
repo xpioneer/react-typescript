@@ -1,5 +1,4 @@
 import { observable, action, autorun, runInAction } from 'mobx';
-import { message } from 'antd'
 import { serialize } from '@utils/params'
 import { Moment } from 'moment'
 
@@ -52,8 +51,8 @@ class apiLogStore {
       runInAction(() => {
         this.loading = false
       })
-      message.error(err.msg)
-      console.log(err)
+      // message.error(err.msg)
+      // console.log(err)
     })
   }
 

@@ -1,6 +1,7 @@
 import * as React from 'react'
 import {inject, observer} from 'mobx-react'
 import { Row, Col, Form, Icon, Input, Button, DatePicker, Table, Modal, Badge } from 'antd';
+import { object2Str } from '@utils/tools'
 
 const FormItem = Form.Item;
 
@@ -43,7 +44,7 @@ export default class APILog extends React.Component<IProps> {
   }, {
     title: '参数',
     dataIndex: 'params',
-    render: (text: string, record: any, index: number) => <div onClick={() => this.showParamsDetail(record.params, 'params')} className="textflow-4"> {text} </div>,
+    render: (text: string, record: any, index: number) => <div onClick={() => this.showParamsDetail(record.params, 'params')} className="textflow-4"> {object2Str(text)} </div>,
   }, {
     title: '状态',
     dataIndex: 'status',
@@ -64,13 +65,17 @@ export default class APILog extends React.Component<IProps> {
     render: (text: string, record: any, index: number) => <Button size="small" type="primary" onClick={() => this.viewDetail(record)}>详情</Button>,
   }]
 
+  object2Str = (o : string|object): string => {
+    return typeof o === 'string' ? o : JSON.stringify(o)
+  }
+
   // 查看Url/参数详情
   showParamsDetail = (str: any, type?: string) => {
     if(str) {
       this.setState({
         modalTitle: type === 'url' ? 'Url详情' : '参数详情',
         visible: !this.state.visible,
-        modalTxt: str
+        modalTxt: object2Str(str)
       })
     } else {
       this.setState({ visible: false })
@@ -125,7 +130,7 @@ export default class APILog extends React.Component<IProps> {
           <div>Path：</div><div>{data.path}</div>
         </div>
         <div className="row">
-          <div>参数：</div><div>{data.params}</div>
+          <div>参数：</div><div>{object2Str(data.params)}</div>
         </div>
         <div className="row">
           <div>请求头：</div><div>{this.formatHeader(data.headers)}</div>

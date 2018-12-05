@@ -1,6 +1,7 @@
 import * as React from 'react'
 import {inject, observer} from 'mobx-react'
 import { Row, Col, Form, Icon, Input, Button, DatePicker, Table, Modal, Badge } from 'antd';
+import { object2Str } from '@utils/tools'
 
 const FormItem = Form.Item;
 
@@ -43,7 +44,7 @@ export default class ErrorsLog extends React.Component<IProps> {
   }, {
     title: '参数',
     dataIndex: 'params',
-    render: (text: string, record: any, index: number) => <div onClick={() => this.showParamsDetail(record, 'params')} className="textflow-4"> {text} </div>,
+    render: (text: string, record: any, index: number) => <div onClick={() => this.showParamsDetail(record, 'params')} className="textflow-4"> {object2Str(text)} </div>,
   }, {
     title: '错误信息',
     dataIndex: 'msg',
@@ -83,7 +84,7 @@ export default class ErrorsLog extends React.Component<IProps> {
       this.setState({
         modalTitle: title + '详情',
         visible: !this.state.visible,
-        modalTxt: str
+        modalTxt: object2Str(str)
       })
     } else {
       this.setState({ visible: false })
@@ -163,7 +164,7 @@ export default class ErrorsLog extends React.Component<IProps> {
           <div>Path：</div><div>{data.path}</div>
         </div>
         <div className="row">
-          <div>参数：</div><div>{data.params}</div>
+          <div>参数：</div><div>{object2Str(data.params)}</div>
         </div>
         <div className="row">
           <div>请求头：</div><div>{this.formatHeader(data.headers)}</div>

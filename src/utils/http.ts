@@ -1,32 +1,34 @@
 import axios from 'axios'
+import { AxiosResponse, AxiosError } from 'axios'
 import { storage } from '@utils/tools'
 import { JWT_TOKEN } from '@constants/index'
+import helper from './httpHelper'
 
 const $http = axios.create({
   baseURL: '',
+  responseType: 'json',
   transformResponse: [function (data) {
-    if (typeof data === 'string') {
-      return JSON.parse(data)
-    }
     return data
   }],
   timeout: 30000
 })
 
 $http.interceptors.request.use(config => {
-  config.headers['Authorization'] = 'Bearer ' + storage.get(JWT_TOKEN)
+  config.headers.common['Authorization'] = 'Bearer ' + storage.get(JWT_TOKEN)
   return config
 }, error => {
   return Promise.reject(error)
 })
 
 $http.interceptors.response.use(response => {
-  const {config: {url}, data: {errors}} = response
-  if(url === '/graphql' && errors) {
-    $msg.error(errors[0].message)
-  }
+  helper.successHelper(response)
   return Promise.resolve(response.data)
 }, error => {
+  if(error.response && /^[456]\d{2}$/.test(error.response.status)) {
+    helper.errorHelper(error.response)
+  } else {
+    $msg.error(error.toString()) // other err: code error
+  }
   return Promise.reject(error.response.data)
 })
 

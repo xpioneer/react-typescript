@@ -54,8 +54,8 @@ class errorLogStore {
       runInAction(() => {
         this.loading = false
       })
-      message.error(err.msg)
-      console.log(err)
+      // message.error(err.msg)
+      // console.log(err)
     })
   }
 

@@ -1,4 +1,7 @@
 
+export const object2Str = (o : string|object): string => {
+  return typeof o === 'string' ? o : JSON.stringify(o)
+}
 
 export const storage = {
   get:  (key: string) => {
