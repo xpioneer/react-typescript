@@ -6,6 +6,7 @@ import { JWT_TOKEN, SYS_LANG } from '@constants/index'
 const zhCN: any = zh_CN
 
 class HomeStore {
+  @observable token: string = storage.get(JWT_TOKEN)
   @observable collapsed: boolean = false
   @observable lang: any = storage.get(SYS_LANG) === 'CN' ? zhCN : undefined
   

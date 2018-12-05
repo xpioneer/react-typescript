@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { RouteProps } from 'react-router-dom'
 import NotFound  from '@components/notFound'
 
@@ -22,49 +22,41 @@ export const routes: IRouteProps[] = [
   {
     path: '/home',
     exact: true,
-    auth: true,
     component: Dashboard
   },
   {
     path: '/home/charts',
     exact: true,
-    auth: true,
     component: Chart
   },
   {
     path: '/home/log-api',
     exact: true,
-    auth: true,
     component: LogApi
   },
   {
     path: '/home/log-errors',
     exact: true,
-    auth: true,
     component: LogErrors
   },
   {
     path: '/home/blog-article',
     exact: true,
-    auth: true,
     component: ArticleList
   },
   {
     path: '/home/blog-articleEdit/:id',
     exact: true,
-    auth: true,
     component: ArticleEdit
   },
   {
     path: '/home/blog-articleCreate',
     exact: true,
-    auth: true,
     component: ArticleCreate
   },
   {
     path: '/home/demos',
     exact: true,
-    auth: true,
     component: Demo
   },
   {
@@ -73,13 +65,13 @@ export const routes: IRouteProps[] = [
   },
 ]
 
-const Routes = <Suspense fallback={<div>loading...</div>}>
+const Routes = (token: any) => <Suspense fallback={<div>loading...</div>}>
   <Switch>
   {
     routes.map(r => {
-      const {path, exact, component} = r
+      const {path, exact, component, auth} = r
       const LazyCom = component
-      return <Route key={path + ''} exact={exact} path={path} render={(props: any) => <LazyCom {...props}/>}/>
+      return <Route key={path + ''} exact={exact} path={path} render={(props: any) => (token ? <LazyCom {...props}/> : <Redirect to="/login"/>)}/>
     })
   }
   </Switch>

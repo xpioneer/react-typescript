@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Layout } from 'antd';
 import { inject, observer } from 'mobx-react'
-import Routes, { routes } from '../../routes'
+import Routes from '../../routes'
 import Sider from '@components/shared/sider'
 import Header from '@components/shared/header'
 import Footer from '@components/shared/footer'
@@ -22,7 +22,7 @@ class Home extends React.Component<IProps> {
         <Layout>
           <Header props={homeStore}/>
           <Content style={{ margin: '16px 12px', padding: 16, background: '#fff', minHeight: 520 }}>
-          { Routes }
+          { Routes(homeStore.token) }
           </Content>
           <Footer/>
         </Layout>
