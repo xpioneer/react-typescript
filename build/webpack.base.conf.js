@@ -141,7 +141,7 @@ module.exports = {
         react: {
           name: 'vendor',
           test: /[\\/]node_modules\/(react|mobx)[\\/]/,
-          priority: 0,
+          priority: 1,
           chunks: "all"
         },
         antd: {
@@ -154,7 +154,7 @@ module.exports = {
           name: 'common',
           minChunks: 2,
           chunks: "all",
-          priority: -20,
+          priority: -10,
           reuseExistingChunk: true
         }
       }

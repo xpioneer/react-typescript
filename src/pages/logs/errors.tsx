@@ -129,11 +129,11 @@ export default class ErrorsLog extends React.Component<IProps> {
     if(type === 'string') {
       const headerObj = JSON.parse(data)
       return Object.keys(headerObj).map(h => {
-        return <div>{h} : {headerObj[h]}</div>
+        return <div key={h}>{h} : {headerObj[h]}</div>
       })
     } else if(type === 'object') {
       return Object.keys(data).map(h => {
-        return <div>{h} : {data[h]}</div>
+        return <div key={h}>{h} : {data[h]}</div>
       })
     } else {
       return ''

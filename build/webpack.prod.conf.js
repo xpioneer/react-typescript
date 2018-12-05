@@ -11,7 +11,7 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin")
 const _PROD_ = process.env.NODE_ENV === 'production'
 
 const webpackConfig = merge(baseWebpackConfig, {
-  mode: _PROD_ ? 'production' : 'none',
+  mode: 'production',
   devtool: false,
   plugins: [
     new CleanWebpackPlugin(['dist'], {root: path.resolve(__dirname, '../')}),
@@ -31,6 +31,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       parallel: true
     }),
     new HtmlWebpackPlugin({
+      title: 'CMS-React',
       filename: 'index.html',
       template: path.resolve(__dirname, '../src/index.html'),
       inject: true,
