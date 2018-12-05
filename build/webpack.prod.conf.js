@@ -22,7 +22,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       uglifyOptions: {
         compress: {
           warnings: false,
-          drop_console: !_PROD_ ? false : true,
+          drop_console: _PROD_ ? true : false,
         },
         output: {
           comments: false

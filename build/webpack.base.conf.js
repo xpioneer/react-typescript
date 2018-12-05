@@ -125,7 +125,7 @@ module.exports = {
   // 精确控制要显示的 bundle 信息
 
   optimization: {
-    minimize: !_PROD_ ? false : true,
+    minimize: _PROD_ ? true : false,
     runtimeChunk: {
       name: "manifest"
     },
@@ -147,7 +147,7 @@ module.exports = {
         antd: {
           name: 'vendor1',
           test: /[\\/]node_modules\/antd[\\/]/,
-          priority: -5,
+          priority: 0,
           chunks: "all"
         },
         default: {
