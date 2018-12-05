@@ -14,46 +14,57 @@ const ArticleEdit = lazy(() => import( /* webpackChunkName:"articleEdit" */ '@pa
 const ArticleCreate = lazy(() => import( /* webpackChunkName:"articleCreate" */ '@pages/article/articleCreate'))
 const Demo = lazy(() => import( /* webpackChunkName:"demo" */ '@pages/demo/demo'))
 
+interface IRouteProps extends RouteProps{
+  auth?: boolean
+}
 
-export const routes: RouteProps[] = [
+export const routes: IRouteProps[] = [
   {
     path: '/home',
     exact: true,
+    auth: true,
     component: Dashboard
   },
   {
     path: '/home/charts',
     exact: true,
+    auth: true,
     component: Chart
   },
   {
     path: '/home/log-api',
     exact: true,
+    auth: true,
     component: LogApi
   },
   {
     path: '/home/log-errors',
     exact: true,
+    auth: true,
     component: LogErrors
   },
   {
     path: '/home/blog-article',
     exact: true,
+    auth: true,
     component: ArticleList
   },
   {
     path: '/home/blog-articleEdit/:id',
     exact: true,
+    auth: true,
     component: ArticleEdit
   },
   {
     path: '/home/blog-articleCreate',
     exact: true,
+    auth: true,
     component: ArticleCreate
   },
   {
     path: '/home/demos',
     exact: true,
+    auth: true,
     component: Demo
   },
   {
