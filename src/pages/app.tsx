@@ -2,12 +2,10 @@ import * as React from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
 import { Provider } from 'mobx-react'
 import stores from '../stores'
-// import Home from '@pages/home/home'
-// import Login from '@pages/login/login'
 
 const { lazy, Suspense } = React
-const Home = lazy(() => import('@pages/home/home'))
-const Login = lazy(() => import('@pages/login/login'))
+const Home = lazy(() => import( /* webpackChunkName:"home" */'@pages/home/home'))
+const Login = lazy(() => import( /* webpackChunkName:"login" */'@pages/login/login'))
 
 class App extends React.Component {
 

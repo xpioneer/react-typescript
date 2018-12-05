@@ -65,7 +65,7 @@ export const routes: RouteProps[] = [
 const Routes = <Suspense fallback={<div>loading...</div>}>
   <Switch>
   {
-    ...routes.map(r => {
+    routes.map(r => {
       const {path, exact, component} = r
       const LazyCom = component
       return <Route key={path + ''} exact={exact} path={path} render={(props: any) => <LazyCom {...props}/>}/>
