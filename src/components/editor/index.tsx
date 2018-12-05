@@ -1,6 +1,8 @@
 import * as React from 'react'
+import { QuillOptionsStatic } from 'quill'
+import * as Q from 'quill'
 
-const Quill = require('quill')
+const Quill: any = Q
 
 const toolbarOptions = [
   ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
@@ -30,24 +32,25 @@ interface IEditor {
   onChange(text: string): Function
 }
 
-export default class QuillEditor extends React.Component<IEditor> {
+export default class QuillEditorComponent extends React.Component<IEditor> {
   value: string = this.props.value
   oldVal: string = this.props.value
 
   quillEditor: any = null
+  quillOptions: QuillOptionsStatic = {
+    // debug: false,
+    modules: {
+      toolbar: toolbarOptions,
+    },
+    placeholder: '请在这里写下你的内容...',
+    readOnly: false,
+    theme: 'snow',
+  }
   
   componentDidMount() {
     const { onChange } = this.props
     const { editor }: any = this.refs
-    this.quillEditor = new Quill(editor, {
-      // debug: false,
-      modules: {
-        toolbar: toolbarOptions,
-      },
-      placeholder: '请在这里写下你的内容...',
-      readOnly: false,
-      theme: 'snow',
-    })
+    this.quillEditor = new Quill(editor, this.quillOptions)
 
     // this.quillEditor.on('editor-change', (delta: any, oldDelta: any, source: any) => {
     //   // too many change

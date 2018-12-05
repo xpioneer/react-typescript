@@ -17,18 +17,11 @@ module.exports = {
 
   output: {
     path: resolve("dist"), // string
-    // 所有输出文件的目标路径
-    // publicPath: "/assets/", // string
-    // // 输出解析文件的目录，url 相对于 HTML 页面
-    // library: "MyLibrary", // string,
-    // // 导出库(exported library)的名称
-    // libraryTarget: "umd", // 通用模块定义
-    // 导出库(exported library)的类型
 
     publicPath: '/', // root Dir
     sourceMapFilename: '[name].map',
-    chunkFilename: 'static/js/[name].chunk.[chunkhash].js',
-    filename: 'static/js/[name].bundle.[hash].js'
+    chunkFilename: 'static/js/[name].[chunkhash:8].js',
+    filename: 'static/js/[name].[hash:8].js'
   },
 
   module: {
@@ -64,7 +57,7 @@ module.exports = {
           plugins: [
             ['@babel/plugin-syntax-dynamic-import'],
             ['@babel/plugin-proposal-decorators', {legacy: true}],
-            ['@babel/plugin-proposal-class-properties']
+            ['@babel/plugin-proposal-class-properties', {loose: true}]
           ]
         }
       },
@@ -141,37 +134,26 @@ module.exports = {
       minSize: 30000,
       minChunks: 1,
       maxAsyncRequests: 5,
-      maxInitialRequests: 4,
+      maxInitialRequests: 3,
       automaticNameDelimiter: '~',
       name: true,
       cacheGroups: {
         react: {
           name: 'vendor',
-          test: /[\\/]node_modules\/react(\w)*[\\/]/,
-          priority: 20,
+          test: /[\\/]node_modules\/(react|mobx)[\\/]/,
+          priority: 0,
           chunks: "all"
         },
         antd: {
           name: 'vendor1',
           test: /[\\/]node_modules\/antd[\\/]/,
-          priority: 10,
-          chunks: "all"
-        },
-        editor: {
-          name: 'vendor2',
-          test: /[\\/]node_modules\/quill[\\/]/,
-          priority: 10,
-          chunks: "all"
-        },
-        vendors: {
-          name: 'vendor3',
-          test: /[\\/]node_modules[\\/]/,
-          priority: 5,
+          priority: -5,
           chunks: "all"
         },
         default: {
           name: 'common',
           minChunks: 2,
+          chunks: "all",
           priority: -20,
           reuseExistingChunk: true
         }

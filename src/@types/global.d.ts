@@ -1,6 +1,6 @@
 import { MessageApi } from 'antd/lib/message'
 import { RouteComponentProps } from 'react-router-dom'
-import {AxiosInstance} from 'axios'
+import { AxiosInstance } from 'axios'
 
 declare global {
   export const $http: AxiosInstance
