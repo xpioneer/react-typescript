@@ -10,7 +10,7 @@ export const storage = {
   },
 
   set:  (key: string, value: any): void => {
-    if(value !== null || value !== undefined) {
+    if(value !== null && value !== undefined) {
       localStorage.setItem(key, JSON.stringify(value))
     }
   },

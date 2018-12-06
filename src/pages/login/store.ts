@@ -24,8 +24,8 @@ class LoginStore {
       username: this.username,
       password: this.password
     }).then((res: any) => {
-      storage.set(JWT_TOKEN, res.token) // store jwt token
-      location.replace(sessionStorage.getItem(REDIRECT_URL) || '/home')
+      storage.set(JWT_TOKEN, res.data) // store jwt token
+      // location.replace(sessionStorage.getItem(REDIRECT_URL) || '/home')
     }, err => {
       // $msg.error('用户名和密码错误!')
     })

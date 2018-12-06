@@ -1,7 +1,7 @@
 import * as React from 'react'
-import { Route, Switch, Redirect } from 'react-router-dom';
-import { RouteProps } from 'react-router-dom'
+import { Route, Switch, Redirect, RouteProps } from 'react-router-dom';
 import NotFound  from '@components/notFound'
+import Loading from '@components/loading'
 
 const {lazy, Suspense} = React
 
@@ -14,11 +14,8 @@ const ArticleEdit = lazy(() => import( /* webpackChunkName:"articleEdit" */ '@pa
 const ArticleCreate = lazy(() => import( /* webpackChunkName:"articleCreate" */ '@pages/article/articleCreate'))
 const Demo = lazy(() => import( /* webpackChunkName:"demo" */ '@pages/demo/demo'))
 
-interface IRouteProps extends RouteProps{
-  auth?: boolean
-}
 
-export const routes: IRouteProps[] = [
+export const routes: RouteProps[] = [
   {
     path: '/home',
     exact: true,
@@ -65,13 +62,13 @@ export const routes: IRouteProps[] = [
   },
 ]
 
-const Routes = (token: any) => <Suspense fallback={<div>loading...</div>}>
+const Routes = (authorized: boolean) => <Suspense fallback={<Loading/>}>
   <Switch>
   {
     routes.map(r => {
-      const {path, exact, component, auth} = r
+      const {path, exact, component} = r
       const LazyCom = component
-      return <Route key={path + ''} exact={exact} path={path} render={(props: any) => (token ? <LazyCom {...props}/> : <Redirect to="/login"/>)}/>
+      return <Route key={path + ''} exact={exact} path={path} render={(props: any) => (authorized ? <LazyCom {...props}/> : <Redirect to="/login"/>)}/>
     })
   }
   </Switch>
