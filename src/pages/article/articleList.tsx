@@ -1,6 +1,8 @@
 import * as React from 'react'
 import {inject, observer} from 'mobx-react'
-import { Row, Col, Form, Icon, Input, Button, DatePicker, Table, Modal, Badge } from 'antd';
+import { Row, Col, Form, Icon, Input, Button, DatePicker, Table, Modal, Badge, } from 'antd';
+import { ColumnProps } from 'antd/lib/table'
+import { IArticle } from '@models/article'
 
 const FormItem = Form.Item;
 
@@ -17,10 +19,10 @@ export default class APILog extends React.Component<IProps> {
     detailInfo: {}
   }
 
-  columns = [{
+  columns: ColumnProps<IArticle>[] = [{
     title: 'ID',
     dataIndex: 'id',
-    sorter: true,
+    // sorter: true,
     // render: (name: any) => `${name.first} ${name.last}`,
     width: '12%',
   }, {
@@ -39,16 +41,20 @@ export default class APILog extends React.Component<IProps> {
     title: '创建时间',
     width: '120px',
     dataIndex: 'createdAt',
+    key: 'createdAt',
+    sorter: true
+    // defaultSortOrder: 'descend',
+    // sortOrder: true
   }, {
     title: '操作',
     dataIndex: '',
     width: '80px',
-    render: (text: string, record: any, index: number) => <Button size="small" type="primary" href={`/home/blog-articleEdit/${record.id}`}>详情</Button>,
+    render: (text: string, record: IArticle, index: number) => <Button size="small" type="primary" onClick={() => this.viewDetail(record)}>详情</Button>,
   }]
 
-  // viewDetail(data: any) {
-  //   this.props.history.push('/blog-articleEdit', {id: data.id})
-  // }
+  viewDetail(data: IArticle) {
+    this.props.history.push('/blog-articleEdit/' + data.id)
+  }
 
   create = () => {
     this.props.history.push('/home/blog-articleCreate')

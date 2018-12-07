@@ -48,6 +48,8 @@ class HttpHelper {
           $msg.error('用户名或密码错误');
         } else if (arr[1] === '/upload-file') {
           $msg.error('文件上传失败');
+        } else if (arr[0]) {
+          $msg.error(err.data.errors[0].message || 'graphql params error')
         } else {
           $msg.error(err.data.msg || err.data.statusText);
         }

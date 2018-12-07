@@ -1,5 +1,4 @@
 import { observable, action, autorun, runInAction, computed } from 'mobx';
-import { message } from 'antd'
 
 const getArticleById = `query article($id: String){
   article(id: $id){
@@ -42,7 +41,7 @@ class articleEditStore {
       runInAction(() => {
         this.loading = false
       })
-      message.error(err[0].message)
+      // message.error(err[0].message)
     })
   }
 

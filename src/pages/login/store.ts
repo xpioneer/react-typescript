@@ -15,17 +15,17 @@ class LoginStore {
   }
 
   @action login = () => {
-    // if(this.password.length < 6 || this.username.length < 3) {
-    //   $msg.error('请输入正确格式的用户名和密码')
-    //   return
-    // }
+    if(this.password.length < 6 || this.username.length < 3) {
+      $msg.error('请输入正确格式的用户名和密码')
+      return
+    }
 
     $http.post('/api/login', {
       username: this.username,
       password: this.password
     }).then((res: any) => {
       storage.set(JWT_TOKEN, res.data) // store jwt token
-      // location.replace(sessionStorage.getItem(REDIRECT_URL) || '/home')
+      location.replace(sessionStorage.getItem(REDIRECT_URL) || '/home')
     }, err => {
       // $msg.error('用户名和密码错误!')
     })

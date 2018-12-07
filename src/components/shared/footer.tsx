@@ -7,5 +7,5 @@ export default () => <Footer
   style={{
     background: '#fff',
     textAlign: 'center'}}>
-  Copyright by Keefe
+  Copyright by xpioneer
 </Footer>

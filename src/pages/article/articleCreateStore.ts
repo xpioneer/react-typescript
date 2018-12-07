@@ -1,5 +1,4 @@
 import { observable, action, autorun, runInAction, computed } from 'mobx';
-import { message } from 'antd'
 
 const getInitQuery = `{
   articleTypes(page: 1, pageSize: 99){
@@ -41,7 +40,7 @@ class articleCreateStore {
       runInAction(() => {
         this.loading = false
       })
-      message.error(err[0].message)
+      // message.error(err[0].message)
     })
   }
 
@@ -62,7 +61,7 @@ class articleCreateStore {
       runInAction(() => {
         this.loading = false
       })
-      message.error(err[0].message)
+      // message.error(err[0].message)
     })
   }
 

@@ -3,10 +3,10 @@ import { message } from 'antd'
 import { serialize } from '@utils/params'
 import { Moment } from 'moment'
 
-const queryArticles = `query articlePages($page: Int, $pageSize: Int){
-  articles(page: $page, pageSize: $pageSize){
+const queryArticles = `query articlePages($page: Int, $pageSize: Int, $order: pageOrder, $title: String){
+  articles(page: $page, pageSize: $pageSize, order: $order, title: $title){
     list{id,title,abstract,createdAt,createdBy}
-    meta{page,total,pageSize}
+    meta{current,total,pageSize}
   }
 }`
 
@@ -16,7 +16,8 @@ class articleListStore {
     abstract: '',
     createdAt: '',
     page: 1,
-    pageSize: 10
+    pageSize: 10,
+    order: {}
   }
   @observable loading: boolean = false
   @observable list: [] = []
@@ -41,12 +42,25 @@ class articleListStore {
       abstract: '',
       createdAt: '',
       page: 1,
-      pageSize: 10
+      pageSize: 10,
+      order: {}
     }
   }
 
-  @action search = (data: any = {}) => {
-    this.value['page'] = data.current || 1
+  @action search = (pagination: any = {}, filters: any, orders: any) => {
+    console.log(pagination, '----pagination')
+    console.log(pagination, filters, orders)
+    this.value['page'] = pagination.current || 1
+
+    if(orders && Object.keys(orders).length > 0) {
+      this.value.order[orders.field] = orders.order === 'ascend' ? 'ASC' : 'DESC'
+    }
+    
+    this.fetch(this.value)
+  }
+
+  fetch = (data: any) => {
+    console.log(data, '----data')
     this.loading = true
 
     $http.post('/graphql', {
@@ -62,7 +76,7 @@ class articleListStore {
       runInAction(() => {
         this.loading = false
       })
-      message.error(err.msg)
+      // message.error(err.msg)
       console.log(err)
     })
   }
