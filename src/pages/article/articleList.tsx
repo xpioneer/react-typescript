@@ -53,7 +53,7 @@ export default class APILog extends React.Component<IProps> {
   }]
 
   viewDetail(data: IArticle) {
-    this.props.history.push('/blog-articleEdit/' + data.id)
+    this.props.history.push(`/home/blog-articleEdit/${data.id}`)
   }
 
   create = () => {
@@ -65,7 +65,7 @@ export default class APILog extends React.Component<IProps> {
   }
 
   render(){
-    const { value, loading, list, meta, inputChange, search, clear } = this.props.articleListStore
+    const { value, loading, list, meta, createdAt, inputChange, search, clear } = this.props.articleListStore
  
     return <React.Fragment>
       <Form className="search-form">
@@ -83,12 +83,12 @@ export default class APILog extends React.Component<IProps> {
           </Col>
           <Col span={6}>
             <FormItem>
-              <DatePicker.RangePicker onChange={(e) => inputChange(e, 'createdAt')} />
+              <Input placeholder="标签" onChange={e => inputChange(e.target.value, 'tag')} value={value.tag}/>
             </FormItem>
           </Col>
           <Col span={6}>
             <FormItem>
-              <DatePicker.RangePicker/>
+              <DatePicker.RangePicker onChange={(e) => inputChange(e, 'createdAt')} value={createdAt}/>
             </FormItem>
           </Col>
         </Row>

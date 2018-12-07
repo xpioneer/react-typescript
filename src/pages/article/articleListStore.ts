@@ -1,10 +1,10 @@
 import { observable, action, autorun, runInAction } from 'mobx';
-import { message } from 'antd'
 import { serialize } from '@utils/params'
 import { Moment } from 'moment'
 
-const queryArticles = `query articlePages($page: Int, $pageSize: Int, $order: pageOrder, $title: String){
-  articles(page: $page, pageSize: $pageSize, order: $order, title: $title){
+const queryArticles = `
+query articlePages($page: Int, $pageSize: Int, $order: pageOrder, $title: String, $abstract: String, $tag: String, $createdAt: [String]){
+  articles(page: $page, pageSize: $pageSize, order: $order, title: $title, abstract: $abstract, tag: $tag, createdAt: $createdAt){
     list{id,title,abstract,createdAt,createdBy}
     meta{current,total,pageSize}
   }
@@ -14,6 +14,7 @@ class articleListStore {
   @observable value = {
     title: '',
     abstract: '',
+    tag: '',
     createdAt: '',
     page: 1,
     pageSize: 10,
@@ -22,24 +23,27 @@ class articleListStore {
   @observable loading: boolean = false
   @observable list: [] = []
   @observable meta: object = {}
-  @observable createdAt: string = ''
+  @observable createdAt: string = '' // datepicker show value
   
   
   @action inputChange = (value: any, type: string) => {
     if(type === 'createdAt') {
-      const range: [Moment, Moment] = value
-      this.value[type] = range.map((d: Moment, index) => {
-        return index > 0 ? d.format('YYYY/MM/DD 23:59:59:999') : d.format('YYYY/MM/DD 00:00:00:000')
-      }).join(',')
+      this.createdAt = value
+      const range = value
+      this.value[type] = range.map((d: Moment, index: number) => {
+        return index > 0 ? d.format('YYYY-MM-DD 23:59:59:999') : d.format('YYYY-MM-DD 00:00:00:000')
+      })
     } else {
       this.value[type] = value.trim()
     }
   }
 
   @action clear = () => {
+    this.createdAt = ''
     this.value = {
       title: '',
       abstract: '',
+      tag: '',
       createdAt: '',
       page: 1,
       pageSize: 10,
@@ -48,8 +52,6 @@ class articleListStore {
   }
 
   @action search = (pagination: any = {}, filters: any, orders: any) => {
-    console.log(pagination, '----pagination')
-    console.log(pagination, filters, orders)
     this.value['page'] = pagination.current || 1
 
     if(orders && Object.keys(orders).length > 0) {
@@ -76,8 +78,6 @@ class articleListStore {
       runInAction(() => {
         this.loading = false
       })
-      // message.error(err.msg)
-      console.log(err)
     })
   }
 

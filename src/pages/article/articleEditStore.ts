@@ -1,6 +1,7 @@
 import { observable, action, autorun, runInAction, computed } from 'mobx';
 
-const getArticleById = `query article($id: String){
+const getArticleById = `
+query article($id: String){
   article(id: $id){
     id,title,abstract,description,isTop,tag,createdAt,createdBy,
     typeId
@@ -41,7 +42,6 @@ class articleEditStore {
       runInAction(() => {
         this.loading = false
       })
-      // message.error(err[0].message)
     })
   }
 
