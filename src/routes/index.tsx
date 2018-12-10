@@ -12,6 +12,8 @@ const LogErrors = lazy(() => import( /* webpackChunkName:"logErrors" */ '@pages/
 const ArticleList = lazy(() => import( /* webpackChunkName:"articleList" */ '@pages/article/articleList'))
 const ArticleEdit = lazy(() => import( /* webpackChunkName:"articleEdit" */ '@pages/article/articleEdit'))
 const ArticleCreate = lazy(() => import( /* webpackChunkName:"articleCreate" */ '@pages/article/articleCreate'))
+const ArticleTypeList = lazy(() => import( /* webpackChunkName:"articleTypeList" */ '@pages/articleType/articleTypeList'))
+
 const Demo = lazy(() => import( /* webpackChunkName:"demo" */ '@pages/demo/demo'))
 
 
@@ -50,6 +52,11 @@ export const routes: RouteProps[] = [
     path: '/home/blog-articleCreate',
     exact: true,
     component: ArticleCreate
+  },
+  {
+    path: '/home/blog-type',
+    exact: true,
+    component: ArticleTypeList
   },
   {
     path: '/home/demos',

@@ -5,6 +5,7 @@ import errorLogStore from '../pages/logs/errorStore';
 import articleListStore from '../pages/article/articleListStore';
 import articleEditStore from '../pages/article/articleEditStore';
 import articleCreateStore from '../pages/article/articleCreateStore';
+import articleTypeListStore from '../pages/articleType/articleTypeListStore';
 
 import demoStore from '../pages/demo/store';
 
@@ -18,6 +19,7 @@ export default {
   articleListStore,
   articleEditStore,
   articleCreateStore,
+  articleTypeListStore,
 
   demoStore
 }
