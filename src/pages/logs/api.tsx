@@ -21,7 +21,6 @@ export default class APILog extends React.Component<IProps> {
   columns = [{
     title: 'ID',
     dataIndex: 'id',
-    sorter: true,
     // render: (name: any) => `${name.first} ${name.last}`,
     width: '12%',
   }, {
@@ -54,6 +53,7 @@ export default class APILog extends React.Component<IProps> {
     title: '创建时间',
     width: '120px',
     dataIndex: 'createdAt',
+    sorter: true
   }, {
     title: '耗时(ms)',
     dataIndex: 'time',

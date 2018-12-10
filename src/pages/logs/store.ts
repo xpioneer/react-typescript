@@ -8,7 +8,8 @@ class apiLogStore {
     url: '',
     createdAt: '',
     page: 1,
-    pageSize: 10
+    pageSize: 10,
+    order: {}
   }
   @observable loading: boolean = false
   @observable list: [] = []
@@ -28,19 +29,29 @@ class apiLogStore {
   }
 
   @action clear = () => {
+    this.createdAt = ''
     this.value = {
       path: '',
       url: '',
       createdAt: '',
       page: 1,
-      pageSize: 10
+      pageSize: 10,
+      order: {}
     }
   }
 
-  @action search = (data: any = {}) => {
-    this.value['page'] = data.current || 1
-    this.loading = true
+  @action search = (pagination: any = {}, filters: any, orders: any) => {
+    this.value['page'] = pagination.current || 1
 
+    if(orders && Object.keys(orders).length > 0) {
+      this.value.order[orders.field] = orders.order === 'ascend' ? 'ASC' : 'DESC'
+    }
+    
+    this.fetch(this.value)
+  }
+
+  fetch = (data: any) => {
+    this.loading = true
     $http.get('/api/log-api?' + serialize.fmtGet(this.value)).then((res: any) => {
       runInAction(() => {
         this.loading = false

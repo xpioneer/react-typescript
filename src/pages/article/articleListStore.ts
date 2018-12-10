@@ -62,7 +62,7 @@ class articleListStore {
   }
 
   fetch = (data: any) => {
-    console.log(data, '----data')
+    // console.log(data, '----data')
     this.loading = true
 
     $http.post('/graphql', {
