@@ -19,7 +19,7 @@ const formItemLayout = {
 
 @inject('articleCreateStore')
 @observer
-export default class ArticleDetail extends React.Component<IProps> {
+export default class ArticleCreate extends React.Component<IProps> {
 
   edit() {
     const { match:{ params:{ id } }, history }: any = this.props

@@ -173,6 +173,9 @@ export default class ErrorsLog extends React.Component<IProps> {
           <div>响应头：</div><div>{this.formatHeader(data.responseHeaders)}</div>
         </div>
         <div className="row">
+          <div>响应参数：</div><div>{object2Str(data.resData)}</div>
+        </div>
+        <div className="row">
           <div>创建时间：</div><div>{data.createdAt}</div>
         </div>
         <div className="row">

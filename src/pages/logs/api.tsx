@@ -101,7 +101,15 @@ export default class APILog extends React.Component<IProps> {
   formatHeader = (data: any) => {
     const type = typeof(data)
     if(type === 'string') {
-      const headerObj = JSON.parse(data)
+      let headerObj = ''
+      try{
+        headerObj = JSON.parse(data)
+      } catch(e) {
+        if(data.length > 10240) {
+          return data.substr(0, 1024) + '...'
+        }
+        return data
+      }
       return Object.keys(headerObj).map(h => {
         return <div key={h}>{h} : {headerObj[h]}</div>
       })
@@ -136,7 +144,10 @@ export default class APILog extends React.Component<IProps> {
           <div>请求头：</div><div>{this.formatHeader(data.headers)}</div>
         </div>
         <div className="row">
-          <div>响应头：</div><div>{this.formatHeader(data.responseHeaders)}</div>
+          <div>响应头：</div><div>{this.formatHeader(data.resHeaders || data.responseHeaders)}</div>
+        </div>
+        <div className="row">
+          <div>响应参数：</div><div>{object2Str(data.resData)}</div>
         </div>
         <div className="row">
           <div>创建时间：</div><div>{data.createdAt}</div>
