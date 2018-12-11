@@ -1,8 +1,8 @@
-#react-typescript
+# react-typescript
 
 ### 项目概况
 ***
-使用蚂蚁金服的Antd开发的一套后台管理系统，主要用到了react、typescript、antd等技术，使用webpack4打包构建
+使用蚂蚁金服的Antd开发的一套后台管理系统，主要用到了react、typescript、antd、mobx等技术，使用webpack4打包构建，包含React16的code splitting等新特性。
 
 ### 项目主要技术结构
 
