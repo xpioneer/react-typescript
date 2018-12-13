@@ -41,6 +41,7 @@ class HttpHelper {
   public errorHelper (err: AxiosResponse): void {
     console.log(err, 'err.data.msg.statusText')
     const path = err.config.url.split('?')[0]
+    const data = err.data // server response data
     switch (err.status) {
       case 400:
         const arr = path.split('/api');
@@ -49,9 +50,9 @@ class HttpHelper {
         } else if (arr[1] === '/upload-file') {
           $msg.error('文件上传失败');
         } else if (arr[0]) {
-          $msg.error(err.data.errors[0].message || 'graphql params error')
+          $msg.error(data.errors[0].message || 'graphql params error')
         } else {
-          $msg.error(err.data.msg || err.data.statusText);
+          $msg.error(data.msg || err.statusText);
         }
         break;
       case 401:
@@ -63,7 +64,7 @@ class HttpHelper {
         }, 1000);
         break;
       case 403:
-        $msg.error('错误, 禁止访问');
+        $msg.error(data.msg || '错误, 禁止访问');
         break;
       case 404:
         $msg.error('未找到, 未找到资源,请检查');
