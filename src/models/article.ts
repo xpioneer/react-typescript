@@ -1,5 +1,6 @@
+import { IBase } from './base'
 
-export interface IArticle {
+export interface IArticle extends IBase {
   title: string
 
   abstract: string

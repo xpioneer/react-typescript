@@ -55,7 +55,7 @@ export default class ArticleTypeList extends React.Component<IProps> {
   }
 
   create = () => {
-    this.props.history.push('/home/blog-articleCreate')
+    this.props.history.push('/home/blog-typeCreate')
   }
   
   componentDidMount() {
@@ -83,7 +83,7 @@ export default class ArticleTypeList extends React.Component<IProps> {
         <Row className="search-btn-w">
           <Col span={24}>
             <Button onClick={clear}>清空</Button>
-            {/* <Button onClick={this.create} icon="edit">创建</Button> */}
+            <Button onClick={this.create} icon="edit">创建</Button>
             <Button type="primary" onClick={search}>搜索</Button>
           </Col>
         </Row>
