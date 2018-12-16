@@ -43,15 +43,15 @@ export default class ArticleTypeList extends React.Component<IProps> {
     dataIndex: 'createdAt',
     key: 'createdAt',
     sorter: true
-  // }, {
-  //   title: '操作',
-  //   dataIndex: '',
-  //   width: '80px',
-  //   render: (text: string, record: IArticleType, index: number) => <Button size="small" type="primary" onClick={() => this.viewDetail(record)}>详情</Button>,
+  }, {
+    title: '操作',
+    dataIndex: '',
+    width: '80px',
+    render: (text: string, record: IArticleType, index: number) => <Button size="small" type="primary" onClick={() => this.viewDetail(record)}>详情</Button>
   }]
 
   viewDetail(data: IArticleType) {
-    this.props.history.push(`/home/blog-articleEdit/${data.id}`)
+    this.props.history.push(`/home/blog-typeEdit/${data.id}`)
   }
 
   create = () => {

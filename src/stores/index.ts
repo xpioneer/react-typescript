@@ -6,6 +6,7 @@ import articleListStore from '../pages/article/articleListStore';
 import articleEditStore from '../pages/article/articleEditStore';
 import articleCreateStore from '../pages/article/articleCreateStore';
 import articleTypeListStore from '../pages/articleType/articleTypeListStore';
+import articleTypeEditStore from '../pages/articleType/articleTypeEditStore';
 import articleTypeCreateStore from '../pages/articleType/articleTypeCreateStore';
 
 import demoStore from '../pages/demo/store';
@@ -21,6 +22,7 @@ export default {
   articleEditStore,
   articleCreateStore,
   articleTypeListStore,
+  articleTypeEditStore,
   articleTypeCreateStore,
 
   demoStore

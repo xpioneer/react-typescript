@@ -13,6 +13,7 @@ const ArticleList = lazy(() => import( /* webpackChunkName:"articleList" */ '@pa
 const ArticleEdit = lazy(() => import( /* webpackChunkName:"articleEdit" */ '@pages/article/articleEdit'))
 const ArticleCreate = lazy(() => import( /* webpackChunkName:"articleCreate" */ '@pages/article/articleCreate'))
 const ArticleTypeList = lazy(() => import( /* webpackChunkName:"articleTypeList" */ '@pages/articleType/articleTypeList'))
+const ArticleTypeEdit = lazy(() => import( /* webpackChunkName:"articleTypeEdit" */ '@pages/articleType/articleTypeEdit'))
 const ArticleTypeCreate = lazy(() => import( /* webpackChunkName:"articleTypeCreate" */ '@pages/articleType/articleTypeCreate'))
 
 const Demo = lazy(() => import( /* webpackChunkName:"demo" */ '@pages/demo/demo'))
@@ -58,6 +59,12 @@ export const routes: RouteProps[] = [
     path: '/home/blog-type',
     exact: true,
     component: ArticleTypeList
+  },
+
+  {
+    path: '/home/blog-typeEdit/:id',
+    exact: true,
+    component: ArticleTypeEdit
   },
   {
     path: '/home/blog-typeCreate',
