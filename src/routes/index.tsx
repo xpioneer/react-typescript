@@ -18,6 +18,7 @@ const ArticleTypeCreate = lazy(() => import( /* webpackChunkName:"articleTypeCre
 const TagList = lazy(() => import( /* webpackChunkName:"tagList" */ '@pages/tag/tagList'))
 const TagEdit = lazy(() => import( /* webpackChunkName:"tagEdit" */ '@pages/tag/tagEdit'))
 const TagCreate = lazy(() => import( /* webpackChunkName:"tagCreate" */ '@pages/tag/tagCreate'))
+const CommentList = lazy(() => import( /* webpackChunkName:"commentList" */ '@pages/comment/commentList'))
 
 const Demo = lazy(() => import( /* webpackChunkName:"demo" */ '@pages/demo/demo'))
 
@@ -87,6 +88,11 @@ export const routes: RouteProps[] = [
     path: '/home/blog-tagEdit/:id',
     exact: true,
     component: TagEdit
+  },
+  {
+    path: '/home/blog-comment',
+    exact: true,
+    component: CommentList
   },
   {
     path: '/home/demos',
