@@ -31,7 +31,7 @@ export default class ArticleEdit extends React.Component<IProps> {
   }
 
   render(){
-    const { mainData, typeList, tagList, tagChange, changeType, inputChange, edit } = this.props.articleEditStore
+    const { mainData, typeList, tagList, tagChange, changeType, inputChange, update } = this.props.articleEditStore
  
     return <React.Fragment>
       <Form className="search-form" layout="horizontal">
@@ -95,7 +95,7 @@ export default class ArticleEdit extends React.Component<IProps> {
         </Row>
         <Row>
           <Col span={24} offset={3}>
-            <Button onClick={edit} type="primary">保存编辑</Button>
+            <Button onClick={update} type="primary">保存编辑</Button>
             <Button onClick={this.back}>取消</Button>
           </Col>
         </Row>

@@ -13,6 +13,12 @@ query article($id: String){
     list{id,name}
   }
 }`
+const updateArticle = `
+mutation upateArticle($id: String){
+  editArticle(id: $id){
+    id
+  }
+}`
 
 class articleEditStore {
   @observable loading: boolean = false
@@ -57,8 +63,20 @@ class articleEditStore {
     this.mainData['tag'] = value.join(',')
   }
 
-  @action edit = () => {
-    console.log(this.mainData.description)
+  @action update = () => {
+    $http.post('/graphql', {
+      query: updateArticle,
+      variables: this.mainData
+    }).then((res: any) => {
+      runInAction(() => {
+        this.loading = false
+        this.getDetail(this.mainData.id)
+      })
+    }, err => {
+      runInAction(() => {
+        this.loading = false
+      })
+    })
   }
 
 }
