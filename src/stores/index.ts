@@ -9,6 +9,8 @@ import articleTypeListStore from '../pages/articleType/articleTypeListStore';
 import articleTypeEditStore from '../pages/articleType/articleTypeEditStore';
 import articleTypeCreateStore from '../pages/articleType/articleTypeCreateStore';
 import tagListStore from '../pages/tag/tagListStore';
+import tagEditStore from '../pages/tag/tagEditStore';
+import tagCreateStore from '../pages/tag/tagCreateStore';
 
 import demoStore from '../pages/demo/store';
 
@@ -26,6 +28,8 @@ export default {
   articleTypeEditStore,
   articleTypeCreateStore,
   tagListStore,
+  tagEditStore,
+  tagCreateStore,
 
   demoStore
 }
