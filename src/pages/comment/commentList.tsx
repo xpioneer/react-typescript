@@ -49,7 +49,7 @@ export default class CommentList extends React.Component<IProps> {
   }]
 
   viewDetail(data: IComment) {
-    this.props.history.push(`/home/blog-commentEdit/${data.id}`)
+    this.props.history.push(`/home/blog-comment/${data.id}`)
   }
   
   componentDidMount() {

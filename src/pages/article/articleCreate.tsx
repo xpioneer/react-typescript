@@ -21,17 +21,12 @@ const formItemLayout = {
 @observer
 export default class ArticleCreate extends React.Component<IProps> {
 
-  edit() {
-    const { match:{ params:{ id } }, history }: any = this.props
-    history.push(`/home/blog-articleEdit/${id}`)
-  }
-
   back = () => {
     this.props.history.go(-1)
   }
 
   goDetail = (id: string) => {
-    this.props.history.push(`/home/blog-articleEdit/${id}`)
+    this.props.history.push(`/home/blog-article/${id}`)
   }
   
   componentDidMount() {
@@ -39,7 +34,7 @@ export default class ArticleCreate extends React.Component<IProps> {
   }
 
   render(){
-    const { mainData, typeList, tagList, changeType, tagChange, inputChange, save } = this.props.articleCreateStore
+    const { mainData, typeList, tagList, tagChange, inputChange, save } = this.props.articleCreateStore
  
     return <React.Fragment>
       <Form className="search-form" layout="horizontal">
@@ -69,8 +64,8 @@ export default class ArticleCreate extends React.Component<IProps> {
           <Col span={10}>
             <FormItem label="是否置顶" labelCol={{sm: {span: 8}}} wrapperCol={{sm: { span: 16 }}}>
               <Select value={mainData.isTop} onChange={e => inputChange(e, 'isTop')}>
-                <Select.Option value="1">是</Select.Option>
-                <Select.Option value="0">否</Select.Option>
+                <Select.Option value={1}>是</Select.Option>
+                <Select.Option value={0}>否</Select.Option>
               </Select>
             </FormItem>
           </Col>

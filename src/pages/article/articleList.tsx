@@ -53,7 +53,7 @@ export default class ArticleList extends React.Component<IProps> {
   }]
 
   viewDetail(data: IArticle) {
-    this.props.history.push(`/home/blog-articleEdit/${data.id}`)
+    this.props.history.push(`/home/blog-article/${data.id}`)
   }
 
   create = () => {

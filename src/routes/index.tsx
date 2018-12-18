@@ -56,7 +56,7 @@ export const routes: RouteProps[] = [
     component: ArticleList
   },
   {
-    path: '/home/blog-articleEdit/:id',
+    path: '/home/blog-article/:id',
     exact: true,
     component: ArticleEdit
   },
@@ -71,7 +71,7 @@ export const routes: RouteProps[] = [
     component: ArticleTypeList
   },
   {
-    path: '/home/blog-typeEdit/:id',
+    path: '/home/blog-type/:id',
     exact: true,
     component: ArticleTypeEdit
   },
@@ -91,7 +91,7 @@ export const routes: RouteProps[] = [
     component: TagCreate
   },
   {
-    path: '/home/blog-tagEdit/:id',
+    path: '/home/blog-tag/:id',
     exact: true,
     component: TagEdit
   },
@@ -101,7 +101,7 @@ export const routes: RouteProps[] = [
     component: CommentList
   },
   {
-    path: '/home/blog-commentEdit/:id',
+    path: '/home/blog-comment/:id',
     exact: true,
     component: CommentEdit
   },

@@ -34,7 +34,7 @@ interface IEditor {
 
 export default class QuillEditorComponent extends React.Component<IEditor> {
   value: string = this.props.value
-  oldVal: string = this.props.value
+  oldVal: string = ''
 
   quillEditor: any = null
   quillOptions: QuillOptionsStatic = {
@@ -52,21 +52,15 @@ export default class QuillEditorComponent extends React.Component<IEditor> {
     const { editor }: any = this.refs
     this.quillEditor = new Quill(editor, this.quillOptions)
 
-    // this.quillEditor.on('editor-change', (delta: any, oldDelta: any, source: any) => {
-    //   // too many change
-    // });
-
     this.quillEditor.on('text-change', (delta: any, oldDelta: any, source: any) => {
       let _html: string = this.quillEditor.root.innerHTML;
       if (_html === '<p><br></p>') {
         _html = '';
-        // return;
       }
       if(this.oldVal !== _html) {
         this.oldVal = _html
         onChange && onChange(_html);
       }
-      // console.log('text value:', this.oldVal)
     });
   }
 
@@ -74,7 +68,7 @@ export default class QuillEditorComponent extends React.Component<IEditor> {
   changeEditorText = () => {
     const { value } = this.props
     // 赋值
-    if(this.oldVal !== value) {
+    if(this.oldVal !== value && value !== undefined && this.quillEditor) {
       this.quillEditor.root.innerHTML = value;
       this.oldVal = value
     }

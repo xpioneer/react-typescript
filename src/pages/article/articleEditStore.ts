@@ -15,8 +15,8 @@ query article($id: String){
   }
 }`
 const updateArticle = `
-mutation upateArticle($id: String){
-  editArticle(id: $id){
+mutation upateArticle($id: String!, $title: String!, $abstract: String!, $typeId: String!, $description: String!, $isTop: Int, $tag: String!,){
+  editArticle(id: $id, title: $title, abstract: $abstract, typeId: $typeId, description: $description, isTop: $isTop, tag: $tag){
     id
   }
 }`
@@ -50,10 +50,6 @@ class articleEditStore {
         this.loading = false
       })
     })
-  }
-
-  @action changeType = (value: string) => {
-    this.mainData.typeId = value
   }
 
   @action inputChange = (value: string, type: string) => {

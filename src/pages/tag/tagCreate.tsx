@@ -8,17 +8,12 @@ const FormItem = Form.Item;
 @observer
 export default class TagCreate extends React.Component<IProps> {
 
-  edit() {
-    const { match:{ params:{ id } }, history }: any = this.props
-    history.push(`/home/blog-tagEdit/${id}`)
-  }
-
   back = () => {
     this.props.history.go(-1)
   }
 
   goDetail = (id: string) => {
-    this.props.history.push(`/home/blog-tagEdit/${id}`)
+    this.props.history.push(`/home/blog-tag/${id}`)
   }
   
   componentDidMount() {

@@ -41,12 +41,10 @@ class articleCreateStore {
       runInAction(() => {
         this.loading = false
       })
-      // message.error(err[0].message)
     })
   }
 
   @action save = (cb: Function) => {
-    console.log('this.mainData--', this.mainData)
     this.loading = true
 
     $http.post(GRAPHQL_API, {
@@ -62,11 +60,10 @@ class articleCreateStore {
       runInAction(() => {
         this.loading = false
       })
-      // message.error(err[0].message)
     })
   }
 
-  @action inputChange = (value: string, type: string) => {
+  @action inputChange = (value: string | number, type: string) => {
     this.mainData[type] = value
   }
 

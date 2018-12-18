@@ -45,7 +45,7 @@ export default class ArticleTypeList extends React.Component<IProps> {
   }]
 
   viewDetail(data: ITag) {
-    this.props.history.push(`/home/blog-tagEdit/${data.id}`)
+    this.props.history.push(`/home/blog-tag/${data.id}`)
   }
 
   create = () => {

@@ -31,7 +31,7 @@ export default class ArticleEdit extends React.Component<IProps> {
   }
 
   render(){
-    const { mainData, typeList, tagList, tagChange, changeType, inputChange, update } = this.props.articleEditStore
+    const { mainData, typeList, tagList, tagChange, inputChange, update } = this.props.articleEditStore
  
     return <React.Fragment>
       <Form className="search-form" layout="horizontal">
@@ -39,19 +39,19 @@ export default class ArticleEdit extends React.Component<IProps> {
         <Row gutter={24}>
           <Col span={18}>
             <FormItem label="标题" labelCol={{sm: {span: 4}}} wrapperCol={{sm: { span: 20 }}}>
-              <Input placeholder="标题" defaultValue={mainData.title}/>
+              <Input placeholder="标题" value={mainData.title} onChange={e => inputChange(e.target.value, 'title')}/>
             </FormItem>
           </Col>
           <Col span={18}>
             <FormItem label="摘要" labelCol={{sm: {span: 4}}} wrapperCol={{sm: { span: 20 }}}>
-              <Input.TextArea rows={4} readOnly placeholder="摘要" value={mainData.abstract}/>
+              <Input.TextArea rows={4} placeholder="摘要" value={mainData.abstract} onChange={e => inputChange(e.target.value, 'abstract')}/>
             </FormItem>
           </Col>
         </Row>
         <Row gutter={24}>
           <Col span={10}>
             <FormItem label="文章类型" labelCol={{sm: {span: 8}}} wrapperCol={{sm: { span: 16 }}}>
-              <Select value={mainData.typeId} onChange={changeType}>
+              <Select value={mainData.typeId} onChange={e => inputChange(e, 'typeId')}>
                 {
                   typeList.map((t:any, i:number) => <Select.Option value={t.id} key={t.id}>{t.name}</Select.Option>)
                 }
@@ -60,9 +60,9 @@ export default class ArticleEdit extends React.Component<IProps> {
           </Col>
           <Col span={10}>
             <FormItem label="是否置顶" labelCol={{sm: {span: 8}}} wrapperCol={{sm: { span: 16 }}}>
-              <Select value={mainData.isTop}>
-                <Select.Option value="1">是</Select.Option>
-                <Select.Option value="0">否</Select.Option>
+              <Select value={mainData.isTop} onChange={e => inputChange(e, 'isTop')}>
+                <Select.Option value={1}>是</Select.Option>
+                <Select.Option value={0}>否</Select.Option>
               </Select>
             </FormItem>
           </Col>
