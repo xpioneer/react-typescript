@@ -5,7 +5,7 @@ import { Moment } from 'moment'
 const queryCommentTypes = `
 query commentPages($page: Int, $pageSize: Int, $order: pageOrder, $description: String, $createdAt: [String]){
   comments(page: $page, pageSize: $pageSize, order: $order, description: $description, createdAt: $createdAt){
-    list{id,description,ip,createdAt,createdBy}
+    list{id,description,articleId,ip,createdAt}
     meta{current,total,pageSize}
   }
 }`

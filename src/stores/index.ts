@@ -12,6 +12,7 @@ import tagListStore from '../pages/tag/tagListStore';
 import tagEditStore from '../pages/tag/tagEditStore';
 import tagCreateStore from '../pages/tag/tagCreateStore';
 import commentListStore from '../pages/comment/commentListStore';
+import commentEditStore from '../pages/comment/commentEditStore';
 
 import demoStore from '../pages/demo/store';
 
@@ -32,6 +33,7 @@ export default {
   tagEditStore,
   tagCreateStore,
   commentListStore,
+  commentEditStore,
 
   demoStore
 }
