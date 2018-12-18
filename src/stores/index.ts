@@ -15,6 +15,7 @@ import commentListStore from '@pages/comment/commentListStore';
 import commentEditStore from '@pages/comment/commentEditStore';
 import leaveMsgListStore from '@pages/leaveMsg/leaveMsgListStore';
 import leaveMsgEditStore from '@pages/leaveMsg/leaveMsgEditStore';
+import userListStore from '@pages/user/userListStore';
 
 import demoStore from '../pages/demo/store';
 
@@ -38,6 +39,7 @@ export default {
   commentEditStore,
   leaveMsgListStore,
   leaveMsgEditStore,
+  userListStore,
 
   demoStore
 }
