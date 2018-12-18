@@ -1,4 +1,5 @@
 import { observable, action, autorun, runInAction, computed } from 'mobx';
+import { GRAPHQL_API } from '@constants/index';
 
 const postArticleType = `
 mutation createArticleType($name: String!, $remark: String){
@@ -10,10 +11,9 @@ class articleTypeCreateStore {
   @observable mainData: any = {} // articleType detail data
 
   @action save = (cb: Function) => {
-    console.log('this.mainData--', this.mainData)
     this.loading = true
 
-    $http.post('/graphql', {
+    $http.post(GRAPHQL_API, {
       query: postArticleType,
       variables: this.mainData
     }).then((res: any) => {

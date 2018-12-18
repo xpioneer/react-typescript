@@ -1,4 +1,5 @@
 import { observable, action, autorun, runInAction, computed } from 'mobx';
+import { GRAPHQL_API } from '@constants/index'
 
 const getInitQuery = `{
   articleTypes(page: 1, pageSize: 99){
@@ -23,7 +24,7 @@ class articleCreateStore {
   @action getInitData = (id: string) => {
     this.loading = true
 
-    $http.post('/graphql', {
+    $http.post(GRAPHQL_API, {
       query: getInitQuery,
       variables: {id}
     }).then((res: any) => {
@@ -48,7 +49,7 @@ class articleCreateStore {
     console.log('this.mainData--', this.mainData)
     this.loading = true
 
-    $http.post('/graphql', {
+    $http.post(GRAPHQL_API, {
       query: postArticle,
       variables: {input: this.mainData}
     }).then((res: any) => {

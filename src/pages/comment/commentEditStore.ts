@@ -1,4 +1,5 @@
 import { observable, action, autorun, runInAction, computed } from 'mobx';
+import { GRAPHQL_API } from '@constants/index'
 
 const getCommentById = `
 query getComment($id: String!){
@@ -17,7 +18,7 @@ class commentEditStore {
   @observable mainData: any = {} // articleType detail data
 
   @action getDetail = (id: string) => {
-    $http.post('/graphql', {
+    $http.post(GRAPHQL_API, {
       query: getCommentById,
       variables: {id}
     }).then((res: any) => {

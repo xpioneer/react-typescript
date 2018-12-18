@@ -1,6 +1,7 @@
 import { observable, action, autorun, runInAction } from 'mobx';
 import { serialize } from '@utils/params'
 import { Moment } from 'moment'
+import { GRAPHQL_API } from '@constants/index'
 
 const queryArticles = `
 query articlePages($page: Int, $pageSize: Int, $order: pageOrder, $title: String, $abstract: String, $tag: String, $createdAt: [String]){
@@ -65,7 +66,7 @@ class articleListStore {
     // console.log(data, '----data')
     this.loading = true
 
-    $http.post('/graphql', {
+    $http.post(GRAPHQL_API, {
       query: queryArticles,
       variables: serialize.fmtPost(this.value)
     }).then((res: any) => {

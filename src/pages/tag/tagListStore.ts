@@ -1,6 +1,7 @@
 import { observable, action, autorun, runInAction } from 'mobx';
 import { serialize } from '@utils/params'
 import { Moment } from 'moment'
+import { GRAPHQL_API } from '@constants/index';
 
 const queryTagTypes = `
 query articleTypePages($page: Int, $pageSize: Int, $order: pageOrder, $name: String, $createdAt: [String]){
@@ -60,7 +61,7 @@ class tagListStore {
   fetch = (data: any) => {
     this.loading = true
 
-    $http.post('/graphql', {
+    $http.post(GRAPHQL_API, {
       query: queryTagTypes,
       variables: serialize.fmtPost(this.value)
     }).then((res: any) => {

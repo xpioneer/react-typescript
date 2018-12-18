@@ -1,4 +1,5 @@
 import { observable, action, autorun, runInAction, computed } from 'mobx';
+import { GRAPHQL_API } from '@constants/index';
 
 const getArticleTypeById = `
 query getArticleType($id: String!){
@@ -22,7 +23,7 @@ class articleTypeEditStore {
   @observable mainData: any = {} // articleType detail data
 
   @action getDetail = (id: string) => {
-    $http.post('/graphql', {
+    $http.post(GRAPHQL_API, {
       query: getArticleTypeById,
       variables: {id}
     }).then((res: any) => {
