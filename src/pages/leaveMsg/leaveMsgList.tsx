@@ -2,14 +2,14 @@ import * as React from 'react'
 import {inject, observer} from 'mobx-react'
 import { Row, Col, Form, Icon, Input, Button, DatePicker, Table, Modal, Badge, } from 'antd';
 import { ColumnProps } from 'antd/lib/table'
-import { IComment } from '@models/comment'
+import { ILeaveMsg } from '@models/leaveMsg'
 
 const FormItem = Form.Item;
 
 
-@inject('commentListStore')
+@inject('leaveMsgListStore')
 @observer
-export default class CommentList extends React.Component<IProps> {
+export default class LeaveMsgList extends React.Component<IProps> {
 
   state = {
     modalTitle: '参数详情',
@@ -19,22 +19,18 @@ export default class CommentList extends React.Component<IProps> {
     detailInfo: {}
   }
 
-  columns: ColumnProps<IComment>[] = [{
+  columns: ColumnProps<ILeaveMsg>[] = [{
     title: 'ID',
     dataIndex: 'id',
     width: '15%',
   }, {
-    title: '评论内容',
+    title: '留言内容',
     dataIndex: 'description',
     width: '240px',
   }, {
-    title: '文章ID',
-    dataIndex: 'articleId',
-    width: '120px',
-  }, {
     title: 'IP',
     dataIndex: 'ip',
-    width: '100px',
+    width: '120px',
   }, {
     title: '创建时间',
     width: '120px',
@@ -45,27 +41,27 @@ export default class CommentList extends React.Component<IProps> {
     title: '操作',
     dataIndex: '',
     width: '80px',
-    render: (text: string, record: IComment, index: number) => <Button size="small" type="primary" onClick={() => this.viewDetail(record)}>详情</Button>
+    render: (text: string, record: ILeaveMsg, index: number) => <Button size="small" type="primary" onClick={() => this.viewDetail(record)}>详情</Button>
   }]
 
-  viewDetail(data: IComment) {
-    this.props.history.push(`/home/blog-commentEdit/${data.id}`)
+  viewDetail(data: ILeaveMsg) {
+    this.props.history.push(`/home/blog-message/${data.id}`)
   }
   
   componentDidMount() {
-    this.props.commentListStore.search()
+    this.props.leaveMsgListStore.search()
   }
 
   render(){
-    const { value, loading, list, meta, createdAt, inputChange, search, clear } = this.props.commentListStore
+    const { value, loading, list, meta, createdAt, inputChange, search, clear } = this.props.leaveMsgListStore
  
     return <React.Fragment>
       <Form className="search-form">
-        <h3>评论列表</h3>
+        <h3>留言列表</h3>
         <Row gutter={24}>
           <Col span={6}>
             <FormItem>
-              <Input placeholder="评论内容" onChange={e => inputChange(e.target.value, 'description')} value={value.description}/>
+              <Input placeholder="留言内容" onChange={e => inputChange(e.target.value, 'description')} value={value.description}/>
             </FormItem>
           </Col>
           <Col span={6}>
@@ -77,6 +73,7 @@ export default class CommentList extends React.Component<IProps> {
         <Row className="search-btn-w">
           <Col span={24}>
             <Button onClick={clear}>清空</Button>
+            {/* <Button onClick={this.create} icon="edit">创建</Button> */}
             <Button type="primary" onClick={search}>搜索</Button>
           </Col>
         </Row>

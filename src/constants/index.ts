@@ -6,3 +6,6 @@ export const SYS_LANG = 'SYS_LANG'
 
 // redirect url key
 export const REDIRECT_URL = 'REDIRECT_URL'
+
+// graphql api modal
+export const GRAPHQL_API = '/graphql'

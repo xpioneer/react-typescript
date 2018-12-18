@@ -4,9 +4,9 @@ import { Row, Col, Form, Icon, Input, Button, DatePicker, Select, Checkbox, Badg
 
 const FormItem = Form.Item;
 
-@inject('commentEditStore')
+@inject('leaveMsgEditStore')
 @observer
-export default class CommentEdit extends React.Component<IProps> {
+export default class LeaveMsgEdit extends React.Component<IProps> {
 
   back = () => {
     this.props.history.go(-1)
@@ -14,24 +14,19 @@ export default class CommentEdit extends React.Component<IProps> {
   
   componentDidMount() {
     const {id}: any = this.props.match.params
-    this.props.commentEditStore.getDetail(id)
+    this.props.leaveMsgEditStore.getDetail(id)
   }
 
   render(){
-    const { mainData } = this.props.commentEditStore
+    const { mainData } = this.props.leaveMsgEditStore
  
     return <React.Fragment>
       <Form className="search-form" layout="horizontal">
-        <h3>评论详情</h3>
+        <h3>留言详情</h3>
         <Row gutter={24}>
           <Col span={18}>
-            <FormItem label="评论内容" labelCol={{sm: {span: 4}}} wrapperCol={{sm: { span: 20 }}}>
-              <Input.TextArea rows={4} placeholder="评论内容" value={mainData.description} readOnly/>
-            </FormItem>
-          </Col>
-          <Col span={18}>
-            <FormItem label="文章ID" labelCol={{sm: {span: 4}}} wrapperCol={{sm: { span: 20 }}}>
-              <Input placeholder="文章ID" value={mainData.articleId} readOnly/>
+            <FormItem label="留言内容" labelCol={{sm: {span: 4}}} wrapperCol={{sm: { span: 20 }}}>
+              <Input.TextArea rows={4} placeholder="留言内容" value={mainData.description} readOnly/>
             </FormItem>
           </Col>
           <Col span={18}>
@@ -39,11 +34,11 @@ export default class CommentEdit extends React.Component<IProps> {
               <Input placeholder="IP" value={mainData.ip} readOnly/>
             </FormItem>
           </Col>
-          <Col span={18}>
+          {/* <Col span={18}>
             <FormItem label="客户端" labelCol={{sm: {span: 4}}} wrapperCol={{sm: { span: 20 }}}>
               <Input.TextArea rows={4} placeholder="客户端" value={mainData.client} readOnly/>
             </FormItem>
-          </Col>
+          </Col> */}
           <Col span={18}>
             <FormItem label="创建时间" labelCol={{sm: {span: 4}}} wrapperCol={{sm: { span: 20 }}}>
               <Input placeholder="创建时间" value={mainData.createdAt} readOnly/>

@@ -3,15 +3,15 @@ import { serialize } from '@utils/params'
 import { Moment } from 'moment'
 import { GRAPHQL_API } from '@constants/index'
 
-const queryCommentTypes = `
-query commentPages($page: Int, $pageSize: Int, $order: pageOrder, $description: String, $createdAt: [String]){
-  comments(page: $page, pageSize: $pageSize, order: $order, description: $description, createdAt: $createdAt){
-    list{id,description,articleId,ip,createdAt}
+const queryLeaveMsg = `
+query leaveMsgPages($page: Int, $pageSize: Int, $order: pageOrder, $description: String, $createdAt: [String]){
+  leaveMsgs(page: $page, pageSize: $pageSize, order: $order, description: $description, createdAt: $createdAt){
+    list{id,description,ip,createdAt}
     meta{current,total,pageSize}
   }
 }`
 
-class commentListStore {
+class leaveMsgListStore {
   @observable value = {
     description: '',
     createdAt: '',
@@ -62,13 +62,13 @@ class commentListStore {
     this.loading = true
 
     $http.post(GRAPHQL_API, {
-      query: queryCommentTypes,
+      query: queryLeaveMsg,
       variables: serialize.fmtPost(this.value)
     }).then((res: any) => {
       runInAction(() => {
         this.loading = false
-        this.list = res.data.comments.list
-        this.meta = res.data.comments.meta
+        this.list = res.data.leaveMsgs.list
+        this.meta = res.data.leaveMsgs.meta
       })
     }, err => {
       runInAction(() => {
@@ -79,4 +79,4 @@ class commentListStore {
 
 }
 
-export default new commentListStore()
+export default new leaveMsgListStore()

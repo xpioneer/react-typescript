@@ -20,6 +20,8 @@ const TagEdit = lazy(() => import( /* webpackChunkName:"tagEdit" */ '@pages/tag/
 const TagCreate = lazy(() => import( /* webpackChunkName:"tagCreate" */ '@pages/tag/tagCreate'))
 const CommentList = lazy(() => import( /* webpackChunkName:"commentList" */ '@pages/comment/commentList'))
 const CommentEdit = lazy(() => import( /* webpackChunkName:"commentEdit" */ '@pages/comment/commentEdit'))
+const LeaveMsgList = lazy(() => import( /* webpackChunkName:"leaveMsgList" */ '@pages/leaveMsg/leaveMsgList'))
+const LeaveMsgEdit = lazy(() => import( /* webpackChunkName:"leaveMsgEdit" */ '@pages/leaveMsg/leaveMsgEdit'))
 
 const Demo = lazy(() => import( /* webpackChunkName:"demo" */ '@pages/demo/demo'))
 
@@ -99,6 +101,16 @@ export const routes: RouteProps[] = [
     path: '/home/blog-commentEdit/:id',
     exact: true,
     component: CommentEdit
+  },
+  {
+    path: '/home/blog-message',
+    exact: true,
+    component: LeaveMsgList
+  },
+  {
+    path: '/home/blog-message/:id',
+    exact: true,
+    component: LeaveMsgEdit
   },
   {
     path: '/home/demos',
