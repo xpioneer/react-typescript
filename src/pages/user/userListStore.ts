@@ -15,6 +15,7 @@ class userListStore {
   @observable value = {
     nickName: '',
     username: '',
+    userType: '',
     createdAt: '',
     page: 1,
     pageSize: 10,
@@ -34,7 +35,7 @@ class userListStore {
         return index > 0 ? d.format('YYYY-MM-DD 23:59:59:999') : d.format('YYYY-MM-DD 00:00:00:000')
       })
     } else {
-      this.value[type] = value.trim()
+      this.value[type] = typeof(value) === 'number' ? value : value.trim()
     }
   }
 
@@ -43,6 +44,7 @@ class userListStore {
     this.value = {
       nickName: '',
       username: '',
+      userType: '',
       createdAt: '',
       page: 1,
       pageSize: 10,

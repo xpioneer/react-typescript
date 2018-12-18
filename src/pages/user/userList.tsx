@@ -2,7 +2,7 @@ import * as React from 'react'
 import {inject, observer} from 'mobx-react'
 import { Row, Col, Form, Select, Input, Button, DatePicker, Table, Modal, Badge, } from 'antd';
 import { ColumnProps } from 'antd/lib/table'
-import { ITag } from '@models/tag'
+import { IUser } from '@models/user'
 
 const FormItem = Form.Item;
 
@@ -26,7 +26,7 @@ export default class UserList extends React.Component<IProps> {
     {name: '测试用户', value: 9},
   ]
 
-  columns: ColumnProps<ITag>[] = [{
+  columns: ColumnProps<IUser>[] = [{
     title: 'ID',
     dataIndex: 'id',
     width: '15%',
@@ -56,11 +56,11 @@ export default class UserList extends React.Component<IProps> {
     title: '操作',
     dataIndex: '',
     width: '80px',
-    render: (text: string, record: ITag, index: number) => <Button size="small" type="primary" onClick={() => this.viewDetail(record)}>详情</Button>
+    render: (text: string, record: IUser, index: number) => <Button size="small" type="primary" onClick={() => this.viewDetail(record)}>详情</Button>
   }]
 
-  viewDetail(data: ITag) {
-    this.props.history.push(`/home/blog-userEdit/${data.id}`)
+  viewDetail(data: IUser) {
+    this.props.history.push(`/home/blog-user/${data.id}`)
   }
 
   create = () => {
@@ -90,9 +90,9 @@ export default class UserList extends React.Component<IProps> {
           </Col>
           <Col span={6}>
             <FormItem>
-              <Select placeholder="用户类型" onChange={e => inputChange(e.target.value, 'userType')} value={value.userType}>
+              <Select placeholder="用户类型" onChange={e => inputChange(e, 'userType')} value={value.userType}>
               {
-                this.userTypeList.map((u, i) => <Select.Option key={u.name} value={u.value}/>)
+                this.userTypeList.map((u, i) => <Select.Option key={u.name} value={u.value}>{u.name}</Select.Option>)
               }
               </Select>
             </FormItem>
