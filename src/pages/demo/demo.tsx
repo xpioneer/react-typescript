@@ -38,7 +38,8 @@ export default class Demo extends React.Component<IProps> {
     const {demoStore: {
       count, add, desc,
       inputApi, methodChange, typeChange, inputParams, testApi,
-      apiUrl, apiMethod, apiType, apiParams, apiResult
+      apiUrl, apiMethod, apiType, apiParams, apiResult,
+      fileChange, upload, clearFile
     }} = this.props
     
     return <div>
@@ -97,6 +98,27 @@ export default class Demo extends React.Component<IProps> {
               </FormItem>
               <FormItem label="结果" labelCol={{span: 4}} wrapperCol={{span: 18}}>
                 <TextArea rows={24} value={apiResult}/>
+              </FormItem>
+            </Form>
+          </Col>
+        </Row>
+      </section>
+
+      <section style={styles.block}>
+        <h3>文件上传</h3>
+        <Row style={styles.padding}>
+          <Col span={24}>
+            <Form>
+              <FormItem label="选择文件" labelCol={{span: 4}} wrapperCol={{span: 20}}>
+                <Row gutter={8}>
+                  <Col span={12}>
+                    <input type="file" placeholder="请选择文件" onChange={e => fileChange(e)}/>
+                  </Col>
+                  <Col span={6}>
+                    <Button type="primary" onClick={upload}>上传</Button>
+                    <Button onClick={fileChange}>清空</Button>
+                  </Col>
+                </Row>
               </FormItem>
             </Form>
           </Col>

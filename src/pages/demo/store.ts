@@ -27,6 +27,7 @@ class DemoStore {
   @observable apiMethod = 'GET'
   @observable apiParams = ''
   @observable apiResult = ''
+  @observable fileVal: any
 
   @action add = () => {
     return ++this.count
@@ -99,6 +100,30 @@ class DemoStore {
         runInAction(() => this.apiResult = JSON.stringify(err.data, null, '    '))
       })
     }
+  }
+
+  @action fileChange = (e: any) => {
+    if(e && e.target.files) {
+      this.fileVal = e.target.files[0]
+    } else {
+      this.fileVal = undefined
+    }
+  }
+
+  @action upload = () => {
+    console.log(this.fileVal)
+    if(!this.fileVal) {
+      $msg.warn('请选择文件')
+      return
+    }
+    const fd = new FormData()
+    fd.append('file', this.fileVal)
+
+    $http.post('/api/upload', fd).then(res => {
+      console.log(res)
+    }, err => {
+      console.log(err, 'err')
+    })
   }
 
 }
