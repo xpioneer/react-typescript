@@ -24,7 +24,7 @@ export default class ArticleList extends React.Component<IProps> {
     dataIndex: 'id',
     // sorter: true,
     // render: (name: any) => `${name.first} ${name.last}`,
-    width: '12%',
+    width: '15%',
   }, {
     title: '标题',
     dataIndex: 'title',
@@ -39,7 +39,7 @@ export default class ArticleList extends React.Component<IProps> {
     width: '120px',
   }, {
     title: '创建时间',
-    width: '120px',
+    width: '70px',
     dataIndex: 'createdAt',
     key: 'createdAt',
     sorter: true
@@ -48,7 +48,7 @@ export default class ArticleList extends React.Component<IProps> {
   }, {
     title: '操作',
     dataIndex: '',
-    width: '80px',
+    width: '30px',
     render: (text: string, record: IArticle, index: number) => <Button size="small" type="primary" onClick={() => this.viewDetail(record)}>详情</Button>,
   }]
 

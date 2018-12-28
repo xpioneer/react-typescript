@@ -28,8 +28,8 @@
   div{
     width: 40px;
     height: 36px;
-    background: url('../imgs/logo.svg') center center no-repeat;
-    background-size: cover;
+    // background: url('../imgs/logo.svg') center center no-repeat;
+    // background-size: cover;
     animation: logoRotate 6s linear 0s infinite normal running none;
 
     &:hover{
@@ -68,8 +68,11 @@
     }
   }
 
-  .ant-table-thead > tr > th, .ant-table-tbody > tr > td{
-    padding: 6px;
+  .ant-table-thead > tr > th{
+    padding: 10px;
+  }
+  .ant-table-tbody > tr > td{
+    padding: 0 6px;
   }
 }
 
