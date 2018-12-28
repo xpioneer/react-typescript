@@ -39,7 +39,7 @@ class HttpHelper {
   }
 
   public errorHelper (err: AxiosResponse): void {
-    console.log(err, 'err.data.msg.statusText')
+    // console.log(err, 'err.data.msg.statusText')
     const path = err.config.url.split('?')[0]
     const data = err.data // server response data
     switch (err.status) {
@@ -79,7 +79,7 @@ class HttpHelper {
         $msg.error('错误, 此方法不接受,请检查');
         break;
       case 500:
-        $msg.error(err.statusText);
+        $msg.error(data.msg || data.errors[0]);
         break;
       case 503:
         $msg.error('连接被拒绝, 服务不可用');
