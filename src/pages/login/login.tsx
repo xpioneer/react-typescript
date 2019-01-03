@@ -29,10 +29,10 @@ export default class Login extends React.Component<IProps> {
   //   console.log('componentDidUpdate')
   // }
 
-  // componentDidMount() {
-  //   console.log('componentDidMount')
-  //   window.addEventListener('keydown', this.listenEnter)
-  // }
+  componentDidMount() {
+    console.log('componentDidMount')
+    window.addEventListener('keydown', this.listenEnter)
+  }
 
   // componentWillUnmount() {
   //   console.log('componentWillUnmount')

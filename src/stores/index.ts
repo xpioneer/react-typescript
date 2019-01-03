@@ -18,6 +18,7 @@ import leaveMsgEditStore from '@pages/leaveMsg/leaveMsgEditStore';
 import userListStore from '@pages/user/userListStore';
 import userEditStore from '@pages/user/userEditStore';
 import userCreateStore from '@pages/user/userCreateStore';
+import ballListStore from '@pages/lottery/ballListStore';
 
 import demoStore from '../pages/demo/store';
 
@@ -44,6 +45,7 @@ export default {
   userListStore,
   userEditStore,
   userCreateStore,
+  ballListStore,
 
   demoStore
 }
