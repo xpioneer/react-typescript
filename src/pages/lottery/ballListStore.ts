@@ -4,7 +4,7 @@ import { Moment } from 'moment'
 import { GRAPHQL_API } from '@constants/index'
 
 const queryBall = `
-query ballPages($page: Int, $pageSize: Int, $order: pageOrder, $issue: issue, $drawDate: [String]){
+query ballPages($page: Int, $pageSize: Int, $order: pageOrder, $issue: String, $drawDate: [String]){
   balls(page: $page, pageSize: $pageSize, order: $order, issue: $issue, drawDate: $drawDate){
     list{id,issue,red1,red2,red3,red4,red5,red6,blue,prizeOne,prizeOneNum,prizeTwo,prizeTwoNum,drawDate,createdAt}
     meta{current,total,pageSize}

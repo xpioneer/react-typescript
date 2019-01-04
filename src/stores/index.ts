@@ -19,6 +19,7 @@ import userListStore from '@pages/user/userListStore';
 import userEditStore from '@pages/user/userEditStore';
 import userCreateStore from '@pages/user/userCreateStore';
 import ballListStore from '@pages/lottery/ballListStore';
+import ballCreateStore from '@pages/lottery/ballCreateStore';
 
 import demoStore from '../pages/demo/store';
 
@@ -46,6 +47,7 @@ export default {
   userEditStore,
   userCreateStore,
   ballListStore,
+  ballCreateStore,
 
   demoStore
 }

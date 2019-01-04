@@ -90,7 +90,7 @@ export default class BallList extends React.Component<IProps> {
   }
 
   create = () => {
-    this.props.history.push('/home/lottery-createBall')
+    this.props.history.push('/home/lottery-ballCreate')
   }
 
   setColor = (num: number, type: string) => {
