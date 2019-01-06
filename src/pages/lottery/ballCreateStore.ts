@@ -2,8 +2,8 @@ import { observable, action, autorun, runInAction, computed } from 'mobx';
 import { GRAPHQL_API } from '@constants/index';
 
 const postBall = `
-mutation createBall($issue: String!, $reds: [Int]!, $blue: Int!, $drawDate: String){
-  ball(issue: $issue, reds: $reds, blue: $blue, drawDate: $drawDate){id}
+mutation createBall($issue: String!, $reds: [Int]!, $blue: Int!, $pool: Int!, $prizeOne: Int!, $prizeOneNum: Int!, $prizeTwo: Int!, $prizeTwoNum: Int!, $bettingNum: Int!, $drawDate: String!){
+  ball(issue: $issue, reds: $reds, blue: $blue, pool: $pool, prizeOne: $prizeOne, prizeOneNum: $prizeOneNum, prizeTwo: $prizeTwo, prizeTwoNum: $prizeTwoNum, bettingNum: $bettingNum, drawDate: $drawDate){id}
 }`
 
 
@@ -18,7 +18,7 @@ class ballCreateStore {
   ]
   blueBalls: number[] = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
   @observable reds: number[] = []
-  @observable blues: number[] = [0]
+  @observable blues: number[] = []
 
   @action selectBall = (num: number, type: 'red' | 'blue') => {
     if(type === 'red') {
@@ -31,31 +31,64 @@ class ballCreateStore {
         }
       }
     } else {
-      this.blues = this.blues[0] === num ? [0] : [num]
+      this.blues[0] === num ? this.blues.splice(0, 1) : this.blues.splice(0, 1, num)
     }
   }
 
   @action save = (cb: Function) => {
-    this.loading = true
+    if(
+      /^\d{5}$/.test(this.mainData.issue) && 
+      this.reds.length === 6 &&
+      this.blues.length === 1 &&
+      /^\d+$/.test(this.mainData.pool) &&
+      /^\d+$/.test(this.mainData.prizeOne) &&
+      /^\d+$/.test(this.mainData.prizeOneNum) &&
+      /^\d+$/.test(this.mainData.prizeTwo) &&
+      /^\d+$/.test(this.mainData.prizeTwoNum) &&
+      /^\d+$/.test(this.mainData.bettingNum) && 
+      this.mainData.drawDate
+      ){
+      let data = {
+        issue: this.mainData.issue,
+        reds: this.reds.sort(),
+        blue: this.blues[0],
+        pool: +this.mainData.pool,
+        prizeOne: +this.mainData.prizeOne,
+        prizeOneNum: +this.mainData.prizeOneNum,
+        prizeTwo: +this.mainData.prizeTwo,
+        prizeTwoNum: +this.mainData.prizeTwoNum,
+        bettingNum: +this.mainData.bettingNum,
+        drawDate: new Date(this.mainData.drawDate).toLocaleDateString(),
+      }
 
-    $http.post(GRAPHQL_API, {
-      query: postBall,
-      variables: this.mainData
-    }).then((res: any) => {
-      const {ball:{id}} = res.data
-      // cb(id)
-      runInAction(() => {
-        this.loading = false
+      this.loading = true
+      $http.post(GRAPHQL_API, {
+        query: postBall,
+        variables: data
+      }).then((res: any) => {
+        // const {ball:{id}} = res.data
+        // cb(id)
+        window.history.go(-1)
+        runInAction(() => {
+          this.loading = false
+        })
+      }, err => {
+        runInAction(() => {
+          this.loading = false
+        })
       })
-    }, err => {
-      runInAction(() => {
-        this.loading = false
-      })
-    })
+    } else {
+      $msg.warn('请检查数据填写完整性和格式')
+    }
+    
   }
 
   @action inputChange = (value: string, type: string) => {
-    this.mainData[type] = value.trim()
+    if(type === 'drawDate') {
+      this.mainData[type] = value
+    } else {
+      this.mainData[type] = value.trim()
+    }
   }
 
 }

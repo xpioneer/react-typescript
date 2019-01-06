@@ -74,8 +74,8 @@ export default class BallCreate extends React.Component<IProps> {
         <h3>新增一期双色球</h3>
         <Row gutter={24}>
           <Col span={18}>
-            <FormItem label="期号" labelCol={{sm: {span: 4}}} wrapperCol={{sm: { span: 6 }}}>
-              <Input placeholder="期号" value={mainData.issue} onChange={e => inputChange(e.target.value, 'issue')}/>
+            <FormItem label="期号" labelCol={{sm: {span: 4}}} wrapperCol={{sm: { span: 8 }}}>
+              <Input placeholder="期号，如：(19001)" value={mainData.issue} onChange={e => inputChange(e.target.value, 'issue')}/>
             </FormItem>
           </Col>
         </Row>
@@ -113,8 +113,47 @@ export default class BallCreate extends React.Component<IProps> {
         </Row>
         <Row>
           <Col span={18}>
-            <FormItem label="开奖日期" labelCol={{sm: {span: 4}}} wrapperCol={{sm: { span: 6 }}}>
-              <Input placeholder="开奖日期" value={mainData.drawDate} onChange={e => inputChange(e.target.value, 'drawDate')}/>
+            <FormItem label="奖金池" labelCol={{sm: {span: 4}}} wrapperCol={{sm: { span: 8 }}}>
+              <Input placeholder="奖金池" value={mainData.pool} onChange={e => inputChange(e.target.value, 'pool')}/>
+            </FormItem>
+          </Col>
+        </Row>
+        <Row>
+          <Col span={12}>
+            <FormItem label="一等奖注数" labelCol={{sm: {span: 6}}} wrapperCol={{sm: { span: 12 }}}>
+              <Input placeholder="一等奖注数" value={mainData.prizeOneNum} onChange={e => inputChange(e.target.value, 'prizeOneNum')}/>
+            </FormItem>
+          </Col>
+          <Col span={12}>
+            <FormItem label="一等奖奖金" labelCol={{sm: {span: 6}}} wrapperCol={{sm: { span: 12 }}}>
+              <Input placeholder="一等奖奖金" value={mainData.prizeOne} onChange={e => inputChange(e.target.value, 'prizeOne')}/>
+            </FormItem>
+          </Col>
+        </Row>
+        <Row>
+          <Col span={12}>
+            <FormItem label="二等奖注数" labelCol={{sm: {span: 6}}} wrapperCol={{sm: { span: 12 }}}>
+              <Input placeholder="二等奖注数" value={mainData.prizeTwoNum} onChange={e => inputChange(e.target.value, 'prizeTwoNum')}/>
+            </FormItem>
+          </Col>
+          <Col span={12}>
+            <FormItem label="二等奖奖金" labelCol={{sm: {span: 6}}} wrapperCol={{sm: { span: 12 }}}>
+              <Input placeholder="二等奖奖金" value={mainData.prizeTwo} onChange={e => inputChange(e.target.value, 'prizeTwo')}/>
+            </FormItem>
+          </Col>
+        </Row>
+        <Row>
+          <Col span={18}>
+            <FormItem label="总投注金额" labelCol={{sm: {span: 4}}} wrapperCol={{sm: { span: 8 }}}>
+              <Input placeholder="总投注金额" value={mainData.bettingNum} onChange={e => inputChange(e.target.value, 'bettingNum')}/>
+            </FormItem>
+          </Col>
+        </Row>
+        <Row>
+          <Col span={18}>
+            <FormItem label="开奖日期" labelCol={{sm: {span: 4}}} wrapperCol={{sm: { span: 8 }}}>
+              <DatePicker onChange={(e) => inputChange(e, 'drawDate')} value={mainData.drawDate}/>
+              {/* <Input placeholder="开奖日期" value={mainData.drawDate} onChange={e => inputChange(e.target.value, 'drawDate')}/> */}
             </FormItem>
           </Col>
         </Row>
