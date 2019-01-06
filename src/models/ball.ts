@@ -2,7 +2,7 @@ import { IBase } from './base'
 
 export interface IBall extends IBase {
 
-  orderId: number
+  issue: number
 
   red1: number
 
@@ -15,6 +15,8 @@ export interface IBall extends IBase {
   red5: number
   
   red6: number
+
+  reds: number[]
   
   blue: number
 

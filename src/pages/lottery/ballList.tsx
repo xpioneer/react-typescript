@@ -11,14 +11,6 @@ const FormItem = Form.Item;
 @observer
 export default class BallList extends React.Component<IProps> {
 
-  state = {
-    modalTitle: '参数详情',
-    visible: false,
-    modalTxt: '',
-    visibleLog: false,
-    detailInfo: {}
-  }
-
   columns: ColumnProps<IBall>[] = [{
     title: '期号',
     dataIndex: 'issue',
@@ -123,7 +115,8 @@ export default class BallList extends React.Component<IProps> {
   }
 
   setColor = (num: number, type: string) => {
-    return <div style={{textAlign: 'center', color: type}}>{num}</div>
+    const color =  type === 'red' ? '#f54646' : '#39f'
+    return <div style={{textAlign: 'center', color: color}}>{num}</div>
   }
   
   componentDidMount() {

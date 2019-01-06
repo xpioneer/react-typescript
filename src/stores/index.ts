@@ -21,6 +21,7 @@ import userCreateStore from '@pages/user/userCreateStore';
 import ballListStore from '@pages/lottery/ballListStore';
 import ballCreateStore from '@pages/lottery/ballCreateStore';
 import ballEditStore from '@pages/lottery/ballEditStore';
+import ballTrendStore from '@pages/lottery/ballTrendStore';
 
 import demoStore from '../pages/demo/store';
 
@@ -50,6 +51,7 @@ export default {
   ballListStore,
   ballCreateStore,
   ballEditStore,
+  ballTrendStore,
 
   demoStore
 }

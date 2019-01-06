@@ -24,8 +24,8 @@ export default class BallEdit extends React.Component<IProps> {
       flex: '0 0 auto',
       margin: '0 4px 4px 0',
       cursor: 'pointer',
-      border: '1px solid red',
-      color: 'red'
+      border: '1px solid #f54646',
+      color: '#f54646'
     },
     blue: {
       width: '30px',
@@ -37,8 +37,8 @@ export default class BallEdit extends React.Component<IProps> {
       flex: '0 0 auto',
       margin: '0 4px 4px 0',
       cursor: 'pointer',
-      border: '1px solid blue',
-      color: 'blue'
+      border: '1px solid #39f',
+      color: '#39f'
     }
   }
 
@@ -47,9 +47,10 @@ export default class BallEdit extends React.Component<IProps> {
   }
 
   setActive = (type: 'red'|'blue', selected: [number], num: number) => {
+    const color =  type === 'red' ? '#f54646' : '#39f'
     if(selected.some((v, i) => num === v)) {
       let _style = JSON.parse(JSON.stringify(this.style[type]))
-      _style['backgroundColor'] = type
+      _style['backgroundColor'] = color
       _style['color'] = '#fff'
       return _style
     } else {

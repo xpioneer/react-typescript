@@ -28,6 +28,7 @@ const UserCreate = lazy(() => import( /* webpackChunkName:"userCreate" */ '@page
 const BallList = lazy(() => import( /* webpackChunkName:"ballList" */ '@pages/lottery/ballList'))
 const BallCreate = lazy(() => import( /* webpackChunkName:"ballCreate" */ '@pages/lottery/ballCreate'))
 const BallEdit = lazy(() => import( /* webpackChunkName:"ballEdit" */ '@pages/lottery/ballEdit'))
+const BallTrend = lazy(() => import( /* webpackChunkName:"ballTrend" */ '@pages/lottery/ballTrend'))
 
 const Demo = lazy(() => import( /* webpackChunkName:"demo" */ '@pages/demo/demo'))
 
@@ -147,6 +148,11 @@ export const routes: RouteProps[] = [
     path: '/home/lottery-ball/:id',
     exact: true,
     component: BallEdit
+  },
+  {
+    path: '/home/lottery-trend',
+    exact: true,
+    component: BallTrend
   },
   {
     path: '/home/demos',

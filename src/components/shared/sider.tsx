@@ -39,6 +39,8 @@ const MenuList = [{
   key:'5', title:'Lottery', icon:'smile',
   children: [{
     key: '5-0', title: '双色球', path: '/home/lottery-balls', icon: 'dollar'
+  },{
+    key: '5-1', title: '趋势图', path: '/home/lottery-trend', icon: 'fund'
   }]
 },{
   key:'99', title:'Demo', path: '/home/demos', icon:'bulb'
