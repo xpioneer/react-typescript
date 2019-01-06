@@ -6,9 +6,14 @@ import { GRAPHQL_API } from '@constants/index'
 const queryBall = `
 query ballPages($page: Int, $pageSize: Int, $order: pageOrder, $issue: String, $drawDate: [String]){
   balls(page: $page, pageSize: $pageSize, order: $order, issue: $issue, drawDate: $drawDate){
-    list{id,issue,red1,red2,red3,red4,red5,red6,blue,prizeOne,prizeOneNum,prizeTwo,prizeTwoNum,drawDate,createdAt}
+    list{id,issue,red1,red2,red3,red4,red5,red6,blue,pool,prizeOne,prizeOneNum,prizeTwo,prizeTwoNum,bettingNum,drawDate,createdAt}
     meta{current,total,pageSize}
   }
+}`
+
+const deleteBall = `
+mutation delete($id: String!){
+  delBall(id: $id)
 }`
 
 class ballListStore {
@@ -69,6 +74,22 @@ class ballListStore {
         this.loading = false
         this.list = res.data.balls.list
         this.meta = res.data.balls.meta
+      })
+    }, err => {
+      runInAction(() => {
+        this.loading = false
+      })
+    })
+  }
+
+  @action deleteBall = (id: string) => {
+    return $http.post(GRAPHQL_API, {
+      query: deleteBall,
+      variables: {id}
+    }).then((res: any) => {
+      runInAction(() => {
+        this.loading = false
+        this.search({}, null, null)
       })
     }, err => {
       runInAction(() => {

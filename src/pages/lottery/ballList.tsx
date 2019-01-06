@@ -28,28 +28,43 @@ export default class BallList extends React.Component<IProps> {
     children: [{
       title: '1',
       dataIndex: 'red1',
+      width: '30px',
       render: (text: number, record: IBall, index: number) => this.setColor(text, 'red')
     },{
       title: '2',
       dataIndex: 'red2',
+      width: '30px',
       render: (text: number, record: IBall, index: number) => this.setColor(text, 'red')
     },{
       title: '3',
       dataIndex: 'red3',
+      width: '30px',
       render: (text: number, record: IBall, index: number) => this.setColor(text, 'red')
     },{
       title: '4',
       dataIndex: 'red4',
+      width: '30px',
       render: (text: number, record: IBall, index: number) => this.setColor(text, 'red')
     },{
       title: '5',
       dataIndex: 'red5',
+      width: '30px',
       render: (text: number, record: IBall, index: number) => this.setColor(text, 'red')
     },{
       title: '6',
       dataIndex: 'red6',
+      width: '30px',
       render: (text: number, record: IBall, index: number) => this.setColor(text, 'red')
     }]
+  }, {
+    title: '蓝球',
+    dataIndex: 'blue',
+    width: '30px',
+    render: (text: number, record: IBall, index: number) => this.setColor(text, 'blue')
+  }, {
+    title: '奖池奖金(元)',
+    dataIndex: 'pool',
+    render: (text: number) => this.showMoney(text)
   }, {
     title: '一等奖',
     children: [{
@@ -57,7 +72,8 @@ export default class BallList extends React.Component<IProps> {
       dataIndex: 'prizeOneNum'
     },{
       title: '奖金(元)',
-      dataIndex: 'prizeOne'
+      dataIndex: 'prizeOne',
+      render: (text: number) => this.showMoney(text)
     }]
   }, {
     title: '二等奖',
@@ -66,12 +82,13 @@ export default class BallList extends React.Component<IProps> {
       dataIndex: 'prizeTwoNum'
     },{
       title: '奖金(元)',
-      dataIndex: 'prizeTwo'
+      dataIndex: 'prizeTwo',
+      render: (text: number) => this.showMoney(text)
     }]
   }, {
-    title: '蓝球',
-    dataIndex: 'blue',
-    render: (text: number, record: IBall, index: number) => this.setColor(text, 'blue')
+    title: '总投注额(元)',
+    dataIndex: 'bettingNum',
+    render: (text: number) => this.showMoney(text)
   }, {
     title: '开奖日期',
     width: '120px',
@@ -81,12 +98,24 @@ export default class BallList extends React.Component<IProps> {
   }, {
     title: '操作',
     dataIndex: '',
-    width: '80px',
-    render: (text: string, record: IBall, index: number) => <Button size="small" type="primary" onClick={() => this.viewDetail(record)}>详情</Button>
+    width: '120px',
+    render: (text: string, record: IBall, index: number) => <React.Fragment><Button size="small" type="primary" onClick={() => this.viewDetail(record)}>详情</Button><Button size="small" onClick={() => this.showDelete(record.id)}>删除</Button></React.Fragment>
   }]
 
   viewDetail(data: IBall) {
     this.props.history.push(`/home/lottery-ball/${data.id}`)
+  }
+
+  showDelete = (id: string) => {
+    Modal.confirm({
+      title: '确认删除',
+      content: '删除后该条记录将无法恢复',
+      onOk: () => this.props.ballListStore.deleteBall(id)
+    })
+  }
+
+  showMoney = (num: number) => {
+    return (num + '').replace(/\B(?=(\d{3})+(?!\d))/g, ',')
   }
 
   create = () => {
@@ -94,11 +123,7 @@ export default class BallList extends React.Component<IProps> {
   }
 
   setColor = (num: number, type: string) => {
-    if(type === 'red') {
-      return <div style={{textAlign: 'center', color: type}}>{num}</div>
-    } else {
-      return <div style={{textAlign: 'center', color: type}}>{num}</div>
-    }
+    return <div style={{textAlign: 'center', color: type}}>{num}</div>
   }
   
   componentDidMount() {
