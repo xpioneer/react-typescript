@@ -1,13 +1,19 @@
 import { observable, action, autorun, runInAction, computed } from 'mobx';
 import { GRAPHQL_API } from '@constants/index';
+import * as Moment from 'moment'
 
-const postBall = `
-mutation createBall($input: ballInput!){
-  ball(input: $input){id}
+const getBallById = `
+query ball($id: String!){
+  ball(id: $id){id,issue,reds,blue,pool,prizeOne,prizeOneNum,prizeTwo,prizeTwoNum,bettingNum,drawDate,createdAt}
+}`
+
+const updateBall = `
+mutation updateBall($input: ballInput!){
+  updated:editBall(input: $input)
 }`
 
 
-class ballCreateStore {
+class ballEditStore {
   @observable loading: boolean = false
   @observable mainData: any = {} // tag detail data
   redBalls: number[] = [
@@ -35,7 +41,36 @@ class ballCreateStore {
     }
   }
 
-  @action save = (cb: Function) => {
+  @action getBall = (id: string) => {
+    $http.post(GRAPHQL_API, {
+      query: getBallById,
+      variables: {id}
+    }).then((res: any) => {
+      runInAction(() => {
+        this.loading = false
+        const {ball} = res.data
+        this.reds = ball.reds
+        this.blues = [ball.blue]
+        this.mainData = {
+          id: ball.id,
+          issue: ball.issue,
+          prizeOne: ball.prizeOne,
+          prizeOneNum: ball.prizeOneNum,
+          prizeTwo: ball.prizeTwo,
+          prizeTwoNum: ball.prizeTwoNum,
+          pool: ball.pool,
+          bettingNum: ball.bettingNum,
+          drawDate: Moment(ball.drawDate)
+        }
+      })
+    }, err => {
+      runInAction(() => {
+        this.loading = false
+      })
+    })
+  }
+
+  @action save = () => {
     if(
       /^\d{5}$/.test(this.mainData.issue) && 
       this.reds.length === 6 &&
@@ -49,6 +84,7 @@ class ballCreateStore {
       this.mainData.drawDate
       ){
       let data = {
+        id: this.mainData.id,
         issue: this.mainData.issue,
         reds: this.reds.sort((a, b) => a - b),
         blue: this.blues[0],
@@ -63,12 +99,13 @@ class ballCreateStore {
 
       this.loading = true
       $http.post(GRAPHQL_API, {
-        query: postBall,
+        query: updateBall,
         variables: {input: data}
       }).then((res: any) => {
-        // const {ball:{id}} = res.data
-        // cb(id)
-        window.history.go(-1)
+        if(res.data.updated) {
+          this.getBall(data.id)
+        }
+        
         runInAction(() => {
           this.loading = false
         })
@@ -93,4 +130,4 @@ class ballCreateStore {
 
 }
 
-export default new ballCreateStore()
+export default new ballEditStore()

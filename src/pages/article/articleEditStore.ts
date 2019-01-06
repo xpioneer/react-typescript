@@ -2,7 +2,7 @@ import { observable, action, autorun, runInAction, computed } from 'mobx';
 import { GRAPHQL_API } from '@constants/index'
 
 const getArticleById = `
-query article($id: String){
+query article($id: String!){
   article(id: $id){
     id,title,abstract,description,isTop,tag,createdAt,createdBy,
     typeId

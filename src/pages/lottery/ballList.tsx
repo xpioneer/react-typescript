@@ -86,11 +86,11 @@ export default class BallList extends React.Component<IProps> {
   }]
 
   viewDetail(data: IBall) {
-    // this.props.history.push(`/home/blog-message/${data.id}`)
+    this.props.history.push(`/home/lottery-ball/${data.id}`)
   }
 
   create = () => {
-    this.props.history.push('/home/lottery-ballCreate')
+    this.props.history.push('/home/lottery-ball')
   }
 
   setColor = (num: number, type: string) => {
