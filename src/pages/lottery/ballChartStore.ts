@@ -37,7 +37,7 @@ class ballChartStore {
         this.loading = false
         // this.reds = ballCount.reds
         // this.blues = ballCount.blues
-        console.log(ballCount)
+        // console.log(ballCount)
         cb && cb(ballCount.reds, ballCount.blues)
       })
     }, err => {

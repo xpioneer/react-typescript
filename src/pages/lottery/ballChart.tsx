@@ -15,7 +15,9 @@ require('echarts/lib/component/title');
 export default class BallChart extends React.Component<IProps> {
 
   chartRef: any = React.createRef()
+  blueRef: any = React.createRef()
   ballCountChart: Echart.ECharts
+  blueBallCountChart: Echart.ECharts
   
   state = {
     visible: false
@@ -43,42 +45,68 @@ export default class BallChart extends React.Component<IProps> {
   
   componentDidMount() {
     this.ballCountChart = Echart.init(this.chartRef.current)
+    this.blueBallCountChart = Echart.init(this.blueRef.current)
     const { fetchChartData } = this.props.ballChartStore
     
     fetchChartData((reds:[any], blues:[any]) => {
-      let list = [...reds, ...blues]
-      let xData = list.map((v:any, i:number) => {
-          return v.name
-      })
-      let yData = list.map((v:any, i:number) => {
-        return v.value
-      })
       this.ballCountChart.setOption({
         title: {
-            text: '历史出现次数'
+            text: '红球'
         },
         tooltip: {},
+        grid: {
+          left: '2%',
+          right: '2%',
+          bottom: '3%',
+          containLabel: true
+        },
         xAxis: {
-            data: xData
+            data: reds.map(v => v.name)
         },
         yAxis: {},
         series: [{
             name: '次数',
             type: 'bar',
-            data: yData
-        }]
+            data: reds.map(v => v.value)
+        }],
+        color: ['#f54646']
+      })
+
+      this.blueBallCountChart.setOption({
+        title: {
+          text: '蓝球'
+        },
+        tooltip: {},
+        grid: {
+          left: '2%',
+          right: '2%',
+          bottom: '3%',
+          containLabel: true
+        },
+        xAxis: {
+            data: blues.map(v => v.name)
+        },
+        yAxis: {},
+        series: [{
+            name: '次数',
+            type: 'bar',
+            data: blues.map(v => v.value)
+        }],
+        color: ['#3399ff']
       })
     })
   }
 
   render(){
     return <React.Fragment>
-      <div className="search-form">
+      <div>
         <h3>红蓝球历史出现次数</h3>
-        <Row gutter={24}>
-          <Col span={24}>
-            <div className='chart-w' ref={this.chartRef}>
-            </div>
+        <Row>
+          <Col span={16}>
+            <div className='chart-w' style={{borderRight: 'none'}} ref={this.chartRef}></div>
+          </Col>
+          <Col span={8}>
+            <div className='chart-w' ref={this.blueRef}></div>
           </Col>
         </Row>
       </div>
