@@ -4,7 +4,7 @@ import { GRAPHQL_API } from '@constants/index';
 const queryChart = `
 fragment common on ballChartType { name value }
 query ball{
-  ballCount{reds{...common},blues{...common}}
+  ballCount{reds{...common},blues{...common},redDisList{...common}}
 }`
 
 
@@ -38,7 +38,7 @@ class ballChartStore {
         // this.reds = ballCount.reds
         // this.blues = ballCount.blues
         // console.log(ballCount)
-        cb && cb(ballCount.reds, ballCount.blues)
+        cb && cb(ballCount.reds, ballCount.blues, ballCount.redDisList)
       })
     }, err => {
       runInAction(() => {

@@ -2,10 +2,11 @@ import * as React from 'react'
 import {inject, observer} from 'mobx-react'
 import { Row, Col, Form, Button } from 'antd';
 import { IBall } from '@models/ball'
-import * as Echart from 'echarts'
+import * as Echart from 'echarts/lib/echarts'
 // const Echart = require('echarts/lib/echarts')
 // 引入柱状图
 require('echarts/lib/chart/bar');
+require('echarts/lib/chart/line');
 // 引入提示框和标题组件
 require('echarts/lib/component/tooltip');
 require('echarts/lib/component/title');
@@ -16,8 +17,10 @@ export default class BallChart extends React.Component<IProps> {
 
   chartRef: any = React.createRef()
   blueRef: any = React.createRef()
+  redChartRef: any = React.createRef()
   ballCountChart: Echart.ECharts
   blueBallCountChart: Echart.ECharts
+  redBallDistributionChart: Echart.ECharts
   
   state = {
     visible: false
@@ -46,12 +49,26 @@ export default class BallChart extends React.Component<IProps> {
   componentDidMount() {
     this.ballCountChart = Echart.init(this.chartRef.current)
     this.blueBallCountChart = Echart.init(this.blueRef.current)
+    this.redBallDistributionChart = Echart.init(this.redChartRef.current)
+
     const { fetchChartData } = this.props.ballChartStore
     
-    fetchChartData((reds:[any], blues:[any]) => {
+    fetchChartData((reds:[any], blues:[any], redDisList:[[any]]) => {
+      const series: any = redDisList.map((item, i) => {
+        return {
+          name: `红球${i + 1}`,
+          type: 'line',
+          smooth: true,
+          showSymbol: false,
+          symbol: 'circle',
+          symbolSize: 6,
+          data: item.map(v => v.value)
+        }
+      })
+
       this.ballCountChart.setOption({
         title: {
-            text: '红球'
+          text: '红球'
         },
         tooltip: {},
         grid: {
@@ -61,13 +78,13 @@ export default class BallChart extends React.Component<IProps> {
           containLabel: true
         },
         xAxis: {
-            data: reds.map(v => v.name)
+          data: reds.map(v => v.name)
         },
         yAxis: {},
         series: [{
-            name: '次数',
-            type: 'bar',
-            data: reds.map(v => v.value)
+          name: '次数',
+          type: 'bar',
+          data: reds.map(v => v.value)
         }],
         color: ['#f54646']
       })
@@ -84,15 +101,35 @@ export default class BallChart extends React.Component<IProps> {
           containLabel: true
         },
         xAxis: {
-            data: blues.map(v => v.name)
+          data: blues.map(v => v.name)
         },
         yAxis: {},
         series: [{
-            name: '次数',
-            type: 'bar',
-            data: blues.map(v => v.value)
+          name: '次数',
+          type: 'bar',
+          data: blues.map(v => v.value)
         }],
         color: ['#3399ff']
+      })
+
+      this.redBallDistributionChart.setOption({
+        title: {
+          text: '红球分布图'
+        },
+        tooltip: {},
+        grid: {
+          left: '2%',
+          right: '2%',
+          bottom: '3%',
+          containLabel: true
+        },
+        xAxis: {
+          data: reds.map(v => v.name)
+        },
+        yAxis: {},
+        series: series,
+        // color: ['#f54646','#f5464685','#f5464670','#f5464655','#f5464640','#f5464625']
+        color: ['#f54646','#c23531','#2f4554', '#61a0a8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3']
       })
     })
   }
@@ -107,6 +144,12 @@ export default class BallChart extends React.Component<IProps> {
           </Col>
           <Col span={8}>
             <div className='chart-w' ref={this.blueRef}></div>
+          </Col>
+        </Row>
+        <h3>红球历史出现分布图</h3>
+        <Row>
+          <Col span={24}>
+            <div className='chart-w' style={{borderRight: 'none'}} ref={this.redChartRef}></div>
           </Col>
         </Row>
       </div>
