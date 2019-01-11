@@ -10,6 +10,7 @@ require('echarts/lib/chart/line');
 // 引入提示框和标题组件
 require('echarts/lib/component/tooltip');
 require('echarts/lib/component/title');
+require('echarts/lib/component/legend');
 
 @inject('ballChartStore')
 @observer
@@ -116,7 +117,20 @@ export default class BallChart extends React.Component<IProps> {
         title: {
           text: '红球分布图'
         },
-        tooltip: {},
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            // lineStyle: {
+            //     color: '#ddd'
+            // }
+          },
+          backgroundColor: 'rgba(255,255,255,1)',
+          // padding: [5, 10],
+          textStyle: {
+              color: '#7588E4',
+          },
+          extraCssText: 'box-shadow: 0 0 5px rgba(0,0,0,0.3)'
+        },
         grid: {
           left: '2%',
           right: '2%',
@@ -127,9 +141,14 @@ export default class BallChart extends React.Component<IProps> {
           data: reds.map(v => v.name)
         },
         yAxis: {},
+        legend: {
+          right: 20,
+          orient: 'horizontal',
+          data: ['红球1','红球2','红球3','红球4','红球5','红球6']
+        },
         series: series,
         // color: ['#f54646','#f5464685','#f5464670','#f5464655','#f5464640','#f5464625']
-        color: ['#f54646','#c23531','#2f4554', '#61a0a8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3']
+        color: ['#f54646','#c23531','#2f4554', '#61a0a8', '#d48265', '#6e7074','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3']
       })
     })
   }
