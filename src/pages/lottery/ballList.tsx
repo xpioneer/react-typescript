@@ -83,15 +83,15 @@ export default class BallList extends React.Component<IProps> {
     render: (text: number) => this.showMoney(text)
   }, {
     title: '开奖日期',
-    width: '120px',
+    width: '100px',
     dataIndex: 'drawDate',
     key: 'drawDate',
     sorter: true
   }, {
     title: '操作',
     dataIndex: '',
-    width: '120px',
-    render: (text: string, record: IBall, index: number) => <React.Fragment><Button size="small" type="primary" onClick={() => this.viewDetail(record)}>详情</Button><Button size="small" onClick={() => this.showDelete(record.id)}>删除</Button></React.Fragment>
+    width: '80px',
+    render: (text: string, record: IBall, index: number) => <React.Fragment><a onClick={() => this.viewDetail(record)}>详情</a>|<a onClick={() => this.showDelete(record.id)}>删除</a></React.Fragment>
   }]
 
   viewDetail(data: IBall) {
