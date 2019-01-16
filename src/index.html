@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title><%= htmlWebpackPlugin.options.title %></title>
   <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
+  <link rel="manifest" href="/manifest.json">
   <script>
     var _html = document.documentElement;
     function getSize() {
@@ -20,7 +21,7 @@
     }
     getSize();
 
-    var timer;
+    var timer = null;
     window.addEventListener('resize', function(e) {
       clearTimeout(timer);
       timer = setTimeout(function(){getSize()}, 300);
