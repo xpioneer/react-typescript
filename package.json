@@ -10,6 +10,13 @@
     "dev": "NODE_ENV=development webpack-dev-server --config build/webpack.dev.conf.js",
     "build": "NODE_ENV=production webpack --config build/webpack.prod.conf.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xpioneer/react-typescript.git"
+  },
+  "bugs": {
+    "url": "https://github.com/xpioneer/react-typescript/issues"
+  },
   "dependencies": {
     "antd": "^3.10.4",
     "axios": "^0.18.0",
