@@ -177,7 +177,7 @@ const Routes = (authorized: boolean) => <Suspense fallback={<Loading/>}>
     routes.map(r => {
       const {path, exact, component} = r
       const LazyCom = component
-      return <Route key={path + ''} exact={exact} path={path} render={(props: any) => (authorized ? <LazyCom {...props}/> : <Redirect to="/login"/>)}/>
+      return <Route key={path + ''} exact={!!exact} path={path} render={(props: any) => (authorized ? <LazyCom {...props}/> : <Redirect to="/login"/>)}/>
     })
   }
   </Switch>
