@@ -45,7 +45,12 @@ const MenuList = [{
     key: '5-2', title: '统计图', path: '/home/lottery-chart', icon: 'bar-chart'
   }]
 },{
-  key:'99', title:'Demo', path: '/home/demos', icon:'bulb'
+  key:'99', title:'Demo', icon:'bulb',
+  children: [{
+    key: '99-0', title: '示例', path: '/home/demos', icon:'experiment'
+  },{
+    key: '99-1', title: '示例mobx', path: '/home/demo-mobx', icon:'experiment'
+  }]
 }]
 
 class SiderComponent extends React.Component<ISiderProps> {
@@ -84,7 +89,10 @@ class SiderComponent extends React.Component<ISiderProps> {
       <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
         {
           MenuList.map(m => {
-            return m.children ? <SubMenu key={m.key} title={<span><Icon type={m.icon} /><span>{m.title}</span></span>}>
+            return m.children ?
+            <SubMenu
+              key={m.key}
+              title={<span><Icon type={m.icon} /><span>{m.title}</span></span>}>
               {
                 m.children.map(mc => {
                   return <Item key={mc.key}>
@@ -95,7 +103,8 @@ class SiderComponent extends React.Component<ISiderProps> {
                   </Item>
                 })
               }
-            </SubMenu> : <Item key={m.key}>
+            </SubMenu> :
+            <Item key={m.key}>
               <Link to={m.path}>
                 <Icon type={m.icon} />
                 <span>{m.title}</span>
