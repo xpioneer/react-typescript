@@ -8,7 +8,7 @@ module.exports = merge(webpackConfig, {
   devtool: 'cheap-modules-eval-source-map',
   mode: 'development',
   devServer: {
-    port: '8022',
+    port: '8060',
     host: 'localhost',
     proxy: {
       '/api': 'http://127.0.0.1:8020',
