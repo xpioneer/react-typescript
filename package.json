@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "antd": "^3.10.4",
-    "axios": "^0.18.0",
+    "axios": "^0.19.0",
     "echarts": "^4.2.0-rc.2",
     "mobx": "^5.6.0",
     "mobx-react": "^5.3.6",
@@ -66,11 +66,11 @@
     "typescript": "^3.6.4",
     "uglifyjs-webpack-plugin": "^2.0.1",
     "url-loader": "^1.1.2",
-    "webpack": "^4.26.1",
-    "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.10",
+    "webpack": "^4.41.1",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.8.2",
     "webpack-manifest-plugin": "^2.0.4",
-    "webpack-merge": "^4.1.4"
+    "webpack-merge": "^4.2.2"
   },
   "husky": {
     "hooks": {
