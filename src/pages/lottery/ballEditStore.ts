@@ -1,5 +1,5 @@
-import { observable, action, autorun, runInAction, computed } from 'mobx';
-import { GRAPHQL_API } from '@constants/index';
+import { observable, action, autorun, runInAction, computed } from 'mobx'
+import { GRAPHQL_API } from '@constants/index'
 import * as Moment from 'moment'
 
 const getBallById = `
@@ -82,7 +82,7 @@ class ballEditStore {
       /^\d+$/.test(this.mainData.prizeTwoNum) &&
       /^\d+$/.test(this.mainData.bettingNum) && 
       this.mainData.drawDate
-      ){
+    ){
       let data = {
         id: this.mainData.id,
         issue: this.mainData.issue,

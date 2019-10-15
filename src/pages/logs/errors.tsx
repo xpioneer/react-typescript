@@ -1,9 +1,9 @@
 import * as React from 'react'
 import {inject, observer} from 'mobx-react'
-import { Row, Col, Form, Icon, Input, Button, DatePicker, Table, Modal, Badge } from 'antd';
+import { Row, Col, Form, Icon, Input, Button, DatePicker, Table, Modal, Badge } from 'antd'
 import { object2Str } from '@utils/tools'
 
-const FormItem = Form.Item;
+const FormItem = Form.Item
 
 
 @inject('errorLogStore')
@@ -191,35 +191,35 @@ export default class ErrorsLog extends React.Component<IProps> {
   }
 
   // 获取状态badge
-  getStatus = (status: any): "default"|"success"|"warning"|"error" => {
-    let info: "default"|"success"|"warning"|"error" = "default";
+  getStatus = (status: any): 'default'|'success'|'warning'|'error' => {
+    let info: 'default'|'success'|'warning'|'error' = 'default'
     switch (status) {
-      case 200:
-      case 201:
-        info = 'success';
-        break;
-      case 400:
-      case 401:
-      case 403:
-      case 404:
-      case 405:
-      case 406:
-        info = 'warning';
-        break;
-      case 500:
-      case 501:
-      case 502:
-      case 503:
-      case 504:
-      case 505:
-        info = 'error';
-        break;
+      case 200 :
+      case 201 :
+        info = 'success'
+        break
+      case 400 :
+      case 401 :
+      case 403 :
+      case 404 :
+      case 405 :
+      case 406 :
+        info = 'warning'
+        break
+      case 500 :
+      case 501 :
+      case 502 :
+      case 503 :
+      case 504 :
+      case 505 :
+        info = 'error'
+        break
 
-      default:
-        info = 'default';
-        break;
+      default :
+        info = 'default'
+        break
     }
-    return info;
+    return info
   }
   
   componentDidMount() {

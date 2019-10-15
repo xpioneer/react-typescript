@@ -1,4 +1,4 @@
-import { observable, action, autorun, runInAction } from 'mobx';
+import { observable, action, autorun, runInAction } from 'mobx'
 import { message } from 'antd'
 import { serialize } from '@utils/params'
 import { Moment } from 'moment'

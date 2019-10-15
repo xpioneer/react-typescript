@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Layout } from 'antd';
+import { Layout } from 'antd'
 import { inject, observer } from 'mobx-react'
 import Routes from '../../routes'
 import Sider from '@components/shared/sider'
@@ -22,7 +22,7 @@ class Home extends React.Component<IProps> {
         <Layout>
           <Header props={homeStore}/>
           <Content style={{ margin: '16px 12px', padding: 16, background: '#fff', minHeight: 520 }}>
-          { Routes(homeStore.authorized) }
+            { Routes(homeStore.authorized) }
           </Content>
           <Footer/>
         </Layout>

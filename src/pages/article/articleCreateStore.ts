@@ -1,4 +1,4 @@
-import { observable, action, autorun, runInAction, computed } from 'mobx';
+import { observable, action, autorun, runInAction, computed } from 'mobx'
 import { GRAPHQL_API } from '@constants/index'
 
 const getInitQuery = `{

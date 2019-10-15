@@ -1,7 +1,7 @@
 import * as React from 'react'
-import { observable, action, autorun, runInAction, computed } from 'mobx';
+import { observable, action, autorun, runInAction, computed } from 'mobx'
 import {inject, observer} from 'mobx-react'
-import { Row, Col, Button, Badge, Icon, Form, Input, Select } from 'antd';
+import { Row, Col, Button, Badge, Icon, Form, Input, Select } from 'antd'
 
 const FormItem = Form.Item
 const TextArea = Input.TextArea

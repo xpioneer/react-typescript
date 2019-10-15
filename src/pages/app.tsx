@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
+import * as React from 'react'
+import { BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom'
 import { Provider } from 'mobx-react'
 import stores from '../stores'
 import Loading from '@components/loading'
@@ -28,4 +28,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default App

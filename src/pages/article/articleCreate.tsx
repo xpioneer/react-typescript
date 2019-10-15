@@ -1,9 +1,9 @@
 import * as React from 'react'
 import {inject, observer} from 'mobx-react'
-import { Row, Col, Form, Icon, Input, Button, DatePicker, Select, Checkbox, Badge } from 'antd';
+import { Row, Col, Form, Icon, Input, Button, DatePicker, Select, Checkbox, Badge } from 'antd'
 import Editor from '@components/editor'
 
-const FormItem = Form.Item;
+const FormItem = Form.Item
 const CheckboxGroup = Checkbox.Group
 
 const formItemLayout = {
@@ -56,7 +56,7 @@ export default class ArticleCreate extends React.Component<IProps> {
             <FormItem label="文章类型" labelCol={{sm: {span: 8}}} wrapperCol={{sm: { span: 16 }}}>
               <Select value={mainData.typeId} onChange={e => inputChange(e, 'typeId')}>
                 {
-                  typeList.map((t:any, i:number) => <Select.Option value={t.id} key={t.id}>{t.name}</Select.Option>)
+                  typeList.map((t: any, i: number) => <Select.Option value={t.id} key={t.id}>{t.name}</Select.Option>)
                 }
               </Select>
             </FormItem>

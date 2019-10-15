@@ -1,5 +1,5 @@
-import { observable, action, autorun, runInAction, computed } from 'mobx';
-import { GRAPHQL_API } from '@constants/index';
+import { observable, action, autorun, runInAction, computed } from 'mobx'
+import { GRAPHQL_API } from '@constants/index'
 
 const postUser = `
 mutation createArticleType($username: String!, $nickName: String!, $password: String!, $userType: Int!, $sex: Int!, $remark: String){

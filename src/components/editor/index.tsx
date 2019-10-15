@@ -24,7 +24,7 @@ const toolbarOptions = [
   ['link', 'image'],
 
   ['clean'],                                         // remove formatting button
-];
+]
 
 interface IEditor {
   disabled?: boolean
@@ -46,22 +46,24 @@ export default class QuillEditorComponent extends React.Component<IEditor> {
     readOnly: false,
     theme: 'snow',
   }
+
+  $editor: any = null
   
   componentDidMount() {
     const { onChange } = this.props
-    const { editor }: any = this.refs
-    this.quillEditor = new Quill(editor, this.quillOptions)
+    const { $editor } = this
+    this.quillEditor = new Quill($editor, this.quillOptions)
 
     this.quillEditor.on('text-change', (delta: any, oldDelta: any, source: any) => {
-      let _html: string = this.quillEditor.root.innerHTML;
+      let _html: string = this.quillEditor.root.innerHTML
       if (_html === '<p><br></p>') {
-        _html = '';
+        _html = ''
       }
       if(this.oldVal !== _html) {
         this.oldVal = _html
-        onChange && onChange(_html);
+        onChange && onChange(_html)
       }
-    });
+    })
   }
 
   // change editor value
@@ -69,7 +71,7 @@ export default class QuillEditorComponent extends React.Component<IEditor> {
     const { value } = this.props
     // 赋值
     if(this.oldVal !== value && value !== undefined && this.quillEditor) {
-      this.quillEditor.root.innerHTML = value;
+      this.quillEditor.root.innerHTML = value
       this.oldVal = value
     }
   }
@@ -79,7 +81,7 @@ export default class QuillEditorComponent extends React.Component<IEditor> {
     this.changeEditorText()
 
     return <div className="editor-wrap">
-      <div style={{minHeight: '600px'}} ref="editor"></div>
+      <div style={{minHeight: '600px'}} ref={this.$editor}></div>
       {disabled ? <div className="editor-mask"></div> : ''}
     </div>
     

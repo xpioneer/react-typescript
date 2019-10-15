@@ -1,7 +1,7 @@
-import { observable, action, autorun, runInAction } from 'mobx';
+import { observable, action, autorun, runInAction } from 'mobx'
 import { serialize } from '@utils/params'
 import { Moment } from 'moment'
-import { GRAPHQL_API } from '@constants/index';
+import { GRAPHQL_API } from '@constants/index'
 
 const queryArticleTypes = `
 query articleTypePages($page: Int, $pageSize: Int, $order: pageOrder, $name: String, $createdAt: [String]){

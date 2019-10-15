@@ -18,7 +18,7 @@ export default class HeaderComponent extends React.Component<IHeaderProps> {
       padding: 0,
       display: 'flex',
       alignItems: 'center'
-      }}>
+    }}>
       <div style={{flex: '1 1 0'}}>
         <Icon
           style={{cursor: 'pointer'}}

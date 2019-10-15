@@ -1,10 +1,10 @@
 import * as React from 'react'
 import {inject, observer} from 'mobx-react'
-import { Row, Col, Form, Select, Input, Button, DatePicker, Table, Modal, Badge, } from 'antd';
+import { Row, Col, Form, Select, Input, Button, DatePicker, Table, Modal, Badge, } from 'antd'
 import { ColumnProps } from 'antd/lib/table'
 import { IUser } from '@models/user'
 
-const FormItem = Form.Item;
+const FormItem = Form.Item
 
 
 @inject('userListStore')
@@ -91,9 +91,9 @@ export default class UserList extends React.Component<IProps> {
           <Col span={6}>
             <FormItem>
               <Select placeholder="用户类型" onChange={e => inputChange(e, 'userType')} value={value.userType}>
-              {
-                this.userTypeList.map((u, i) => <Select.Option key={u.name} value={u.value}>{u.name}</Select.Option>)
-              }
+                {
+                  this.userTypeList.map((u, i) => <Select.Option key={u.name} value={u.value}>{u.name}</Select.Option>)
+                }
               </Select>
             </FormItem>
           </Col>

@@ -1,10 +1,10 @@
 import * as React from 'react'
 import {inject, observer} from 'mobx-react'
-import { Row, Col, Form, Icon, Input, Button, DatePicker, Table, Modal, Badge, } from 'antd';
+import { Row, Col, Form, Icon, Input, Button, DatePicker, Table, Modal, Badge, } from 'antd'
 import { ColumnProps } from 'antd/lib/table'
 import { IArticle } from '@models/article'
 
-const FormItem = Form.Item;
+const FormItem = Form.Item
 
 
 @inject('articleListStore')
@@ -49,7 +49,7 @@ export default class ArticleList extends React.Component<IProps> {
     title: '操作',
     dataIndex: '',
     width: '30px',
-    render: (text: string, record: IArticle, index: number) => <Button size="small" type="primary" onClick={() => this.viewDetail(record)}>详情</Button>,
+    render: (text: string, record, index) => <Button size="small" type="primary" onClick={() => this.viewDetail(record)}>详情</Button>,
   }]
 
   viewDetail(data: IArticle) {

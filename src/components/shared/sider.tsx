@@ -90,26 +90,26 @@ class SiderComponent extends React.Component<ISiderProps> {
         {
           MenuList.map(m => {
             return m.children ?
-            <SubMenu
-              key={m.key}
-              title={<span><Icon type={m.icon} /><span>{m.title}</span></span>}>
-              {
-                m.children.map(mc => {
-                  return <Item key={mc.key}>
-                    <Link to={mc.path}>
-                      <Icon type={mc.icon} />
-                      <span>{mc.title}</span>
-                    </Link>
-                  </Item>
-                })
-              }
-            </SubMenu> :
-            <Item key={m.key}>
-              <Link to={m.path}>
-                <Icon type={m.icon} />
-                <span>{m.title}</span>
-              </Link>
-            </Item>
+              <SubMenu
+                key={m.key}
+                title={<span><Icon type={m.icon} /><span>{m.title}</span></span>}>
+                {
+                  m.children.map(mc => {
+                    return <Item key={mc.key}>
+                      <Link to={mc.path}>
+                        <Icon type={mc.icon} />
+                        <span>{mc.title}</span>
+                      </Link>
+                    </Item>
+                  })
+                }
+              </SubMenu> :
+              <Item key={m.key}>
+                <Link to={m.path}>
+                  <Icon type={m.icon} />
+                  <span>{m.title}</span>
+                </Link>
+              </Item>
           })
         }
       </Menu>

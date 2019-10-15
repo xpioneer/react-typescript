@@ -1,8 +1,8 @@
 import * as React from 'react'
 import {inject, observer} from 'mobx-react'
-import { Row, Col, Form, Icon, Input, Button, DatePicker, Select, Checkbox, Badge } from 'antd';
+import { Row, Col, Form, Icon, Input, Button, DatePicker, Select, Checkbox, Badge } from 'antd'
 
-const FormItem = Form.Item;
+const FormItem = Form.Item
 const CheckboxGroup = Checkbox.Group
 
 @inject('ballCreateStore')
@@ -87,11 +87,11 @@ export default class BallCreate extends React.Component<IProps> {
                 display:'flex',
                 paddingTop: '6px',
                 flexWrap: 'wrap'}}>
-              {
-                redBalls.map((n: number, i: number) => {
-                  return <div key={n} style={this.setActive('red', reds, n)} onClick={() => selectBall(n, 'red')}>{n}</div>
-                })
-              }
+                {
+                  redBalls.map((n: number, i: number) => {
+                    return <div key={n} style={this.setActive('red', reds, n)} onClick={() => selectBall(n, 'red')}>{n}</div>
+                  })
+                }
               </div>
             </FormItem>
           </Col>
@@ -103,11 +103,11 @@ export default class BallCreate extends React.Component<IProps> {
                 display:'flex',
                 paddingTop: '6px',
                 flexWrap: 'wrap'}}>
-              {
-                blueBalls.map((n: number, i: number) => {
-                  return <div key={n} style={this.setActive('blue', blues, n)} onClick={() => selectBall(n, 'blue')}>{n}</div>
-                })
-              }
+                {
+                  blueBalls.map((n: number, i: number) => {
+                    return <div key={n} style={this.setActive('blue', blues, n)} onClick={() => selectBall(n, 'blue')}>{n}</div>
+                  })
+                }
               </div>
             </FormItem>
           </Col>

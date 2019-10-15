@@ -1,4 +1,4 @@
-import { observable, action, computed, autorun, runInAction } from 'mobx';
+import { observable, action, computed, autorun, runInAction } from 'mobx'
 import { storage } from '@utils/tools'
 import { JWT_TOKEN, REDIRECT_URL } from '@constants/index'
 

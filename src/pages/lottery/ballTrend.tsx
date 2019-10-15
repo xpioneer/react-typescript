@@ -1,10 +1,10 @@
 import * as React from 'react'
 import {inject, observer} from 'mobx-react'
-import { Row, Col, Form, Icon, Input, Button, DatePicker, Table, Modal, Select } from 'antd';
+import { Row, Col, Form, Icon, Input, Button, DatePicker, Table, Modal, Select } from 'antd'
 import { ColumnProps } from 'antd/lib/table'
 import { IBall } from '@models/ball'
 
-const FormItem = Form.Item;
+const FormItem = Form.Item
 
 
 @inject('ballTrendStore')
@@ -124,131 +124,131 @@ export default class BallTrend extends React.Component<IProps> {
         keyboard={true}
         visible={visible}
         onOk={() => this.showRule()}
-        onCancel={() => this.showRule()}
-      > <table className='rules-table'><tbody>
-        <tr>
-          <td rowSpan={2}>奖级</td>
-          <td colSpan={2}>中奖条件</td>
-          <td rowSpan={2}>中奖说明</td>
-          <td rowSpan={2} style={{width: '520px'}}>单注奖金说明</td>
-          <td rowSpan={2}>收益倍数</td>
-        </tr>
-        <tr>
-          <td>红球</td>
-          <td>蓝球</td>
-        </tr>
-        <tr>
-          <td>一等奖</td>
-          <td>
-            <div className="ball red"></div>
-            <div className="ball red"></div>
-            <div className="ball red"></div>
-            <div className="ball red"></div>
-            <div className="ball red"></div>
-            <div className="ball red"></div>
-          </td>
-          <td><div className="ball blue"></div></td>
-          <td>6+1</td>
-          <td>
+        onCancel={() => this.showRule()}>
+        <table className='rules-table'><tbody>
+          <tr>
+            <td rowSpan={2}>奖级</td>
+            <td colSpan={2}>中奖条件</td>
+            <td rowSpan={2}>中奖说明</td>
+            <td rowSpan={2} style={{width: '520px'}}>单注奖金说明</td>
+            <td rowSpan={2}>收益倍数</td>
+          </tr>
+          <tr>
+            <td>红球</td>
+            <td>蓝球</td>
+          </tr>
+          <tr>
+            <td>一等奖</td>
+            <td>
+              <div className="ball red"></div>
+              <div className="ball red"></div>
+              <div className="ball red"></div>
+              <div className="ball red"></div>
+              <div className="ball red"></div>
+              <div className="ball red"></div>
+            </td>
+            <td><div className="ball blue"></div></td>
+            <td>6+1</td>
+            <td>
           当奖池资金低于1亿元时，奖金总额为当期高等奖奖金的70%与奖池中累积的奖金之和，单注奖金按注均分，单注最高限额封顶500万元。
 当奖池资金高于1亿元（含）时，奖金总额包括两部分，一部分为当期高等奖奖金的50%与奖池中累积的奖金之和，单注奖金按注均分，单注最高限额封顶500万元；另一部分为当期高等奖奖金的20%，单注奖金按注均分，单注最高限额封顶500万元。
-          </td>
-          <td>浮动</td>
-        </tr>
-        <tr>
-          <td>二等奖</td>
-          <td>
-            <div className="ball red"></div>
-            <div className="ball red"></div>
-            <div className="ball red"></div>
-            <div className="ball red"></div>
-            <div className="ball red"></div>
-            <div className="ball red"></div>
-          </td>
-          <td></td>
-          <td>6+0</td>
-          <td>当期高等奖奖金的30%</td>
-          <td>浮动</td>
-        </tr>
-        <tr>
-          <td>三等奖</td>
-          <td>
-            <div className="ball red"></div>
-            <div className="ball red"></div>
-            <div className="ball red"></div>
-            <div className="ball red"></div>
-            <div className="ball red"></div>
-          </td>
-          <td><div className="ball blue"></div></td>
-          <td>5+1</td>
-          <td>单注奖金额固定为3000元</td>
-          <td>1500</td>
-        </tr>
-        <tr>
-          <td rowSpan={2}>四等奖</td>
-          <td>
-            <div className="ball red"></div>
-            <div className="ball red"></div>
-            <div className="ball red"></div>
-            <div className="ball red"></div>
-            <div className="ball red"></div>
-          </td>
-          <td></td>
-          <td>5+0</td>
-          <td rowSpan={2}>单注奖金额固定为200元</td>
-          <td rowSpan={2}>100</td>
-        </tr>
-        <tr>
-          <td>
-            <div className="ball red"></div>
-            <div className="ball red"></div>
-            <div className="ball red"></div>
-            <div className="ball red"></div>
-          </td>
-          <td>
-            <div className="ball blue"></div>
-          </td>
-          <td>4+1</td>
-        </tr>
-        <tr>
-          <td rowSpan={2}>五等奖</td>
-          <td>
-            <div className="ball red"></div>
-            <div className="ball red"></div>
-            <div className="ball red"></div>
-            <div className="ball red"></div>
-          </td>
-          <td></td>
-          <td>4+0</td>
-          <td rowSpan={2}>单注奖金额固定为10元</td>
-          <td rowSpan={2}>5</td>
-        </tr>
-        <tr>
-          <td>
-            <div className="ball red"></div>
-            <div className="ball red"></div>
-            <div className="ball red"></div>
-          </td>
-          <td><div className="ball blue"></div></td>
-          <td>3+1</td>
-        </tr>
-        <tr>
-          <td rowSpan={3}>六等奖</td>
-          <td>
-            <div className="ball red"></div>
-            <div className="ball red"></div>
-          </td>
-          <td><div className="ball blue"></div></td>
-          <td>2+1</td>
-          <td rowSpan={3}>单注奖金额固定为5元</td>
-          <td rowSpan={3}>2.5</td>
-        </tr>
-        <tr>
-          <td><div className="ball red"></div></td>
-          <td><div className="ball blue"></div></td>
-          <td>1+1</td>
-        </tr>
-        <tr><td></td><td><div className="ball blue"></div></td><td>0+1</td></tr>
+            </td>
+            <td>浮动</td>
+          </tr>
+          <tr>
+            <td>二等奖</td>
+            <td>
+              <div className="ball red"></div>
+              <div className="ball red"></div>
+              <div className="ball red"></div>
+              <div className="ball red"></div>
+              <div className="ball red"></div>
+              <div className="ball red"></div>
+            </td>
+            <td></td>
+            <td>6+0</td>
+            <td>当期高等奖奖金的30%</td>
+            <td>浮动</td>
+          </tr>
+          <tr>
+            <td>三等奖</td>
+            <td>
+              <div className="ball red"></div>
+              <div className="ball red"></div>
+              <div className="ball red"></div>
+              <div className="ball red"></div>
+              <div className="ball red"></div>
+            </td>
+            <td><div className="ball blue"></div></td>
+            <td>5+1</td>
+            <td>单注奖金额固定为3000元</td>
+            <td>1500</td>
+          </tr>
+          <tr>
+            <td rowSpan={2}>四等奖</td>
+            <td>
+              <div className="ball red"></div>
+              <div className="ball red"></div>
+              <div className="ball red"></div>
+              <div className="ball red"></div>
+              <div className="ball red"></div>
+            </td>
+            <td></td>
+            <td>5+0</td>
+            <td rowSpan={2}>单注奖金额固定为200元</td>
+            <td rowSpan={2}>100</td>
+          </tr>
+          <tr>
+            <td>
+              <div className="ball red"></div>
+              <div className="ball red"></div>
+              <div className="ball red"></div>
+              <div className="ball red"></div>
+            </td>
+            <td>
+              <div className="ball blue"></div>
+            </td>
+            <td>4+1</td>
+          </tr>
+          <tr>
+            <td rowSpan={2}>五等奖</td>
+            <td>
+              <div className="ball red"></div>
+              <div className="ball red"></div>
+              <div className="ball red"></div>
+              <div className="ball red"></div>
+            </td>
+            <td></td>
+            <td>4+0</td>
+            <td rowSpan={2}>单注奖金额固定为10元</td>
+            <td rowSpan={2}>5</td>
+          </tr>
+          <tr>
+            <td>
+              <div className="ball red"></div>
+              <div className="ball red"></div>
+              <div className="ball red"></div>
+            </td>
+            <td><div className="ball blue"></div></td>
+            <td>3+1</td>
+          </tr>
+          <tr>
+            <td rowSpan={3}>六等奖</td>
+            <td>
+              <div className="ball red"></div>
+              <div className="ball red"></div>
+            </td>
+            <td><div className="ball blue"></div></td>
+            <td>2+1</td>
+            <td rowSpan={3}>单注奖金额固定为5元</td>
+            <td rowSpan={3}>2.5</td>
+          </tr>
+          <tr>
+            <td><div className="ball red"></div></td>
+            <td><div className="ball blue"></div></td>
+            <td>1+1</td>
+          </tr>
+          <tr><td></td><td><div className="ball blue"></div></td><td>0+1</td></tr>
         </tbody></table> </Modal>
       <Form className="search-form">
         <h3>双色球趋势</h3>

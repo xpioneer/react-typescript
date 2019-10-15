@@ -1,10 +1,10 @@
 import * as React from 'react'
 import {inject, observer} from 'mobx-react'
-import { Row, Col, Form, Icon, Input, Button, DatePicker, Table, Modal, Badge, } from 'antd';
+import { Row, Col, Form, Icon, Input, Button, DatePicker, Table, Modal, Badge, } from 'antd'
 import { ColumnProps } from 'antd/lib/table'
 import { ILeaveMsg } from '@models/leaveMsg'
 
-const FormItem = Form.Item;
+const FormItem = Form.Item
 
 
 @inject('leaveMsgListStore')

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {inject, observer} from 'mobx-react'
-import { Row, Col, Button, Badge, Icon, Form, Input, Select } from 'antd';
+import { Row, Col, Button, Badge, Icon, Form, Input, Select } from 'antd'
 
 const FormItem = Form.Item
 const TextArea = Input.TextArea
@@ -71,15 +71,15 @@ export default class Demo extends React.Component<IProps> {
                   </Col>
                   {
                     apiType === '/api' ?
-                    <Col span={3}>
-                      <Select value={apiMethod}
-                        onChange={methodChange}>
-                        <Option value="GET">GET</Option>
-                        <Option value="POST">POST</Option>
-                        <Option value="PUT">PUT</Option>
-                        <Option value="DELETE">DELETE</Option>
-                      </Select>
-                    </Col> : ''
+                      <Col span={3}>
+                        <Select value={apiMethod}
+                          onChange={methodChange}>
+                          <Option value="GET">GET</Option>
+                          <Option value="POST">POST</Option>
+                          <Option value="PUT">PUT</Option>
+                          <Option value="DELETE">DELETE</Option>
+                        </Select>
+                      </Col> : ''
                   }
                   <Col span={3}>
                     <Select value={apiType}

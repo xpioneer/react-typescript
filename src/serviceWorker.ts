@@ -59,7 +59,7 @@ export default function register() {
     // }
 
     window.addEventListener('load', () => {
-      const swUrl = `/serviceWorker.js`
+      const swUrl = '/serviceWorker.js'
 
       if (isLocalhost) {
         // This is running on localhost. Lets check if a service worker still exists or not.

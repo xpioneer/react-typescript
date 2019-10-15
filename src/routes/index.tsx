@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Route, Switch, Redirect, RouteProps } from 'react-router-dom';
+import { Route, Switch, Redirect, RouteProps } from 'react-router-dom'
 import NotFound  from '@components/notFound'
 import Loading from '@components/loading'
 
@@ -179,13 +179,13 @@ export const routes: RouteProps[] = [
 
 const Routes = (authorized: boolean) => <Suspense fallback={<Loading/>}>
   <Switch>
-  {
-    routes.map(r => {
-      const {path, exact, component} = r
-      const LazyCom = component
-      return <Route key={path + ''} exact={!!exact} path={path} render={(props: any) => (authorized ? <LazyCom {...props}/> : <Redirect to="/login"/>)}/>
-    })
-  }
+    {
+      routes.map(r => {
+        const {path, exact, component} = r
+        const LazyCom = component
+        return <Route key={path + ''} exact={!!exact} path={path} render={(props: any) => (authorized ? <LazyCom {...props}/> : <Redirect to="/login"/>)}/>
+      })
+    }
   </Switch>
 </Suspense>
 

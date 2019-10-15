@@ -1,16 +1,16 @@
 import * as React from 'react'
 import {inject, observer} from 'mobx-react'
-import { Row, Col, Form, Button } from 'antd';
+import { Row, Col, Form, Button } from 'antd'
 import { IBall } from '@models/ball'
 import * as Echart from 'echarts/lib/echarts'
 // const Echart = require('echarts/lib/echarts')
 // 引入柱状图
-require('echarts/lib/chart/bar');
-require('echarts/lib/chart/line');
+require('echarts/lib/chart/bar')
+require('echarts/lib/chart/line')
 // 引入提示框和标题组件
-require('echarts/lib/component/tooltip');
-require('echarts/lib/component/title');
-require('echarts/lib/component/legend');
+require('echarts/lib/component/tooltip')
+require('echarts/lib/component/title')
+require('echarts/lib/component/legend')
 
 @inject('ballChartStore')
 @observer
@@ -54,7 +54,7 @@ export default class BallChart extends React.Component<IProps> {
 
     const { fetchChartData } = this.props.ballChartStore
     
-    fetchChartData((reds:[any], blues:[any], redDisList:[[any]]) => {
+    fetchChartData((reds: [any], blues: [any], redDisList: [[any]]) => {
       const series: any = redDisList.map((item, i) => {
         return {
           name: `红球${i + 1}`,
@@ -127,7 +127,7 @@ export default class BallChart extends React.Component<IProps> {
           backgroundColor: 'rgba(255,255,255,1)',
           // padding: [5, 10],
           textStyle: {
-              color: '#7588E4',
+            color: '#7588E4',
           },
           extraCssText: 'box-shadow: 0 0 5px rgba(0,0,0,0.3)'
         },

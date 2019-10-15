@@ -1,9 +1,11 @@
 
 class Params {
-  constructor () {}
+  constructor () {
+    // 
+  }
 
   public fmtPost (data: any) {
-    const obj = {};
+    const obj = {}
     for (const key in data) {
       if (data[key] !== undefined && data[key] !== '' && data[key] !== null && typeof(data[key]) !== 'object') {
         obj[key] = data[key]
@@ -12,21 +14,21 @@ class Params {
         obj[key] = data[key]
       }
     }
-    return obj;
+    return obj
   }
 
   public fmtGet (data: any) {
-    const arr: any = [];
+    const arr: any = []
     if (data !== null && typeof data === 'object') {
       for (const key in data) {
         if (data[key] !== undefined && data[key] !== '' && data[key] !== null) {
-          const str = encodeURIComponent(key) + '=' + encodeURIComponent(data[key]);
-          arr.push(str);
+          const str = encodeURIComponent(key) + '=' + encodeURIComponent(data[key])
+          arr.push(str)
         }
       }
     }
-    arr.push('_=' + Date.now());
-    return arr.join('&');
+    arr.push('_=' + Date.now())
+    return arr.join('&')
   }
 }
 

@@ -1,5 +1,5 @@
-import { observable, action, autorun, runInAction, computed } from 'mobx';
-import { GRAPHQL_API } from '@constants/index';
+import { observable, action, autorun, runInAction, computed } from 'mobx'
+import { GRAPHQL_API } from '@constants/index'
 
 const postBall = `
 mutation createBall($input: ballInput!){
@@ -47,7 +47,7 @@ class ballCreateStore {
       /^\d+$/.test(this.mainData.prizeTwoNum) &&
       /^\d+$/.test(this.mainData.bettingNum) && 
       this.mainData.drawDate
-      ){
+    ){
       let data = {
         issue: this.mainData.issue,
         reds: this.reds.sort((a, b) => a - b),
