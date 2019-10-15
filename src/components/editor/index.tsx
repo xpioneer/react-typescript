@@ -47,7 +47,7 @@ export default class QuillEditorComponent extends React.Component<IEditor> {
     theme: 'snow',
   }
 
-  $editor: any = null
+  $editor: HTMLDivElement = null
   
   componentDidMount() {
     const { onChange } = this.props
@@ -81,7 +81,7 @@ export default class QuillEditorComponent extends React.Component<IEditor> {
     this.changeEditorText()
 
     return <div className="editor-wrap">
-      <div style={{minHeight: '600px'}} ref={this.$editor}></div>
+      <div style={{minHeight: '600px'}} ref={el => this.$editor = el}></div>
       {disabled ? <div className="editor-mask"></div> : ''}
     </div>
     
