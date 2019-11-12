@@ -4,6 +4,7 @@
 
 # dependencies
 /node_modules
+dist
 
 # mac
 .DS_Store
