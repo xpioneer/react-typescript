@@ -100,6 +100,7 @@ module.exports = {
       '@constants': resolve('src/constants'),
       '@models': resolve('src/models'),
       '@pages': resolve('src/pages'),
+      '@plugins': resolve('src/plugins'),
       '@utils': resolve('src/utils')
     }
   },

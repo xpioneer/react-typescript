@@ -2,10 +2,10 @@ import * as React from 'react'
 import { Layout } from 'antd'
 import { inject, observer } from 'mobx-react'
 import Routes from '../../routes'
-import Sider from '@components/shared/sider'
-import Header from '@components/shared/header'
-import Footer from '@components/shared/footer'
-import { LocaleProvider } from 'antd'
+import Sider from './components/sider'
+import Header from './components/header'
+import Footer from './components/footer'
+import { LocaleProvider, ConfigProvider } from 'antd'
 
 const { Content } = Layout
 
@@ -16,7 +16,7 @@ class Home extends React.Component<IProps> {
   render(){
     const {homeStore} = this.props
     
-    return (<LocaleProvider locale={homeStore.lang}>
+    return (<ConfigProvider locale={homeStore.lang}>
       <Layout>
         <Sider {...homeStore}/>
         <Layout>
@@ -27,7 +27,7 @@ class Home extends React.Component<IProps> {
           <Footer/>
         </Layout>
       </Layout>
-    </LocaleProvider>)
+    </ConfigProvider>)
   }
 }
 

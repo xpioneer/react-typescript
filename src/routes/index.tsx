@@ -31,8 +31,10 @@ const BallEdit = lazy(() => import( /* webpackChunkName:"ballEdit" */ '@pages/lo
 const BallTrend = lazy(() => import( /* webpackChunkName:"ballTrend" */ '@pages/lottery/ballTrend'))
 const BallChart = lazy(() => import( /* webpackChunkName:"ballChart" */ '@pages/lottery/ballChart'))
 
+// demos
 const Demo = lazy(() => import( /* webpackChunkName:"demo" */ '@pages/demo/demo'))
 const DemoMobx = lazy(() => import( /* webpackChunkName:"demo" */ '@pages/demo/demoMobx'))
+const DemoRedux = lazy(() => import( /* webpackChunkName:"demo" */ '@pages/demo/demoRedux'))
 
 
 export const routes: RouteProps[] = [
@@ -170,6 +172,11 @@ export const routes: RouteProps[] = [
     path: '/home/demo-mobx',
     exact: true,
     component: DemoMobx
+  },
+  {
+    path: '/home/demo-redux',
+    exact: true,
+    component: DemoRedux
   },
   {
     path: '*',

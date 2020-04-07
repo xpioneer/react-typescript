@@ -50,18 +50,20 @@ const MenuList = [{
     key: '99-0', title: '示例', path: '/home/demos', icon:'experiment'
   },{
     key: '99-1', title: '示例mobx', path: '/home/demo-mobx', icon:'experiment'
+  },{
+    key: '99-2', title: '示例redux', path: '/home/demo-redux', icon:'experiment'
   }]
 }]
 
 class SiderComponent extends React.Component<ISiderProps> {
 
-  componentWillReceiveProps() {
-    // console.log('willReceiveProps')
-  }
+  // componentWillReceiveProps() {
+  //   // console.log('willReceiveProps')
+  // }
 
-  componentWillUpdate(props: any){
-    // console.log('willUpdate')
-  }
+  // componentWillUpdate(props: any){
+  //   // console.log('willUpdate')
+  // }
 
   componentDidMount(){
     // console.log('didMount')
@@ -71,6 +73,7 @@ class SiderComponent extends React.Component<ISiderProps> {
     const {collapsed} = this.props
     
     return (<Sider
+      width="260"
       trigger={null}
       collapsible
       collapsed={collapsed}>

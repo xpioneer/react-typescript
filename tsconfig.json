@@ -26,6 +26,7 @@
       "@constants/*": ["constants/*"],
       "@models/*": ["models/*"],
       "@pages/*": ["pages/*"],
+      "@plugins": ["plugins/*"],
       "@utils/*": ["utils/*"]
     }
   },
