@@ -1,27 +1,33 @@
 import React, { Component } from 'react'
-import { IAnyObject } from '../redux/model'
+import { IAnyObject, ICreateStore } from '../redux/model'
 import PropTypes from 'prop-types'
 
 interface IProviderProps{
-  $store: IAnyObject
+  store: IAnyObject
 }
 
-export class ReduxProvider extends Component<IProviderProps> {
+export class ReduxProvider extends Component<IProviderProps, ICreateStore> {
   
   static childContextTypes = {
-    $store: PropTypes.object
+    store: PropTypes.shape({
+      subscribe: PropTypes.func.isRequired,
+      dispatch: PropTypes.func.isRequired,
+      getState: PropTypes.func.isRequired
+    }).isRequired
   }
 
   constructor(props: IProviderProps) {
     super(props)
-    this.store = props.$store
+    this.$store = props.store
+    console.log('ReduxProvider---constructor', 999)
   }
 
-  store = {}
+  $store: IAnyObject = {}
 
   getChildContext() {
+    console.log('获取了---getChildContext', this.$store)
     return {
-      $store: this.store
+      store: this.$store
     }
   }
 

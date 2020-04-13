@@ -9,8 +9,8 @@ export interface IAnyObject {
 }
 
 export interface ICreateStore {
-  getState: Function
-  dispatch: Function
-  subscribe: Function
-  replaceReducer: Function
+  getState: () => any
+  dispatch: (action: IAction) => void
+  subscribe: (listener: Function) => () => void
+  replaceReducer: (nextReducer: Function) => void
 }

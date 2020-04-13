@@ -31,13 +31,13 @@ export const createStore = (reducer: Function, initState?: any, enhancer?: Funct
       }
       try{
         isDispatch = true
-        console.log('触发方法:', action, '更新state:', JSON.stringify(state))
+        console.log('触发方法:', action, '更新之前state:', JSON.stringify(state))
         state = reducer(state, action)
       } finally {
         isDispatch = false
       }
       listeners.forEach(ln => ln())
-      console.log('更新state之后:', state)
+      console.log('更新state之后:', JSON.stringify(state))
     }
 
     // 更新reducer

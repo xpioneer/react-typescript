@@ -1,9 +1,4 @@
-import { createStore, combineReducers } from '../../plugins/redux'
-
-interface IAction {
-  type: string
-  playload: any
-}
+import { createStore, combineReducers, IAction } from '../../plugins/redux'
 
 const initCountState = {
   count: 0
@@ -14,14 +9,27 @@ const initInfoState = {
   desc: '我们可以学习到redux的原理...'
 }
 
+const ADD = 'ADD', DECREASE = 'DECREASE'
+
+export const countActions = {
+  
+  [ADD]: {
+    type: ADD
+  },
+
+  [DECREASE]: {
+    type: DECREASE
+  }
+}
+
 // reducer
 const countReducer = (state = initCountState, action: IAction) => {
   switch(action.type) {
-    case 'ADD' :
+    case ADD :
       state.count++
       console.log('add', state)
       return state
-    case 'DECREASE' :
+    case DECREASE :
       state.count--
       console.log('dec', state)
       return state

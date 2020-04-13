@@ -156,7 +156,7 @@ export default class BallEdit extends React.Component<IProps> {
         </Row>
         <Row>
           <Col span={24} offset={3}>
-            <Button onClick={save} type="primary">保存</Button>
+            <Button onClick={save} type="primary" className="mgr16">保存</Button>
             <Button onClick={this.back}>取消</Button>
           </Col>
         </Row>

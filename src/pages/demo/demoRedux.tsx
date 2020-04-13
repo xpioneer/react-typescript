@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Row, Col, Button, Badge, Icon, Form, Input, Select } from 'antd'
-import { ReduxProvider, connect } from '@plugins/react-redux'
-import { store } from './reducer'
+import { ReduxProvider, connect } from '../../plugins/react-redux'
+import { store, countActions } from './reducer'
 
 console.log(store.getState(), '---store')
 
@@ -24,8 +24,7 @@ const styles = {
   }
 }
 
-
-export default class DemoRedux extends React.Component<IProps> {
+class DemoRedux extends React.Component<any> {
   
 
   add = () => {
@@ -36,36 +35,56 @@ export default class DemoRedux extends React.Component<IProps> {
   }
 
   shouldComponentUpdate(preState: any, nextProps: any) {
-    console.log(preState, nextProps)
-    return false
+    console.log(preState, nextProps, 'shouldComponentUpdate')
+    return true
   }
 
   componentDidMount() {
-    console.log(this, 'store.getState().counter')
+    console.log(this.props, 'demo --- componentDidMount store.getState().counter')
   }
 
   render(){
     // const count = 9
-    const { count } = store.getState().counter
-    console.log( count , ' =-===count ')
+    const { counter: {count}, disabled } = this.props
+    const { ADD, DECREASE } = this.props
+    console.log( count , 'demo render =-===count', disabled, )
     
-    return <ReduxProvider store={store}>
-      <div>
-        <section style={styles.block}>
-          <h3>redux测试</h3>
-          <Row style={styles.padding}>
-            <Col span={24}>
-              <Button onClick={this.dec}>
-                <Icon type="minus" />
-              </Button>
-              <Badge count={count} showZero={true}/>
-              <Button onClick={this.add}>
-                <Icon type="plus" />
-              </Button>
-            </Col>
-          </Row>
-        </section>
-      </div>
-    </ReduxProvider>
+    return <div>
+      <section style={styles.block}>
+        <h3>redux测试</h3>
+        <Row style={styles.padding}>
+          <Col span={24}>
+            <Button onClick={DECREASE}>
+              <Icon type="minus" />
+            </Button>
+            <Badge count={count} showZero={true}/>
+            <Button onClick={ADD}>
+              <Icon type="plus" />
+            </Button>
+          </Col>
+        </Row>
+      </section>
+    </div>
   }
 }
+
+
+const DemosComponentWithRedux = connect(
+  (state: any) => ({
+    counter: state.counter,
+    disabled: state.counter.count > 10
+  }),
+  (dispatch: Function) => ({
+    ADD: () => dispatch(countActions.ADD),
+    DECREASE: () => dispatch(countActions.DECREASE)
+  })
+)(DemoRedux)
+
+
+const ProviderComponent: React.FC = () => {
+  return <ReduxProvider store={store}>
+    <DemosComponentWithRedux/>
+  </ReduxProvider>
+}
+
+export default ProviderComponent
