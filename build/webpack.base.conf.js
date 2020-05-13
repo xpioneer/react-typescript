@@ -26,6 +26,13 @@ module.exports = {
     filename: 'static/js/[name].[hash:8].js'
   },
 
+  resolveLoader: {
+    modules: [
+      resolve('build'),
+      'node_modules'
+    ]
+  },
+
   module: {
     rules: [
       // {
@@ -35,6 +42,14 @@ module.exports = {
       //     transpileOnly: true
       //   }
       // },
+      {
+        test: /\.(j|t)sx?$/,
+        loader: 'px2rem-loader',
+        options: {
+          remRoot: 40,
+          fixed: 6
+        }
+      },
       {
         test: /\.(j|t)sx?$/,
         include: [

@@ -2,6 +2,7 @@ import * as React from 'react'
 import { Row, Col, Button, Badge, Icon, Form, Input, Select } from 'antd'
 import { ReduxProvider, connect } from '../../plugins/react-redux'
 import { store, countActions } from './reducer'
+import { HookButton } from './demoHooks'
 
 console.log(store.getState(), '---store')
 
@@ -61,6 +62,7 @@ class DemoRedux extends React.Component<any> {
             <Button onClick={ADD}>
               <Icon type="plus" />
             </Button>
+            <HookButton></HookButton>
           </Col>
         </Row>
       </section>

@@ -8,24 +8,21 @@ const { lazy, Suspense } = React
 const Home = lazy(() => import( /* webpackChunkName:"home" */'@pages/home/home'))
 const Login = lazy(() => import( /* webpackChunkName:"login" */'@pages/login/login'))
 
-class App extends React.Component {
+const App: React.FC = () => {
 
-  render(){
-
-    return (
-      <Provider {...stores}>
-        <Router>
-          <Suspense fallback={<Loading size="large"/>}>
-            <Switch>
-              <Route path="/home" component={(props: any) => <Home {...props}/>}/>
-              <Route path="/login" exact component={(props: any) => <Login {...props}/>}/>
-              <Redirect to="/home"/>
-            </Switch>
-          </Suspense>
-        </Router>
-      </Provider>
-    )
-  }
+  return (
+    <Provider {...stores}>
+      <Router>
+        <Suspense fallback={<Loading size="large"/>}>
+          <Switch>
+            <Route path="/home" component={(props: any) => <Home {...props}/>}/>
+            <Route path="/login" exact component={(props: any) => <Login {...props}/>}/>
+            <Redirect to="/home"/>
+          </Switch>
+        </Suspense>
+      </Router>
+    </Provider>
+  )
 }
 
 export default App

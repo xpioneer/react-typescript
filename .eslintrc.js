@@ -51,6 +51,7 @@ module.exports = {
     'react/jsx-first-prop-new-line': 'off',
     'react/jsx-indent': [ 'error', 2 ],
     'react/jsx-indent-props': [2, 2],
+    'react/prop-types': 0,
 
     // @typescript-eslint 
     '@typescript-eslint/indent': [2, 2],

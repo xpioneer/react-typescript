@@ -81,10 +81,6 @@
     "src/**/*.{js,jsx,ts,tsx}": [
       "npm run lint:fix",
       "git add"
-    ],
-    "src/**/*.{css,less,json,html,md,markdown}": [
-      "prettier --write",
-      "git add"
     ]
   }
 }

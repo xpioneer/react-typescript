@@ -36,3 +36,13 @@ export class ReduxProvider extends Component<IProviderProps, ICreateStore> {
     return this.props.children
   }
 }
+
+
+// createContext
+
+export const { Provider, Consumer } = React.createContext(null)
+
+export const ReduxProvider1: React.FC<IProviderProps> = (props) => {
+
+  return <Provider value={props.store}>{props.children}</Provider>
+}
