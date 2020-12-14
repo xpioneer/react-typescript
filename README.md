@@ -26,8 +26,10 @@ git clone git@github.com:xpioneer/react-typescript.git
 
 安装node_modules依赖 `yarn`
 
+# in your command terminal
+
 ```
-yarn #in your command terminal
+yarn 
 ```
 ***
 
