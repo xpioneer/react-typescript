@@ -4,7 +4,7 @@ const path = require('path'),
   CopyWebpackPlugin = require('copy-webpack-plugin'),
   MiniCssExtractPlugin = require("mini-css-extract-plugin"),
   ManifestPlugin = require('webpack-manifest-plugin'),
-  SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
+  {GenerateSW} = require('workbox-webpack-plugin');
 
 const _PROD_ = process.env.NODE_ENV === 'production';
 
@@ -155,7 +155,7 @@ module.exports = {
       maxAsyncRequests: 5,
       maxInitialRequests: 3,
       automaticNameDelimiter: '~',
-      name: true,
+      // name: true,
       cacheGroups: {
         react: {
           name: 'vendor',
@@ -187,26 +187,27 @@ module.exports = {
     //   },
     //   _DEV_: JSON.stringify(_DEV_),
     // }),
-    new ManifestPlugin({
-      fileName: 'asset-manifest.json'
-    }),
-    new SWPrecacheWebpackPlugin({
-      dontCacheBustUrlsMatching: /\.\w{8}\./,
-      filename: 'serviceWorker.js',
-      logger(message) {
-        console.log(message);
-        if (message.indexOf('Total precache size is') === 0) {
-          return;
-        }
-        if (message.indexOf('Skipping static resource') === 0) {
-          return;
-        }
-      },
-      minify: true,
-      navigateFallback: '/index.html',
-      navigateFallbackWhitelist: [/^(?!\/__).*/],
-      staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
-    }),
+    new GenerateSW(),
+    // new ManifestPlugin({
+    //   fileName: 'asset-manifest.json'
+    // }),
+    // new SWPrecacheWebpackPlugin({
+    //   dontCacheBustUrlsMatching: /\.\w{8}\./,
+    //   filename: 'serviceWorker.js',
+    //   logger(message) {
+    //     console.log(message);
+    //     if (message.indexOf('Total precache size is') === 0) {
+    //       return;
+    //     }
+    //     if (message.indexOf('Skipping static resource') === 0) {
+    //       return;
+    //     }
+    //   },
+    //   minify: true,
+    //   navigateFallback: '/index.html',
+    //   navigateFallbackWhitelist: [/^(?!\/__).*/],
+    //   staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
+    // }),
     new MiniCssExtractPlugin({
       filename: "static/css/[name].[contenthash].css",
     }),
@@ -214,9 +215,11 @@ module.exports = {
       $http: [resolve('src/utils/http.ts'), 'default'],
       $msg: [resolve('node_modules/antd/es/message/index.js'), 'default']
     }),
-    new CopyWebpackPlugin([{
-      from: resolve('statics'),
-      ignore: ['.*']
-    }])
+    new CopyWebpackPlugin({
+      patterns: [{
+        from: resolve('statics'),
+        // ignore: ['.*']
+      }]
+    })
   ]
 }
