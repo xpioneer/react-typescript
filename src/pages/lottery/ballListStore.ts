@@ -31,7 +31,7 @@ class ballListStore {
   
   
   @action inputChange = (value: any, type: string) => {
-    if(type === 'drawDate') {
+    if (type === 'drawDate') {
       this.drawDate = value
       const range = value
       this.value[type] = range.map((d: Moment, index: number) => {
@@ -56,7 +56,7 @@ class ballListStore {
   @action search = (pagination: any = {}, filters: any, orders: any) => {
     this.value['page'] = pagination.current || 1
 
-    if(orders && Object.keys(orders).length > 0) {
+    if (orders && Object.keys(orders).length > 0) {
       this.value.order[orders.field] = orders.order === 'ascend' ? 'ASC' : 'DESC'
     }
     

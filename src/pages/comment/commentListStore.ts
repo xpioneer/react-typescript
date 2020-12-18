@@ -26,7 +26,7 @@ class commentListStore {
   
   
   @action inputChange = (value: any, type: string) => {
-    if(type === 'createdAt') {
+    if (type === 'createdAt') {
       this.createdAt = value
       const range = value
       this.value[type] = range.map((d: Moment, index: number) => {
@@ -51,7 +51,7 @@ class commentListStore {
   @action search = (pagination: any = {}, filters: any, orders: any) => {
     this.value['page'] = pagination.current || 1
 
-    if(orders && Object.keys(orders).length > 0) {
+    if (orders && Object.keys(orders).length > 0) {
       this.value.order[orders.field] = orders.order === 'ascend' ? 'ASC' : 'DESC'
     }
     

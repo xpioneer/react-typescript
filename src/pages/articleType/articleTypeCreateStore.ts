@@ -17,7 +17,7 @@ class articleTypeCreateStore {
       query: postArticleType,
       variables: this.mainData
     }).then((res: any) => {
-      const {articleType:{id}} = res.data
+      const {articleType: {id}} = res.data
       cb(id)
       runInAction(() => {
         this.loading = false

@@ -29,7 +29,7 @@ export default class Login extends React.Component<IProps> {
   //   console.log('componentDidUpdate')
   // }
 
-  componentDidMount() {
+  componentDidMount () {
     console.log('componentDidMount')
     window.addEventListener('keydown', this.listenEnter)
   }
@@ -39,7 +39,7 @@ export default class Login extends React.Component<IProps> {
   // }
 
   listenEnter = (e: KeyboardEvent) => {
-    if(e.keyCode === 13) {
+    if (e.keyCode === 13) {
       this.props.loginStore.login()
     }
   }
@@ -48,7 +48,7 @@ export default class Login extends React.Component<IProps> {
     e.preventDefault()
   }
 
-  render(){
+  render () {
     const { inputChange, login, loading, canLogin } = this.props.loginStore
     
     return <Form style={{

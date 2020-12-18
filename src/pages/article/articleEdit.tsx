@@ -25,12 +25,12 @@ export default class ArticleEdit extends React.Component<IProps> {
     this.props.history.go(-1)
   }
   
-  componentDidMount() {
+  componentDidMount () {
     const {id}: any = this.props.match.params
     this.props.articleEditStore.getDetail(id)
   }
 
-  render(){
+  render () {
     const { mainData, typeList, tagList, tagChange, inputChange, update } = this.props.articleEditStore
  
     return <React.Fragment>

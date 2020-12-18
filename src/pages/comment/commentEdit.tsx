@@ -12,12 +12,12 @@ export default class CommentEdit extends React.Component<IProps> {
     this.props.history.go(-1)
   }
   
-  componentDidMount() {
+  componentDidMount () {
     const {id}: any = this.props.match.params
     this.props.commentEditStore.getDetail(id)
   }
 
-  render(){
+  render () {
     const { mainData } = this.props.commentEditStore
  
     return <React.Fragment>

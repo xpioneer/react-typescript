@@ -10,7 +10,7 @@ interface IHeaderProps {
 export default class HeaderComponent extends React.Component<IHeaderProps> {
 
 
-  render(){
+  render () {
     const {collapsed, toggleMenu, lang, toggleLang, logout} = this.props.props
     
     return (<Header style={{

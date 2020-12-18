@@ -22,27 +22,27 @@ export default class BallList extends React.Component<IProps> {
       dataIndex: 'red1',
       width: '30px',
       render: (text: number, record: IBall, index: number) => this.setColor(text, 'red')
-    },{
+    }, {
       title: '2',
       dataIndex: 'red2',
       width: '30px',
       render: (text: number, record: IBall, index: number) => this.setColor(text, 'red')
-    },{
+    }, {
       title: '3',
       dataIndex: 'red3',
       width: '30px',
       render: (text: number, record: IBall, index: number) => this.setColor(text, 'red')
-    },{
+    }, {
       title: '4',
       dataIndex: 'red4',
       width: '30px',
       render: (text: number, record: IBall, index: number) => this.setColor(text, 'red')
-    },{
+    }, {
       title: '5',
       dataIndex: 'red5',
       width: '30px',
       render: (text: number, record: IBall, index: number) => this.setColor(text, 'red')
-    },{
+    }, {
       title: '6',
       dataIndex: 'red6',
       width: '30px',
@@ -62,7 +62,7 @@ export default class BallList extends React.Component<IProps> {
     children: [{
       title: '注数',
       dataIndex: 'prizeOneNum'
-    },{
+    }, {
       title: '奖金(元)',
       dataIndex: 'prizeOne',
       render: (text: number) => this.showMoney(text)
@@ -72,7 +72,7 @@ export default class BallList extends React.Component<IProps> {
     children: [{
       title: '注数',
       dataIndex: 'prizeTwoNum'
-    },{
+    }, {
       title: '奖金(元)',
       dataIndex: 'prizeTwo',
       render: (text: number) => this.showMoney(text)
@@ -94,7 +94,7 @@ export default class BallList extends React.Component<IProps> {
     render: (text: string, record: IBall, index: number) => <React.Fragment><a onClick={() => this.viewDetail(record)}>详情</a>|<a onClick={() => this.showDelete(record.id)}>删除</a></React.Fragment>
   }]
 
-  viewDetail(data: IBall) {
+  viewDetail (data: IBall) {
     this.props.history.push(`/home/lottery-ball/${data.id}`)
   }
 
@@ -119,11 +119,11 @@ export default class BallList extends React.Component<IProps> {
     return <div style={{textAlign: 'center', color: color}}>{num}</div>
   }
   
-  componentDidMount() {
+  componentDidMount () {
     this.props.ballListStore.search()
   }
 
-  render(){
+  render () {
     const { value, loading, list, meta, drawDate, inputChange, search, clear } = this.props.ballListStore
  
     return <React.Fragment>

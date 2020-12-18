@@ -44,14 +44,14 @@ class articleCreateStore {
     })
   }
 
-  @action save = (cb: Function) => {
+  @action save = (cb: (args: any) => void) => {
     this.loading = true
 
     $http.post(GRAPHQL_API, {
       query: postArticle,
       variables: {input: this.mainData}
     }).then((res: any) => {
-      const {article:{id}} = res.data
+      const {article: {id}} = res.data
       cb(id)
       runInAction(() => {
         this.loading = false

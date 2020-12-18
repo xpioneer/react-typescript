@@ -35,20 +35,20 @@ class DemoRedux extends React.Component<any> {
     store.dispatch({type: 'DECREASE'})
   }
 
-  shouldComponentUpdate(preState: any, nextProps: any) {
+  shouldComponentUpdate (preState: any, nextProps: any) {
     console.log(preState, nextProps, 'shouldComponentUpdate')
     return true
   }
 
-  componentDidMount() {
+  componentDidMount () {
     console.log(this.props, 'demo --- componentDidMount store.getState().counter')
   }
 
-  render(){
+  render () {
     // const count = 9
     const { counter: {count}, disabled } = this.props
     const { ADD, DECREASE } = this.props
-    console.log( count , 'demo render =-===count', disabled, )
+    console.log( count, 'demo render =-===count', disabled, )
     
     return <div>
       <section style={styles.block}>

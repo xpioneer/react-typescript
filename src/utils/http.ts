@@ -23,13 +23,13 @@ $http.interceptors.request.use(config => {
 $http.interceptors.response.use(response => {
   helper.successHelper(response)
   // console.log(response)
-  if(response.data.errors) {
+  if (response.data.errors) {
     return Promise.reject(response.data.data)
   } else {
     return Promise.resolve(response.data) // status:200, normal
   }
 }, error => {
-  if(error.response && /^[456]\d{2}$/.test(error.response.status)) {
+  if (error.response && /^[456]\d{2}$/.test(error.response.status)) {
     helper.errorHelper(error.response)
   } else {
     $msg.error(error.toString()) // other err: code error

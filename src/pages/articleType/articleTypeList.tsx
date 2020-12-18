@@ -50,7 +50,7 @@ export default class ArticleTypeList extends React.Component<IProps> {
     render: (text: string, record: IArticleType, index: number) => <Button size="small" type="primary" onClick={() => this.viewDetail(record)}>详情</Button>
   }]
 
-  viewDetail(data: IArticleType) {
+  viewDetail (data: IArticleType) {
     this.props.history.push(`/home/blog-type/${data.id}`)
   }
 
@@ -58,11 +58,11 @@ export default class ArticleTypeList extends React.Component<IProps> {
     this.props.history.push('/home/blog-typeCreate')
   }
   
-  componentDidMount() {
+  componentDidMount () {
     this.props.articleTypeListStore.search()
   }
 
-  render(){
+  render () {
     const { value, loading, list, meta, createdAt, inputChange, search, clear } = this.props.articleTypeListStore
  
     return <React.Fragment>

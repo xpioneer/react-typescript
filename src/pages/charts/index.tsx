@@ -2,7 +2,7 @@ import * as React from 'react'
 
 export default class Chart extends React.Component<IProps> {
 
-  render(){
+  render () {
     
     return (
       <div>

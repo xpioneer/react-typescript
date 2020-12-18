@@ -71,13 +71,13 @@ export default class ErrorsLog extends React.Component<IProps> {
 
   // 查看Url/参数详情
   showParamsDetail = (record: any, type?: string) => {
-    if(record) {
+    if (record) {
       let str = record.url, title = 'Url'
-      if(type === 'params') {
+      if (type === 'params') {
         title = 'Params'
         str = record.params
       }
-      if(type === 'msg') {
+      if (type === 'msg') {
         title = '错误'
         str = this.errorStack(record.errors)
       }
@@ -94,7 +94,7 @@ export default class ErrorsLog extends React.Component<IProps> {
 
   // 查看日志详情
   viewDetail = (data: any) => {
-    if(data) {
+    if (data) {
       this.setState({
         visibleLog: true,
         detailInfo: data
@@ -127,12 +127,12 @@ export default class ErrorsLog extends React.Component<IProps> {
 
   formatHeader = (data: any) => {
     const type = typeof(data)
-    if(type === 'string') {
+    if (type === 'string') {
       const headerObj = JSON.parse(data)
       return Object.keys(headerObj).map(h => {
         return <div key={h}>{h} : {headerObj[h]}</div>
       })
-    } else if(type === 'object') {
+    } else if (type === 'object') {
       return Object.keys(data).map(h => {
         return <div key={h}>{h} : {data[h]}</div>
       })
@@ -143,7 +143,7 @@ export default class ErrorsLog extends React.Component<IProps> {
 
   // 日志详情页面
   wrapHtml = (data: any) => {
-    if(data !== null && Object.keys(data).length > 0) {
+    if (data !== null && Object.keys(data).length > 0) {
       return <React.Fragment>
         <div className="row">
           <div>ID：</div><div>{data.id}</div>
@@ -222,11 +222,11 @@ export default class ErrorsLog extends React.Component<IProps> {
     return info
   }
   
-  componentDidMount() {
+  componentDidMount () {
     this.props.errorLogStore.search()
   }
 
-  render(){
+  render () {
     const { modalTitle, visible, modalTxt, visibleLog, detailInfo } = this.state
     const { value, loading, list, meta, inputChange, search, clear } = this.props.errorLogStore
  

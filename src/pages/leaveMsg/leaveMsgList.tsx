@@ -44,15 +44,15 @@ export default class LeaveMsgList extends React.Component<IProps> {
     render: (text: string, record: ILeaveMsg, index: number) => <Button size="small" type="primary" onClick={() => this.viewDetail(record)}>详情</Button>
   }]
 
-  viewDetail(data: ILeaveMsg) {
+  viewDetail (data: ILeaveMsg) {
     this.props.history.push(`/home/blog-message/${data.id}`)
   }
   
-  componentDidMount() {
+  componentDidMount () {
     this.props.leaveMsgListStore.search()
   }
 
-  render(){
+  render () {
     const { value, loading, list, meta, createdAt, inputChange, search, clear } = this.props.leaveMsgListStore
  
     return <React.Fragment>

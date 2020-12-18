@@ -28,12 +28,12 @@ export default class BallChart extends React.Component<IProps> {
   }
   
   redBalls: number[] = [
-    1,2,3,4,5,6,7,8,9,10,
-    11,12,13,14,15,16,17,18,19,20,
-    21,22,23,24,25,26,27,28,29,30,
-    31,32,33
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+    11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+    21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
+    31, 32, 33
   ]
-  blueBalls: number[] = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
+  blueBalls: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
 
   setBall = (data: IBall, num: number, type: 'red'|'blue') => {
     const color =  type === 'red' ? '#f54646' : '#3399ff'
@@ -47,7 +47,7 @@ export default class BallChart extends React.Component<IProps> {
     this.setState({visible: !this.state.visible})
   }
   
-  componentDidMount() {
+  componentDidMount () {
     this.ballCountChart = Echart.init(this.chartRef.current)
     this.blueBallCountChart = Echart.init(this.blueRef.current)
     this.redBallDistributionChart = Echart.init(this.redChartRef.current)
@@ -144,16 +144,16 @@ export default class BallChart extends React.Component<IProps> {
         legend: {
           right: 20,
           orient: 'horizontal',
-          data: ['红球1','红球2','红球3','红球4','红球5','红球6']
+          data: ['红球1', '红球2', '红球3', '红球4', '红球5', '红球6']
         },
         series: series,
         // color: ['#f54646','#f5464685','#f5464670','#f5464655','#f5464640','#f5464625']
-        color: ['#f54646','#c23531','#2f4554', '#61a0a8', '#d48265', '#6e7074','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3']
+        color: ['#f54646', '#c23531', '#2f4554', '#61a0a8', '#d48265', '#6e7074', '#749f83',  '#ca8622', '#bda29a', '#6e7074', '#546570', '#c4ccd3']
       })
     })
   }
 
-  render(){
+  render () {
     return <React.Fragment>
       <div>
         <h3>红蓝球历史出现次数</h3>

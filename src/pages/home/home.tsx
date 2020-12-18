@@ -13,7 +13,7 @@ const { Content } = Layout
 @observer
 class Home extends React.Component<IProps> {
 
-  render(){
+  render () {
     const {homeStore} = this.props
     
     return (<ConfigProvider locale={homeStore.lang}>

@@ -7,7 +7,7 @@ interface ILoadingProps {
 
 export default class Loading extends React.Component<ILoadingProps> {
 
-  render() {
+  render () {
     const { size = 'default' } = this.props
 
     return (

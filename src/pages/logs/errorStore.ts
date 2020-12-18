@@ -19,7 +19,7 @@ class errorLogStore {
   
   
   @action inputChange = (value: any, type: string) => {
-    if(type === 'createdAt') {
+    if (type === 'createdAt') {
       const range: [Moment, Moment] = value
       this.value[type] = range.map((d: Moment, index) => {
         return index > 0 ? d.format('YYYY/MM/DD 23:59:59:999') : d.format('YYYY/MM/DD 00:00:00:000')

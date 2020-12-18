@@ -4,13 +4,13 @@ export const object2Str = (o: string|object): string => {
 }
 
 export const storage = {
-  get:  (key: string) => {
+  get: (key: string) => {
     const value = localStorage.getItem(key)
     return JSON.parse(value)
   },
 
-  set:  (key: string, value: any): void => {
-    if(value !== null && value !== undefined) {
+  set: (key: string, value: any): void => {
+    if (value !== null && value !== undefined) {
       localStorage.setItem(key, JSON.stringify(value))
     }
   },

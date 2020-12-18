@@ -44,7 +44,7 @@ export default class ArticleTypeList extends React.Component<IProps> {
     render: (text: string, record: ITag, index: number) => <Button size="small" type="primary" onClick={() => this.viewDetail(record)}>详情</Button>
   }]
 
-  viewDetail(data: ITag) {
+  viewDetail (data: ITag) {
     this.props.history.push(`/home/blog-tag/${data.id}`)
   }
 
@@ -52,11 +52,11 @@ export default class ArticleTypeList extends React.Component<IProps> {
     this.props.history.push('/home/blog-tagCreate')
   }
   
-  componentDidMount() {
+  componentDidMount () {
     this.props.tagListStore.search()
   }
 
-  render(){
+  render () {
     const { value, loading, list, meta, createdAt, inputChange, search, clear } = this.props.tagListStore
  
     return <React.Fragment>

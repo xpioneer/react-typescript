@@ -16,12 +16,12 @@ export default class BallTrend extends React.Component<IProps> {
   }
   
   redBalls: number[] = [
-    1,2,3,4,5,6,7,8,9,10,
-    11,12,13,14,15,16,17,18,19,20,
-    21,22,23,24,25,26,27,28,29,30,
-    31,32,33
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+    11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+    21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
+    31, 32, 33
   ]
-  blueBalls: number[] = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
+  blueBalls: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
 
   columns: ColumnProps<IBall>[] = [{
     title: '期号',
@@ -29,58 +29,58 @@ export default class BallTrend extends React.Component<IProps> {
     // width: '15%',
   },
   // red balls
-  {title: () => <div style={{color: '#f5464680'}}>1</div>,dataIndex: '1',render: (text: number, record: IBall, index: number) => this.setBall(record, 1, 'red')},
-  {title: () => <div style={{color: '#f5464680'}}>2</div>,dataIndex: '2',render: (text: number, record: IBall, index: number) => this.setBall(record, 2, 'red')},
-  {title: () => <div style={{color: '#f5464680'}}>3</div>,dataIndex: '3',render: (text: number, record: IBall, index: number) => this.setBall(record, 3, 'red')},
-  {title: () => <div style={{color: '#f5464680'}}>4</div>,dataIndex: '4',render: (text: number, record: IBall, index: number) => this.setBall(record, 4, 'red')},
-  {title: () => <div style={{color: '#f5464680'}}>5</div>,dataIndex: '5',render: (text: number, record: IBall, index: number) => this.setBall(record, 5, 'red')},
-  {title: () => <div style={{color: '#f5464680'}}>6</div>,dataIndex: '6',render: (text: number, record: IBall, index: number) => this.setBall(record, 6, 'red')},
-  {title: () => <div style={{color: '#f5464680'}}>7</div>,dataIndex: '7',render: (text: number, record: IBall, index: number) => this.setBall(record, 7, 'red')},
-  {title: () => <div style={{color: '#f5464680'}}>8</div>,dataIndex: '8',render: (text: number, record: IBall, index: number) => this.setBall(record, 8, 'red')},
-  {title: () => <div style={{color: '#f5464680'}}>9</div>,dataIndex: '9',render: (text: number, record: IBall, index: number) => this.setBall(record, 9, 'red')},
-  {title: () => <div style={{color: '#f5464680'}}>10</div>,dataIndex: '10',render: (text: number, record: IBall, index: number) => this.setBall(record, 10, 'red')},
-  {title: () => <div style={{color: '#f5464680'}}>11</div>,dataIndex: '11',render: (text: number, record: IBall, index: number) => this.setBall(record, 11, 'red')},
-  {title: () => <div style={{color: '#f5464680'}}>12</div>,dataIndex: '12',render: (text: number, record: IBall, index: number) => this.setBall(record, 12, 'red')},
-  {title: () => <div style={{color: '#f5464680'}}>13</div>,dataIndex: '13',render: (text: number, record: IBall, index: number) => this.setBall(record, 13, 'red')},
-  {title: () => <div style={{color: '#f5464680'}}>14</div>,dataIndex: '14',render: (text: number, record: IBall, index: number) => this.setBall(record, 14, 'red')},
-  {title: () => <div style={{color: '#f5464680'}}>15</div>,dataIndex: '15',render: (text: number, record: IBall, index: number) => this.setBall(record, 15, 'red')},
-  {title: () => <div style={{color: '#f5464680'}}>16</div>,dataIndex: '16',render: (text: number, record: IBall, index: number) => this.setBall(record, 16, 'red')},
-  {title: () => <div style={{color: '#f5464680'}}>17</div>,dataIndex: '17',render: (text: number, record: IBall, index: number) => this.setBall(record, 17, 'red')},
-  {title: () => <div style={{color: '#f5464680'}}>18</div>,dataIndex: '18',render: (text: number, record: IBall, index: number) => this.setBall(record, 18, 'red')},
-  {title: () => <div style={{color: '#f5464680'}}>19</div>,dataIndex: '19',render: (text: number, record: IBall, index: number) => this.setBall(record, 19, 'red')},
-  {title: () => <div style={{color: '#f5464680'}}>20</div>,dataIndex: '20',render: (text: number, record: IBall, index: number) => this.setBall(record, 20, 'red')},
-  {title: () => <div style={{color: '#f5464680'}}>21</div>,dataIndex: '21',render: (text: number, record: IBall, index: number) => this.setBall(record, 21, 'red')},
-  {title: () => <div style={{color: '#f5464680'}}>22</div>,dataIndex: '22',render: (text: number, record: IBall, index: number) => this.setBall(record, 22, 'red')},
-  {title: () => <div style={{color: '#f5464680'}}>23</div>,dataIndex: '23',render: (text: number, record: IBall, index: number) => this.setBall(record, 23, 'red')},
-  {title: () => <div style={{color: '#f5464680'}}>24</div>,dataIndex: '24',render: (text: number, record: IBall, index: number) => this.setBall(record, 24, 'red')},
-  {title: () => <div style={{color: '#f5464680'}}>25</div>,dataIndex: '25',render: (text: number, record: IBall, index: number) => this.setBall(record, 25, 'red')},
-  {title: () => <div style={{color: '#f5464680'}}>26</div>,dataIndex: '26',render: (text: number, record: IBall, index: number) => this.setBall(record, 26, 'red')},
-  {title: () => <div style={{color: '#f5464680'}}>27</div>,dataIndex: '27',render: (text: number, record: IBall, index: number) => this.setBall(record, 27, 'red')},
-  {title: () => <div style={{color: '#f5464680'}}>28</div>,dataIndex: '28',render: (text: number, record: IBall, index: number) => this.setBall(record, 28, 'red')},
-  {title: () => <div style={{color: '#f5464680'}}>29</div>,dataIndex: '29',render: (text: number, record: IBall, index: number) => this.setBall(record, 29, 'red')},
-  {title: () => <div style={{color: '#f5464680'}}>30</div>,dataIndex: '30',render: (text: number, record: IBall, index: number) => this.setBall(record, 30, 'red')},
-  {title: () => <div style={{color: '#f5464680'}}>31</div>,dataIndex: '31',render: (text: number, record: IBall, index: number) => this.setBall(record, 31, 'red')},
-  {title: () => <div style={{color: '#f5464680'}}>32</div>,dataIndex: '32',render: (text: number, record: IBall, index: number) => this.setBall(record, 32, 'red')},
-  {title: () => <div style={{color: '#f5464680'}}>33</div>,dataIndex: '33',render: (text: number, record: IBall, index: number) => this.setBall(record, 33, 'red')},
+  {title: () => <div style={{color: '#f5464680'}}>1</div>, dataIndex: '1', render: (text: number, record: IBall, index: number) => this.setBall(record, 1, 'red')},
+  {title: () => <div style={{color: '#f5464680'}}>2</div>, dataIndex: '2', render: (text: number, record: IBall, index: number) => this.setBall(record, 2, 'red')},
+  {title: () => <div style={{color: '#f5464680'}}>3</div>, dataIndex: '3', render: (text: number, record: IBall, index: number) => this.setBall(record, 3, 'red')},
+  {title: () => <div style={{color: '#f5464680'}}>4</div>, dataIndex: '4', render: (text: number, record: IBall, index: number) => this.setBall(record, 4, 'red')},
+  {title: () => <div style={{color: '#f5464680'}}>5</div>, dataIndex: '5', render: (text: number, record: IBall, index: number) => this.setBall(record, 5, 'red')},
+  {title: () => <div style={{color: '#f5464680'}}>6</div>, dataIndex: '6', render: (text: number, record: IBall, index: number) => this.setBall(record, 6, 'red')},
+  {title: () => <div style={{color: '#f5464680'}}>7</div>, dataIndex: '7', render: (text: number, record: IBall, index: number) => this.setBall(record, 7, 'red')},
+  {title: () => <div style={{color: '#f5464680'}}>8</div>, dataIndex: '8', render: (text: number, record: IBall, index: number) => this.setBall(record, 8, 'red')},
+  {title: () => <div style={{color: '#f5464680'}}>9</div>, dataIndex: '9', render: (text: number, record: IBall, index: number) => this.setBall(record, 9, 'red')},
+  {title: () => <div style={{color: '#f5464680'}}>10</div>, dataIndex: '10', render: (text: number, record: IBall, index: number) => this.setBall(record, 10, 'red')},
+  {title: () => <div style={{color: '#f5464680'}}>11</div>, dataIndex: '11', render: (text: number, record: IBall, index: number) => this.setBall(record, 11, 'red')},
+  {title: () => <div style={{color: '#f5464680'}}>12</div>, dataIndex: '12', render: (text: number, record: IBall, index: number) => this.setBall(record, 12, 'red')},
+  {title: () => <div style={{color: '#f5464680'}}>13</div>, dataIndex: '13', render: (text: number, record: IBall, index: number) => this.setBall(record, 13, 'red')},
+  {title: () => <div style={{color: '#f5464680'}}>14</div>, dataIndex: '14', render: (text: number, record: IBall, index: number) => this.setBall(record, 14, 'red')},
+  {title: () => <div style={{color: '#f5464680'}}>15</div>, dataIndex: '15', render: (text: number, record: IBall, index: number) => this.setBall(record, 15, 'red')},
+  {title: () => <div style={{color: '#f5464680'}}>16</div>, dataIndex: '16', render: (text: number, record: IBall, index: number) => this.setBall(record, 16, 'red')},
+  {title: () => <div style={{color: '#f5464680'}}>17</div>, dataIndex: '17', render: (text: number, record: IBall, index: number) => this.setBall(record, 17, 'red')},
+  {title: () => <div style={{color: '#f5464680'}}>18</div>, dataIndex: '18', render: (text: number, record: IBall, index: number) => this.setBall(record, 18, 'red')},
+  {title: () => <div style={{color: '#f5464680'}}>19</div>, dataIndex: '19', render: (text: number, record: IBall, index: number) => this.setBall(record, 19, 'red')},
+  {title: () => <div style={{color: '#f5464680'}}>20</div>, dataIndex: '20', render: (text: number, record: IBall, index: number) => this.setBall(record, 20, 'red')},
+  {title: () => <div style={{color: '#f5464680'}}>21</div>, dataIndex: '21', render: (text: number, record: IBall, index: number) => this.setBall(record, 21, 'red')},
+  {title: () => <div style={{color: '#f5464680'}}>22</div>, dataIndex: '22', render: (text: number, record: IBall, index: number) => this.setBall(record, 22, 'red')},
+  {title: () => <div style={{color: '#f5464680'}}>23</div>, dataIndex: '23', render: (text: number, record: IBall, index: number) => this.setBall(record, 23, 'red')},
+  {title: () => <div style={{color: '#f5464680'}}>24</div>, dataIndex: '24', render: (text: number, record: IBall, index: number) => this.setBall(record, 24, 'red')},
+  {title: () => <div style={{color: '#f5464680'}}>25</div>, dataIndex: '25', render: (text: number, record: IBall, index: number) => this.setBall(record, 25, 'red')},
+  {title: () => <div style={{color: '#f5464680'}}>26</div>, dataIndex: '26', render: (text: number, record: IBall, index: number) => this.setBall(record, 26, 'red')},
+  {title: () => <div style={{color: '#f5464680'}}>27</div>, dataIndex: '27', render: (text: number, record: IBall, index: number) => this.setBall(record, 27, 'red')},
+  {title: () => <div style={{color: '#f5464680'}}>28</div>, dataIndex: '28', render: (text: number, record: IBall, index: number) => this.setBall(record, 28, 'red')},
+  {title: () => <div style={{color: '#f5464680'}}>29</div>, dataIndex: '29', render: (text: number, record: IBall, index: number) => this.setBall(record, 29, 'red')},
+  {title: () => <div style={{color: '#f5464680'}}>30</div>, dataIndex: '30', render: (text: number, record: IBall, index: number) => this.setBall(record, 30, 'red')},
+  {title: () => <div style={{color: '#f5464680'}}>31</div>, dataIndex: '31', render: (text: number, record: IBall, index: number) => this.setBall(record, 31, 'red')},
+  {title: () => <div style={{color: '#f5464680'}}>32</div>, dataIndex: '32', render: (text: number, record: IBall, index: number) => this.setBall(record, 32, 'red')},
+  {title: () => <div style={{color: '#f5464680'}}>33</div>, dataIndex: '33', render: (text: number, record: IBall, index: number) => this.setBall(record, 33, 'red')},
   // blue balls
-  {title: () => <div style={{color: '#3399ff80'}}>1</div>,dataIndex: 'blue-1',render: (text: number, record: IBall, index: number) => this.setBall(record, 1, 'blue')},
-  {title: () => <div style={{color: '#3399ff80'}}>2</div>,dataIndex: 'blue-2',render: (text: number, record: IBall, index: number) => this.setBall(record, 2, 'blue')},
-  {title: () => <div style={{color: '#3399ff80'}}>3</div>,dataIndex: 'blue-3',render: (text: number, record: IBall, index: number) => this.setBall(record, 3, 'blue')},
-  {title: () => <div style={{color: '#3399ff80'}}>4</div>,dataIndex: 'blue-4',render: (text: number, record: IBall, index: number) => this.setBall(record, 4, 'blue')},
-  {title: () => <div style={{color: '#3399ff80'}}>5</div>,dataIndex: 'blue-5',render: (text: number, record: IBall, index: number) => this.setBall(record, 5, 'blue')},
-  {title: () => <div style={{color: '#3399ff80'}}>6</div>,dataIndex: 'blue-6',render: (text: number, record: IBall, index: number) => this.setBall(record, 6, 'blue')},
-  {title: () => <div style={{color: '#3399ff80'}}>7</div>,dataIndex: 'blue-7',render: (text: number, record: IBall, index: number) => this.setBall(record, 7, 'blue')},
-  {title: () => <div style={{color: '#3399ff80'}}>8</div>,dataIndex: 'blue-8',render: (text: number, record: IBall, index: number) => this.setBall(record, 8, 'blue')},
-  {title: () => <div style={{color: '#3399ff80'}}>9</div>,dataIndex: 'blue-9',render: (text: number, record: IBall, index: number) => this.setBall(record, 9, 'blue')},
-  {title: () => <div style={{color: '#3399ff80'}}>10</div>,dataIndex: 'blue-10',render: (text: number, record: IBall, index: number) => this.setBall(record, 10, 'blue')},
-  {title: () => <div style={{color: '#3399ff80'}}>11</div>,dataIndex: 'blue-11',render: (text: number, record: IBall, index: number) => this.setBall(record, 11, 'blue')},
-  {title: () => <div style={{color: '#3399ff80'}}>12</div>,dataIndex: 'blue-12',render: (text: number, record: IBall, index: number) => this.setBall(record, 12, 'blue')},
-  {title: () => <div style={{color: '#3399ff80'}}>13</div>,dataIndex: 'blue-13',render: (text: number, record: IBall, index: number) => this.setBall(record, 13, 'blue')},
-  {title: () => <div style={{color: '#3399ff80'}}>14</div>,dataIndex: 'blue-14',render: (text: number, record: IBall, index: number) => this.setBall(record, 14, 'blue')},
-  {title: () => <div style={{color: '#3399ff80'}}>15</div>,dataIndex: 'blue-15',render: (text: number, record: IBall, index: number) => this.setBall(record, 15, 'blue')},
-  {title: () => <div style={{color: '#3399ff80'}}>16</div>,dataIndex: 'blue-16',render: (text: number, record: IBall, index: number) => this.setBall(record, 16, 'blue')}]
+  {title: () => <div style={{color: '#3399ff80'}}>1</div>, dataIndex: 'blue-1', render: (text: number, record: IBall, index: number) => this.setBall(record, 1, 'blue')},
+  {title: () => <div style={{color: '#3399ff80'}}>2</div>, dataIndex: 'blue-2', render: (text: number, record: IBall, index: number) => this.setBall(record, 2, 'blue')},
+  {title: () => <div style={{color: '#3399ff80'}}>3</div>, dataIndex: 'blue-3', render: (text: number, record: IBall, index: number) => this.setBall(record, 3, 'blue')},
+  {title: () => <div style={{color: '#3399ff80'}}>4</div>, dataIndex: 'blue-4', render: (text: number, record: IBall, index: number) => this.setBall(record, 4, 'blue')},
+  {title: () => <div style={{color: '#3399ff80'}}>5</div>, dataIndex: 'blue-5', render: (text: number, record: IBall, index: number) => this.setBall(record, 5, 'blue')},
+  {title: () => <div style={{color: '#3399ff80'}}>6</div>, dataIndex: 'blue-6', render: (text: number, record: IBall, index: number) => this.setBall(record, 6, 'blue')},
+  {title: () => <div style={{color: '#3399ff80'}}>7</div>, dataIndex: 'blue-7', render: (text: number, record: IBall, index: number) => this.setBall(record, 7, 'blue')},
+  {title: () => <div style={{color: '#3399ff80'}}>8</div>, dataIndex: 'blue-8', render: (text: number, record: IBall, index: number) => this.setBall(record, 8, 'blue')},
+  {title: () => <div style={{color: '#3399ff80'}}>9</div>, dataIndex: 'blue-9', render: (text: number, record: IBall, index: number) => this.setBall(record, 9, 'blue')},
+  {title: () => <div style={{color: '#3399ff80'}}>10</div>, dataIndex: 'blue-10', render: (text: number, record: IBall, index: number) => this.setBall(record, 10, 'blue')},
+  {title: () => <div style={{color: '#3399ff80'}}>11</div>, dataIndex: 'blue-11', render: (text: number, record: IBall, index: number) => this.setBall(record, 11, 'blue')},
+  {title: () => <div style={{color: '#3399ff80'}}>12</div>, dataIndex: 'blue-12', render: (text: number, record: IBall, index: number) => this.setBall(record, 12, 'blue')},
+  {title: () => <div style={{color: '#3399ff80'}}>13</div>, dataIndex: 'blue-13', render: (text: number, record: IBall, index: number) => this.setBall(record, 13, 'blue')},
+  {title: () => <div style={{color: '#3399ff80'}}>14</div>, dataIndex: 'blue-14', render: (text: number, record: IBall, index: number) => this.setBall(record, 14, 'blue')},
+  {title: () => <div style={{color: '#3399ff80'}}>15</div>, dataIndex: 'blue-15', render: (text: number, record: IBall, index: number) => this.setBall(record, 15, 'blue')},
+  {title: () => <div style={{color: '#3399ff80'}}>16</div>, dataIndex: 'blue-16', render: (text: number, record: IBall, index: number) => this.setBall(record, 16, 'blue')}]
 
-  viewDetail(data: IBall) {
+  viewDetail (data: IBall) {
     this.props.history.push(`/home/lottery-ball/${data.id}`)
   }
 
@@ -95,8 +95,8 @@ export default class BallTrend extends React.Component<IProps> {
   setBall = (data: IBall, num: number, type: 'red'|'blue') => {
     const color =  type === 'red' ? '#f54646' : '#3399ff'
     const active = type === 'red' ? data.reds.some(v => v === num) : data.blue === num
-    if(active) {
-      return <div style={{width:'16px',height:'16px',borderRadius:'100%',display:'flex',alignItems:'center',justifyContent:'center',backgroundColor: color,color:'#fff',fontSize:'12px',margin:'auto'}}>{num}</div>
+    if (active) {
+      return <div style={{width: '16px', height: '16px', borderRadius: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: color, color: '#fff', fontSize: '12px', margin: 'auto'}}>{num}</div>
     }
     return ''//<div style={{textAlign: 'center', color: color + '60', fontSize:'12px'}}>{num}</div>
   }
@@ -109,11 +109,11 @@ export default class BallTrend extends React.Component<IProps> {
     this.setState({visible: !this.state.visible})
   }
   
-  componentDidMount() {
+  componentDidMount () {
     this.props.ballTrendStore.search()
   }
 
-  render(){
+  render () {
     const { visible } = this.state
     const { value, loading, list, meta, drawDate, inputChange, search, clear } = this.props.ballTrendStore
  
@@ -150,8 +150,8 @@ export default class BallTrend extends React.Component<IProps> {
             <td><div className="ball blue"></div></td>
             <td>6+1</td>
             <td>
-          当奖池资金低于1亿元时，奖金总额为当期高等奖奖金的70%与奖池中累积的奖金之和，单注奖金按注均分，单注最高限额封顶500万元。
-当奖池资金高于1亿元（含）时，奖金总额包括两部分，一部分为当期高等奖奖金的50%与奖池中累积的奖金之和，单注奖金按注均分，单注最高限额封顶500万元；另一部分为当期高等奖奖金的20%，单注奖金按注均分，单注最高限额封顶500万元。
+              当奖池资金低于1亿元时，奖金总额为当期高等奖奖金的70%与奖池中累积的奖金之和，单注奖金按注均分，单注最高限额封顶500万元。
+              当奖池资金高于1亿元（含）时，奖金总额包括两部分，一部分为当期高等奖奖金的50%与奖池中累积的奖金之和，单注奖金按注均分，单注最高限额封顶500万元；另一部分为当期高等奖奖金的20%，单注奖金按注均分，单注最高限额封顶500万元。
             </td>
             <td>浮动</td>
           </tr>

@@ -29,7 +29,7 @@ const toolbarOptions = [
 interface IEditor {
   disabled?: boolean
   value: string
-  onChange(text: string): Function
+  onChange(text: string): () => void
 }
 
 export default class QuillEditorComponent extends React.Component<IEditor> {
@@ -49,7 +49,7 @@ export default class QuillEditorComponent extends React.Component<IEditor> {
 
   $editor: HTMLDivElement = null
   
-  componentDidMount() {
+  componentDidMount () {
     const { onChange } = this.props
     const { $editor } = this
     this.quillEditor = new Quill($editor, this.quillOptions)
@@ -59,7 +59,7 @@ export default class QuillEditorComponent extends React.Component<IEditor> {
       if (_html === '<p><br></p>') {
         _html = ''
       }
-      if(this.oldVal !== _html) {
+      if (this.oldVal !== _html) {
         this.oldVal = _html
         onChange && onChange(_html)
       }
@@ -70,13 +70,13 @@ export default class QuillEditorComponent extends React.Component<IEditor> {
   changeEditorText = () => {
     const { value } = this.props
     // 赋值
-    if(this.oldVal !== value && value !== undefined && this.quillEditor) {
+    if (this.oldVal !== value && value !== undefined && this.quillEditor) {
       this.quillEditor.root.innerHTML = value
       this.oldVal = value
     }
   }
 
-  render(){
+  render () {
     const { disabled } = this.props
     this.changeEditorText()
 

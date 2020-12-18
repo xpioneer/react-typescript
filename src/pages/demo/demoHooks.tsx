@@ -2,10 +2,10 @@ import * as React from 'react'
 import { Button } from 'antd'
 
 
-function useState<T>(initialValue: T): [T, (newState: T) => void] {
+function useState<T> (initialValue: T): [T, (newState: T) => void] {
   let state = initialValue
 
-  function setState(newState: T) {
+  function setState (newState: T) {
     state = newState
     // render()
   }

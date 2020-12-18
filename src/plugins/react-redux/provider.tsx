@@ -16,7 +16,7 @@ export class ReduxProvider extends Component<IProviderProps, ICreateStore> {
     }).isRequired
   }
 
-  constructor(props: IProviderProps) {
+  constructor (props: IProviderProps) {
     super(props)
     this.$store = props.store
     console.log('ReduxProvider---constructor', 999)
@@ -24,14 +24,14 @@ export class ReduxProvider extends Component<IProviderProps, ICreateStore> {
 
   $store: IAnyObject = {}
 
-  getChildContext() {
+  getChildContext () {
     console.log('获取了---getChildContext', this.$store)
     return {
       store: this.$store
     }
   }
 
-  render() {
+  render () {
     // console.log('$store', )
     return this.props.children
   }

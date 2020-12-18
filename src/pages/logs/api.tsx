@@ -71,7 +71,7 @@ export default class APILog extends React.Component<IProps> {
 
   // 查看Url/参数详情
   showParamsDetail = (str: any, type?: string) => {
-    if(str) {
+    if (str) {
       this.setState({
         modalTitle: type === 'url' ? 'Url详情' : '参数详情',
         visible: !this.state.visible,
@@ -85,7 +85,7 @@ export default class APILog extends React.Component<IProps> {
 
   // 查看日志详情
   viewDetail = (data: any) => {
-    if(data) {
+    if (data) {
       this.setState({
         visibleLog: true,
         detailInfo: data
@@ -100,12 +100,12 @@ export default class APILog extends React.Component<IProps> {
 
   formatHeader = (data: any) => {
     const type = typeof(data)
-    if(type === 'string') {
+    if (type === 'string') {
       let headerObj = ''
-      try{
+      try {
         headerObj = JSON.parse(data)
-      } catch(e) {
-        if(data.length > 10240) {
+      } catch (e) {
+        if (data.length > 10240) {
           return data.substr(0, 1024) + '...'
         }
         return data
@@ -113,7 +113,7 @@ export default class APILog extends React.Component<IProps> {
       return Object.keys(headerObj).map(h => {
         return <div key={h}>{h} : {headerObj[h]}</div>
       })
-    } else if(type === 'object') {
+    } else if (type === 'object') {
       return Object.keys(data).map(h => {
         return <div key={h}>{h} : {data[h]}</div>
       })
@@ -123,7 +123,7 @@ export default class APILog extends React.Component<IProps> {
   }
 
   wrapHtml = (data: any) => {
-    if(data !== null && Object.keys(data).length > 0) {
+    if (data !== null && Object.keys(data).length > 0) {
       return <React.Fragment>
         <div className="row">
           <div>ID：</div><div>{data.id}</div>
@@ -196,11 +196,11 @@ export default class APILog extends React.Component<IProps> {
     return info
   }
   
-  componentDidMount() {
+  componentDidMount () {
     this.props.apiLogStore.search()
   }
 
-  render(){
+  render () {
     const { modalTitle, visible, modalTxt, visibleLog, detailInfo } = this.state
     const { value, loading, list, meta, inputChange, search, clear } = this.props.apiLogStore
  

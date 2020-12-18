@@ -84,6 +84,7 @@ module.exports = {
     '@typescript-eslint/space-before-function-paren': [2],
     '@typescript-eslint/keyword-spacing': [2, ],
     '@typescript-eslint/comma-spacing': 2,
-    '@typescript-eslint/type-annotation-spacing': 2
+    '@typescript-eslint/type-annotation-spacing': 2,
+    '@typescript-eslint/ban-types': 0
   }
 }
