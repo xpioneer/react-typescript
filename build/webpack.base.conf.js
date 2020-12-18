@@ -3,7 +3,6 @@ const path = require('path'),
   styleRules = require('./styleLoaderConf'),
   CopyWebpackPlugin = require('copy-webpack-plugin'),
   MiniCssExtractPlugin = require("mini-css-extract-plugin"),
-  ManifestPlugin = require('webpack-manifest-plugin'),
   {GenerateSW} = require('workbox-webpack-plugin');
 
 const _PROD_ = process.env.NODE_ENV === 'production';
@@ -23,7 +22,7 @@ module.exports = {
     publicPath: '/', // root Dir
     sourceMapFilename: '[name].map',
     chunkFilename: 'static/js/[name].[chunkhash:8].js',
-    filename: 'static/js/[name].[hash:8].js'
+    filename: 'static/js/[name].[contenthash:8].js'
   },
 
   resolveLoader: {
@@ -57,33 +56,33 @@ module.exports = {
         ],
         exclude: /node_modules/,
         loader: "babel-loader",
-        options: {
-          presets: [
-            ["@babel/preset-env", {
-              targets: { ie: 9, },
-              ignoreBrowserslistConfig: true,
-              useBuiltIns: false,
-              modules: false,
-              exclude: ['transform-typeof-symbol'],
-            }],
-            ["@babel/preset-react", {
-              "targets": "last 2 versions, ie 11", "modules": false
-            }],
-            ["@babel/preset-typescript"]
-          ],
-          plugins: [
-            ['@babel/plugin-syntax-dynamic-import'],
-            ['@babel/plugin-proposal-decorators', {legacy: true}],
-            ['@babel/plugin-proposal-class-properties', {loose: true}]
-          ]
-        }
+        // options: {
+        //   presets: [
+        //     ["@babel/preset-env", {
+        //       targets: { ie: 9, },
+        //       ignoreBrowserslistConfig: true,
+        //       useBuiltIns: false,
+        //       modules: false,
+        //       exclude: ['transform-typeof-symbol'],
+        //     }],
+        //     ["@babel/preset-react", {
+        //       "targets": "last 2 versions, ie 11", "modules": false
+        //     }],
+        //     ["@babel/preset-typescript"]
+        //   ],
+        //   plugins: [
+        //     ['@babel/plugin-syntax-dynamic-import'],
+        //     ['@babel/plugin-proposal-decorators', {legacy: true}],
+        //     ['@babel/plugin-proposal-class-properties', {loose: true}]
+        //   ]
+        // }
       },
       ...styleRules,
       {
         test: /\.(eot|woff|woff2|ttf)(\?\S*)?$/,
         loader: "url-loader",
         options: {
-          name: "assets/fonts/[name].[hash:8].[ext]",
+          name: "assets/fonts/[name].[contenthash:8].[ext]",
           limit: 2048
         }
       },
@@ -91,7 +90,7 @@ module.exports = {
         test: /\.(svg|png|jpe?g|gif)(\?\S*)?$/,
         loader: "url-loader",
         options: {
-          name: "assets/imgs/[name].[hash:8].[ext]",
+          name: "assets/imgs/[name].[contenthash:8].[ext]",
           limit: 2048
         }
       }
@@ -187,7 +186,7 @@ module.exports = {
     //   },
     //   _DEV_: JSON.stringify(_DEV_),
     // }),
-    new GenerateSW(),
+    // new GenerateSW(),
     // new ManifestPlugin({
     //   fileName: 'asset-manifest.json'
     // }),

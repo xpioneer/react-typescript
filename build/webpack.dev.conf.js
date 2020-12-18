@@ -26,6 +26,7 @@ module.exports = merge(webpackConfig, {
     // inline: true,
     https: false, // true for self-signed, object for cert authority
     // noInfo: true, // only errors & warns on hot reload
+    progress: true,
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
