@@ -30,153 +30,140 @@ const BallCreate = lazy(() => import( /* webpackChunkName:"ballCreate" */ '@page
 const BallEdit = lazy(() => import( /* webpackChunkName:"ballEdit" */ '@pages/lottery/ballEdit'))
 const BallTrend = lazy(() => import( /* webpackChunkName:"ballTrend" */ '@pages/lottery/ballTrend'))
 const BallChart = lazy(() => import( /* webpackChunkName:"ballChart" */ '@pages/lottery/ballChart'))
+const StockList = lazy(() => import( /* webpackChunkName:"StockList" */ '@pages/stocks'))
+const StockHistories = lazy(() => import( /* webpackChunkName:"StockList" */ '@pages/stocks/history'))
 
 // demos
 const Demo = lazy(() => import( /* webpackChunkName:"demo" */ '@pages/demo/demo'))
 const DemoMobx = lazy(() => import( /* webpackChunkName:"demo" */ '@pages/demo/demoMobx'))
 const DemoRedux = lazy(() => import( /* webpackChunkName:"demo" */ '@pages/demo/demoRedux'))
+const DemoHooks = lazy(() => import( /* webpackChunkName:"demo" */ '@pages/demo/demoHooks'))
 
 
 export const routes: RouteProps[] = [
   {
     path: '/home',
-    exact: true,
     component: Dashboard
   },
   {
     path: '/home/charts',
-    exact: true,
     component: Chart
   },
   {
     path: '/home/log-api',
-    exact: true,
     component: LogApi
   },
   {
     path: '/home/log-errors',
-    exact: true,
     component: LogErrors
   },
   {
     path: '/home/blog-article',
-    exact: true,
     component: ArticleList
   },
   {
     path: '/home/blog-article/:id',
-    exact: true,
     component: ArticleEdit
   },
   {
     path: '/home/blog-articleCreate',
-    exact: true,
     component: ArticleCreate
   },
   {
     path: '/home/blog-type',
-    exact: true,
     component: ArticleTypeList
   },
   {
     path: '/home/blog-type/:id',
-    exact: true,
     component: ArticleTypeEdit
   },
   {
     path: '/home/blog-typeCreate',
-    exact: true,
     component: ArticleTypeCreate
   },
   {
     path: '/home/blog-tag',
-    exact: true,
     component: TagList
   },
   {
     path: '/home/blog-tagCreate',
-    exact: true,
     component: TagCreate
   },
   {
     path: '/home/blog-tag/:id',
-    exact: true,
     component: TagEdit
   },
   {
     path: '/home/blog-comment',
-    exact: true,
     component: CommentList
   },
   {
     path: '/home/blog-comment/:id',
-    exact: true,
     component: CommentEdit
   },
   {
     path: '/home/blog-message',
-    exact: true,
     component: LeaveMsgList
   },
   {
     path: '/home/blog-message/:id',
-    exact: true,
     component: LeaveMsgEdit
   },
   {
     path: '/home/blog-user',
-    exact: true,
     component: UserList
   },
   {
     path: '/home/blog-user/:id',
-    exact: true,
     component: UserEdit
   },
   {
     path: '/home/blog-userCreate',
-    exact: true,
     component: UserCreate
   },
   {
     path: '/home/lottery-balls',
-    exact: true,
     component: BallList
   },
   {
     path: '/home/lottery-ball',
-    exact: true,
     component: BallCreate
   },
   {
     path: '/home/lottery-ball/:id',
-    exact: true,
     component: BallEdit
   },
   {
     path: '/home/lottery-trend',
-    exact: true,
     component: BallTrend
   },
   {
     path: '/home/lottery-chart',
-    exact: true,
     component: BallChart
   },
   {
     path: '/home/demos',
-    exact: true,
     component: Demo
   },
   {
     path: '/home/demo-mobx',
-    exact: true,
     component: DemoMobx
   },
   {
     path: '/home/demo-redux',
-    exact: true,
     component: DemoRedux
+  },
+  {
+    path: '/home/demo-hooks',
+    component: DemoHooks
+  },
+  {
+    path: '/home/stocks',
+    component: StockList
+  },
+  {
+    path: '/home/stocks-history',
+    component: StockHistories
   },
   {
     path: '*',
@@ -190,7 +177,7 @@ const Routes = (authorized: boolean) => <Suspense fallback={<Loading/>}>
       routes.map(r => {
         const {path, exact, component} = r
         const LazyCom = component
-        return <Route key={path + ''} exact={!!exact} path={path} render={(props: any) => (authorized ? <LazyCom {...props}/> : <Redirect to="/login"/>)}/>
+        return <Route key={path + ''} exact={exact !== false} path={path} render={(props: any) => (authorized ? <LazyCom {...props}/> : <Redirect to="/login"/>)}/>
       })
     }
   </Switch>

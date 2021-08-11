@@ -44,16 +44,25 @@ const MenuList = [{
   },{
     key: '5-2', title: '统计图', path: '/home/lottery-chart', icon: 'bar-chart'
   }]
-},{
-  key:'99', title:'Demo', icon:'bulb',
-  children: [{
-    key: '99-0', title: '示例', path: '/home/demos', icon:'experiment'
+},,{
+    key:'6', title:'Stocks', icon:'stock',
+    children: [{
+      key: '6-0', title: 'Stock', path: '/home/stocks', icon: 'dollar'
+    },{
+      key: '6-1', title: 'Stock History', path: '/home/stocks-history', icon: 'fund'
+    }]
   },{
-    key: '99-1', title: '示例mobx', path: '/home/demo-mobx', icon:'experiment'
-  },{
-    key: '99-2', title: '示例redux', path: '/home/demo-redux', icon:'experiment'
+    key:'99', title:'Demo', icon:'bulb',
+    children: [{
+      key: '99-0', title: '示例', path: '/home/demos', icon:'experiment'
+    },{
+      key: '99-1', title: '示例mobx', path: '/home/demo-mobx', icon:'experiment'
+    },{
+      key: '99-2', title: '示例redux', path: '/home/demo-redux', icon:'experiment'
+    },{
+      key: '99-3', title: '示例hooks', path: '/home/demo-hooks', icon:'experiment'
+    }]
   }]
-}]
 
 class SiderComponent extends React.Component<ISiderProps> {
 

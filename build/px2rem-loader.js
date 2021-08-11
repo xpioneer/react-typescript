@@ -1,6 +1,6 @@
 const loaderUtils = require('loader-utils')
 
-const pxReg = /\b(\d+(\.\d+)?)PX\b/g
+const pxReg = /\b(\d+(\.\d+)?)px\b/g
 
 module.exports = function(content) {
 

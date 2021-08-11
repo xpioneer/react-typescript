@@ -23,3 +23,25 @@ export const storage = {
     localStorage.clear()
   }
 }
+
+
+export const data2PageData = <T>(data: IPageData<T> = {
+  data: [],
+  meta: { page: 1, pageSize: 10, total: 0 }
+}): IPageData<T> => {
+  return {
+    ...data,
+    meta: {
+      ...data.meta,
+      showTotal: total => `共${total}条`
+    }
+    
+  }
+}
+
+export const pageData2Params = (meta: Partial<IPageData['meta']> = {page: 1, pageSize: 10}): Pick<IPageData['meta'], 'page' | 'pageSize'> => {
+  return {
+    page: meta.page,
+    pageSize: meta.pageSize
+  }
+}

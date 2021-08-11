@@ -1,8 +1,16 @@
 import * as React from 'react'
 import { QuillOptionsStatic } from 'quill'
 import * as Q from 'quill'
+// const ImageResize = require('quill-image-resize-module/src/ImageResize.js');
+// console.log(ImageResize, 'imageresize')
+interface IQuillOptions extends QuillOptionsStatic {
+  // imageResize: {
+  //   displaySize: boolean
+  // }
+}
 
 const Quill: any = Q
+// Quill.register('modules/imageResize', ImageResize)
 
 const toolbarOptions = [
   ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
@@ -37,8 +45,11 @@ export default class QuillEditorComponent extends React.Component<IEditor> {
   oldVal: string = ''
 
   quillEditor: any = null
-  quillOptions: QuillOptionsStatic = {
+  quillOptions: IQuillOptions = {
     // debug: false,
+    imageResize: {
+      displaySize: true // default false
+    },
     modules: {
       toolbar: toolbarOptions,
     },

@@ -2,7 +2,7 @@ import { observable, action, autorun, runInAction, computed } from 'mobx'
 import { GRAPHQL_API } from '@constants/index'
 
 const getUser = `
-query getUser($id: String!){
+{
   user(id: $id){
     id
     username

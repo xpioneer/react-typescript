@@ -6,6 +6,7 @@ const path = require('path'),
   ManifestPlugin = require('webpack-manifest-plugin'),
   SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 
+const DonePlugin = require('./donePlugin')
 const _PROD_ = process.env.NODE_ENV === 'production';
 
 const resolve = (dir) => {
@@ -42,14 +43,14 @@ module.exports = {
       //     transpileOnly: true
       //   }
       // },
-      {
-        test: /\.(j|t)sx?$/,
-        loader: 'px2rem-loader',
-        options: {
-          remRoot: 40,
-          fixed: 6
-        }
-      },
+      // {
+      //   test: /\.(j|t)sx?$/,
+      //   loader: 'px2rem-loader',
+      //   options: {
+      //     remRoot: 40,
+      //     fixed: 6
+      //   }
+      // },
       {
         test: /\.(j|t)sx?$/,
         include: [
@@ -67,7 +68,7 @@ module.exports = {
               exclude: ['transform-typeof-symbol'],
             }],
             ["@babel/preset-react", {
-              "targets": "last 2 versions, ie 11", "modules": false
+              targets: "last 2 versions, ie 11", modules: false
             }],
             ["@babel/preset-typescript"]
           ],
@@ -181,6 +182,8 @@ module.exports = {
   },
 
   plugins: [
+    // new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /zh-cn/),
+    new DonePlugin(),
     // new webpack.DefinePlugin({
     //   "process.env": {
     //     NODE_ENV: JSON.stringify(_PROD_ ? "development" : "production")

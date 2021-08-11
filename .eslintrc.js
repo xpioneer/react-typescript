@@ -45,6 +45,7 @@ module.exports = {
     'default-case': 2,
     'no-spaced-func': 2,
     'no-case-declarations': 0,
+    'no-sparse-arrays': 0,
     // react jsx
     'react/display-name': 0,
     'react/jsx-filename-extension': 'off',
@@ -61,7 +62,6 @@ module.exports = {
     '@typescript-eslint/no-use-before-define': 0,
     '@typescript-eslint/member-delimiter-style': 0,
     '@typescript-eslint/no-unused-vars': 0,
-    '@typescript-eslint/no-use-before-define': 0,
     '@typescript-eslint/no-explicit-any': 0,
     '@typescript-eslint/explicit-member-accessibility': 0,
     '@typescript-eslint/no-angle-bracket-type-assertion': 0,
@@ -69,7 +69,7 @@ module.exports = {
     '@typescript-eslint/no-empty-function': 1,
     '@typescript-eslint/semi': 0,
     '@typescript-eslint/no-inferrable-types': 0,
-    '@typescript-eslint/no-empty-interface': 1,
+    '@typescript-eslint/no-empty-interface': 0,
     '@typescript-eslint/class-name-casing': 0,
   }
 };

@@ -5,7 +5,7 @@ export default class Dashboard extends React.Component {
     return <div>
       <p>Welcome to Dashboard!</p>
       <div>GraphQL Application. </div>
-      <p style={{width: '400PX', height: 40, fontSize: '24px'}}>测试rem</p>
+      {/* <p style={{width: '400px', height: '40PX', fontSize: '24px'}}>测试rem</p> */}
       <div>66px</div>
     </div>
   }
