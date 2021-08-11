@@ -17,22 +17,22 @@ class ballEditStore {
   @observable loading: boolean = false
   @observable mainData: any = {} // tag detail data
   redBalls: number[] = [
-    1,2,3,4,5,6,7,8,9,10,
-    11,12,13,14,15,16,17,18,19,20,
-    21,22,23,24,25,26,27,28,29,30,
-    31,32,33
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+    11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+    21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
+    31, 32, 33
   ]
-  blueBalls: number[] = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
+  blueBalls: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
   @observable reds: number[] = []
   @observable blues: number[] = []
 
   @action selectBall = (num: number, type: 'red' | 'blue') => {
-    if(type === 'red') {
+    if (type === 'red') {
       let index = this.reds.findIndex(v => v === num)
-      if(index >= 0) { // selected, delete
+      if (index >= 0) { // selected, delete
         this.reds.splice(index, 1)
       } else { // not selected
-        if(this.reds.length < 6) { // and length < 6
+        if (this.reds.length < 6) { // and length < 6
           this.reds.push(num)
         }
       }
@@ -71,7 +71,7 @@ class ballEditStore {
   }
 
   @action save = () => {
-    if(
+    if (
       /^\d{5}$/.test(this.mainData.issue) && 
       this.reds.length === 6 &&
       this.blues.length === 1 &&
@@ -82,7 +82,7 @@ class ballEditStore {
       /^\d+$/.test(this.mainData.prizeTwoNum) &&
       /^\d+$/.test(this.mainData.bettingNum) && 
       this.mainData.drawDate
-    ){
+    ) {
       let data = {
         id: this.mainData.id,
         issue: this.mainData.issue,
@@ -102,7 +102,7 @@ class ballEditStore {
         query: updateBall,
         variables: {input: data}
       }).then((res: any) => {
-        if(res.data.updated) {
+        if (res.data.updated) {
           this.getBall(data.id)
         }
         
@@ -121,7 +121,7 @@ class ballEditStore {
   }
 
   @action inputChange = (value: string, type: string) => {
-    if(type === 'drawDate') {
+    if (type === 'drawDate') {
       this.mainData[type] = value
     } else {
       this.mainData[type] = value.trim()

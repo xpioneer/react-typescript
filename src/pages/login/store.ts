@@ -8,7 +8,7 @@ class LoginStore {
   @observable loading: boolean = false
   
   @action inputChange = (value: string, type: string): void => {
-    if(type === 'pwd') {
+    if (type === 'pwd') {
       this.password = value
     } else {
       this.username = value.trim()
@@ -20,10 +20,10 @@ class LoginStore {
   }
 
   @action login = () => {
-    if(this.loading) {
+    if (this.loading) {
       return
     }
-    if(!this.canLogin) {
+    if (!this.canLogin) {
       $msg.error('请输入正确格式的用户名和密码')
       return
     }

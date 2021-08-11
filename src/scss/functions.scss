@@ -8,89 +8,87 @@
 /**
  * margin, padding
  */
- $start: 8;
- $end: 80;
- $step: 8;
- 
- @while $start <= $end {
+$start: 8;
+$end: 80;
+$step: 8;
+
+@while $start <= $end {
 
   $val: $start;
- 
-  .mgtrbl#{$val} { margin: $val + px !important }
-  .mgtb#{$val} { margin: $val + px 0 !important }
-  .mglr#{$val} { margin: 0 $val + px !important }
-  .mgt#{$val} { margin-top: $val + px !important }
-  .mgr#{$val} { margin-right: $val + px !important }
-  .mgb#{$val} { margin-bottom: $val + px !important }
-  .mgl#{$val} { margin-left: $val + px !important }
-  
-  .pdtrbl#{$val} { padding: $val + px !important }
-  .pdtb#{$val} { padding: $val + px 0 !important }
-  .pdlr#{$val} { padding: 0 $val + px !important }
-  .pdt#{$val} { padding-top: $val + px !important }
-  .pdr#{$val} { padding-right: $val + px !important }
-  .pdb#{$val} { padding-bottom: $val + px !important }
-  .pdl#{$val} { padding-left: $val + px !important }
 
+  .mgtrbl#{$val} { margin: $val + px !important; }
+  .mgtb#{$val} { margin: $val + px 0 !important; }
+  .mglr#{$val} { margin: 0 $val + px !important; }
+  .mgt#{$val} { margin-top: $val + px !important; }
+  .mgr#{$val} { margin-right: $val + px !important; }
+  .mgb#{$val} { margin-bottom: $val + px !important; }
+  .mgl#{$val} { margin-left: $val + px !important; }
+
+  .pdtrbl#{$val} { padding: $val + px !important; }
+  .pdtb#{$val} { padding: $val + px 0 !important; }
+  .pdlr#{$val} { padding: 0 $val + px !important; }
+  .pdt#{$val} { padding-top: $val + px !important; }
+  .pdr#{$val} { padding-right: $val + px !important; }
+  .pdb#{$val} { padding-bottom: $val + px !important; }
+  .pdl#{$val} { padding-left: $val + px !important; }
 
 
   .row-col-mgb#{$val} {
-    .ant-col{
+    .ant-col {
       margin-bottom: $val + px;
     }
   }
   .row-col-mgt#{$val} {
-    .ant-col{
+    .ant-col {
       margin-top: $val + px;
     }
   }
   .row-col-mgtb#{$val} {
-    .ant-col{
+    .ant-col {
       margin: $val 0;
     }
   }
 
   .row-col-pdb#{$val} {
-    .ant-col{
+    .ant-col {
       padding-bottom: $val + px;
     }
   }
   .row-col-pdt#{$val} {
-    .ant-col{
+    .ant-col {
       padding-top: $val + px;
     }
   }
   .row-col-pdtb#{$val} {
-    .ant-col{
+    .ant-col {
       padding: $val + px 0;
     }
   }
-   
+
   $start: $start + $step;
- }
- 
- /**
+}
+
+/**
   * font-size, font-weigt
   */
- $fsS: 6;
- $fsE: 60;
- $fsStep: 1;
- 
- @while $fsS <= $fsE {
-  .fs#{$fsS}{
+$fsS: 6;
+$fsE: 60;
+$fsStep: 1;
+
+@while $fsS <= $fsE {
+  .fs#{$fsS} {
     font-size: $fsS + px;
   }
-  $fsS: $fsS + $fsStep
- }
+  $fsS: $fsS + $fsStep;
+}
 
- $fwS: 100;
- $fwE: 900;
- $fwStep: 100;
- 
- @while $fwS <= $fwE {
-  .fs#{$fwS}{
+$fwS: 100;
+$fwE: 900;
+$fwStep: 100;
+
+@while $fwS <= $fwE {
+  .fs#{$fwS} {
     font-weight: $fwS;
   }
-  $fwS: $fwS + $fwStep
- }
- 
+  $fwS: $fwS + $fwStep;
+}

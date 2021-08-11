@@ -12,12 +12,12 @@ export default class LeaveMsgEdit extends React.Component<IProps> {
     this.props.history.go(-1)
   }
   
-  componentDidMount() {
+  componentDidMount () {
     const {id}: any = this.props.match.params
     this.props.leaveMsgEditStore.getDetail(id)
   }
 
-  render(){
+  render () {
     const { mainData } = this.props.leaveMsgEditStore
  
     return <React.Fragment>

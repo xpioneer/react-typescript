@@ -39,18 +39,18 @@ export default class DemoMobx extends React.Component<IProps> {
   //   })
   // }
 
-  @observable count = 66;
+  @observable count = 66
 
   @action add = () => { this.count++ }
   @action dec = () => { this.count-- }
 
-  componentDidMount() {
+  componentDidMount () {
     // console.log($http)
     // console.log(this.props)
     console.log(this)
   }
 
-  render(){
+  render () {
     // const {count} = this.state
     const {count, add, dec} = this
     

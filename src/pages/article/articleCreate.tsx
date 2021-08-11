@@ -29,11 +29,11 @@ export default class ArticleCreate extends React.Component<IProps> {
     this.props.history.push(`/home/blog-article/${id}`)
   }
   
-  componentDidMount() {
+  componentDidMount () {
     this.props.articleCreateStore.getInitData()
   }
 
-  render(){
+  render () {
     const { mainData, typeList, tagList, tagChange, inputChange, save } = this.props.articleCreateStore
  
     return <React.Fragment>

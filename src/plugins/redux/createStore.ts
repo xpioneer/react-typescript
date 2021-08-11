@@ -3,12 +3,12 @@ import { IAction, ICreateStore } from './model'
 // 创建store
 export const createStore = (reducer: Function, initState?: any, enhancer?: Function): ICreateStore => {
   let state: any = initState, listeners: Function[] = [], isDispatch = false
-  if(typeof initState === 'function') {
+  if (typeof initState === 'function') {
     enhancer = initState
     initState = undefined
   }
 
-  if(enhancer) {
+  if (enhancer) {
     const newCreateStore =  enhancer(createStore)
     return newCreateStore(reducer, initState)
   } else {
@@ -26,10 +26,10 @@ export const createStore = (reducer: Function, initState?: any, enhancer?: Funct
 
     // 更新状态
     const dispatch = (action: IAction) => {
-      if(isDispatch){
+      if (isDispatch) {
         throw new Error('dispatching...')
       }
-      try{
+      try {
         isDispatch = true
         console.log('触发方法:', action, '更新之前state:', JSON.stringify(state))
         state = reducer(state, action)

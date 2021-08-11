@@ -24,7 +24,7 @@ export const countActions = {
 
 // reducer
 const countReducer = (state = initCountState, action: IAction) => {
-  switch(action.type) {
+  switch (action.type) {
     case ADD :
       state.count++
       console.log('add', state)
@@ -41,7 +41,7 @@ const countReducer = (state = initCountState, action: IAction) => {
 // reducer
 const infoReducer = (state = initInfoState, action: IAction) => {
   let random =  + Math.random()
-  switch(action.type) {
+  switch (action.type) {
     case 'SET_NAME' :
       state.name = '这里是Redux' + random
       return state

@@ -59,7 +59,7 @@ export default class UserList extends React.Component<IProps> {
     render: (text: string, record: IUser, index: number) => <Button size="small" type="primary" onClick={() => this.viewDetail(record)}>详情</Button>
   }]
 
-  viewDetail(data: IUser) {
+  viewDetail (data: IUser) {
     this.props.history.push(`/home/blog-user/${data.id}`)
   }
 
@@ -67,11 +67,11 @@ export default class UserList extends React.Component<IProps> {
     this.props.history.push('/home/blog-userCreate')
   }
   
-  componentDidMount() {
+  componentDidMount () {
     this.props.userListStore.search()
   }
 
-  render(){
+  render () {
     const { value, loading, list, meta, createdAt, inputChange, search, clear } = this.props.userListStore
  
     return <React.Fragment>

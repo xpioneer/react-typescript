@@ -29,12 +29,12 @@ const styles = {
 @observer
 export default class Demo extends React.Component<IProps> {
 
-  componentDidMount() {
+  componentDidMount () {
     // console.log($http)
     // console.log(this.props)
   }
 
-  render(){
+  render () {
     const {demoStore: {
       count, add, desc,
       inputApi, methodChange, typeChange, inputParams, testApi,

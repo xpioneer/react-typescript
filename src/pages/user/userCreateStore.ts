@@ -23,7 +23,7 @@ class userCreateStore {
   }
 
   @action save = (cb: Function) => {
-    if(!this.pwdPass) {
+    if (!this.pwdPass) {
       $msg.warn('密码长度必须大于6，且必须相同')
       return
     } else {
@@ -36,7 +36,7 @@ class userCreateStore {
       query: postUser,
       variables: this.mainData
     }).then((res: any) => {
-      const {user:{id}} = res.data
+      const {user: {id}} = res.data
       cb(id)
       runInAction(() => { this.loading = false })
     }, err => {
@@ -50,7 +50,7 @@ class userCreateStore {
 
   @action pwdChange = (value: string, type: string) => {
     this.password[type] = value
-    if(this.password.pwd.length > 0 &&
+    if (this.password.pwd.length > 0 &&
       this.password.confirmPwd.length > 0 &&
       this.password.pwd !== this.password.confirmPwd) {
       clearTimeout(this.timer)

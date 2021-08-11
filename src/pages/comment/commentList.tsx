@@ -48,15 +48,15 @@ export default class CommentList extends React.Component<IProps> {
     render: (text: string, record: IComment, index: number) => <Button size="small" type="primary" onClick={() => this.viewDetail(record)}>详情</Button>
   }]
 
-  viewDetail(data: IComment) {
+  viewDetail (data: IComment) {
     this.props.history.push(`/home/blog-comment/${data.id}`)
   }
   
-  componentDidMount() {
+  componentDidMount () {
     this.props.commentListStore.search()
   }
 
-  render(){
+  render () {
     const { value, loading, list, meta, createdAt, inputChange, search, clear } = this.props.commentListStore
  
     return <React.Fragment>

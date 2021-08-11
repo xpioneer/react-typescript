@@ -17,7 +17,7 @@ class tagCreateStore {
       query: postTag,
       variables: this.mainData
     }).then((res: any) => {
-      const {tag:{id}} = res.data
+      const {tag: {id}} = res.data
       cb(id)
       runInAction(() => {
         this.loading = false

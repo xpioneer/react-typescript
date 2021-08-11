@@ -46,7 +46,7 @@ class articleTypeEditStore {
       query: postArticleType,
       variables: this.mainData
     }).then((res: any) => {
-      const {editArticleType:{id}} = res.data
+      const {editArticleType: {id}} = res.data
       runInAction(() => {
         this.loading = false
 

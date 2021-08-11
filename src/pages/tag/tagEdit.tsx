@@ -12,12 +12,12 @@ export default class TagEdit extends React.Component<IProps> {
     this.props.history.go(-1)
   }
   
-  componentDidMount() {
+  componentDidMount () {
     const {id}: any = this.props.match.params
     this.props.tagEditStore.getDetail(id)
   }
 
-  render(){
+  render () {
     const { mainData, inputChange, update } = this.props.tagEditStore
  
     return <React.Fragment>

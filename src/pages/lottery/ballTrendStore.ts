@@ -26,13 +26,13 @@ class ballTrendStore {
   
   
   @action inputChange = (value: any, type: string) => {
-    if(type === 'drawDate') {
+    if (type === 'drawDate') {
       this.drawDate = value
       const range = value
       this.value[type] = range.map((d: Moment, index: number) => {
         return index > 0 ? d.format('YYYY-MM-DD 23:59:59:999') : d.format('YYYY-MM-DD 00:00:00:000')
       })
-    } else if(type === 'pageSize'){
+    } else if (type === 'pageSize') {
       this.value[type] = value
     } else {
       this.value[type] = value.trim()
@@ -53,7 +53,7 @@ class ballTrendStore {
   @action search = (pagination: any = {}, filters: any, orders: any) => {
     this.value['page'] = pagination.current || 1
 
-    if(orders && Object.keys(orders).length > 0) {
+    if (orders && Object.keys(orders).length > 0) {
       this.value.order[orders.field] = orders.order === 'ascend' ? 'ASC' : 'DESC'
     }
     

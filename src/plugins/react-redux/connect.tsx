@@ -3,12 +3,12 @@ import PropTypes from 'prop-types'
 import { ICreateStore } from '../redux'
 import {} from './provider'
 
-export function connect<T>(
+export function connect<T> (
   mapStateToProps?: Function,
   mapDispatchToProps?: Function
 ) {
   
-  return function connectWithComponent(WrappedComponent: React.ComponentType) {
+  return function connectWithComponent (WrappedComponent: React.ComponentType) {
   
     return class CustomeComponent extends Component {
       
@@ -20,11 +20,11 @@ export function connect<T>(
         }).isRequired
       }
 
-      constructor(props: any, context: {store: ICreateStore}) {
+      constructor (props: any, context: {store: ICreateStore}) {
         super(props)
         this.store = context.store
         this.state = mapStateToProps(this.store.getState())
-        if(typeof mapDispatchToProps === 'function') {
+        if (typeof mapDispatchToProps === 'function') {
           this.mappedDispatch = mapDispatchToProps(this.store.dispatch)
         }
         console.log('connect....constructor', this.state, this.mappedDispatch)
@@ -36,7 +36,7 @@ export function connect<T>(
       mappedDispatch: any = {}
       unsub = () => {}
     
-      componentDidMount() {
+      componentDidMount () {
         console.log('connect----componentDidMount', mapStateToProps(this.store.getState()))
         this.unsub = this.store.subscribe(() => {
           const mappedState = mapStateToProps(this.store.getState())
@@ -45,11 +45,11 @@ export function connect<T>(
         })
       }
     
-      componentWillUnmount() {
+      componentWillUnmount () {
         this.unsub()
       }
     
-      render() {
+      render () {
         return <WrappedComponent {...this.props} {...this.state} {...this.mappedDispatch}/>
       }
     }
@@ -57,12 +57,12 @@ export function connect<T>(
 }
 
 
-export function connect1<T>(
+export function connect1<T> (
   mapStateToProps?: Function,
   mapDispatchToProps?: Function
 ) {
   
-  return function connectWithComponent(WrappedComponent: React.ComponentType) {
+  return function connectWithComponent (WrappedComponent: React.ComponentType) {
   
     return class CustomeComponent extends Component {
       
@@ -74,11 +74,11 @@ export function connect1<T>(
         }).isRequired
       }
 
-      constructor(props: any, context: {store: ICreateStore}) {
+      constructor (props: any, context: {store: ICreateStore}) {
         super(props)
         this.store = context.store
         this.state = mapStateToProps(this.store.getState())
-        if(typeof mapDispatchToProps === 'function') {
+        if (typeof mapDispatchToProps === 'function') {
           this.mappedDispatch = mapDispatchToProps(this.store.dispatch)
         }
         console.log('connect....constructor', this.state, this.mappedDispatch)
@@ -90,7 +90,7 @@ export function connect1<T>(
       mappedDispatch: any = {}
       unsub = () => {}
     
-      componentDidMount() {
+      componentDidMount () {
         console.log('connect----componentDidMount', mapStateToProps(this.store.getState()))
         this.unsub = this.store.subscribe(() => {
           const mappedState = mapStateToProps(this.store.getState())
@@ -99,11 +99,11 @@ export function connect1<T>(
         })
       }
     
-      componentWillUnmount() {
+      componentWillUnmount () {
         this.unsub()
       }
     
-      render() {
+      render () {
         return <WrappedComponent {...this.props} {...this.state} {...this.mappedDispatch}/>
       }
     }

@@ -2,8 +2,8 @@ import { AxiosResponse } from 'axios'
 import { REDIRECT_URL } from '@constants/index'
 
 class HttpHelper {
-  private store: any;
-  private seStore: any;
+  private store: any
+  private seStore: any
 
   constructor () {
     this.store = localStorage
@@ -26,7 +26,7 @@ class HttpHelper {
           }, 1000)
         } else if (path[1] === '/upload-file') {
           $msg.success('文件上传成功')
-        } else if(path[0] === '/graphql' && errors) {
+        } else if (path[0] === '/graphql' && errors) {
           $msg.error(errors[0].message) // graphql status:200 response contain errors
         } else {
           $msg.success('操作成功')

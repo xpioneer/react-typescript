@@ -3,8 +3,7 @@ const path = require('path'),
   styleRules = require('./styleLoaderConf'),
   CopyWebpackPlugin = require('copy-webpack-plugin'),
   MiniCssExtractPlugin = require("mini-css-extract-plugin"),
-  ManifestPlugin = require('webpack-manifest-plugin'),
-  SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
+  {GenerateSW} = require('workbox-webpack-plugin');
 
 const DonePlugin = require('./donePlugin')
 const _PROD_ = process.env.NODE_ENV === 'production';
@@ -24,7 +23,7 @@ module.exports = {
     publicPath: '/', // root Dir
     sourceMapFilename: '[name].map',
     chunkFilename: 'static/js/[name].[chunkhash:8].js',
-    filename: 'static/js/[name].[hash:8].js'
+    filename: 'static/js/[name].[contenthash:8].js'
   },
 
   resolveLoader: {
@@ -84,7 +83,7 @@ module.exports = {
         test: /\.(eot|woff|woff2|ttf)(\?\S*)?$/,
         loader: "url-loader",
         options: {
-          name: "assets/fonts/[name].[hash:8].[ext]",
+          name: "assets/fonts/[name].[contenthash:8].[ext]",
           limit: 2048
         }
       },
@@ -92,7 +91,7 @@ module.exports = {
         test: /\.(svg|png|jpe?g|gif)(\?\S*)?$/,
         loader: "url-loader",
         options: {
-          name: "assets/imgs/[name].[hash:8].[ext]",
+          name: "assets/imgs/[name].[contenthash:8].[ext]",
           limit: 2048
         }
       }
@@ -156,7 +155,7 @@ module.exports = {
       maxAsyncRequests: 5,
       maxInitialRequests: 3,
       automaticNameDelimiter: '~',
-      name: true,
+      // name: true,
       cacheGroups: {
         react: {
           name: 'vendor',
@@ -190,26 +189,27 @@ module.exports = {
     //   },
     //   _DEV_: JSON.stringify(_DEV_),
     // }),
-    new ManifestPlugin({
-      fileName: 'asset-manifest.json'
-    }),
-    new SWPrecacheWebpackPlugin({
-      dontCacheBustUrlsMatching: /\.\w{8}\./,
-      filename: 'serviceWorker.js',
-      logger(message) {
-        console.log(message);
-        if (message.indexOf('Total precache size is') === 0) {
-          return;
-        }
-        if (message.indexOf('Skipping static resource') === 0) {
-          return;
-        }
-      },
-      minify: true,
-      navigateFallback: '/index.html',
-      navigateFallbackWhitelist: [/^(?!\/__).*/],
-      staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
-    }),
+    // new GenerateSW(),
+    // new ManifestPlugin({
+    //   fileName: 'asset-manifest.json'
+    // }),
+    // new SWPrecacheWebpackPlugin({
+    //   dontCacheBustUrlsMatching: /\.\w{8}\./,
+    //   filename: 'serviceWorker.js',
+    //   logger(message) {
+    //     console.log(message);
+    //     if (message.indexOf('Total precache size is') === 0) {
+    //       return;
+    //     }
+    //     if (message.indexOf('Skipping static resource') === 0) {
+    //       return;
+    //     }
+    //   },
+    //   minify: true,
+    //   navigateFallback: '/index.html',
+    //   navigateFallbackWhitelist: [/^(?!\/__).*/],
+    //   staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
+    // }),
     new MiniCssExtractPlugin({
       filename: "static/css/[name].[contenthash].css",
     }),
@@ -217,9 +217,11 @@ module.exports = {
       $http: [resolve('src/utils/http.ts'), 'default'],
       $msg: [resolve('node_modules/antd/es/message/index.js'), 'default']
     }),
-    new CopyWebpackPlugin([{
-      from: resolve('statics'),
-      ignore: ['.*']
-    }])
+    new CopyWebpackPlugin({
+      patterns: [{
+        from: resolve('statics'),
+        // ignore: ['.*']
+      }]
+    })
   ]
 }

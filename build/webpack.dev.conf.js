@@ -1,11 +1,11 @@
 const path = require('path'),
   webpack = require('webpack'),
-  merge = require('webpack-merge'),
+  { merge } = require('webpack-merge'),
   webpackConfig = require('./webpack.base.conf'),
   HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = merge(webpackConfig, {
-  devtool: 'cheap-modules-eval-source-map',
+  devtool: 'eval',
   mode: 'development',
   devServer: {
     port: '8060',
@@ -26,6 +26,7 @@ module.exports = merge(webpackConfig, {
     // inline: true,
     https: false, // true for self-signed, object for cert authority
     // noInfo: true, // only errors & warns on hot reload
+    progress: true,
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),

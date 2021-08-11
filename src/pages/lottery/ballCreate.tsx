@@ -11,7 +11,7 @@ export default class BallCreate extends React.Component<IProps> {
 
   style = {
     wrap: {
-      display:'flex',
+      display: 'flex',
       paddingTop: '10px',
       flexWrap: 'wrap'
     },
@@ -49,7 +49,7 @@ export default class BallCreate extends React.Component<IProps> {
 
   setActive = (type: 'red'|'blue', selected: [number], num: number) => {
     const color =  type === 'red' ? '#f54646' : '#39f'
-    if(selected.some((v, i) => num === v)) {
+    if (selected.some((v, i) => num === v)) {
       let _style = JSON.parse(JSON.stringify(this.style[type]))
       _style['backgroundColor'] = color
       _style['color'] = '#fff'
@@ -63,11 +63,11 @@ export default class BallCreate extends React.Component<IProps> {
   //   this.props.history.push(`/home/blog-tag/${id}`)
   // }
   
-  componentDidMount() {
+  componentDidMount () {
     // 
   }
 
-  render(){
+  render () {
     const { redBalls, blueBalls, reds, blues, selectBall, mainData, inputChange, save } = this.props.ballCreateStore
  
     return <React.Fragment>
@@ -84,7 +84,7 @@ export default class BallCreate extends React.Component<IProps> {
           <Col span={18}>
             <FormItem label="红球" labelCol={{sm: {span: 4}}} wrapperCol={{sm: { span: 20 }}}>
               <div style={{
-                display:'flex',
+                display: 'flex',
                 paddingTop: '6px',
                 flexWrap: 'wrap'}}>
                 {
@@ -100,7 +100,7 @@ export default class BallCreate extends React.Component<IProps> {
           <Col span={18}>
             <FormItem label="蓝球" labelCol={{sm: {span: 4}}} wrapperCol={{sm: { span: 20 }}}>
               <div style={{
-                display:'flex',
+                display: 'flex',
                 paddingTop: '6px',
                 flexWrap: 'wrap'}}>
                 {

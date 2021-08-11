@@ -7,14 +7,21 @@ const postcssLoader = {
   loader: 'postcss-loader',
   options: {
     sourceMap: _DEV_ ? true : false,
-    plugins: [
-      require('autoprefixer'),
-      // require('postcss-pxtorem')({
-      //   rootValue: 40,
-      //   propList: ['*'],
-      //   selectorBlackList: [/^\.(vux|weui)-[\w]*/]
-      // })
-    ]
+    postcssOptions: {
+      plugins: [
+        ['postcss-preset-env', {
+          browsers: '> 0.5%, not dead, iOS >= 7, Android >= 4.3'
+        }]
+      ]
+    },
+    // plugins: [
+    //   require('autoprefixer'),
+    //   // require('postcss-pxtorem')({
+    //   //   rootValue: 40,
+    //   //   propList: ['*'],
+    //   //   selectorBlackList: [/^\.(vux|weui)-[\w]*/]
+    //   // })
+    // ]
   }
 }
 

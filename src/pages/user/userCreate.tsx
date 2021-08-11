@@ -27,11 +27,11 @@ export default class UserCreate extends React.Component<IProps> {
     this.props.history.push(`/home/blog-user/${id}`)
   }
   
-  componentDidMount() {
+  componentDidMount () {
     // 
   }
 
-  render(){
+  render () {
     const { mainData, inputChange, save, password, pwdChange } = this.props.userCreateStore
  
     return <React.Fragment>

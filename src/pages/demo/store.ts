@@ -7,7 +7,7 @@ interface IParamsData {
 
 const fmtGetParams = (params: object) => {
   let data = ''
-  for(let k in params) {
+  for (let k in params) {
     data += k + '=' + params[k] + '&'
   }
   data = data.substring(0, data.length - 1)
@@ -33,7 +33,7 @@ class DemoStore {
     return ++this.count
   }
   @action desc = () => {
-    if(this.count <= 0){
+    if (this.count <= 0) {
       return 0
     }
     return --this.count
@@ -46,7 +46,7 @@ class DemoStore {
   @action typeChange = (type: string) => {
     this.apiType = type
     this.apiUrl = type
-    if(this.apiType === '/graphql') {
+    if (this.apiType === '/graphql') {
       this.apiParams = JSON.stringify(defaultParams, null, '    ')
     } else {
       this.apiParams = ''
@@ -64,18 +64,18 @@ class DemoStore {
   @action testApi = () => {
     let jsonData = {}, error = null
     try {
-      if(this.apiParams) {
+      if (this.apiParams) {
         jsonData = JSON.parse(this.apiParams)
       }
-    } catch(e) {
+    } catch (e) {
       error = e
     }
-    if(error) {
+    if (error) {
       message.error('参数请使用json格式')
       return
     }
-    if(this.apiType === '/api') {
-      if(this.apiMethod === 'GET'){
+    if (this.apiType === '/api') {
+      if (this.apiMethod === 'GET') {
         $http.get(this.apiUrl + fmtGetParams(jsonData)).then(res => {
           runInAction(() => this.apiResult = JSON.stringify(res, null, '    '))
         })
@@ -103,7 +103,7 @@ class DemoStore {
   }
 
   @action fileChange = (e: any) => {
-    if(e && e.target.files) {
+    if (e && e.target.files) {
       this.fileVal = e.target.files[0]
     } else {
       this.fileVal = undefined
@@ -112,7 +112,7 @@ class DemoStore {
 
   @action upload = () => {
     console.log(this.fileVal)
-    if(!this.fileVal) {
+    if (!this.fileVal) {
       $msg.warn('请选择文件')
       return
     }

@@ -18,7 +18,7 @@ class apiLogStore {
   
   
   @action inputChange = (value: any, type: string) => {
-    if(type === 'createdAt') {
+    if (type === 'createdAt') {
       const range: [Moment, Moment] = value
       this.value[type] = range.map((d: Moment, index) => {
         return index > 0 ? d.format('YYYY/MM/DD 23:59:59:999') : d.format('YYYY/MM/DD 00:00:00:000')
@@ -43,7 +43,7 @@ class apiLogStore {
   @action search = (pagination: any = {}, filters: any, orders: any) => {
     this.value['page'] = pagination.current || 1
 
-    if(orders && Object.keys(orders).length > 0) {
+    if (orders && Object.keys(orders).length > 0) {
       this.value.order[orders.field] = orders.order === 'ascend' ? 'ASC' : 'DESC'
     }
     

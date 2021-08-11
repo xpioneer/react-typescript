@@ -16,11 +16,11 @@ export default class TagCreate extends React.Component<IProps> {
     this.props.history.push(`/home/blog-tag/${id}`)
   }
   
-  componentDidMount() {
+  componentDidMount () {
     // 
   }
 
-  render(){
+  render () {
     const { mainData, inputChange, save } = this.props.tagCreateStore
  
     return <React.Fragment>

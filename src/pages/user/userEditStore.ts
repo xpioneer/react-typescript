@@ -46,7 +46,7 @@ class userEditStore {
 
   @action update = (cb: Function) => {
     let pwd = this.mainData['password']
-    if(pwd && pwd.length > 0 && pwd.length < 6) {
+    if (pwd && pwd.length > 0 && pwd.length < 6) {
       $msg.warn('密码长度必须大于6')
       return
     }
