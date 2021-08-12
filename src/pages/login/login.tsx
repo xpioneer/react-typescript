@@ -6,7 +6,7 @@ const FormItem = Form.Item
 
 @inject('loginStore')
 @observer
-export default class Login extends React.Component<IProps> {
+export default class Login extends React.Component<ICommonProps> {
 
   // componentWillMount(){
   //   console.log('componentWillMount')

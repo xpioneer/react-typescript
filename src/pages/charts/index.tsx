@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-export default class Chart extends React.Component<IProps> {
+export default class Chart extends React.Component<ICommonProps> {
 
   render () {
     

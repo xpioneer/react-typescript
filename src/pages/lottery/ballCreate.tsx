@@ -7,7 +7,7 @@ const CheckboxGroup = Checkbox.Group
 
 @inject('ballCreateStore')
 @observer
-export default class BallCreate extends React.Component<IProps> {
+export default class BallCreate extends React.Component<ICommonProps> {
 
   style = {
     wrap: {

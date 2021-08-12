@@ -23,7 +23,7 @@ const styles = {
 }
 
 @observer
-export default class DemoMobx extends React.Component<IProps> {
+export default class DemoMobx extends React.Component<ICommonProps> {
 
   // state = {
   //   count: 0,

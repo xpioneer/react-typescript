@@ -14,7 +14,7 @@ require('echarts/lib/component/legend')
 
 @inject('ballChartStore')
 @observer
-export default class BallChart extends React.Component<IProps> {
+export default class BallChart extends React.Component<ICommonProps> {
 
   chartRef: any = React.createRef()
   blueRef: any = React.createRef()

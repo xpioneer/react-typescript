@@ -11,7 +11,7 @@ const { Content } = Layout
 
 @inject('homeStore')
 @observer
-class Home extends React.Component<IProps> {
+class Home extends React.Component<ICommonProps> {
 
   render () {
     const {homeStore} = this.props

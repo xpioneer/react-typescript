@@ -6,7 +6,7 @@ const FormItem = Form.Item
 
 @inject('ballEditStore')
 @observer
-export default class BallEdit extends React.Component<IProps> {
+export default class BallEdit extends React.Component<ICommonProps> {
 
   style = {
     wrap: {

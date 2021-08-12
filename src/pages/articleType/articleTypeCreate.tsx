@@ -6,7 +6,7 @@ const FormItem = Form.Item
 
 @inject('articleTypeCreateStore')
 @observer
-export default class ArticleTypeCreate extends React.Component<IProps> {
+export default class ArticleTypeCreate extends React.Component<ICommonProps> {
 
   back = () => {
     this.props.history.go(-1)

@@ -9,7 +9,7 @@ const FormItem = Form.Item
 
 @inject('leaveMsgListStore')
 @observer
-export default class LeaveMsgList extends React.Component<IProps> {
+export default class LeaveMsgList extends React.Component<ICommonProps> {
 
   state = {
     modalTitle: '参数详情',

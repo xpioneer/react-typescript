@@ -21,13 +21,9 @@ const styles = {
   }
 }
 
-// interface IProps{
-//   demoStore?: any
-// }
-
 @inject('demoStore')
 @observer
-export default class Demo extends React.Component<IProps> {
+export default class Demo extends React.Component<ICommonProps> {
 
   componentDidMount () {
     // console.log($http)

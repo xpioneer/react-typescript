@@ -6,7 +6,7 @@ const FormItem = Form.Item
 
 @inject('commentEditStore')
 @observer
-export default class CommentEdit extends React.Component<IProps> {
+export default class CommentEdit extends React.Component<ICommonProps> {
 
   back = () => {
     this.props.history.go(-1)

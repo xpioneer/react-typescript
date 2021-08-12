@@ -19,7 +19,7 @@ const formItemLayout = {
 
 @inject('articleCreateStore')
 @observer
-export default class ArticleCreate extends React.Component<IProps> {
+export default class ArticleCreate extends React.Component<ICommonProps> {
 
   back = () => {
     this.props.history.go(-1)

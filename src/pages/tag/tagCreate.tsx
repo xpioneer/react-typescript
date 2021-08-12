@@ -6,7 +6,7 @@ const FormItem = Form.Item
 
 @inject('tagCreateStore')
 @observer
-export default class TagCreate extends React.Component<IProps> {
+export default class TagCreate extends React.Component<ICommonProps> {
 
   back = () => {
     this.props.history.go(-1)

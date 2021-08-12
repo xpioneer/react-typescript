@@ -6,7 +6,7 @@ const FormItem = Form.Item
 
 @inject('userCreateStore')
 @observer
-export default class UserCreate extends React.Component<IProps> {
+export default class UserCreate extends React.Component<ICommonProps> {
 
   userTypeList = [
     {name: '超级用户', value: 0},

@@ -6,7 +6,7 @@ const FormItem = Form.Item
 
 @inject('leaveMsgEditStore')
 @observer
-export default class LeaveMsgEdit extends React.Component<IProps> {
+export default class LeaveMsgEdit extends React.Component<ICommonProps> {
 
   back = () => {
     this.props.history.go(-1)

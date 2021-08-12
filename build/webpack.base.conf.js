@@ -2,8 +2,8 @@ const path = require('path'),
   webpack = require('webpack'),
   styleRules = require('./styleLoaderConf'),
   CopyWebpackPlugin = require('copy-webpack-plugin'),
-  MiniCssExtractPlugin = require("mini-css-extract-plugin"),
-  {GenerateSW} = require('workbox-webpack-plugin');
+  MiniCssExtractPlugin = require("mini-css-extract-plugin");
+  // {GenerateSW} = require('workbox-webpack-plugin');
 
 const DonePlugin = require('./donePlugin')
 const _PROD_ = process.env.NODE_ENV === 'production';

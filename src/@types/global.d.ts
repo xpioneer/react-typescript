@@ -5,12 +5,14 @@ import { AxiosStatic } from 'axios'
 
 
 declare global {
+
+  const $http: AxiosStatic
   
-  export const $msg: MessageApi
+  const $msg: MessageApi
   
-  export const $notice: NotificationApi
+  const $notice: NotificationApi
   
-  export interface IProps extends RouteComponentProps {
+  interface ICommonProps extends RouteComponentProps {
     [key: string]: any
   }
 

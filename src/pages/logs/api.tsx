@@ -8,7 +8,7 @@ const FormItem = Form.Item
 
 @inject('apiLogStore')
 @observer
-export default class APILog extends React.Component<IProps> {
+export default class APILog extends React.Component<ICommonProps> {
 
   state = {
     modalTitle: '参数详情',

@@ -8,7 +8,7 @@ const FormItem = Form.Item
 
 @inject('errorLogStore')
 @observer
-export default class ErrorsLog extends React.Component<IProps> {
+export default class ErrorsLog extends React.Component<ICommonProps> {
 
   state = {
     modalTitle: '参数详情',

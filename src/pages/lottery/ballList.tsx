@@ -9,7 +9,7 @@ const FormItem = Form.Item
 
 @inject('ballListStore')
 @observer
-export default class BallList extends React.Component<IProps> {
+export default class BallList extends React.Component<ICommonProps> {
 
   columns: ColumnProps<IBall>[] = [{
     title: '期号',

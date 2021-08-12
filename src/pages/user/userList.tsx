@@ -9,7 +9,7 @@ const FormItem = Form.Item
 
 @inject('userListStore')
 @observer
-export default class UserList extends React.Component<IProps> {
+export default class UserList extends React.Component<ICommonProps> {
 
   state = {
     modalTitle: '参数详情',

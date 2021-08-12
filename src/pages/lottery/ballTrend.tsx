@@ -9,7 +9,7 @@ const FormItem = Form.Item
 
 @inject('ballTrendStore')
 @observer
-export default class BallTrend extends React.Component<IProps> {
+export default class BallTrend extends React.Component<ICommonProps> {
   
   state = {
     visible: false
