@@ -5,7 +5,8 @@ import Routes from '../../routes'
 import Sider from './components/sider'
 import Header from './components/header'
 import Footer from './components/footer'
-import { LocaleProvider, ConfigProvider } from 'antd'
+import { ConfigProvider } from 'antd'
+import SiderBar from './components/siderbar'
 
 const { Content } = Layout
 
@@ -18,7 +19,7 @@ class Home extends React.Component<ICommonProps> {
     
     return (<ConfigProvider locale={homeStore.lang}>
       <Layout>
-        <Sider {...homeStore}/>
+        <SiderBar/>
         <Layout>
           <Header props={homeStore}/>
           <Content style={{ margin: '16px 12px', padding: 16, background: '#fff', minHeight: 520 }}>

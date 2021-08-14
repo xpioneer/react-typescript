@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {inject, observer} from 'mobx-react'
-import { Row, Col, Form, Icon, Input, Button, DatePicker, Table, Modal, Badge, } from 'antd'
+import { Row, Col, Form, Input, Button, DatePicker, Table, Modal, Badge, } from 'antd'
 import { ColumnProps } from 'antd/lib/table'
 import { IComment } from '@models/comment'
 
@@ -49,7 +49,7 @@ export default class CommentList extends React.Component<ICommonProps> {
   }]
 
   viewDetail (data: IComment) {
-    this.props.history.push(`/home/blog-comment/${data.id}`)
+    this.props.history.push(`/home/blog/comment/${data.id}`)
   }
   
   componentDidMount () {

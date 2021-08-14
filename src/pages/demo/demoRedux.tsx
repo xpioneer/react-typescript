@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Row, Col, Button, Badge, Icon, Form, Input, Select } from 'antd'
+import { Row, Col, Button, Badge, Form, Input, Select } from 'antd'
 import { ReduxProvider, connect } from '../../plugins/react-redux'
 import { store, countActions } from './reducer'
 

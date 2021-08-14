@@ -60,11 +60,11 @@ export default class UserList extends React.Component<ICommonProps> {
   }]
 
   viewDetail (data: IUser) {
-    this.props.history.push(`/home/blog-user/${data.id}`)
+    this.props.history.push(`/home/blog/user/detail/${data.id}`)
   }
 
   create = () => {
-    this.props.history.push('/home/blog-userCreate')
+    this.props.history.push('/home/blog/user/create')
   }
   
   componentDidMount () {

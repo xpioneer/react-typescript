@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {inject, observer} from 'mobx-react'
-import { Row, Col, Form, Icon, Input, Button, DatePicker, Table, Modal, Select } from 'antd'
+import { Row, Col, Form, Input, Button, DatePicker, Table, Modal, Select } from 'antd'
 import { ColumnProps } from 'antd/lib/table'
 import { IBall } from '@models/ball'
 

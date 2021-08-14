@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {inject, observer} from 'mobx-react'
-import { Row, Col, Form, Icon, Input, Button, DatePicker, Select, Checkbox, Badge } from 'antd'
+import { Row, Col, Form, Input, Button, DatePicker, Select, Checkbox, Badge } from 'antd'
 
 const FormItem = Form.Item
 const CheckboxGroup = Checkbox.Group

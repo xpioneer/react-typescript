@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {inject, observer} from 'mobx-react'
-import { Row, Col, Form, Icon, Input, Button, DatePicker, Table, Modal, Badge, } from 'antd'
+import { Row, Col, Form, Input, Button, DatePicker, Table, Modal, Badge, } from 'antd'
 import { ColumnProps } from 'antd/lib/table'
 import { IBall } from '@models/ball'
 
@@ -95,7 +95,7 @@ export default class BallList extends React.Component<ICommonProps> {
   }]
 
   viewDetail (data: IBall) {
-    this.props.history.push(`/home/lottery-ball/${data.id}`)
+    this.props.history.push(`/home/lottery/ball/detail/${data.id}`)
   }
 
   showDelete = (id: string) => {
@@ -111,7 +111,7 @@ export default class BallList extends React.Component<ICommonProps> {
   }
 
   create = () => {
-    this.props.history.push('/home/lottery-ball')
+    this.props.history.push('/home/lottery/ball/create')
   }
 
   setColor = (num: number, type: string) => {

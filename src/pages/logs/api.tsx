@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {inject, observer} from 'mobx-react'
-import { Row, Col, Form, Icon, Input, Button, DatePicker, Table, Modal, Badge } from 'antd'
+import { Row, Col, Form, Input, Button, DatePicker, Table, Modal, Badge } from 'antd'
 import { object2Str } from '@utils/tools'
 
 const FormItem = Form.Item

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {inject, observer} from 'mobx-react'
-import { Row, Col, Form, Icon, Input, Button, DatePicker, Table, Modal, Badge, } from 'antd'
+import { Row, Col, Form, Input, Button, DatePicker, Table, Modal, Badge, } from 'antd'
 import { ColumnProps } from 'antd/lib/table'
 import { IArticle } from '@models/article'
 
@@ -53,11 +53,11 @@ export default class ArticleList extends React.Component<ICommonProps> {
   }]
 
   viewDetail (data: IArticle) {
-    this.props.history.push(`/home/blog-article/${data.id}`)
+    this.props.history.push(`/home/blog/article/detail/${data.id}`)
   }
 
   create = () => {
-    this.props.history.push('/home/blog-articleCreate')
+    this.props.history.push('/home/blog/article/create')
   }
   
   componentDidMount () {

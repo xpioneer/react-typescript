@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {inject, observer} from 'mobx-react'
-import { Row, Col, Form, Icon, Input, Button, DatePicker, Table, Modal, Badge, } from 'antd'
+import { Row, Col, Form, Input, Button, DatePicker, Table, Modal, Badge, } from 'antd'
 import { ColumnProps } from 'antd/lib/table'
 import { ILeaveMsg } from '@models/leaveMsg'
 
@@ -45,7 +45,7 @@ export default class LeaveMsgList extends React.Component<ICommonProps> {
   }]
 
   viewDetail (data: ILeaveMsg) {
-    this.props.history.push(`/home/blog-message/${data.id}`)
+    this.props.history.push(`/home/blog/message/detail/${data.id}`)
   }
   
   componentDidMount () {
