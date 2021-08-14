@@ -1,6 +1,7 @@
 import * as React from 'react'
 import {inject, observer} from 'mobx-react'
 import { Form, Input, Button, Checkbox } from 'antd'
+import { UserOutlined, LockOutlined } from '@ant-design/icons'
 
 const FormItem = Form.Item
 
@@ -57,11 +58,11 @@ export default class Login extends React.Component<ICommonProps> {
       'paddingTop': '15%'}}>
       <h2>管理后台</h2>
       <FormItem>
-        <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username"
+        <Input prefix={<UserOutlined />} placeholder="Username"
           onChange={e => inputChange(e.target.value, 'username')}/>
       </FormItem>
       <FormItem>
-        <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password"
+        <Input prefix={<LockOutlined />} type="password" placeholder="Password"
           onChange={e => inputChange(e.target.value, 'pwd')}/>
       </FormItem>
       <FormItem>
