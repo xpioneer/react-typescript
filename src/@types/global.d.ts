@@ -22,16 +22,20 @@ declare global {
     status: number
   }
 
+  type XExtends<T, K extends string | number | symbol, V = any> = T & { [P in K]: V }
+  
+  interface IPager {
+    count: number
+    page: number
+    pageSize: number
+    total: number
+    totalPage: number
+    showTotal: (total: number) => React.ReactNode
+  }
+
   interface IPageData<T = any> {
     data: T[]
-    meta: {
-      count?: number
-      page: number
-      pageSize: number
-      total?: number
-      totalPage?: number
-      showTotal?: (total: number) => React.ReactNode
-    }
+    meta: Partial<IPager>
     msg?: string
     status?: number
   }

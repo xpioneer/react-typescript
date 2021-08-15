@@ -27,19 +27,19 @@ export const storage = {
 
 export const data2PageData = <T>(data: IPageData<T> = {
   data: [],
-  meta: { page: 1, pageSize: 10, total: 0 }
+  meta: { page: 1, pageSize: 10, total: 0, count: 0 }
 }): IPageData<T> => {
   return {
     ...data,
     meta: {
       ...data.meta,
-      showTotal: total => `共${total}条`
+      showTotal: total => `共${total}条，本页${data.meta.count}条`
     }
     
   }
 }
 
-export const pageData2Params = (meta: Partial<IPageData['meta']> = {page: 1, pageSize: 10}): Pick<IPageData['meta'], 'page' | 'pageSize'> => {
+export const pageData2Params = (meta: Partial<IPager> = {page: 1, pageSize: 10}): Pick<IPager, 'page' | 'pageSize'> => {
   return {
     page: meta.page,
     pageSize: meta.pageSize

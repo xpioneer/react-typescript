@@ -10,7 +10,7 @@ const $http = axios.create({
   transformResponse: [function (data) {
     return data
   }],
-  timeout: 60000 * 1
+  timeout: 60000 * 2
 })
 
 $http.interceptors.request.use(config => {
