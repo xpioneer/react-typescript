@@ -24,7 +24,7 @@ const LeftMenu = (props: ICommonProps) => {
     const pathList = pathname.split('/').filter(p => p);
     const realMenus = LeftMenuConfig();
 
-    console.log(pathList, 'realMenus', realMenus)
+    // console.log(pathList, 'realMenus', realMenus)
     // 路由更新时更新左侧菜单选中和展开项
     if (realMenus.length > 0) {
       setMenuList(realMenus);
@@ -60,7 +60,7 @@ const LeftMenu = (props: ICommonProps) => {
   };
 
   return (
-    <Sider collapsible width={200}>
+    <Sider collapsible width={220}>
       <div className="logo">
         <div>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="-11.5 -10.23174 23 20.46348">
@@ -86,7 +86,7 @@ const LeftMenu = (props: ICommonProps) => {
             return (
               <SubMenu key={String(item.path)} title={item.title} icon={item.icon}>
                 {item.subRoute.map(child => (
-                  <Menu.Item key={String(child.path)}>
+                  <Menu.Item key={String(child.path)} icon={child.icon}>
                     <Link to={String(child.path)}>{child.title}</Link>
                   </Menu.Item>
                 ))}

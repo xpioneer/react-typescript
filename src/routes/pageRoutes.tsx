@@ -3,7 +3,7 @@ import { RouteProps } from 'react-router-dom'
 import NotFound  from '@components/notFound'
 import {
   AreaChartOutlined, BarChartOutlined, BulbOutlined, DollarOutlined, ExperimentOutlined, FileSearchOutlined,
-  FormOutlined, FrownOutlined, FundOutlined, HomeOutlined, MehOutlined, SmileOutlined, StockOutlined
+  BookOutlined, FormOutlined, FrownOutlined, FundOutlined, HomeOutlined, MehOutlined, SmileOutlined, StockOutlined
 } from '@ant-design/icons'
 
 const {lazy} = React
@@ -89,7 +89,7 @@ const routesConf: Partial<XRouteProps>[] = [
   },
   {
     title: 'Blog',
-    icon: <FileSearchOutlined/>,
+    icon: <BookOutlined/>,
     path: '/blog',
     subRoute: [
       {
@@ -293,8 +293,9 @@ const LeftMenuConfig = () => routesConf
         subRoute = route.subRoute
           .filter(_route => typeof _route.title === 'string')
           .map(_route => ({
-            path:route.path + String(_route.path),
+            path: route.path + String(_route.path),
             title: _route.title,
+            icon: _route.icon
           }));
       }
       return {

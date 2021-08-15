@@ -6,7 +6,7 @@ import { data2PageData, pageData2Params } from '../../utils/tools'
 import { marketOpts, blockOpts } from '../../types/stock'
 import { StockHistory } from '../../types/stockHistory'
 
-const ShareList: React.FC = () => {
+const StockHistoryList: React.FC = () => {
 
   const [form] = Form.useForm<StockQuery>()
 
@@ -65,4 +65,4 @@ const ShareList: React.FC = () => {
 }
 
 
-export default ShareList
+export default StockHistoryList
