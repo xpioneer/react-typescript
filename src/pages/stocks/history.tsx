@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Row, Col, Form, Table, Input, Button, Spin, Select } from 'antd'
+import { DatePicker } from 'components/datePicker'
 import { historyColumns } from './util'
 import { stockHistoryPageList, StockQuery } from '../../services/stockHistory'
 import { data2PageData, pageData2Params } from '../../utils/tools'

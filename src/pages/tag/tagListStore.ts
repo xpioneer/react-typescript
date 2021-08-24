@@ -1,6 +1,6 @@
 import { observable, action, autorun, runInAction } from 'mobx'
 import { serialize } from '@utils/params'
-import { Moment } from 'moment'
+import { startOfDay, endOfDay } from 'date-fns'
 import { GRAPHQL_API } from '@constants/index'
 
 const queryTagTypes = `
@@ -29,8 +29,8 @@ class tagListStore {
     if (type === 'createdAt') {
       this.createdAt = value
       const range = value
-      this.value[type] = range.map((d: Moment, index: number) => {
-        return index > 0 ? d.format('YYYY-MM-DD 23:59:59:999') : d.format('YYYY-MM-DD 00:00:00:000')
+      this.value[type] = range.map((d: Date, index: number) => {
+        return index > 0 ? endOfDay(d) : startOfDay(d)
       })
     } else {
       this.value[type] = value.trim()

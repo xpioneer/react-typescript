@@ -5,6 +5,13 @@
   "main": "index.js",
   "author": "xpionner",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xpioneer/react-typescript.git"
+  },
+  "bugs": {
+    "url": "https://github.com/xpioneer/react-typescript/issues"
+  },
   "scripts": {
     "start": "npm run dev",
     "dev": "NODE_ENV=development webpack-dev-server --config build/webpack.dev.conf.js",
@@ -14,17 +21,11 @@
     "lintcss": "stylelint --syntax scss src/**/*.scss",
     "lintcss:fix": "stylelint --syntax scss src/**/*.scss --fix"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/xpioneer/react-typescript.git"
-  },
-  "bugs": {
-    "url": "https://github.com/xpioneer/react-typescript/issues"
-  },
   "dependencies": {
     "@ant-design/icons": "^4.6.2",
     "antd": "^4.16.11",
     "axios": "^0.19.0",
+    "date-fns": "^2.23.0",
     "echarts": "^4.2.0-rc.2",
     "mobx": "^5.15.0",
     "mobx-react": "^6.1.4",
@@ -55,6 +56,8 @@
     "eslint-plugin-react": "^7.21.5",
     "html-webpack-plugin": "^5.0.0-alpha.17",
     "husky": "^4.3.6",
+    "less": "^4.1.1",
+    "less-loader": "^10.0.1",
     "lint-staged": "^10.5.3",
     "mini-css-extract-plugin": "^1.3.3",
     "node-sass": "^5.0.0",

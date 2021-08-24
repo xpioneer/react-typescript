@@ -1,6 +1,6 @@
 import { observable, action, autorun, runInAction } from 'mobx'
 import { serialize } from '@utils/params'
-import { Moment } from 'moment'
+import { startOfDay, endOfDay } from 'date-fns'
 
 class apiLogStore {
   @observable value = {
@@ -19,9 +19,9 @@ class apiLogStore {
   
   @action inputChange = (value: any, type: string) => {
     if (type === 'createdAt') {
-      const range: [Moment, Moment] = value
-      this.value[type] = range.map((d: Moment, index) => {
-        return index > 0 ? d.format('YYYY/MM/DD 23:59:59:999') : d.format('YYYY/MM/DD 00:00:00:000')
+      const range: [Date, Date] = value
+      this.value[type] = range.map((d, index) => {
+        return index > 0 ? endOfDay(d) : startOfDay(d)
       }).join(',')
     } else {
       this.value[type] = value.trim()
