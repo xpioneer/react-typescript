@@ -18,9 +18,9 @@ const StockHistoryList: React.FC = () => {
 
   const onQuery = (params = pageData2Params(pageData.meta)) => {
     const vals = form.getFieldsValue()
-    if(!vals.code) {
-      return;
-    }
+    // if(!vals.code) {
+    //   return;
+    // }
     setLoading(true)
     stockHistoryPageList({...params, ...vals, }).then(res => {
       const data = data2PageData(res)
@@ -52,6 +52,7 @@ const StockHistoryList: React.FC = () => {
       </Row>
     </Form>
     <Table
+      size="small"
       columns={historyColumns()}
       dataSource={pageData.data}
       key="code"

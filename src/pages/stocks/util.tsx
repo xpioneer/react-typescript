@@ -94,7 +94,8 @@ export const historyColumns = (): ColumnProps<StockHistory>[] => {
     },
     {
       title: '成交额',
-      dataIndex: 'amount'
+      dataIndex: 'amount',
+      width: 200
     },
     // {
     //   title: '交易量',
@@ -121,7 +122,7 @@ export const historyColumns = (): ColumnProps<StockHistory>[] => {
       dataIndex: 'pcf'
     },
     {
-      title: '总市值',
+      title: '总市值(元)',
       dataIndex: 'market_capital'
     },
     // {
