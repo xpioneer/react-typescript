@@ -2,53 +2,66 @@ import React, { useState, useEffect } from 'react'
 import { ColumnProps } from 'antd/lib/table'
 import { Stock, EMarket, EBlock } from '../../types/stock'
 import { StockHistory } from 'types/stockHistory'
-import { Button } from 'antd'
+import { Button, Tag } from 'antd'
 
-export const listColumns = (): ColumnProps<Stock>[] => {
-  return [{
-    title: 'ID',
-    dataIndex: 'id',
-  }, {
-    title: '名称',
-    dataIndex: 'name',
-    width: '120px',
-  }, {
-    title: '代码',
-    dataIndex: 'code'
-  }, {
-    title: '市场',
-    dataIndex: 'market',
-    render: (v, data) => EMarket[data.market]
-  }, {
-    title: '板块',
-    dataIndex: 'block',
-    render: (v, data) => EBlock[data.block]
-  }, {
-    title: '操作',
-    dataIndex: '',
-    width: '30px',
-    render: (v, data) => <Button type="link">查看</Button>
-  }]
+const blockObj = {
+  1: 'red',
+  2: 'blue',
+  3: 'orange'
+}
+
+export const listColumns = (onOpts: (data: Stock) => void): ColumnProps<Stock>[] => {
+  return [
+    {
+      title: 'ID',
+      dataIndex: 'id',
+    },
+    {
+      title: 'Name',
+      dataIndex: 'name',
+      width: '120px',
+    },
+    {
+      title: 'Code',
+      dataIndex: 'code'
+    },
+    {
+      title: 'Market',
+      dataIndex: 'market',
+      render: (v, data) => EMarket[data.market]
+    },
+    {
+      title: 'Block',
+      dataIndex: 'block',
+      render: (v, data) => <Tag color={blockObj[data.block]}>{EBlock[data.block]}</Tag>
+    },
+    {
+      title: 'Options',
+      dataIndex: '',
+      width: '30px',
+      render: (v, data) => <Button type="link" onClick={() => onOpts(data)}>查看</Button>
+    }
+  ]
 }
 
 export const historyColumns = (): ColumnProps<StockHistory>[] => {
   return [
     {
-      title: '名称',
+      title: 'Name',
       dataIndex: 'name',
       width: '120px',
       fixed: 'left',
     },
     {
-      title: '代码',
+      title: 'Code',
       dataIndex: 'code'
     },
     {
-      title: '日期',
+      title: 'Trade Date',
       dataIndex: 'tradeAt'
     },
     {
-      title: '交易量',
+      title: 'Volumn',
       dataIndex: 'volume'
     },
     {

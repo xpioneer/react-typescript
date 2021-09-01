@@ -3,14 +3,17 @@ import { Row, Col, Form, Table, Input, Button, Spin, Select } from 'antd'
 import { listColumns } from './util'
 import { stockPageList, StockQuery } from '../../services/stock'
 import { data2PageData, pageData2Params } from '../../utils/tools'
-import { Stock, marketOpts, blockOpts } from '../../types/stock'
+import { Stock, EMarket, EBlock } from '../../types/stock'
+import { object2Options } from '@utils/tools'
 
-const StockList: React.FC = () => {
+const StockList: React.FC<ICommonProps> = ({history}) => {
 
   const [form] = Form.useForm<StockQuery>()
 
   const [loading, setLoading] = useState(false)
   const [pageData, setPageData] = useState(data2PageData<Stock>())
+  const [marketOpts] = useState(object2Options(EMarket))
+  const [blockOpts] = useState(object2Options(EBlock))
 
   const onQuery = (params = pageData2Params(pageData.meta)) => {
     const vals = form.getFieldsValue()
@@ -19,6 +22,10 @@ const StockList: React.FC = () => {
       const data = data2PageData(res)
       setPageData(data)
     }).finally(() => setLoading(false))
+  }
+
+  const onOpts = (data: Stock) => {
+    history.push(`/home/stocks/stocks/detail/${data.id}`)
   }
 
   useEffect(() => {
@@ -31,35 +38,33 @@ const StockList: React.FC = () => {
       <Row gutter={16}>
         <Col span={6}>
           <Form.Item name="code">
-            <Input allowClear placeholder="代码"/>
+            <Input allowClear placeholder="Stock Code"/>
           </Form.Item>
         </Col>
         <Col span={6}>
           <Form.Item name="name">
-            <Input allowClear placeholder="名称"/>
+            <Input allowClear placeholder="Stock Name"/>
           </Form.Item>
         </Col>
         <Col span={6}>
           <Form.Item name="market">
-            <Select allowClear placeholder="请选择市场" options={marketOpts()}/>
+            <Select allowClear placeholder="Please Select Market" options={marketOpts}/>
           </Form.Item>
         </Col>
         <Col span={6}>
           <Form.Item name="block">
-            <Select allowClear placeholder="请选择板块" options={blockOpts()}/>
+            <Select allowClear placeholder="Please Select Block" options={blockOpts}/>
           </Form.Item>
         </Col>
       </Row>
-      <Row>
-        <Col span={6} offset={18}>
-          <Button onClick={() => onQuery()}>查询</Button>
-        </Col>
+      <Row justify="end">
+        <Button type="primary" onClick={() => onQuery()}>Search</Button>
       </Row>
     </Form>
     <Table
-      columns={listColumns()}
+      columns={listColumns(onOpts)}
       dataSource={pageData.data}
-      key="code"
+      rowKey="id"
       pagination={{
         ...pageData.meta,
         onChange: (page, pageSize) => onQuery({page, pageSize})

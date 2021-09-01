@@ -12,7 +12,7 @@ declare global {
   
   const $notice: NotificationApi
   
-  interface ICommonProps extends RouteComponentProps {
+  interface ICommonProps<P = AnyObject> extends RouteComponentProps<P>, AnyObject {
     [key: string]: any
   }
 
@@ -21,6 +21,8 @@ declare global {
     msg: string
     status: number
   }
+
+  type AnyObject<T = any> = Record<string, T>
 
   type XExtends<T, K extends string | number | symbol, V = any> = T & { [P in K]: V }
   

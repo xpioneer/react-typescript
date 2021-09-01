@@ -3,6 +3,8 @@ const path = require('path'),
 
 const _DEV_ = process.env.NODE_ENV === 'development'
 
+console.log('当前路径：', process.cwd())
+
 const postcssLoader = {
   loader: 'postcss-loader',
   options: {
@@ -36,6 +38,24 @@ const styleRules = [
     ],
     include: [path.join(__dirname, '../src')]
   },
+  {
+    test: /\.less$/,
+    use: [
+      'style-loader',
+      'css-loader',
+      postcssLoader,
+      {
+        loader: 'less-loader',
+        options: {
+          lessOptions: {
+            javascriptEnabled: true
+          }
+        }
+      }
+    ],
+    // include: [path.join(process.cwd(), 'src')]
+  },
+
   {
     test: /\.css$/,
     use: [

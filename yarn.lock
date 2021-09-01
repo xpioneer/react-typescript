@@ -5011,7 +5011,7 @@ last-call-webpack-plugin@^3.0.0:
 
 less-loader@^10.0.1:
   version "10.0.1"
-  resolved "https://registry.nlark.com/less-loader/download/less-loader-10.0.1.tgz?cache=0&sync_timestamp=1625230463215&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fless-loader%2Fdownload%2Fless-loader-10.0.1.tgz#c05aaba68d00400820275f21c2ad87cb9fa9923f"
+  resolved "https://registry.nlark.com/less-loader/download/less-loader-10.0.1.tgz?cache=0&sync_timestamp=1625230515316&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fless-loader%2Fdownload%2Fless-loader-10.0.1.tgz#c05aaba68d00400820275f21c2ad87cb9fa9923f"
   integrity sha1-wFqrpo0AQAggJ18hwq2Hy5+pkj8=
   dependencies:
     klona "^2.0.4"

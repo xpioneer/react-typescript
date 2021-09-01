@@ -4,7 +4,6 @@ import { DatePicker } from 'components/datePicker'
 import { historyColumns } from './util'
 import { stockHistoryPageList, StockQuery } from '../../services/stockHistory'
 import { data2PageData, pageData2Params } from '../../utils/tools'
-import { marketOpts, blockOpts } from '../../types/stock'
 import { StockHistory } from '../../types/stockHistory'
 
 const StockHistoryList: React.FC = () => {
@@ -39,17 +38,17 @@ const StockHistoryList: React.FC = () => {
       <Row gutter={16}>
         <Col span={6}>
           <Form.Item name="code">
-            <Input allowClear placeholder="代码"/>
+            <Input allowClear placeholder="Stock Code"/>
           </Form.Item>
         </Col>
         <Col span={6}>
           <Form.Item name="name">
-            <Input allowClear placeholder="名称"/>
+            <Input allowClear placeholder="Stock Name"/>
           </Form.Item>
         </Col>
-        <Col span={6} offset={18}>
-          <Button onClick={() => onQuery()}>查询</Button>
-        </Col>
+      </Row>
+      <Row justify="end">
+        <Button type="primary" onClick={() => onQuery()}>Search</Button>
       </Row>
     </Form>
     <Table

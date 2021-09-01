@@ -34,7 +34,9 @@ const BallEdit = lazy(() => import( /* webpackChunkName:"ballEdit" */ '@pages/lo
 const BallTrend = lazy(() => import( /* webpackChunkName:"ballTrend" */ '@pages/lottery/ballTrend'))
 const BallChart = lazy(() => import( /* webpackChunkName:"ballChart" */ '@pages/lottery/ballChart'))
 const StockList = lazy(() => import( /* webpackChunkName:"StockList" */ '@pages/stocks'))
+const StockDetail = lazy(() => import( /* webpackChunkName:"StockDetail" */ '@pages/stocks/detail'))
 const StockHistories = lazy(() => import( /* webpackChunkName:"StockList" */ '@pages/stocks/history'))
+const StockHistoriesDetail = lazy(() => import( /* webpackChunkName:"StockList" */ '@pages/stocks/historyDetail'))
 
 // demos
 const Demo = lazy(() => import( /* webpackChunkName:"demo" */ '@pages/demo/demo'))
@@ -216,7 +218,7 @@ const routesConf: Partial<XRouteProps>[] = [
       },
       {
         path: '/stocks/detail/:id',
-        component: StockList
+        component: StockDetail
       },
       {
         title: 'Trade History',
@@ -229,11 +231,12 @@ const routesConf: Partial<XRouteProps>[] = [
   {
     title: 'Demos',
     path: '/demos',
+    icon: <BulbOutlined/>,
     subRoute: [
       {
         title: 'Demo Page',
         path: '/demo',
-        icon: <BulbOutlined/>,
+        icon: <ExperimentOutlined/>,
         component: Demo
       },
       {
