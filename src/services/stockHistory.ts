@@ -4,7 +4,7 @@ import { Stock } from 'types/stock'
 import { StockHistory } from 'types/stockHistory'
 
 
-export type StockQuery = Omit<Stock & IPageParams, 'id' | 'amount'>
+export type StockQuery = Omit<Stock & IPageParams, 'amount'>
 
 export const stockHistoryPageList = (params: Partial<StockQuery> = pageData2Params()) => {
   return $http.get<any, IPageData<StockHistory>>('/api/stockhistory', { params })

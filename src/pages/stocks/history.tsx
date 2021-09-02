@@ -5,6 +5,8 @@ import { historyColumns } from './util'
 import { stockHistoryPageList, StockQuery } from '../../services/stockHistory'
 import { data2PageData, pageData2Params } from '../../utils/tools'
 import { StockHistory } from '../../types/stockHistory'
+import { debounce } from 'lodash'
+import { stockPageList } from 'services/stock'
 
 const StockHistoryList: React.FC = () => {
 
@@ -13,14 +15,15 @@ const StockHistoryList: React.FC = () => {
   const [loading, setLoading] = useState(false)
   const [pageData, setPageData] = useState(data2PageData<StockHistory>({
     data: [],
-    meta: {page: 1, pageSize: 20, total: 0}
+    meta: {page: 1, pageSize: 10, total: 0}
   }))
+  const [stockOpts, setStockOpts] = useState<IOption<number>[]>([])
 
   const onQuery = (params = pageData2Params(pageData.meta)) => {
     const vals = form.getFieldsValue()
-    // if(!vals.code) {
-    //   return;
-    // }
+    if(!vals.id) {
+      return;
+    }
     setLoading(true)
     stockHistoryPageList({...params, ...vals, }).then(res => {
       const data = data2PageData(res)
@@ -28,22 +31,34 @@ const StockHistoryList: React.FC = () => {
     }).finally(() => setLoading(false))
   }
 
+  const onSelectSearch = debounce((v: string) => {
+    if(!v.trim()) {
+      return;
+    }
+    stockPageList({
+      code: v,
+      name: v,
+      page: 1,
+      pageSize: 100,
+      noPage: true
+    }).then(res => {
+      const list = res.data.map<IOption<number>>(item => ({value: item.id, label: item.name}))
+      console.log(res, 'res===', list)
+      setStockOpts(list)
+    })
+  }, 500)
+
   useEffect(() => {
     onQuery()
   }, [])
 
 
   return <Spin spinning={loading}>
-    <Form form={form}>
+    <Form className="mgb16" form={form}>
       <Row gutter={16}>
         <Col span={6}>
-          <Form.Item name="code">
-            <Input allowClear placeholder="Stock Code"/>
-          </Form.Item>
-        </Col>
-        <Col span={6}>
-          <Form.Item name="name">
-            <Input allowClear placeholder="Stock Name"/>
+          <Form.Item name="id">
+            <Select allowClear showSearch filterOption={false} placeholder="Name/Code" options={stockOpts} onSearch={onSelectSearch}/>
           </Form.Item>
         </Col>
       </Row>
@@ -55,7 +70,7 @@ const StockHistoryList: React.FC = () => {
       size="small"
       columns={historyColumns()}
       dataSource={pageData.data}
-      key="code"
+      rowKey="id"
       scroll={{x: 2400}}
       pagination={{
         ...pageData.meta,
