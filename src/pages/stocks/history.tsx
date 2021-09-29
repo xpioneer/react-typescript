@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react'
 import { Row, Col, Form, Table, Input, Button, Spin, Select } from 'antd'
 import { DatePicker } from 'components/datePicker'
 import { historyColumns } from './util'
-import { stockHistoryPageList, StockQuery } from '../../services/stockHistory'
+import { stockHistoryPageList, stockHistoryTotal } from '../../services/stockHistory'
 import { data2PageData, pageData2Params } from '../../utils/tools'
 import { StockHistory } from '../../types/stockHistory'
 import { debounce } from 'lodash'
 import { stockPageList } from 'services/stock'
+import { StockQuery } from 'types/stock'
 
 const StockHistoryList: React.FC = () => {
 
@@ -18,6 +19,7 @@ const StockHistoryList: React.FC = () => {
     meta: {page: 1, pageSize: 10, total: 0}
   }))
   const [stockOpts, setStockOpts] = useState<IOption<number>[]>([])
+  const [total, setTotal] = useState(0)
 
   const onQuery = (params = pageData2Params(pageData.meta)) => {
     const vals = form.getFieldsValue()
@@ -50,6 +52,7 @@ const StockHistoryList: React.FC = () => {
 
   useEffect(() => {
     onQuery()
+    stockHistoryTotal().then(setTotal)
   }, [])
 
 
@@ -62,7 +65,8 @@ const StockHistoryList: React.FC = () => {
           </Form.Item>
         </Col>
       </Row>
-      <Row justify="end">
+      <Row justify="space-between">
+        <div>All History：{total}</div>
         <Button type="primary" onClick={() => onQuery()}>Search</Button>
       </Row>
     </Form>

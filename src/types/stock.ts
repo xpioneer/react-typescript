@@ -26,3 +26,7 @@ export enum EBlock {
 }
 
 export type KeyofBlock = keyof typeof EBlock
+
+
+export type StockQuery = Omit<Stock & IPageParams, 'amount'>
+

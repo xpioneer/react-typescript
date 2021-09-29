@@ -2,15 +2,27 @@ import * as React from 'react'
 import {inject, observer} from 'mobx-react'
 import { Row, Col, Form, Button } from 'antd'
 import { IBall } from '@models/ball'
-import * as Echart from 'echarts/lib/echarts'
-// const Echart = require('echarts/lib/echarts')
-// 引入柱状图
-require('echarts/lib/chart/bar')
-require('echarts/lib/chart/line')
-// 引入提示框和标题组件
-require('echarts/lib/component/tooltip')
-require('echarts/lib/component/title')
-require('echarts/lib/component/legend')
+import * as Echart from 'echarts/core'
+import { LegendComponent, TitleComponent, TooltipComponent, GridComponent } from 'echarts/components'
+import { BarChart, LineChart  } from 'echarts/charts'
+import { CanvasRenderer } from 'echarts/renderers';
+// // 引入柱状图
+// require('echarts/lib/chart/bar')
+// require('echarts/lib/chart/line')
+// // 引入提示框和标题组件
+// require('echarts/lib/component/tooltip')
+// require('echarts/lib/component/title')
+// require('echarts/lib/component/legend')
+
+Echart.use([
+  BarChart,
+  LineChart,
+  LegendComponent,
+  TitleComponent,
+  TooltipComponent,
+  GridComponent,
+  CanvasRenderer
+])
 
 @inject('ballChartStore')
 @observer

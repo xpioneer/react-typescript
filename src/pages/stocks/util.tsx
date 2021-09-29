@@ -19,7 +19,8 @@ export const listColumns = (onOpts: (data: Stock) => void): ColumnProps<Stock>[]
     {
       title: 'Name',
       dataIndex: 'name',
-      width: '120px',
+      // width: '120px',
+      render: (v, data) => <Button type="link" onClick={() => onOpts(data)}>{v}</Button>
     },
     {
       title: 'Code',
@@ -35,12 +36,12 @@ export const listColumns = (onOpts: (data: Stock) => void): ColumnProps<Stock>[]
       dataIndex: 'block',
       render: (v, data) => <Tag color={blockObj[data.block]}>{EBlock[data.block]}</Tag>
     },
-    {
-      title: 'Options',
-      dataIndex: '',
-      width: '30px',
-      render: (v, data) => <Button type="link" onClick={() => onOpts(data)}>查看</Button>
-    }
+    // {
+    //   title: 'Options',
+    //   dataIndex: '',
+    //   width: '30px',
+    //   render: (v, data) => <Button type="link" onClick={() => onOpts(data)}>查看</Button>
+    // }
   ]
 }
 

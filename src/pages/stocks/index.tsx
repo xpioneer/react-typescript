@@ -34,7 +34,7 @@ const StockList: React.FC<ICommonProps> = ({history}) => {
 
 
   return <Spin spinning={loading}>
-    <Form form={form}>
+    <Form className="mgb16" form={form}>
       <Row gutter={16}>
         <Col span={6}>
           <Form.Item name="code">
