@@ -212,12 +212,12 @@ const routesConf: Partial<XRouteProps>[] = [
     subRoute: [
       {
         title: 'Stocks',
-        path: '/stocks',
+        path: '',
         icon: <StockOutlined/>,
         component: StockList
       },
       {
-        path: '/stocks/detail/:id',
+        path: '/detail/:id',
         component: StockDetail
       },
       {

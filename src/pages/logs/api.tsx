@@ -2,8 +2,11 @@ import * as React from 'react'
 import {inject, observer} from 'mobx-react'
 import { Row, Col, Form, Input, Button, DatePicker, Table, Modal, Badge } from 'antd'
 import { object2Str } from '@utils/tools'
+import { ColumnProps } from 'antd/lib/table'
 
 const FormItem = Form.Item
+
+type TStatus = 'default'|'success'|'warning'|'error'
 
 
 @inject('apiLogStore')
@@ -18,7 +21,7 @@ export default class APILog extends React.Component<ICommonProps> {
     detailInfo: {}
   }
 
-  columns = [{
+  columns: ColumnProps<AnyObject>[] = [{
     title: 'ID',
     dataIndex: 'id',
     // render: (name: any) => `${name.first} ${name.last}`,
@@ -62,6 +65,7 @@ export default class APILog extends React.Component<ICommonProps> {
     title: '操作',
     dataIndex: '',
     width: '80px',
+    fixed: 'right',
     render: (text: string, record: any, index: number) => <Button size="small" type="primary" onClick={() => this.viewDetail(record)}>详情</Button>,
   }]
 
@@ -165,8 +169,8 @@ export default class APILog extends React.Component<ICommonProps> {
   }
 
   // 获取状态badge
-  getStatus = (status: any): 'default'|'success'|'warning'|'error' => {
-    let info: 'default'|'success'|'warning'|'error' = 'default'
+  getStatus = (status: any): TStatus => {
+    let info: TStatus = 'default'
     switch (status) {
       case 200 :
       case 201 :
@@ -259,6 +263,7 @@ export default class APILog extends React.Component<ICommonProps> {
       <Table
         bordered
         className="table-list"
+        scroll={{x: 1600}}
         columns={this.columns}
         rowKey={(record: any) => record.id}
         dataSource={list}
