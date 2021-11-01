@@ -5,6 +5,7 @@ import { stockPageList, StockQuery } from '../../services/stock'
 import { data2PageData, pageData2Params } from '../../utils/tools'
 import { Stock, EMarket, EBlock } from '../../types/stock'
 import { object2Options } from '@utils/tools'
+import { StockChart } from './components/stockChart'
 
 const StockList: React.FC<ICommonProps> = ({history}) => {
 
@@ -34,6 +35,7 @@ const StockList: React.FC<ICommonProps> = ({history}) => {
 
 
   return <Spin spinning={loading}>
+    <StockChart/>
     <Form className="mgb16" form={form}>
       <Row gutter={16}>
         <Col span={6}>
