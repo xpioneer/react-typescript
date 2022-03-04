@@ -10,7 +10,7 @@ import {
   LegendComponentOption
 } from 'echarts/components'
 import { PieChart, PieSeriesOption } from 'echarts/charts'
-import { CanvasRenderer } from 'echarts/renderers';
+import { CanvasRenderer } from 'echarts/renderers'
 import { LabelLayout } from 'echarts/features'
 import { getStockChartCount } from '../../../services/stock'
 import { EBlock } from 'types/stock'
@@ -25,10 +25,10 @@ Echart.use([
 ])
 
 type EchartsOption = Echart.ComposeOption<
-  TitleComponentOption |
-  TooltipComponentOption |
-  LegendComponentOption |
-  PieSeriesOption>
+TitleComponentOption |
+TooltipComponentOption |
+LegendComponentOption |
+PieSeriesOption>
 
 export const StockChart: React.FC = () => {
 
@@ -36,7 +36,7 @@ export const StockChart: React.FC = () => {
 
   useEffect(() => {
     const stockChart = Echart.init(chartRef.current)
-    let options: EchartsOption;
+    let options: EchartsOption
     getStockChartCount().then(res => {
       options = {
         title: {

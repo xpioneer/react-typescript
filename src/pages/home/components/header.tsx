@@ -26,8 +26,8 @@ export default class HeaderComponent extends React.Component<IHeaderProps> {
       justifyContent: 'flex-end'
     }}>
       {/* <div style={{flex: '1 1 0'}} onClick={toggleMenu}> */}
-        {/* {collapsed ? <MenuFoldOutlined/> : <MenuFoldOutlined/>} */}
-        {/* <Icon
+      {/* {collapsed ? <MenuFoldOutlined/> : <MenuFoldOutlined/>} */}
+      {/* <Icon
           style={{cursor: 'pointer'}}
           type={collapsed ? 'menu-unfold' : 'menu-fold'}
           onClick={toggleMenu}/> */}

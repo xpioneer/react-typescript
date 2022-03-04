@@ -5,7 +5,7 @@ import { IBall } from '@models/ball'
 import * as Echart from 'echarts/core'
 import { LegendComponent, TitleComponent, TooltipComponent, GridComponent } from 'echarts/components'
 import { BarChart, LineChart  } from 'echarts/charts'
-import { CanvasRenderer } from 'echarts/renderers';
+import { CanvasRenderer } from 'echarts/renderers'
 // // 引入柱状图
 // require('echarts/lib/chart/bar')
 // require('echarts/lib/chart/line')

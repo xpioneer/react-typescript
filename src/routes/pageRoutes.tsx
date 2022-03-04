@@ -253,11 +253,6 @@ const routesConf: Partial<XRouteProps>[] = [
   },
 ]
 
-routesConf.map(route => {
-  route.path = route.path || ''
-  return route
-})
-
 const routes = routesConf.reduce((prev, cur) => {
   if (cur.subRoute) {
     let _cur: XRouteProps = {}

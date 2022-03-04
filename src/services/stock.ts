@@ -15,5 +15,5 @@ export const getStockDetail = (id: number) => {
 
 
 export const getStockChartCount = () => {
-  return $http.get<{total: number, block: EBlock}[]>(`/api/stock/chartCount`).then(res => res.data)
+  return $http.get<{total: number, block: EBlock}[]>('/api/stock/chartCount').then(res => res.data)
 }

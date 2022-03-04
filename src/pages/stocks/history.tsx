@@ -24,7 +24,7 @@ const StockHistoryList: React.FC = () => {
   const onQuery = (params = pageData2Params(pageData.meta)) => {
     const vals = form.getFieldsValue()
     if(!vals.id) {
-      return;
+      return
     }
     setLoading(true)
     stockHistoryPageList({...params, ...vals, }).then(res => {
@@ -35,7 +35,7 @@ const StockHistoryList: React.FC = () => {
 
   const onSelectSearch = debounce((v: string) => {
     if(!v.trim()) {
-      return;
+      return
     }
     stockPageList({
       code: v,

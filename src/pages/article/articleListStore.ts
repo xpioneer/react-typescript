@@ -1,6 +1,6 @@
 import { observable, action, autorun, runInAction } from 'mobx'
 import { serialize } from '@utils/params'
- import { startOfDay, endOfDay } from 'date-fns'
+import { startOfDay, endOfDay } from 'date-fns'
 import { GRAPHQL_API } from '@constants/index'
 
 const queryArticles = `
