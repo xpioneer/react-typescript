@@ -13,7 +13,7 @@ export default class TagCreate extends React.Component<ICommonProps> {
   }
 
   goDetail = (id: string) => {
-    this.props.history.push(`/home/blog-tag/${id}`)
+    this.props.history.push(`/blog/tag/${id}`)
   }
   
   componentDidMount () {

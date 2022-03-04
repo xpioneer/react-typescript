@@ -1,6 +1,7 @@
 import * as React from 'react'
 import {inject, observer} from 'mobx-react'
 import { Row, Col, Button, Badge, Form, Input, Select } from 'antd'
+import { MinusCircleOutlined, PlusCircleOutlined } from '@ant-design/icons'
 
 const FormItem = Form.Item
 const TextArea = Input.TextArea
@@ -46,10 +47,10 @@ export default class Demo extends React.Component<ICommonProps> {
             <Badge count={count} showZero={true}>
             </Badge>
             <Button onClick={desc}>
-              <Icon type="minus" />
+              <MinusCircleOutlined />
             </Button>
             <Button onClick={add}>
-              <Icon type="plus" />
+              <PlusCircleOutlined />
             </Button>
           </Col>
         </Row>

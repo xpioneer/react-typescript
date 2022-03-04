@@ -1,63 +1,48 @@
-import React, { useState, useEffect } from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import { Layout, Menu } from 'antd';
-import { XRouteProps, LeftMenuConfig } from '../../../routes/pageRoutes';
+import React, { useState, useEffect } from 'react'
+import { Link, withRouter } from 'react-router-dom'
+import { Layout, Menu } from 'antd'
+import { XRouteProps, LeftMenuConfig } from '../../../routes/pageRoutes'
 
 
-const { Sider } = Layout;
-const { SubMenu } = Menu;
+const { Sider } = Layout
+const { SubMenu } = Menu
 
-const DEFAULT_PATH_LEN = 2;
+const DEFAULT_PATH_LEN = 2
 
 
-const setMenuKeys = (paths: string[], end = DEFAULT_PATH_LEN) => `/${paths.slice(0, end).join('/')}`;
+const setMenuKeys = (paths: string[], end = DEFAULT_PATH_LEN) => `/${paths.slice(0, end).join('/')}`
 
 const LeftMenu = (props: ICommonProps) => {
-  const { location, history } = props;
-  const [openKeys, setOpenKeys] = useState([]);
-  const [selectedKeys, setSelectedKeys] = useState([]);
-  const [menuList, setMenuList] = useState<XRouteProps[]>([]);
+  const { location, history } = props
+  const [openKeys, setOpenKeys] = useState([])
+  const [selectedKeys, setSelectedKeys] = useState([])
+  const [menuList, setMenuList] = useState<XRouteProps[]>([])
 
   useEffect(() => {
-    const { pathname } = location;
+    const { pathname } = location
     // window.USER.headerMenuKey为头部菜单选中项，根据配置拿到对应左侧菜单，过滤出有权限的左侧菜单
-    const pathList = pathname.split('/').filter(p => p);
-    const realMenus = LeftMenuConfig();
+    const pathList = pathname.split('/').filter(p => p)
+    const realMenus = LeftMenuConfig()
 
-    // console.log(pathList, 'realMenus', realMenus)
+    console.log(pathList, 'realMenus', realMenus, pathname)
     // 路由更新时更新左侧菜单选中和展开项
     if (realMenus.length > 0) {
-      setMenuList(realMenus);
-      const openKeys = setMenuKeys(pathList);
-      const isTopMenu = realMenus.findIndex(item => item.path === pathname) >= 0;
-      const isMenu2 = realMenus.some((item) => {
-        if (item.subRoute && item.subRoute.length > 0) {
-          return item.subRoute.some(_item => _item.path === pathname);
-        }
-        return false;
-      });
+      setMenuList(realMenus)
+      const openKeys = setMenuKeys(pathList, 1)
+      const isTopMenu = realMenus.findIndex(item => item.path === pathname) >= 0
 
-      if (pathname !== '/' && pathList.length >= DEFAULT_PATH_LEN) {
-        setOpenKeys([openKeys]);
-        if (isTopMenu) {
-          setSelectedKeys([openKeys]);
-        } else if (isMenu2 || pathList.length > DEFAULT_PATH_LEN + 1) {
-          setSelectedKeys([setMenuKeys(pathList, DEFAULT_PATH_LEN + 1)]);
-        } else {
-          setSelectedKeys([setMenuKeys(pathList)]);
-        }
-      } else if (pathname === '/' || pathList.length < DEFAULT_PATH_LEN) {
-        const keys = (realMenus[0].subRoute && realMenus[0].subRoute.length > 0) ? realMenus[0].subRoute[0].path : realMenus[0].path;
-        pathname === '/' && history.replace(String(keys));
-        setOpenKeys([keys]);
-        setSelectedKeys([keys]);
+      setOpenKeys([openKeys])
+      if (isTopMenu) {
+        setSelectedKeys([openKeys])
+      } else {
+        setSelectedKeys([setMenuKeys(pathList)])
       }
     }
-  }, [location.pathname]);
+  }, [location.pathname])
 
   const onOpenChange = (keys: string[]): void => {
-    setOpenKeys(keys);
-  };
+    setOpenKeys(keys)
+  }
 
   return (
     <Sider collapsible width={220}>
@@ -91,17 +76,17 @@ const LeftMenu = (props: ICommonProps) => {
                   </Menu.Item>
                 ))}
               </SubMenu>
-            );
+            )
           }
           return (
             <Menu.Item key={String(item.path)} icon={item.icon}>
               <Link to={String(item.path)}>{item.title}</Link>
             </Menu.Item>
-          );
+          )
         })}
       </Menu>
     </Sider>
-  );
-};
+  )
+}
 
-export default withRouter(LeftMenu);
+export default withRouter(LeftMenu)

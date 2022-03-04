@@ -15,9 +15,9 @@ const App: React.FC = () => {
       <Router>
         <Suspense fallback={<Loading size="large"/>}>
           <Switch>
-            <Route path="/home" component={(props: any) => <Home {...props}/>}/>
             <Route path="/login" exact component={(props: any) => <Login {...props}/>}/>
-            <Redirect to="/home"/>
+            <Route path="/" component={(props: any) => <Home {...props}/>}/>
+            <Redirect to="*"/>
           </Switch>
         </Suspense>
       </Router>

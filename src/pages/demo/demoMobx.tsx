@@ -2,6 +2,7 @@ import * as React from 'react'
 import { observable, action, autorun, runInAction, computed } from 'mobx'
 import {inject, observer} from 'mobx-react'
 import { Row, Col, Button, Badge, Form, Input, Select } from 'antd'
+import { MinusCircleOutlined, PlusCircleOutlined } from '@ant-design/icons'
 
 const FormItem = Form.Item
 const TextArea = Input.TextArea
@@ -60,11 +61,11 @@ export default class DemoMobx extends React.Component<ICommonProps> {
         <Row style={styles.padding}>
           <Col span={24}>
             <Button onClick={dec}>
-              <Icon type="minus" />
+              <MinusCircleOutlined />
             </Button>
             <Badge count={count} showZero={true}/>
             <Button onClick={add}>
-              <Icon type="plus" />
+              <PlusCircleOutlined />
             </Button>
           </Col>
         </Row>

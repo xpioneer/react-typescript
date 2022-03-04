@@ -26,7 +26,7 @@ const StockList: React.FC<ICommonProps> = ({history}) => {
   }
 
   const onOpts = (data: Stock) => {
-    history.push(`/home/stocks/detail/${data.id}`)
+    history.push(`/stocks/detail/${data.id}`)
   }
 
   useEffect(() => {

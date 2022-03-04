@@ -1,5 +1,5 @@
-import { format } from "date-fns"
-import { EDateFormat } from "types/base"
+import { format } from 'date-fns'
+import { EDateFormat } from 'types/base'
 
 export const object2Str = (o: string|object): string => {
   return typeof o === 'string' ? o : JSON.stringify(o)
@@ -68,4 +68,23 @@ export const dateFormat = (date: number | string | Date, pattern = EDateFormat.D
     // 
   }
   return str
+}
+
+export const setRem = () => {
+  let _html = document.documentElement
+  function getSize () {
+    let w = _html.clientWidth
+    if(w <= 320) {
+      _html.style.fontSize = '17.06666666px'
+    } else {
+      _html.style.fontSize = w/750*40 + 'px'
+    }
+  }
+  getSize()
+
+  let timer = 0
+  window.addEventListener('resize', function (e) {
+    clearTimeout(timer)
+    timer = window.setTimeout(function () {getSize()}, 300)
+  })
 }

@@ -54,11 +54,11 @@ export default class ArticleList extends React.Component<ICommonProps> {
   }]
 
   viewDetail (data: IArticle) {
-    this.props.history.push(`/home/blog/article/detail/${data.id}`)
+    this.props.history.push(`/blog/article/detail/${data.id}`)
   }
 
   create = () => {
-    this.props.history.push('/home/blog/article/create')
+    this.props.history.push('/blog/article/create')
   }
   
   componentDidMount () {

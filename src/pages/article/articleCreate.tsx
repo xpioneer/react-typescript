@@ -26,7 +26,7 @@ export default class ArticleCreate extends React.Component<ICommonProps> {
   }
 
   goDetail = (id: string) => {
-    this.props.history.push(`/home/blog-article/${id}`)
+    this.props.history.push(`/blog/article/detail/${id}`)
   }
   
   componentDidMount () {

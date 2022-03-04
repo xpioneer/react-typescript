@@ -46,11 +46,11 @@ export default class ArticleTypeList extends React.Component<ICommonProps> {
   }]
 
   viewDetail (data: ITag) {
-    this.props.history.push(`/home/blog/tag/detail/${data.id}`)
+    this.props.history.push(`/blog/tag/detail/${data.id}`)
   }
 
   create = () => {
-    this.props.history.push('/home/blog/tag/create')
+    this.props.history.push('/blog/tag/create')
   }
   
   componentDidMount () {

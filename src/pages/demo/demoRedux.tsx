@@ -2,6 +2,7 @@ import * as React from 'react'
 import { Row, Col, Button, Badge, Form, Input, Select } from 'antd'
 import { ReduxProvider, connect } from '../../plugins/react-redux'
 import { store, countActions } from './reducer'
+import { MinusCircleOutlined, PlusCircleOutlined } from '@ant-design/icons'
 
 console.log(store.getState(), '---store')
 
@@ -55,11 +56,11 @@ class DemoRedux extends React.Component<any> {
         <Row style={styles.padding}>
           <Col span={24}>
             <Button onClick={DECREASE}>
-              <Icon type="minus" />
+              <MinusCircleOutlined />
             </Button>
             <Badge count={count} showZero={true}/>
             <Button onClick={ADD}>
-              <Icon type="plus" />
+              <PlusCircleOutlined />
             </Button>
           </Col>
         </Row>

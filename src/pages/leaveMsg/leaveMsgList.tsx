@@ -46,7 +46,7 @@ export default class LeaveMsgList extends React.Component<ICommonProps> {
   }]
 
   viewDetail (data: ILeaveMsg) {
-    this.props.history.push(`/home/blog/message/detail/${data.id}`)
+    this.props.history.push(`/blog/message/detail/${data.id}`)
   }
   
   componentDidMount () {

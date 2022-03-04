@@ -13,7 +13,7 @@ export default class ArticleTypeCreate extends React.Component<ICommonProps> {
   }
 
   goDetail = (id: string) => {
-    this.props.history.push(`/home/blog-type/${id}`)
+    this.props.history.push(`/blog/type/${id}`)
   }
   
   componentDidMount () {

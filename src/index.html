@@ -8,22 +8,22 @@
   <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
   <link rel="manifest" href="/manifest.json">
   <script>
-    var _html = document.documentElement;
-    function getSize() {
-      var w = _html.clientWidth;
-      if(w <= 320) {
-        _html.style.fontSize = '17.06666666px';
-      } else {
-        _html.style.fontSize = w/750*40 + 'px';
-      }
-    }
-    getSize();
+    // var _html = document.documentElement;
+    // function getSize() {
+    //   var w = _html.clientWidth;
+    //   if(w <= 320) {
+    //     _html.style.fontSize = '17.06666666px';
+    //   } else {
+    //     _html.style.fontSize = w/750*40 + 'px';
+    //   }
+    // }
+    // getSize();
 
-    var timer = null;
-    window.addEventListener('resize', function(e) {
-      clearTimeout(timer);
-      timer = setTimeout(function(){getSize()}, 300);
-    })
+    // var timer = null;
+    // window.addEventListener('resize', function(e) {
+    //   clearTimeout(timer);
+    //   timer = setTimeout(function(){getSize()}, 300);
+    // })
   </script>
 </head>
 <body>

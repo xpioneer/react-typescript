@@ -81,7 +81,7 @@ export default class BallTrend extends React.Component<ICommonProps> {
   {title: () => <div style={{color: '#3399ff80'}}>16</div>, dataIndex: 'blue-16', render: (text: number, record: IBall, index: number) => this.setBall(record, 16, 'blue')}]
 
   viewDetail (data: IBall) {
-    this.props.history.push(`/home/lottery-ball/${data.id}`)
+    this.props.history.push(`/lottery-ball/${data.id}`)
   }
 
   showDelete = (id: string) => {

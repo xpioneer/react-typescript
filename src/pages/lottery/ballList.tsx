@@ -95,7 +95,7 @@ export default class BallList extends React.Component<ICommonProps> {
   }]
 
   viewDetail (data: IBall) {
-    this.props.history.push(`/home/lottery/ball/detail/${data.id}`)
+    this.props.history.push(`/lottery/ball/detail/${data.id}`)
   }
 
   showDelete = (id: string) => {
@@ -111,7 +111,7 @@ export default class BallList extends React.Component<ICommonProps> {
   }
 
   create = () => {
-    this.props.history.push('/home/lottery/ball/create')
+    this.props.history.push('/lottery/ball/create')
   }
 
   setColor = (num: number, type: string) => {

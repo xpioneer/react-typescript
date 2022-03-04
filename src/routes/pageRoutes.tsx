@@ -43,8 +43,6 @@ const Demo = lazy(() => import( /* webpackChunkName:"demo" */ '@pages/demo/demo'
 const DemoMobx = lazy(() => import( /* webpackChunkName:"demo" */ '@pages/demo/demoMobx'))
 const DemoRedux = lazy(() => import( /* webpackChunkName:"demo" */ '@pages/demo/demoRedux'))
 
-const ROUTE_MODAL = '/home'
-
 export interface XRouteProps extends RouteProps {
   title?: string
   icon?: React.ReactNode
@@ -60,7 +58,7 @@ export interface XRouteProps extends RouteProps {
 const routesConf: Partial<XRouteProps>[] = [
   {
     title: 'Dashboard',
-    path: '',
+    path: '/',
     icon: <HomeOutlined/>,
     component: Dashboard,
   },
@@ -212,7 +210,7 @@ const routesConf: Partial<XRouteProps>[] = [
     subRoute: [
       {
         title: 'Stocks',
-        path: '',
+        path: '/list',
         icon: <StockOutlined/>,
         component: StockList
       },
@@ -256,62 +254,62 @@ const routesConf: Partial<XRouteProps>[] = [
 ]
 
 routesConf.map(route => {
-  route.path = ROUTE_MODAL + route.path
+  route.path = route.path || ''
   return route
 })
 
 const routes = routesConf.reduce((prev, cur) => {
   if (cur.subRoute) {
-    let _cur: XRouteProps = {};
+    let _cur: XRouteProps = {}
     if (cur.component) {
       _cur = {
         title: cur.title,
         path: cur.path,
         component: cur.component,
         meta: cur.meta,
-      };
-      prev.push(_cur);
+      }
+      prev.push(_cur)
     }
     return prev.concat(cur.subRoute.map((item) => {
-      const _item = { ...item };
-      _item.path = cur.path + String(_item.path);
-      return _item;
-    }));
+      const _item = { ...item }
+      _item.path = cur.path + String(_item.path)
+      return _item
+    }))
   }
-  return prev.concat(cur);
-}, []);
+  return prev.concat(cur)
+}, [])
 
 routes.push({
   path: '*',
   component: NotFound
-});
+})
 
 
 const LeftMenuConfig = () => routesConf
   .filter(route => typeof route.title === 'string')
   .map<XRouteProps>(
-    (route) => {
-      let subRoute: XRouteProps[] = [];
-      if (route.subRoute && route.subRoute.length > 0) {
-        subRoute = route.subRoute
-          .filter(_route => typeof _route.title === 'string')
-          .map(_route => ({
-            path: route.path + String(_route.path),
-            title: _route.title,
-            icon: _route.icon
-          }));
-      }
-      return {
-        icon: route.icon,
-        path: route.path,
-        title: route.title,
-        subRoute,
-      };
+  (route) => {
+    let subRoute: XRouteProps[] = []
+    if (route.subRoute && route.subRoute.length > 0) {
+      subRoute = route.subRoute
+        .filter(_route => typeof _route.title === 'string')
+        .map(_route => ({
+          path: route.path + String(_route.path),
+          title: _route.title,
+          icon: _route.icon
+        }))
     }
-  );
+    return {
+      icon: route.icon,
+      path: route.path,
+      title: route.title,
+      subRoute,
+    }
+  }
+)
 
 
-// console.log(routesConf, routes, LeftMenuConfig)
+// console.log(routesConf, routes, 'LeftMenuConfig')
 
 export {
   routesConf,

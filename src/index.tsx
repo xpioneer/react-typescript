@@ -5,6 +5,9 @@ import './scss/app.scss'
 import 'antd/dist/antd.css'
 import 'quill/dist/quill.snow.css'
 import serviceWorker from './serviceWorker'
+import { setRem } from 'utils/tools'
+
+// setRem();
 
 ReactDOM.render(
   <App/>,

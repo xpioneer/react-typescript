@@ -24,7 +24,7 @@ export default class UserCreate extends React.Component<ICommonProps> {
   }
 
   goDetail = (id: string) => {
-    this.props.history.push(`/home/blog-user/${id}`)
+    this.props.history.push(`/blog/user/${id}`)
   }
   
   componentDidMount () {
