@@ -11,8 +11,8 @@
 * typescript
 * antd
 * mobx
-* webpack4
-* react-router4
+* webpack5
+* react-router5
 * pwa
 
 ### 安装
@@ -34,7 +34,7 @@ yarn #in your command terminal
 
 
 ### 运行
-启动开发服务: (http://localhost:8022)
+启动开发服务: (http://localhost:8060)
 
 ```
 yarn start
