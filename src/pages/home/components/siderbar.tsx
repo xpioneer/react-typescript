@@ -45,7 +45,7 @@ const LeftMenu = (props: ICommonProps) => {
   }
 
   return (
-    <Sider collapsible width={220}>
+    <Sider collapsible width={220} style={{minHeight: '100vh'}}>
       <div className="logo">
         <div>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="-11.5 -10.23174 23 20.46348">

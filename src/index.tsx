@@ -1,16 +1,14 @@
 import * as React from 'react'
-import * as ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import App from './pages/app'
 import './scss/app.scss'
-import 'antd/dist/antd.css'
+import 'antd/dist/reset.css'
 import 'quill/dist/quill.snow.css'
 import serviceWorker from './serviceWorker'
 import { setRem } from 'utils/tools'
 
 // setRem();
 
-ReactDOM.render(
-  <App/>,
-  document.getElementById('app')
-)
+const container = document.getElementById('app')!
+createRoot(container).render(<App />)
 serviceWorker()

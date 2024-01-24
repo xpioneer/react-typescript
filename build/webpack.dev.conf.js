@@ -14,11 +14,15 @@ module.exports = merge(webpackConfig, {
       '/api': 'http://127.0.0.1:8020',
       '/graphql': 'http://127.0.0.1:8020'
     },
-    contentBase: path.join(__dirname, '../dist'), // boolean | string | array, static file location
-    // publicPath: '/',
-    stats: {
-      color: true
+    bonjour: true,
+    // contentBase: path.join(__dirname, '../dist'), // boolean | string | array, static file location
+    static: {
+      directory: path.join(__dirname, '../dist')
     },
+    // publicPath: '/',
+    // stats: {
+    //   color: true
+    // },
     compress: true, // enable gzip compression
     historyApiFallback: true, // true for index.html upon 404, object for multiple paths
     hot: true, // hot module replacement. Depends on HotModuleReplacementPlugin
@@ -26,7 +30,14 @@ module.exports = merge(webpackConfig, {
     // inline: true,
     https: false, // true for self-signed, object for cert authority
     // noInfo: true, // only errors & warns on hot reload
-    progress: true,
+    client: {
+      reconnect: true,
+      overlay: {
+        errors: true,
+        warnings: false,
+        runtimeErrors: true,
+      },
+    },
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),

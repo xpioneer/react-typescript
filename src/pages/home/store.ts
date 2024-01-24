@@ -1,5 +1,5 @@
 import { observable, action, autorun, runInAction } from 'mobx'
-import * as zh_CN from 'antd/lib/locale-provider/zh_CN'
+import * as zh_CN from 'antd/lib/locale/zh_CN'
 import { storage } from '@utils/tools'
 import { JWT_TOKEN, SYS_LANG } from '@constants/index'
 

@@ -2,6 +2,7 @@ import * as React from 'react'
 import {inject, observer} from 'mobx-react'
 import { Row, Col, Button, Badge, Form, Input, Select } from 'antd'
 import { MinusCircleOutlined, PlusCircleOutlined } from '@ant-design/icons'
+import { DatePicker } from 'antd'
 
 const FormItem = Form.Item
 const TextArea = Input.TextArea
@@ -52,6 +53,7 @@ export default class Demo extends React.Component<ICommonProps> {
             <Button onClick={add}>
               <PlusCircleOutlined />
             </Button>
+            <DatePicker />
           </Col>
         </Row>
       </section>

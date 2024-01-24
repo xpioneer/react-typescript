@@ -1,6 +1,6 @@
 import { observable, action, autorun, runInAction, computed } from 'mobx'
 import { GRAPHQL_API } from '@constants/index'
-import * as Moment from 'moment'
+import { format } from 'date-fns'
 
 const getBallById = `
 query ball($id: String!){
@@ -60,7 +60,7 @@ class ballEditStore {
           prizeTwoNum: ball.prizeTwoNum,
           pool: ball.pool,
           bettingNum: ball.bettingNum,
-          drawDate: Moment(ball.drawDate)
+          drawDate: format(ball.drawDate, 'yyyy-MM-dd')
         }
       })
     }, err => {
