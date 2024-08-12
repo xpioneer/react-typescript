@@ -1,7 +1,7 @@
 const path = require('path'),
   webpack = require('webpack'),
   { merge } = require('webpack-merge'),
-  webpackConfig = require('./webpack.base.conf'),
+  webpackConfig = require('./webpack.config'),
   HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = merge(webpackConfig, {
@@ -25,7 +25,7 @@ module.exports = merge(webpackConfig, {
     // },
     compress: true, // enable gzip compression
     historyApiFallback: true, // true for index.html upon 404, object for multiple paths
-    hot: true, // hot module replacement. Depends on HotModuleReplacementPlugin
+    // hot: true, // hot module replacement. Depends on HotModuleReplacementPlugin
     // hotOnly: true,
     // inline: true,
     https: false, // true for self-signed, object for cert authority
