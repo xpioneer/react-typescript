@@ -39,7 +39,7 @@ const StockHistories = lazy(() => import( /* webpackChunkName:"StockList" */ '@p
 const StockHistoriesDetail = lazy(() => import( /* webpackChunkName:"StockList" */ '@pages/stocks/historyDetail'))
 
 // demos
-const Demo = lazy(() => import( /* webpackChunkName:"demo" */ '@pages/demo/demo'))
+const Demo = lazy(() => import( /* webpackChunkName:"demo" */ '@pages/demo/demoNew'))
 const DemoMobx = lazy(() => import( /* webpackChunkName:"demo" */ '@pages/demo/demoMobx'))
 const DemoRedux = lazy(() => import( /* webpackChunkName:"demo" */ '@pages/demo/demoRedux'))
 

@@ -1,13 +1,24 @@
 import * as React from 'react'
 
-export default class Chart extends React.Component<ICommonProps> {
+// export default class Chart extends React.Component<ICommonProps> {
 
-  render () {
+//   render () {
     
-    return (
-      <div>
-        this is chart page.
-      </div>
-    )
-  }
+//     return (
+//       <div>
+//         this is chart page.
+//       </div>
+//     )
+//   }
+// }
+
+
+
+export default function Chart() {
+
+  return (
+    <div>
+      this is chart page.
+    </div>
+  )
 }
