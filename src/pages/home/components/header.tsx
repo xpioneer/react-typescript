@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Layout, Popover } from 'antd'
+import { Layout, Popover, Space } from 'antd'
 import {
   MenuFoldOutlined, MenuUnfoldOutlined,
   UserOutlined
@@ -19,7 +19,7 @@ export default class HeaderComponent extends React.Component<IHeaderProps> {
     const {collapsed, toggleMenu, lang, toggleLang, logout} = this.props.props
     
     return (<Header style={{
-      background: '#fff',
+      // background: '#fff',
       padding: 0,
       display: 'flex',
       alignItems: 'center',
@@ -32,19 +32,19 @@ export default class HeaderComponent extends React.Component<IHeaderProps> {
           type={collapsed ? 'menu-unfold' : 'menu-fold'}
           onClick={toggleMenu}/> */}
       {/* </div> */}
-      <div style={{paddingRight: 12}}>
-        <Popover trigger="click" placement="bottomRight" content={
+      <Space style={{paddingRight: 12}}>
+        <Popover placement="bottomRight" content={
           <div className="user-menu">
             <div onClick={() => toggleLang(lang)}>{lang ? 'English' : '中文'}</div>
             <div onClick={logout}>退出登录</div>
           </div>
         }>
-          <UserOutlined/>
+          <UserOutlined style={{color: '#fff'}}/>
           {/* <Icon
             style={{cursor: 'pointer', fontSize: 24}}
             type='user'/> */}
         </Popover>
-      </div>
+      </Space>
     </Header>)
   }
 }

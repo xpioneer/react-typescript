@@ -1,11 +1,8 @@
 import * as React from 'react'
-import { Layout } from 'antd'
+import { Layout, Flex } from 'antd'
 
 const { Footer } = Layout
 
-export default () => <Footer
-  style={{
-    background: '#fff',
-    textAlign: 'center'}}>
-  Copyright by xpioneer
+export default () => <Footer>
+  <Flex justify='center'>Copyright by xpioneer</Flex>
 </Footer>

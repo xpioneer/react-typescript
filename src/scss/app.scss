@@ -1,4 +1,17 @@
+@import './base.scss';
 @import './functions.scss';
+
+/* dark mode */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #000000;
+    color: #ffffff;
+  }
+
+  a {
+    color: #4e9eff;
+  }
+}
 
 #app {
   // height: 100%;
@@ -169,4 +182,10 @@
 .chart-w {
   height: 400px;
   border: 1px solid #eee;
+}
+
+:global {
+  .ant-layout {
+    background-color: transparent;
+  }
 }

@@ -4,7 +4,7 @@ import { storage } from '@utils/tools'
 import { JWT_TOKEN } from '@constants/index'
 import helper from './httpHelper'
 
-const $http = axios.create({
+export const $http = axios.create({
   baseURL: '',
   responseType: 'json',
   transformResponse: [function (data) {
