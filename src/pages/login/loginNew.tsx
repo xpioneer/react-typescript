@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Form, Input, Button, Checkbox } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { onLogin } from '../../services/account'
-import { LoginForm } from '../../types/account'
+import { LoginForm } from '@/types/account'
 import { storage } from "@utils/tools"
 import { JWT_TOKEN, REDIRECT_URL } from "@constants/index"
 

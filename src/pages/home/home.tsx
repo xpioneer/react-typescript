@@ -23,7 +23,7 @@ class Home extends React.Component<ICommonProps> {
           <Header props={homeStore}/>
           <Content style={{
             // margin: '16px 12px',
-            // padding: 16,
+            padding: 16,
             // background: '#fff',
             // minHeight: 520
           }}>

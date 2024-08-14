@@ -2,7 +2,7 @@ import * as React from 'react'
 import { BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom'
 import { Provider } from 'mobx-react'
 import stores from '../stores'
-import Loading from '@components/loading'
+import Loading from '@/components/loading'
 import { ConfigProvider, theme } from 'antd'
 
 const { lazy, Suspense } = React
@@ -17,7 +17,7 @@ const App: React.FC = () => {
         theme={{
           // algorithm: theme.darkAlgorithm,
           token: {
-            // colorPrimary: '#1976d2'
+            // colorPrimary: '#e87722'
           }
         }}
       >

@@ -1,0 +1,29 @@
+
+.logo {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+
+  div {
+    width: 40px;
+    height: 36px;
+    // background: url('../imgs/logo.svg') center center no-repeat;
+    // background-size: cover;
+    animation: logoRotate 6s linear 0s infinite normal running none;
+
+    &:hover {
+      animation-play-state: paused;
+    }
+  }
+}
+
+@keyframes logoRotate {
+  from {
+    transform: rotateZ(0);
+  }
+
+  to {
+    transform: rotateZ(360deg);
+  }
+}

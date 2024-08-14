@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { Layout, Menu } from 'antd'
 import { XRouteProps, LeftMenuConfig } from '../../../routes/pageRoutes'
-
+import styles from './siderbar.scss'
 
 const { Sider } = Layout
 const { SubMenu } = Menu
@@ -46,7 +46,7 @@ const LeftMenu = (props: ICommonProps) => {
 
   return (
     <Sider collapsible width={220} style={{minHeight: '100vh'}}>
-      <div className="logo">
+      <div className={styles.logo}>
         <div>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="-11.5 -10.23174 23 20.46348">
             <circle cx="0" cy="0" r="2.05" fill="#61dafb"/>

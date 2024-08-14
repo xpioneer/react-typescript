@@ -15,12 +15,9 @@
       "es2015"
     ],
     "outDir": "./dist/",
-    "typeRoots": [
-      "./node_modules/@types/",
-      "./src/@types/"
-    ],
     "baseUrl": "./src",
     "paths": {
+      "@/*": ["*"],
       "@assets/*": ["assets/*"],
       "@components/*": ["components/*"],
       "@constants/*": ["constants/*"],
@@ -28,9 +25,10 @@
       "@pages/*": ["pages/*"],
       "@plugins": ["plugins/*"],
       "@utils/*": ["utils/*"]
-    }
+    },
   },
   "compileOnSave": false,
+  // "include": ["src/**/*"],
   "exclude": [
     "node_modules"
   ]

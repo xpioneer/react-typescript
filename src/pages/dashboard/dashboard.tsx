@@ -1,4 +1,5 @@
 import * as React from 'react'
+// import styles from './style.scss'
 
 // export default class Dashboard extends React.Component {
 //   render () {

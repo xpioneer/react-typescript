@@ -27,12 +27,23 @@ const postcssLoader = {
   }
 }
 
+const cssLoader = {
+  loader: 'css-loader',
+  options: {
+    modules: {
+      mode: "local",
+      localIdentName: '[local]_[hash:base64:5]',
+    },
+    importLoaders: 2,
+  }
+}
+
 const styleRules = [
 	{
     test: /\.scss$/,
     use: [
       'style-loader',
-      'css-loader',
+      cssLoader,
       postcssLoader,
       'sass-loader'
     ],
@@ -42,7 +53,7 @@ const styleRules = [
     test: /\.less$/,
     use: [
       'style-loader',
-      'css-loader',
+      cssLoader,
       postcssLoader,
       {
         loader: 'less-loader',
@@ -60,7 +71,7 @@ const styleRules = [
     test: /\.css$/,
     use: [
       'style-loader',
-      'css-loader',
+      cssLoader,
       postcssLoader
     ]
   },

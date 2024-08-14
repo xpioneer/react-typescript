@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { RouteProps } from 'react-router-dom'
-import NotFound  from '@components/notFound'
+import { NotFound }  from '@components/notFound'
 import {
   AreaChartOutlined, BarChartOutlined, BulbOutlined, DollarOutlined, ExperimentOutlined, FileSearchOutlined,
   BookOutlined, FormOutlined, FrownOutlined, FundOutlined, HomeOutlined, MehOutlined, SmileOutlined, StockOutlined

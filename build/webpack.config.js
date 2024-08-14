@@ -110,6 +110,7 @@ module.exports = {
     extensions: [".js", ".ts", ".tsx"],
 
     alias: {
+      '@': resolve('src'),
       '@assets': resolve('src/assets'),
       '@components': resolve('src/components'),
       '@constants': resolve('src/constants'),

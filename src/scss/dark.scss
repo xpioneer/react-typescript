@@ -1,0 +1,23 @@
+
+/* dark mode */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #000000;
+    color: #ffffff;
+  }
+
+  a {
+    color: #4e9eff;
+  }
+}
+
+
+
+:global {
+  @media (prefers-color-scheme: dark) {
+    .ant-layout, .ant-layout-footer {
+      background-color: transparent;
+      color: var(--main-txt-color);
+    }
+  }
+}
