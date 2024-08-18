@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "strict": true,
     "target": "es5",
     "module": "commonjs",
     "sourceMap": false,
@@ -9,6 +10,7 @@
     "noImplicitAny": true,
     "suppressImplicitAnyIndexErrors": true,
     "allowSyntheticDefaultImports": true,
+    "strictPropertyInitialization": false,
     "jsx": "react",
     "lib": [
       "dom",

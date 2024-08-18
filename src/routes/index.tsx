@@ -1,24 +1,19 @@
-import * as React from 'react'
-import { Route, Switch, Redirect } from 'react-router-dom'
+import React, { lazy, Suspense } from 'react'
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import Loading from '@components/loading'
-import { routes } from './pageRoutes'
 
-const { Suspense } = React
+const Home = lazy(() => import( /* webpackChunkName:"home" */'@pages/home/home'))
+const Login = lazy(() => import( /* webpackChunkName:"login" */'@pages/login/loginNew'))
 
-const Routes = (authorized: boolean) => <Suspense fallback={<Loading/>}>
-  <Switch>
-    {
-      routes.map(r => {
-        const {path, exact, component} = r
-        const LazyCom = component
-        return <Route
-          key={path + ''}
-          exact={exact !== false}
-          path={path}
-          render={(props: any) => (authorized ? <LazyCom {...props}/> : <Redirect to="/login"/>)}/>
-      })
-    }
-  </Switch>
-</Suspense>
+export const Routes: React.FC = () => {
 
-export default Routes
+  return <Router>
+    <Suspense fallback={<Loading size="large"/>}>
+      <Switch>
+        <Route path="/login" exact component={(props: any) => <Login {...props}/>}/>
+        <Route path="/" component={(props: any) => <Home {...props}/>}/>
+        <Redirect to="*"/>
+      </Switch>
+    </Suspense>
+  </Router>
+}

@@ -1,39 +1,49 @@
 import * as React from 'react'
 import { Layout } from 'antd'
 import { inject, observer } from 'mobx-react'
-import Routes from '../../routes'
-import Header from './components/header'
+import { AuthorizedRoutes } from 'routes/authorizedRoutes'
+import { HeaderComponent } from './components/header'
 import Footer from './components/footer'
 import { ConfigProvider } from 'antd'
 import SiderBar from './components/siderbar'
+import { useAppStore } from '@/stores/global'
+import zh_CN from 'antd/lib/locale/zh_CN'
+import en_CN from 'antd/lib/locale/en_US'
+import { LangKeys } from 'types/global'
 
 const { Content } = Layout
 
-@inject('homeStore')
-@observer
-class Home extends React.Component<ICommonProps> {
+const AntdLocale: Record<LangKeys, typeof zh_CN> = {
+  'zh-CN': zh_CN,
+  'en-US': en_CN,
+}
 
-  render () {
-    const {homeStore} = this.props
-    
-    return (<ConfigProvider locale={homeStore.lang}>
+const HomePage: React.FC = () => {
+
+  const [{
+    lang,
+    authorized
+  }] = useAppStore()
+
+  return (
+    <ConfigProvider locale={AntdLocale[lang]}>
       <Layout>
         <SiderBar/>
         <Layout>
-          <Header props={homeStore}/>
+          <HeaderComponent/>
           <Content style={{
             // margin: '16px 12px',
             padding: 16,
             // background: '#fff',
             // minHeight: 520
           }}>
-            { Routes(homeStore.authorized) }
+            <AuthorizedRoutes authorized={authorized}/>
           </Content>
           <Footer/>
         </Layout>
       </Layout>
-    </ConfigProvider>)
-  }
+    </ConfigProvider>
+  )
 }
 
-export default Home
+export default HomePage

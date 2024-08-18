@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { Layout, Menu } from 'antd'
-import { XRouteProps, LeftMenuConfig } from '../../../routes/pageRoutes'
+import { XRouteProps, LeftMenuConfig } from 'routes/pageRoutes'
 import styles from './siderbar.scss'
 
 const { Sider } = Layout
@@ -12,10 +12,10 @@ const DEFAULT_PATH_LEN = 2
 
 const setMenuKeys = (paths: string[], end = DEFAULT_PATH_LEN) => `/${paths.slice(0, end).join('/')}`
 
-const LeftMenu = (props: ICommonProps) => {
+const LeftMenu: React.FC<ICommonProps> = (props) => {
   const { location, history } = props
-  const [openKeys, setOpenKeys] = useState([])
-  const [selectedKeys, setSelectedKeys] = useState([])
+  const [openKeys, setOpenKeys] = useState<string[]>([])
+  const [selectedKeys, setSelectedKeys] = useState<string[]>([])
   const [menuList, setMenuList] = useState<XRouteProps[]>([])
 
   useEffect(() => {
@@ -24,16 +24,16 @@ const LeftMenu = (props: ICommonProps) => {
     const pathList = pathname.split('/').filter(p => p)
     const realMenus = LeftMenuConfig()
 
-    console.log(pathList, 'realMenus', realMenus, pathname)
+    // console.log(pathList, 'realMenus', realMenus, pathname)
     // 路由更新时更新左侧菜单选中和展开项
     if (realMenus.length > 0) {
       setMenuList(realMenus)
-      const openKeys = setMenuKeys(pathList, 1)
+      const _openKeys = setMenuKeys(pathList, 1)
       const isTopMenu = realMenus.findIndex(item => item.path === pathname) >= 0
 
-      setOpenKeys([openKeys])
+      setOpenKeys([_openKeys])
       if (isTopMenu) {
-        setSelectedKeys([openKeys])
+        setSelectedKeys([_openKeys])
       } else {
         setSelectedKeys([setMenuKeys(pathList)])
       }
@@ -44,8 +44,10 @@ const LeftMenu = (props: ICommonProps) => {
     setOpenKeys(keys)
   }
 
+  console.log(styles, 'styles')
+
   return (
-    <Sider collapsible width={220} style={{minHeight: '100vh'}}>
+    <Sider collapsible width={220}>
       <div className={styles.logo}>
         <div>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="-11.5 -10.23174 23 20.46348">

@@ -1,5 +1,5 @@
-import { MessageApi } from 'antd/lib/message'
-import { NotificationApi } from 'antd/lib/notification'
+import { MessageInstance } from 'antd/lib/message/interface'
+import { NotificationInstance } from 'antd/lib/notification/interface'
 import { RouteComponentProps } from 'react-router-dom'
 import { AxiosStatic } from 'axios'
 
@@ -8,9 +8,9 @@ declare global {
 
   const $http: AxiosStatic
   
-  const $msg: MessageApi
+  const $msg: MessageInstance
   
-  const $notice: NotificationApi
+  const $notice: NotificationInstance
   
   interface ICommonProps<P = AnyObject> extends RouteComponentProps<P>, AnyObject {
     [key: string]: any
@@ -50,7 +50,9 @@ declare global {
   }
 }
 
-declare module '*.scss' {
-  const styles: { [className: string]: string };
+
+declare const styles: { [className: string]: string }
+
+declare module '.scss' {
   export default styles;
 }
