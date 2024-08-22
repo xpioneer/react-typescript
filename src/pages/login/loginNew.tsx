@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Form, Input, Button, Checkbox } from 'antd'
+import { Form, Input, Button, Checkbox, Space, Flex } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { onLogin } from '../../services/account'
 import { LoginForm } from '@/types/account'
@@ -37,9 +37,16 @@ const LoginPage: React.FC = () => {
     <Form.Item name="pwd" rules={[{required: true}]}>
       <Input prefix={<LockOutlined />} type="password" placeholder="Password"/>
     </Form.Item>
+    <Flex justify="space-between" align="baseline">
+      <Form.Item name="remember" valuePropName="checked">
+        <Checkbox>Remember me</Checkbox>
+      </Form.Item>
+      <a href="">Forgot password</a>
+    </Flex>
     <Form.Item>
       <Button type="primary" htmlType='submit' loading={loading}>Log in</Button>
     </Form.Item>
+    <a href="/register">Register now!</a>
   </Form>
 }
 

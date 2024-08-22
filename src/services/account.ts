@@ -1,4 +1,4 @@
-import { LoginForm } from "types/account"
+import { LoginForm, RegisterForm } from "types/account"
 import $http from '@utils/http'
 
 
@@ -13,4 +13,9 @@ export const onLogout = () => {
   }, err => {
     // $msg.error(err.msg)
   })
+}
+
+
+export const onCreate = (data: LoginForm) => {
+  return $http.post<void>('/api/create', data).then(res => res.data)
 }

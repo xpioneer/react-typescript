@@ -8,7 +8,7 @@ export const object2Str = (o: string|object): string => {
 export const storage = {
   get: (key: string) => {
     const value = localStorage.getItem(key)
-    return JSON.parse(value)
+    return value
   },
 
   set: (key: string, value: any): void => {

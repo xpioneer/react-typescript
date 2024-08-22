@@ -11,7 +11,7 @@ class HttpHelper {
   }
 
   public successHelper (res: AxiosResponse<any>): void {
-    const url = res.config.url.split('?')[0]
+    const url = res.config.url?.split('?')[0]!
     const {data: { errors }} = res
     switch (res.status) {
       case 200 :
@@ -40,7 +40,7 @@ class HttpHelper {
 
   public errorHelper (err: AxiosResponse): void {
     // console.log(err, 'err.data.msg.statusText')
-    const path = err.config.url.split('?')[0]
+    const path = err.config.url?.split('?')[0]!
     const data = err.data // server response data
     switch (err.status) {
       case 400 :
