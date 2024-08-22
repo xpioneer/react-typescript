@@ -7,9 +7,6 @@ import helper from './httpHelper'
 export const $http = axios.create({
   baseURL: '',
   responseType: 'json',
-  transformResponse: [function (data) {
-    return data
-  }],
   timeout: 60000 * 2
 })
 

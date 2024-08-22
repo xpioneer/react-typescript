@@ -34,7 +34,7 @@ const LoginPage: React.FC = () => {
     <Form.Item name="username" rules={[{required: true}]}>
       <Input prefix={<UserOutlined />} placeholder="Username"/>
     </Form.Item>
-    <Form.Item name="pwd" rules={[{required: true}]}>
+    <Form.Item name="password" rules={[{required: true}]}>
       <Input prefix={<LockOutlined />} type="password" placeholder="Password"/>
     </Form.Item>
     <Flex justify="space-between" align="baseline">

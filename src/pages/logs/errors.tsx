@@ -285,6 +285,7 @@ export default class ErrorsLog extends React.Component<ICommonProps> {
       <Table
         bordered
         className="table-list"
+        scroll={{x: 1600}}
         columns={this.columns}
         rowKey={(record: any) => record.id}
         dataSource={list}

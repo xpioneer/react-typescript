@@ -3,7 +3,7 @@
 
 export interface LoginForm {
   username: string
-  pwd: string
+  password: string
 }
 
 export interface RegisterForm extends LoginForm {

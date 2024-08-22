@@ -15,7 +15,7 @@ const RegisterPage: React.FC = () => {
 
   const onFinish = (values: LoginForm) => {
     onCreate(values).then(res => {
-      window.location.href = '/home'
+      window.location.href = '/login'
     })
   }
 
@@ -33,17 +33,17 @@ const RegisterPage: React.FC = () => {
     <Form.Item name="username" rules={[{required: true}]}>
       <Input prefix={<UserOutlined />} placeholder="Username"/>
     </Form.Item>
-    <Form.Item name="pwd" rules={[{required: true}]}>
+    <Form.Item name="password" rules={[{required: true}]}>
       <Input prefix={<LockOutlined />} type="password" placeholder="Password"/>
     </Form.Item>
     <Form.Item<RegisterForm>
       name="confirm"
-      dependencies={['pwd']}
+      dependencies={['password']}
       rules={[
         {required: true},
         ({ getFieldValue }) => ({
           validator(_, value) {
-            if (!value || getFieldValue('pwd') === value) {
+            if (!value || getFieldValue('password') === value) {
               return Promise.resolve();
             }
             return Promise.reject(new Error('The new password that you entered do not match!'));

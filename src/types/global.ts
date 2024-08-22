@@ -1,3 +1,4 @@
+import { isLogged } from '@/utils/tools'
 import { UserInfo } from 'types/user'
 
 
@@ -11,7 +12,7 @@ export type LangKeys = keyof typeof LangI18n
 
 export class Store {
   lang: LangKeys = 'zh-CN'
-  authorized = false
+  authorized = isLogged()
   loading = false
   userInfo = new UserInfo
   collapsed = false

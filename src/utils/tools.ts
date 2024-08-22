@@ -1,3 +1,4 @@
+import { JWT_TOKEN } from '@/constants'
 import { format } from 'date-fns'
 import { EDateFormat } from 'types/base'
 
@@ -6,14 +7,14 @@ export const object2Str = (o: string|object): string => {
 }
 
 export const storage = {
-  get: (key: string) => {
+  get: (key: string): string => {
     const value = localStorage.getItem(key)
-    return value
+    return value || ''
   },
 
-  set: (key: string, value: any): void => {
+  set: (key: string, value: string) => {
     if (value !== null && value !== undefined) {
-      localStorage.setItem(key, JSON.stringify(value))
+      localStorage.setItem(key, value)
     }
   },
 
@@ -87,4 +88,21 @@ export const setRem = () => {
     clearTimeout(timer)
     timer = window.setTimeout(function () {getSize()}, 300)
   })
+}
+
+export const isLogged = () => {
+  try {
+    const token = storage.get(JWT_TOKEN), [h, p, s] = token.split('.')
+    if(h && p && s) {
+      const payload = JSON.parse(window.atob(p)),
+        exp = (+payload.exp * 1000),
+        now = Date.now()
+      if(now < exp) {
+        return true
+      }
+    }
+    return false
+  } catch(e) {
+    return false
+  }
 }
