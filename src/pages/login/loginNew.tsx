@@ -16,7 +16,7 @@ const LoginPage: React.FC = () => {
   const onFinish = (values: LoginForm) => {
     onLogin(values).then(res => {
       storage.set(JWT_TOKEN, res) // store jwt token
-      window.location.replace(sessionStorage.getItem(REDIRECT_URL) || '/home')
+      window.location.replace(sessionStorage.getItem(REDIRECT_URL) || '/')
     })
   }
 

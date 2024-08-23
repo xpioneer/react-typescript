@@ -1,5 +1,10 @@
 import * as React from 'react'
-import { Layout, Popover, Space } from 'antd'
+import { Link } from 'react-router-dom'
+import {
+  Layout, Popover, Space,
+  Dropdown,
+  MenuProps,
+} from 'antd'
 import {
   MenuFoldOutlined, MenuUnfoldOutlined,
   UserOutlined
@@ -7,6 +12,7 @@ import {
 import { useAppStore, setLang } from 'stores/store'
 import { onLogout } from 'services/account'
 import { LangI18n } from 'types/global'
+import { storage } from '@/utils/tools'
 
 
 const { Header } = Layout
@@ -18,6 +24,27 @@ export const HeaderComponent: React.FC = () => {
   },
   dispatch
   ] = useAppStore()
+
+  const items: MenuProps['items'] = [
+    {
+      label: <div onClick={() => setLang(lang)}>{LangI18n[lang]}</div>,
+      key: '1',
+    },
+    {
+      type: 'divider',
+    },
+    {
+      label: 'Log out',
+      key: '9',
+      onClick: () => {
+        onLogout().then(() => {
+          console.log('退出..')
+          storage.clear()
+          window.location.replace('/login')
+        })
+      }
+    },
+  ]
 
 
   return (<Header style={{
@@ -35,17 +62,9 @@ export const HeaderComponent: React.FC = () => {
         onClick={toggleMenu}/> */}
     {/* </div> */}
     <Space style={{paddingRight: 12}}>
-      <Popover placement="bottomRight" content={
-        <div className="user-menu">
-          <div onClick={() => setLang(lang)}>{LangI18n[lang]}</div>
-          <div onClick={onLogout}>退出登录</div>
-        </div>
-      }>
-        <UserOutlined style={{color: '#fff'}}/>
-        {/* <Icon
-          style={{cursor: 'pointer', fontSize: 24}}
-          type='user'/> */}
-      </Popover>
+      <Dropdown menu={{items}}>
+        <UserOutlined/>
+      </Dropdown>
     </Space>
   </Header>)
 }
