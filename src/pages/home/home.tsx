@@ -25,7 +25,6 @@ const HomePage: React.FC = () => {
     authorized
   }] = useAppStore()
 
-  console.log(authorized, '9999')
 
   return (
     <ConfigProvider locale={AntdLocale[lang]}>

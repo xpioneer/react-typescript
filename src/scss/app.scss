@@ -2,7 +2,6 @@
 @import './dark.scss';
 @import './functions.scss';
 
-:global{
 #app {
   // height: 100%;
 }
@@ -125,5 +124,6 @@
 .chart-w {
   height: 400px;
   border: 1px solid #eee;
-}
+  background-color: #fff;
+  padding: 8px;
 }

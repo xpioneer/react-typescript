@@ -1,6 +1,6 @@
 import $http from '@utils/http'
 import { pageData2Params } from '@utils/tools'
-import { EBlock, Stock } from 'types/stock'
+import { StockStats, Stock } from 'types/stock'
 
 
 export type StockQuery = Omit<Stock & IPageParams, 'id' | 'amount'> & { noPage: boolean }
@@ -19,5 +19,5 @@ export const getStockDetail = (id: number) => {
 
 
 export const getStockChartCount = () => {
-  return $http.get<{total: number, block: EBlock}[]>('/api/stock/chartCount').then(res => res.data)
+  return $http.get<StockStats[]>('/api/stock/chartCount').then(res => res.data)
 }

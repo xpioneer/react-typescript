@@ -30,3 +30,7 @@ export type KeyofBlock = keyof typeof EBlock
 
 export type StockQuery = Omit<Stock & IPageParams, 'amount'>
 
+export type StockStats = {
+  total: number
+  block: EBlock
+}

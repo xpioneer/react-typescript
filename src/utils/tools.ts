@@ -103,13 +103,14 @@ export const object2Options = <T, K extends keyof T>(obj: T, keys: K[] = Object.
 export const dateFormat = (date: number | string | Date, pattern = EDateFormat.Date) => {
   let str = ''
   try {
-    const _date = new Date(date)
-    console.log(_date, '-----')
-    if(!isNaN(+_date)) {
-      str = format(_date, pattern)
+    if(date) {
+      const _date = new Date(date)
+      if(!isNaN(+_date)) {
+        str = format(_date, pattern)
+      }
     }
   } catch(e) {
-    // 
+    return 'N/A'
   }
   return str
 }

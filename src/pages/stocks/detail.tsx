@@ -44,7 +44,7 @@ const StockDetailPage: React.FC<ICommonProps<{id: number}>> = ({
         <Col span="24">
           <Space>
             <Button type="primary" onClick={onSync}>Sync</Button>
-            <Button type="ghost" onClick={onSyncAll}>Sync All</Button>
+            <Button type="primary" ghost onClick={onSyncAll}>Sync All</Button>
           </Space>
         </Col>
       </Row>
