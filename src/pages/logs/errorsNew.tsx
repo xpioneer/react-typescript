@@ -1,27 +1,32 @@
-import React, { useState, useEffect } from 'react'
-import { Row, Col, Form, Input, Button, Table, Modal, Badge, Flex, Space, Spin } from 'antd'
-import { ColumnProps } from 'antd/lib/table'
-import styles from './style.module.scss'
-import { APILog, RequestStatus } from 'types/api'
-import { useApi } from './useApi'
+import React from 'react'
+import {
+  Row, Col, Form, Input, Button, Flex, Space,
+  Table, Modal, Badge, TableColumnProps,
+  Spin,
+} from 'antd'
 import { DatePicker } from 'components/datePicker'
+import { object2Str } from '@utils/tools'
+import { ErrorLog } from 'types/apiError'
+import { RequestStatus } from 'types/api'
+import { useErrors } from './useErrors'
+import styles from './style.module.scss'
 import { JSONView } from 'components/jsonView'
 
-
-const APILogPage: React.FC = () => {
+const ErrorsLogPage: React.FC = () => {
 
   const {
     form,
     loading,
     pageData,
     onQuery,
-  } = useApi()
+  } = useErrors()
 
-  const columns: ColumnProps<APILog>[] = [{
+  const columns: TableColumnProps<ErrorLog>[] = [{
     title: 'ID',
     dataIndex: 'id',
+    sorter: true,
     // render: (name: any) => `${name.first} ${name.last}`,
-    width: '12%',
+    width: '120px',
   }, {
   //   title: 'Path',
   //   dataIndex: 'path',
@@ -34,26 +39,28 @@ const APILogPage: React.FC = () => {
     title: 'Url',
     dataIndex: 'url',
     width: '120px',
-    render: (text: string, record, index: number) => <div onClick={() => {showParamsDetail(record.url, 'Url')}} className="textflow-4"> {text} </div>,
+    render: (value: string, record) => <div onClick={() => showParamsDetail(value, 'url')} className="textflow-4"> {value} </div>,
   }, {
     title: '请求方式',
     dataIndex: 'method',
     width: '60px',
   }, {
     title: '参数',
-    width: 400,
     dataIndex: 'params',
-    render: (text: string, record, index: number) => <div onClick={() => showParamsDetail(record.params, '参数')} className="textflow-4"> {object2Str(text)} </div>,
+    render: (value: string, record) => <div onClick={() => showParamsDetail(value, '参数')} className="textflow-4"> {object2Str(value)} </div>,
+  }, {
+    title: '错误信息',
+    dataIndex: 'msg',
+    render: (value: string, record) => <div onClick={() => showParamsDetail(record.errors, '错误信息')} className="textflow-4"> {value} </div>,
   }, {
     title: '状态',
     dataIndex: 'status',
     width: '60px',
-    render: (text: string, record, index: number) => <Badge status={getStatus(text)} text={text}/>,
+    render: (value: string, record) => <Badge status={getStatus(value)} text={value}/>,
   }, {
     title: '创建时间',
     width: '120px',
     dataIndex: 'createdAt',
-    sorter: true
   }, {
     title: '耗时(ms)',
     dataIndex: 'time',
@@ -61,21 +68,25 @@ const APILogPage: React.FC = () => {
   }, {
     title: '操作',
     dataIndex: '',
-    width: '80px',
-    fixed: 'right',
-    render: (text: string, record, index: number) => <Button size="small" type="primary" onClick={() => onViewDetail(record)}>详情</Button>,
+    width: '60px',
+    render: (text: string, record) => <Button size="small" type="primary" onClick={() => onViewDetail(record)}>详情</Button>,
   }]
 
-  const object2Str = (o: string|object): string => {
-    return typeof o === 'string' ? o : JSON.stringify(o)
-  }
-
   // 查看Url/参数详情
-  const showParamsDetail = (str: any, title: string) => {
-    Modal.info({
-      title,
-      content: str,
-    })
+  const showParamsDetail = (data: any, title: string) => {
+    if(typeof data === 'string') {
+      Modal.info({
+        title,
+        content: data,
+      })
+    } else {
+      Modal.info({
+        title,
+        width: '75%',
+        className: styles.large,
+        content: <JSONView data={data} />,
+      })
+    }
   }
 
   // 查看日志详情
@@ -88,8 +99,9 @@ const APILogPage: React.FC = () => {
     })
   }
 
-  const wrapHtml = (data: any) => {
-    if (data && Object.keys(data).length > 0) {
+  // 日志详情页面
+  const wrapHtml = (data: ErrorLog) => {
+    if (data !== null && Object.keys(data).length > 0) {
       return <React.Fragment>
         <div className="row">
           <div>ID：</div><div>{data.id}</div>
@@ -98,31 +110,38 @@ const APILogPage: React.FC = () => {
           <div>IP：</div><div>{data.ip}</div>
         </div>
         <div className="row">
+          <div>错误信息：</div><div>{data.msg}</div>
+        </div>
+        <div className="row">
+          <div>堆栈信息：</div>
+          <div>
+            <JSONView data={data.errors} />
+          </div>
+        </div>
+        <div className="row">
           <div>Url：</div><div>{data.url}</div>
         </div>
         <div className="row">
           <div>Path：</div><div>{data.path}</div>
         </div>
         <div className="row">
-          <div>参数：</div><div>{object2Str(data.params)}</div>
+          <div>参数：</div><div>{data.params}</div>
         </div>
         <div className="row">
           <div>请求头：</div>
           <div>
-            <JSONView data={data.headers}/>
+            <JSONView data={data.headers} />
           </div>
         </div>
         <div className="row">
           <div>响应头：</div>
           <div>
-            <JSONView data={data.resHeaders || data.responseHeaders}/>
+            <JSONView data={data.resHeaders} />
           </div>
         </div>
         <div className="row">
           <div>响应参数：</div>
-          <div>
-            <JSONView data={data.resData}/>
-          </div>
+          <JSONView data={data.resData}/>
         </div>
         <div className="row">
           <div>创建时间：</div><div>{data.createdAt}</div>
@@ -170,29 +189,28 @@ const APILogPage: React.FC = () => {
     }
     return info
   }
-
+ 
   return <Spin spinning={loading}>
-    <Form
-      form={form}
-      className="search-form"
-      onFinish={(vals) => {
-        
-      }}
-    >
-      <h3>API请求日志</h3>
+    <Form className="search-form">
+      <h3>错误日志</h3>
       <Row gutter={24}>
         <Col span={6}>
           <Form.Item name="path">
-            <Input placeholder="path"/>
+            <Input placeholder="path" />
           </Form.Item>
         </Col>
         <Col span={6}>
           <Form.Item name="url">
-            <Input placeholder="url"/>
+            <Input placeholder="url" />
           </Form.Item>
         </Col>
         <Col span={6}>
-          <Form.Item name="_createdAt">
+          <Form.Item name="msg">
+            <Input placeholder="错误信息" />
+          </Form.Item>
+        </Col>
+        <Col span={6}>
+          <Form.Item>
             <DatePicker.RangePicker />
           </Form.Item>
         </Col>
@@ -219,4 +237,4 @@ const APILogPage: React.FC = () => {
   </Spin>
 }
 
-export default APILogPage
+export default ErrorsLogPage
