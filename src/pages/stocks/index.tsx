@@ -20,8 +20,9 @@ const StockList: React.FC<ICommonProps> = ({history}) => {
     const vals = form.getFieldsValue()
     setLoading(true)
     stockPageList({...params, ...vals}).then(res => {
-      const data = data2PageData(res)
-      setPageData(data)
+      console.log('>>>>', res)
+      // const data = data2PageData(res)
+      // setPageData(data)
     }).finally(() => setLoading(false))
   }
 
@@ -35,7 +36,7 @@ const StockList: React.FC<ICommonProps> = ({history}) => {
 
 
   return <Spin spinning={loading}>
-    <StockChart/>
+    {/* <StockChart/> */}
     <Form className="mgb16" form={form}>
       <Row gutter={16}>
         <Col span={6}>

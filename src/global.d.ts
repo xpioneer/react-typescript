@@ -28,6 +28,7 @@ declare global {
   
   interface IPager {
     count: number
+    current: number
     page: number
     pageSize: number
     total: number
@@ -53,6 +54,10 @@ declare global {
 
 declare const styles: { [className: string]: string }
 
-declare module '.scss' {
+declare module '*.scss' {
+  export default styles;
+}
+
+declare module '*.module.scss' {
   export default styles;
 }

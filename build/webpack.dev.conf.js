@@ -32,11 +32,7 @@ module.exports = merge(webpackConfig, {
     // noInfo: true, // only errors & warns on hot reload
     client: {
       reconnect: true,
-      overlay: {
-        errors: true,
-        warnings: false,
-        runtimeErrors: true,
-      },
+      overlay: false,
     },
   },
   plugins: [

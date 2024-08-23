@@ -212,16 +212,17 @@ export default class APILog extends React.Component<ICommonProps> {
       <Modal
         title={modalTitle}
         keyboard={true}
-        visible={visible}
+        open={visible}
         onOk={() => this.showParamsDetail('')}
         onCancel={() => this.showParamsDetail('')}
       > {modalTxt} </Modal>
       <Modal
         className="large-modal"
         title="日志详情"
+        width={'80%'}
         style={{ top: 40 }}
         keyboard={true}
-        visible={visibleLog}
+        open={visibleLog}
         onOk={() => this.viewDetail('')}
         onCancel={() => this.viewDetail('')}
       > {this.wrapHtml(detailInfo)} </Modal>

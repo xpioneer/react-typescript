@@ -10,7 +10,7 @@ const {lazy} = React
 
 const Dashboard = lazy(() => import( /* webpackChunkName:"dashboard" */ '@pages/dashboard/dashboard'))
 const Chart = lazy(() => import( /* webpackChunkName:"charts" */ '@pages/charts'))
-const LogApi = lazy(() => import( /* webpackChunkName:"logApi" */ '@pages/logs/api'))
+const LogApi = lazy(() => import( /* webpackChunkName:"logApi" */ '@pages/logs/apiNew'))
 const LogErrors = lazy(() => import( /* webpackChunkName:"logErrors" */ '@pages/logs/errors'))
 const ArticleList = lazy(() => import( /* webpackChunkName:"articleList" */ '@pages/article/articleList'))
 const ArticleEdit = lazy(() => import( /* webpackChunkName:"articleEdit" */ '@pages/article/articleEdit'))

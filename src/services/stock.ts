@@ -7,6 +7,10 @@ export type StockQuery = Omit<Stock & IPageParams, 'id' | 'amount'> & { noPage: 
 
 export const stockPageList = (params: Partial<StockQuery> = pageData2Params()) => {
   return $http.get<any, IPageData<Stock>>('/api/stocks', { params })
+    .then(res => {
+      console.log('get:', res)
+      return res
+    })
 }
 
 export const getStockDetail = (id: number) => {

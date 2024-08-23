@@ -27,6 +27,8 @@ const postcssLoader = {
   }
 }
 
+const sassModuleRegex = /\.module\.(scss|sass)$/;
+
 const cssLoader = {
   loader: 'css-loader',
   options: {
@@ -41,6 +43,17 @@ const cssLoader = {
 const styleRules = [
 	{
     test: /\.scss$/,
+    exclude: sassModuleRegex,
+    use: [
+      'style-loader',
+      'css-loader',
+      postcssLoader,
+      'sass-loader'
+    ],
+    include: [path.join(__dirname, '../src')]
+  },
+	{
+    test: sassModuleRegex,
     use: [
       'style-loader',
       cssLoader,
@@ -53,7 +66,7 @@ const styleRules = [
     test: /\.less$/,
     use: [
       'style-loader',
-      cssLoader,
+      'css-loader',
       postcssLoader,
       {
         loader: 'less-loader',
@@ -66,12 +79,21 @@ const styleRules = [
     ],
     // include: [path.join(process.cwd(), 'src')]
   },
-
+	{
+    test: /\.module\.less$/,
+    use: [
+      'style-loader',
+      cssLoader,
+      postcssLoader,
+      'less-loader'
+    ],
+    include: [path.join(__dirname, '../src')]
+  },
   {
     test: /\.css$/,
     use: [
       'style-loader',
-      cssLoader,
+      'css-loader',
       postcssLoader
     ]
   },

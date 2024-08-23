@@ -1,0 +1,21 @@
+
+/* row-flex */
+
+.large-modal {
+  width: 80% !important;
+
+  // :global {
+  //   .row {
+  //     display: flex;
+  //     padding-bottom: 10px;
+  
+  //     & > div {
+  //       word-break: break-all;
+  
+  //       &:first-child {
+  //         flex: 0 0 100px;
+  //       }
+  //     }
+  //   }
+  // }
+}

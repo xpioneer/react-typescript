@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { Layout, Menu } from 'antd'
 import { XRouteProps, LeftMenuConfig } from 'routes/pageRoutes'
-import styles from './siderbar.scss'
+import styles from './siderbar.module.scss'
 
 const { Sider } = Layout
 const { SubMenu } = Menu
@@ -44,7 +44,7 @@ const LeftMenu: React.FC<ICommonProps> = (props) => {
     setOpenKeys(keys)
   }
 
-  console.log(styles, 'styles')
+  // console.log(styles, 'styles')
 
   return (
     <Sider collapsible width={220}>

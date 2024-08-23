@@ -28,6 +28,23 @@ export const storage = {
 }
 
 
+/**
+ * 初始化后端分页数据
+ */
+const initServerData = <T = any>(): IPageData<T> => {
+  return {
+    data: [],
+    meta: {
+      current: 0, // antd
+      page: 0,
+      pageSize: 0,
+      total: 0,
+      totalPage: 0,
+      showTotal: (total: number) => `${total} items`
+    }
+  }
+}
+
 export const data2PageData = <T>(data: IPageData<T> = {
   data: [],
   meta: { page: 1, pageSize: 10, total: 0, count: 0 }
@@ -44,11 +61,37 @@ export const data2PageData = <T>(data: IPageData<T> = {
 
 export const pageData2Params = (meta: Partial<IPager> = {page: 1, pageSize: 10}): Pick<IPager, 'page' | 'pageSize'> => {
   return {
-    page: meta.page,
-    pageSize: meta.pageSize
+    page: meta.page!,
+    pageSize: meta.pageSize!
   }
 }
 
+/**
+ * 转换数据为antd分页数据
+ * @param data 后端数据
+ * @returns 分页数据
+ */
+export const data2AntPageData = <T = any>(
+  {
+    data,
+    meta: {
+      count,
+      page,
+      pageSize,
+      total,
+    }
+  } = initServerData<T>()
+): IPageData<T> => {
+  return {
+    data,
+    meta: {
+      current: page ?? 1,
+      pageSize: pageSize ?? 10,
+      total: total ?? 0,
+      showTotal: (total: number) => `total: ${total} items, current page: ${count} items.`
+    }
+  }
+}
 
 export const object2Options = <T, K extends keyof T>(obj: T, keys: K[] = Object.keys(obj) as K[], noNum = true) => {
   return keys.filter(key => noNum ? isNaN(+key) : true).map(key => ({

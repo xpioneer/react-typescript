@@ -2,6 +2,7 @@
 @import './dark.scss';
 @import './functions.scss';
 
+:global{
 #app {
   // height: 100%;
 }
@@ -52,24 +53,6 @@
   }
 }
 
-/* row-flex */
-
-.large-modal {
-  width: 80% !important;
-
-  .row {
-    display: flex;
-    padding-bottom: 10px;
-
-    & > div {
-      word-break: break-all;
-
-      &:first-child {
-        min-width: 100px;
-      }
-    }
-  }
-}
 
 /* user-menu */
 .user-menu {
@@ -142,4 +125,5 @@
 .chart-w {
   height: 400px;
   border: 1px solid #eee;
+}
 }
