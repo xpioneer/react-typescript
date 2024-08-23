@@ -34,6 +34,7 @@
     "quill-image-resize-module": "^3.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-json-view-lite": "^1.4.0",
     "react-router-dom": "^5.3.4"
   },
   "devDependencies": {

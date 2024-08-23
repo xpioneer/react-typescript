@@ -1,21 +1,21 @@
 
 /* row-flex */
 
-.large-modal {
-  width: 80% !important;
+.large {
+  top: 80px;
 
-  // :global {
-  //   .row {
-  //     display: flex;
-  //     padding-bottom: 10px;
+  :global {
+    .row {
+      display: flex;
+      padding-bottom: 10px;
   
-  //     & > div {
-  //       word-break: break-all;
+      & > div {
+        word-break: break-all;
   
-  //       &:first-child {
-  //         flex: 0 0 100px;
-  //       }
-  //     }
-  //   }
-  // }
+        &:first-child {
+          flex: 0 0 100px;
+        }
+      }
+    }
+  }
 }

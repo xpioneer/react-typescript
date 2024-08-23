@@ -6,10 +6,10 @@ import styles from './style.module.scss'
 import { APILog, RequestStatus } from 'types/api'
 import { useApi } from './useApi'
 import { DatePicker } from 'components/datePicker'
+import { JSONView } from 'components/jsonView'
 
 const FormItem = Form.Item
 
-type TStatus = 'default'|'success'|'warning'|'error'
 
 const APILogPage: React.FC = () => {
 
@@ -20,15 +20,7 @@ const APILogPage: React.FC = () => {
     onQuery,
   } = useApi()
 
-  const [state, setState] = useState({
-    modalTitle: '参数详情',
-    visible: false,
-    modalTxt: '',
-    visibleLog: false,
-    detailInfo: {}
-  })
-
-  const columns: ColumnProps<AnyObject>[] = [{
+  const columns: ColumnProps<APILog>[] = [{
     title: 'ID',
     dataIndex: 'id',
     // render: (name: any) => `${name.first} ${name.last}`,
@@ -45,7 +37,7 @@ const APILogPage: React.FC = () => {
     title: 'Url',
     dataIndex: 'url',
     width: '120px',
-    render: (text: string, record: any, index: number) => <div onClick={() => showParamsDetail(record.url, 'url')} className="textflow-4"> {text} </div>,
+    render: (text: string, record, index: number) => <div onClick={() => {showParamsDetail(record.url, 'Url')}} className="textflow-4"> {text} </div>,
   }, {
     title: '请求方式',
     dataIndex: 'method',
@@ -54,12 +46,12 @@ const APILogPage: React.FC = () => {
     title: '参数',
     width: 400,
     dataIndex: 'params',
-    render: (text: string, record: any, index: number) => <div onClick={() => showParamsDetail(record.params, 'params')} className="textflow-4"> {object2Str(text)} </div>,
+    render: (text: string, record, index: number) => <div onClick={() => showParamsDetail(record.params, '参数')} className="textflow-4"> {object2Str(text)} </div>,
   }, {
     title: '状态',
     dataIndex: 'status',
     width: '60px',
-    render: (text: string, record: any, index: number) => <Badge status={getStatus(text)} text={text}/>,
+    render: (text: string, record, index: number) => <Badge status={getStatus(text)} text={text}/>,
   }, {
     title: '创建时间',
     width: '120px',
@@ -74,7 +66,7 @@ const APILogPage: React.FC = () => {
     dataIndex: '',
     width: '80px',
     fixed: 'right',
-    render: (text: string, record: any, index: number) => <Button size="small" type="primary" onClick={() => viewDetail(record)}>详情</Button>,
+    render: (text: string, record, index: number) => <Button size="small" type="primary" onClick={() => onViewDetail(record)}>详情</Button>,
   }]
 
   const object2Str = (o: string|object): string => {
@@ -82,56 +74,21 @@ const APILogPage: React.FC = () => {
   }
 
   // 查看Url/参数详情
-  const showParamsDetail = (str: any, type?: string) => {
-    if (str) {
-      setState({
-        modalTitle: type === 'url' ? 'Url详情' : '参数详情',
-        visible: !state.visible,
-        modalTxt: object2Str(str)
-      })
-    } else {
-      setState({ visible: false })
-    }
-    
+  const showParamsDetail = (str: any, title: string) => {
+    Modal.info({
+      title,
+      content: str,
+    })
   }
 
   // 查看日志详情
-  const viewDetail = (data: any) => {
-    if (data) {
-      setState({
-        visibleLog: true,
-        detailInfo: data
-      })
-    } else {
-      setState({
-        visibleLog: false,
-      })
-    }
-    
-  }
-
-  const formatHeader = (data: any) => {
-    const type = typeof(data)
-    if (type === 'string') {
-      let headerObj = ''
-      try {
-        headerObj = JSON.parse(data)
-      } catch (e) {
-        if (data.length > 10240) {
-          return data.substr(0, 1024) + '...'
-        }
-        return data
-      }
-      return Object.keys(headerObj).map(h => {
-        return <div key={h}>{h} : {headerObj[h]}</div>
-      })
-    } else if (type === 'object') {
-      return Object.keys(data).map(h => {
-        return <div key={h}>{h} : {data[h]}</div>
-      })
-    } else {
-      return ''
-    }
+  const onViewDetail = (data: any) => {
+    Modal.info({
+      title: '日志详情',
+      width: '75%',
+      className: styles.large,
+      content: wrapHtml(data)
+    })
   }
 
   const wrapHtml = (data: any) => {
@@ -153,13 +110,22 @@ const APILogPage: React.FC = () => {
           <div>参数：</div><div>{object2Str(data.params)}</div>
         </div>
         <div className="row">
-          <div>请求头：</div><div>{formatHeader(data.headers)}</div>
+          <div>请求头：</div>
+          <div>
+            <JSONView data={data.headers}/>
+          </div>
         </div>
         <div className="row">
-          <div>响应头：</div><div>{formatHeader(data.resHeaders || data.responseHeaders)}</div>
+          <div>响应头：</div>
+          <div>
+            <JSONView data={data.resHeaders || data.responseHeaders}/>
+          </div>
         </div>
         <div className="row">
-          <div>响应参数：</div><div>{object2Str(data.resData)}</div>
+          <div>响应参数：</div>
+          <div>
+            <JSONView data={data.resData}/>
+          </div>
         </div>
         <div className="row">
           <div>创建时间：</div><div>{data.createdAt}</div>
@@ -177,8 +143,8 @@ const APILogPage: React.FC = () => {
   }
 
   // 获取状态badge
-  const getStatus = (status: any): TStatus => {
-    let info: TStatus = 'default'
+  const getStatus = (status: any): RequestStatus => {
+    let info: RequestStatus = 'default'
     switch (status) {
       case 200 :
       case 201 :
@@ -207,12 +173,7 @@ const APILogPage: React.FC = () => {
     }
     return info
   }
-  
-  const { modalTitle, visible, modalTxt, visibleLog, detailInfo } = state
-  // const { value, loading, list, meta, inputChange, search, clear } = this.props.apiLogStore
 
-  console.log(pageData, '--------------')
- 
   return <Spin spinning={loading}>
     <Form
       form={form}
@@ -261,24 +222,6 @@ const APILogPage: React.FC = () => {
       pagination={pageData.meta}
       onChange={({current, pageSize}) => onQuery(current, pageSize)}
     />
-
-    <Modal
-      title={modalTitle}
-      keyboard={true}
-      open={visible}
-      onOk={() => showParamsDetail('')}
-      onCancel={() => showParamsDetail('')}
-    > {modalTxt} </Modal>
-    <Modal
-      className={styles["large-modal"]}
-      title="日志详情"
-      width={'80%'}
-      style={{ top: 40 }}
-      keyboard={true}
-      open={visibleLog}
-      onOk={() => viewDetail('')}
-      onCancel={() => viewDetail('')}
-    > {wrapHtml(detailInfo)} </Modal>
   </Spin>
 }
 
