@@ -12,7 +12,7 @@ const Dashboard = lazy(() => import( /* webpackChunkName:"dashboard" */ '@pages/
 const Chart = lazy(() => import( /* webpackChunkName:"charts" */ '@pages/charts'))
 const LogApi = lazy(() => import( /* webpackChunkName:"logApi" */ '@pages/logs/apiNew'))
 const LogErrors = lazy(() => import( /* webpackChunkName:"logErrors" */ '@pages/logs/errorsNew'))
-const ArticleList = lazy(() => import( /* webpackChunkName:"articleList" */ '@pages/article/articleList'))
+const ArticleList = lazy(() => import( /* webpackChunkName:"articleList" */ '@pages/article'))
 const ArticleEdit = lazy(() => import( /* webpackChunkName:"articleEdit" */ '@pages/article/articleEdit'))
 const ArticleCreate = lazy(() => import( /* webpackChunkName:"articleCreate" */ '@pages/article/articleCreate'))
 const ArticleTypeList = lazy(() => import( /* webpackChunkName:"articleTypeList" */ '@pages/articleType'))

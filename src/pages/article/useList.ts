@@ -1,28 +1,28 @@
 import { useState, useEffect } from 'react'
 import { Form } from 'antd'
 import { QueryForm } from '@/types/articleType'
-import { IComment } from 'models/comment'
+import { IArticle } from 'models/article'
 import { data2AntPageData } from '@/utils/tools'
 import { useGraphQL } from '@/services/graphql'
 
 const query = `
-query commentPages($page: Int, $pageSize: Int, $order: pageOrder, $description: String, $createdAt: [String]){
-  comments(page: $page, pageSize: $pageSize, order: $order, description: $description, createdAt: $createdAt){
-    list{id,description,articleId,ip,createdAt,updatedAt}
+query articlePages($page: Int, $pageSize: Int, $order: pageOrder, $title: String, $abstract: String, $tag: String, $createdAt: [String]){
+  articles(page: $page, pageSize: $pageSize, order: $order, title: $title, abstract: $abstract, tag: $tag, createdAt: $createdAt){
+    list{id,title,abstract,createdAt,createdBy}
     meta{current,total,pageSize}
   }
 }`
 
 export const useList = () => {
-  const [form] = Form.useForm<QueryForm>()
+  const [form] = Form.useForm()
   
   const [loading, setLoading] = useState(false)
-  const [pageData, setPageData] = useState(data2AntPageData<IComment>())
+  const [pageData, setPageData] = useState(data2AntPageData<IArticle>())
 
   const onQuery = (page = 1, pageSize = 10, order = {createdAt: 'DESC'}) => {
     const vals = form.getFieldsValue()
     setLoading(true)
-    useGraphQL<IComment, boolean>(
+    useGraphQL<IArticle, boolean>(
       query,
       {
         page,
