@@ -2,12 +2,12 @@ import { Form } from 'antd'
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { GRAPHQL_API } from '@/constants'
-import { IArticleType } from 'models/articleType'
+import { ITag } from '@models/tag'
 import { useGraphQL } from '@/services/graphql'
 
-const getArticleTypeById = `
-query getArticleType($id: String!){
-  articleType(id: $id){
+const query = `
+query getTag($id: String!){
+  tag(id: $id){
     id
     name
     remark
@@ -16,41 +16,36 @@ query getArticleType($id: String!){
   }
 }`
 
-// 这里放开了id的限制，update和insert共用一个mutation，后面再改。
-const postArticleType = `
-mutation updateArticleType($id: String, $name: String!, $remark: String){
-  editArticleType(id: $id, name: $name, remark: $remark){
+const mutation = `
+mutation updateTag($id: String, $name: String!, $remark: String){
+  editTag(id: $id, name: $name, remark: $remark){
     id
   }
 }`
 
 
-export const useArticleTypeDetail = () => {
+export const useDetail = () => {
   const {id} = useParams<{id: string}>()
 
-  const [form] = Form.useForm<IArticleType>()
+  const [form] = Form.useForm<ITag>()
 
   const [loading, setLoading] = useState(false)
 
   const isEdit = !!Form.useWatch('id', form)
   
-  const onSave = (vals: IArticleType) => {
+  const onSave = (vals: ITag) => {
     setLoading(true)
-    useGraphQL<'articleType', IArticleType>(
-      postArticleType,
-      {
-        ...vals
-      }
+    useGraphQL<'tag', ITag>(
+      mutation,
+      vals
     ).finally(() => setLoading(false))
   }
 
   const onQuery = () => {
     setLoading(true)
-    useGraphQL<'articleType', IArticleType>(
-      getArticleTypeById,
-      {
-        id,
-      }
+    useGraphQL<'editTag', ITag>(
+      query,
+      { id }
     ).then(form.setFieldsValue)
     .finally(() => setLoading(false))
   }

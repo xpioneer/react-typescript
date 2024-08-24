@@ -18,15 +18,15 @@ $http.interceptors.request.use(config => {
 })
 
 $http.interceptors.response.use(response => {
-  // helper.successHelper(response)
-  console.log(response)
+  helper.successHelper(response)
+  // console.log('response>>:', response)
   if (response.data.errors) {
     return Promise.reject(response.data.data)
   } else {
     return Promise.resolve(response.data) // status:200, normal
   }
 }, (error: AxiosError<IResponseData>) => {
-  console.log(error, 'error')
+  // console.log(error, 'error')
   if (error.response && /^[456]\d{2}$/.test(`${error.response.status}`)) {
     helper.errorHelper(error.response)
   } else {

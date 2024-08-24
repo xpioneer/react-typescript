@@ -18,8 +18,8 @@ const ArticleCreate = lazy(() => import( /* webpackChunkName:"articleCreate" */ 
 const ArticleTypeList = lazy(() => import( /* webpackChunkName:"articleTypeList" */ '@pages/articleType'))
 const ArticleTypeDetail = lazy(() => import( /* webpackChunkName:"articleTypeDeital" */ '@pages/articleType/detail'))
 const ArticleTypeCreate = lazy(() => import( /* webpackChunkName:"articleTypeCreate" */ '@pages/articleType/articleTypeCreate'))
-const TagList = lazy(() => import( /* webpackChunkName:"tagList" */ '@pages/tag/tagList'))
-const TagEdit = lazy(() => import( /* webpackChunkName:"tagEdit" */ '@pages/tag/tagEdit'))
+const TagList = lazy(() => import( /* webpackChunkName:"tagList" */ '@pages/tag'))
+const TagDetail = lazy(() => import( /* webpackChunkName:"tagEdit" */ '@pages/tag/detail'))
 const TagCreate = lazy(() => import( /* webpackChunkName:"tagCreate" */ '@pages/tag/tagCreate'))
 const CommentList = lazy(() => import( /* webpackChunkName:"commentList" */ '@pages/comment/commentList'))
 const CommentEdit = lazy(() => import( /* webpackChunkName:"commentEdit" */ '@pages/comment/commentEdit'))
@@ -127,12 +127,12 @@ const routesConf: Partial<XRouteProps>[] = [
         component: TagList
       },
       {
-        path: '/tag/create',
-        component: TagCreate
+        path: '/tag-new',
+        component: TagDetail
       },
       {
-        path: '/tag/detail/:id',
-        component: TagEdit
+        path: '/tag/:id',
+        component: TagDetail
       },
       {
         title: 'Comment',
