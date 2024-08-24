@@ -34,6 +34,7 @@ export const storage = {
 const initServerData = <T = any>(): IPageData<T> => {
   return {
     data: [],
+    list: [],
     meta: {
       current: 0, // antd
       page: 0,
@@ -67,15 +68,14 @@ export const pageData2Params = (meta: Partial<IPager> = {page: 1, pageSize: 10})
 }
 
 /**
- * 转换数据为antd分页数据
+ * graphql数据转换数据为antd分页数据
  * @param data 后端数据
  * @returns 分页数据
  */
 export const data2AntPageData = <T = any>(
   {
-    data,
+    list,
     meta: {
-      count,
       page,
       pageSize,
       total,
@@ -83,12 +83,12 @@ export const data2AntPageData = <T = any>(
   } = initServerData<T>()
 ): IPageData<T> => {
   return {
-    data,
+    data: list!,
     meta: {
       current: page ?? 1,
       pageSize: pageSize ?? 10,
       total: total ?? 0,
-      showTotal: (total: number) => `total: ${total} items, current page: ${count} items.`
+      showTotal: (total: number) => `total: ${total} items`
     }
   }
 }

@@ -1,4 +1,4 @@
-import $http from '@utils/http'
+// import $http from '@utils/http'
 import { pageData2Params } from '@utils/tools'
 import { StockStats, Stock } from 'types/stock'
 

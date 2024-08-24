@@ -19,7 +19,7 @@ $http.interceptors.request.use(config => {
 
 $http.interceptors.response.use(response => {
   // helper.successHelper(response)
-  // console.log(response)
+  console.log(response)
   if (response.data.errors) {
     return Promise.reject(response.data.data)
   } else {

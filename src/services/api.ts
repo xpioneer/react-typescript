@@ -1,4 +1,4 @@
-import $http from '@utils/http'
+// import $http from '@utils/http'
 import { pageData2Params } from '@utils/tools'
 import { APILog, APIQuery } from 'types/api'
 import { ErrorLog, ErrorQuery } from 'types/apiError'

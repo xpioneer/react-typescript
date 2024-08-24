@@ -24,6 +24,12 @@ declare global {
 
   type AnyObject<T = any> = Record<string, T>
 
+  type GraphQLResponse<Key extends string, T = any, IsPageData = null> = {
+    data: {
+      [key in Key]: IsPageData extends boolean ? IPageData<T> : T
+    }
+  }
+
   type XExtends<T, K extends string | number | symbol, V = any> = T & { [P in K]: V }
   
   interface IPager {
@@ -37,6 +43,7 @@ declare global {
   }
 
   interface IPageData<T = any> {
+    list?: T[]
     data: T[]
     meta: Partial<IPager>
     msg?: string

@@ -24,7 +24,7 @@ export const useApi = () => {
     }
     setLoading(true)
     getApiLogs({...params, ...vals}).then(res => {
-      setPageData(data2AntPageData(res))
+      setPageData(data2PageData(res))
     }).finally(() => setLoading(false))
   }
 

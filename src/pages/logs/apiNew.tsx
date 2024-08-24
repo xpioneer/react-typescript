@@ -175,9 +175,6 @@ const APILogPage: React.FC = () => {
     <Form
       form={form}
       className="search-form"
-      onFinish={(vals) => {
-        
-      }}
     >
       <h3>API请求日志</h3>
       <Row gutter={24}>

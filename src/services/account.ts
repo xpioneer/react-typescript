@@ -1,5 +1,5 @@
 import { LoginForm, RegisterForm } from "types/account"
-import $http from '@utils/http'
+// import $http from '@utils/http'
 import { storage } from "@/utils/tools"
 import { JWT_TOKEN } from "@/constants"
 
