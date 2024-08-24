@@ -35,7 +35,7 @@ export const useDetail = () => {
   
   const onSave = (vals: ITag) => {
     setLoading(true)
-    useGraphQL<'tag', ITag>(
+    useGraphQL<ITag>(
       mutation,
       vals
     ).finally(() => setLoading(false))
@@ -43,7 +43,7 @@ export const useDetail = () => {
 
   const onQuery = () => {
     setLoading(true)
-    useGraphQL<'editTag', ITag>(
+    useGraphQL<ITag>(
       query,
       { id }
     ).then(form.setFieldsValue)

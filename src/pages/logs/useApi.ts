@@ -18,10 +18,6 @@ export const useApi = () => {
       pageSize,
     }
     const vals = form.getFieldsValue()
-    if(vals._createdAt) {
-      vals.createdAt = vals._createdAt.map((d, i) => i > 0 ? endOfDay(d) : startOfDay(d)).join(',')
-      vals._createdAt = undefined
-    }
     setLoading(true)
     getApiLogs({...params, ...vals}).then(res => {
       setPageData(data2PageData(res))

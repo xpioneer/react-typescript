@@ -31,7 +31,7 @@ export const useTag = () => {
     }
     const vals = form.getFieldsValue()
     setLoading(true)
-    useGraphQL<'tags', ITag, boolean>(
+    useGraphQL<ITag, boolean>(
       queryTagPages,
       {
         ...params,

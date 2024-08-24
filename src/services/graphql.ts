@@ -6,15 +6,15 @@ import { GRAPHQL_API } from 'constants/index'
  * @param data parameters
  * @returns Promise<IPageData<T> | T>
  */
-export const useGraphQL = <Key extends string, T = any, IsPageData = null>(
+export const useGraphQL = <T = any, IsPageData = null>(
   query: string,
   data: AnyObject,
 ) => {
-  return $http.post<any, GraphQLResponse<Key, T, IsPageData>>(GRAPHQL_API, {
+  return $http.post<any, GraphQLResponse<T, IsPageData>>(GRAPHQL_API, {
     query,
     variables: data
   }).then(res => {
-    const keys = Object.keys(res.data) as Key[]
+    const keys = Object.keys(res.data)
     return res.data[keys[0]]
   })
 }

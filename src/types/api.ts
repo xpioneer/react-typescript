@@ -37,5 +37,4 @@ export type APIQuery = {
   url: string
   path: string
   createdAt: string
-  _createdAt?: [Date, Date]
 }

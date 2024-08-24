@@ -36,7 +36,7 @@ export const useArticleTypeDetail = () => {
   
   const onSave = (vals: IArticleType) => {
     setLoading(true)
-    useGraphQL<'articleType', IArticleType>(
+    useGraphQL<IArticleType>(
       postArticleType,
       {
         ...vals
@@ -46,7 +46,7 @@ export const useArticleTypeDetail = () => {
 
   const onQuery = () => {
     setLoading(true)
-    useGraphQL<'articleType', IArticleType>(
+    useGraphQL<IArticleType>(
       getArticleTypeById,
       {
         id,

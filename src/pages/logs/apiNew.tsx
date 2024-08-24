@@ -104,7 +104,10 @@ const APILogPage: React.FC = () => {
           <div>Path：</div><div>{data.path}</div>
         </div>
         <div className="row">
-          <div>参数：</div><div>{object2Str(data.params)}</div>
+          <div>参数：</div>
+          <div>
+            <JSONView data={data.params} />
+          </div>
         </div>
         <div className="row">
           <div>请求头：</div>
@@ -189,7 +192,7 @@ const APILogPage: React.FC = () => {
           </Form.Item>
         </Col>
         <Col span={6}>
-          <Form.Item name="_createdAt">
+          <Form.Item name="createdAt">
             <DatePicker.RangePicker />
           </Form.Item>
         </Col>

@@ -125,7 +125,10 @@ const ErrorsLogPage: React.FC = () => {
           <div>Path：</div><div>{data.path}</div>
         </div>
         <div className="row">
-          <div>参数：</div><div>{data.params}</div>
+          <div>参数：</div>
+          <div>
+            <JSONView data={data.params} />
+          </div>
         </div>
         <div className="row">
           <div>请求头：</div>

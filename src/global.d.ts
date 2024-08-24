@@ -24,9 +24,9 @@ declare global {
 
   type AnyObject<T = any> = Record<string, T>
 
-  type GraphQLResponse<Key extends string, T = any, IsPageData = null> = {
+  type GraphQLResponse<T = any, IsPageData = null> = {
     data: {
-      [key in Key]: IsPageData extends boolean ? IPageData<T> : T
+      [key in string]: IsPageData extends boolean ? IPageData<T> : T
     }
   }
 

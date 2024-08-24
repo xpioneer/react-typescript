@@ -22,16 +22,13 @@ export const useArticleType = () => {
   const [pageData, setPageData] = useState(data2AntPageData<ArticleType>())
 
   const onQuery = (page = 1, pageSize = 10) => {
-    const params = {
-      page,
-      pageSize,
-    }
     const vals = form.getFieldsValue()
     setLoading(true)
-    useGraphQL<'articleTypes', ArticleType, boolean>(
+    useGraphQL<ArticleType, boolean>(
       queryArticleTypes,
       {
-        ...params,
+        page,
+        pageSize,
         ...vals
       }
     ).then(res => {
