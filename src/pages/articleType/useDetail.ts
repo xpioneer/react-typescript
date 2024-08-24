@@ -1,5 +1,6 @@
 import { Form } from 'antd'
 import { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 import { GRAPHQL_API } from '@/constants'
 import { IArticleType } from 'models/articleType'
 import { useGraphQL } from '@/services/graphql'
@@ -11,48 +12,63 @@ query getArticleType($id: String!){
     name
     remark
     createdAt
+    updatedAt
   }
 }`
 
+// 这里放开了id的限制，update和insert共用一个mutation，后面再改。
 const postArticleType = `
-mutation updateArticleType($id: String!, $name: String!, $remark: String){
+mutation updateArticleType($id: String, $name: String!, $remark: String){
   editArticleType(id: $id, name: $name, remark: $remark){
     id
   }
 }`
 
 
-const useArticleTypeDetail = () => {
-  const [form] = Form.useForm<any>()
+export const useArticleTypeDetail = () => {
+  const {id} = useParams<{id: string}>()
+
+  const [form] = Form.useForm<IArticleType>()
 
   const [loading, setLoading] = useState(false)
-  const [data, setData] = useState<IArticleType>()
+
+  const isEdit = !!Form.useWatch('id', form)
   
-  const onQuery = (page = 1, pageSize = 10) => {
-    const params = {
-      page,
-      pageSize,
-    }
-    const vals = form.getFieldsValue()
+  const onSave = (vals: IArticleType) => {
+    setLoading(true)
+    useGraphQL<'articleType', IArticleType>(
+      postArticleType,
+      {
+        ...vals
+      }
+    ).finally(() => setLoading(false))
+  }
+
+  const onQuery = () => {
     setLoading(true)
     useGraphQL<'articleType', IArticleType>(
       getArticleTypeById,
       {
-        ...params,
-        ...vals
+        id,
       }
-    ).then(res => {
-      setData(res)
-    }).finally(() => setLoading(false))
+    ).then(form.setFieldsValue)
+    .finally(() => setLoading(false))
   }
 
-  useEffect(onQuery, [])
+  console.log("user>>>", id)
+
+  useEffect(() => {
+    if(id) {
+      onQuery()
+    }
+  }, [id])
 
   return {
     form,
     loading,
-    data,
+    isEdit,
     onQuery,
+    onSave,
   }
 
   // @observable loading: boolean = false

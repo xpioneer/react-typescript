@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {inject, observer} from 'mobx-react'
+import { useHistory } from 'react-router-dom'
 import {
   Row, Col, Form, Input, Button, Table, Modal,
   TableColumnProps, Flex, Space, Spin,
@@ -8,9 +8,10 @@ import { DatePicker } from 'components/datePicker'
 import { IArticleType } from '@models/articleType'
 import { useArticleType } from './useArticleType'
 
-const FormItem = Form.Item
 
 const ArticleTypePage: React.FC = () => {
+
+  const history = useHistory()
 
   const {
     form,
@@ -59,10 +60,7 @@ const ArticleTypePage: React.FC = () => {
   }]
 
   const onView = (data: IArticleType) => {
-    Modal.info({
-      title: 'Tag Detail',
-      // content: 
-    })
+    history.push(`type/${data.id}`)
   }
 
   return <Spin spinning={loading}>
@@ -85,6 +83,9 @@ const ArticleTypePage: React.FC = () => {
       </Row>
       <Flex className='mgb16' justify={'end'}>
         <Space>
+          <Button type='primary' ghost onClick={() => history.push('type-new')}>
+            Create
+          </Button>
           <Button onClick={() => form.resetFields()}>
             清空
           </Button>

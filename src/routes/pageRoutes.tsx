@@ -16,7 +16,7 @@ const ArticleList = lazy(() => import( /* webpackChunkName:"articleList" */ '@pa
 const ArticleEdit = lazy(() => import( /* webpackChunkName:"articleEdit" */ '@pages/article/articleEdit'))
 const ArticleCreate = lazy(() => import( /* webpackChunkName:"articleCreate" */ '@pages/article/articleCreate'))
 const ArticleTypeList = lazy(() => import( /* webpackChunkName:"articleTypeList" */ '@pages/articleType'))
-const ArticleTypeEdit = lazy(() => import( /* webpackChunkName:"articleTypeEdit" */ '@pages/articleType/articleTypeEdit'))
+const ArticleTypeDetail = lazy(() => import( /* webpackChunkName:"articleTypeDeital" */ '@pages/articleType/detail'))
 const ArticleTypeCreate = lazy(() => import( /* webpackChunkName:"articleTypeCreate" */ '@pages/articleType/articleTypeCreate'))
 const TagList = lazy(() => import( /* webpackChunkName:"tagList" */ '@pages/tag/tagList'))
 const TagEdit = lazy(() => import( /* webpackChunkName:"tagEdit" */ '@pages/tag/tagEdit'))
@@ -113,12 +113,12 @@ const routesConf: Partial<XRouteProps>[] = [
         component: ArticleTypeList
       },
       {
-        path: '/type/create',
-        component: ArticleTypeCreate
+        path: '/type-new',
+        component: ArticleTypeDetail
       },
       {
-        path: '/type/detail/:id',
-        component: ArticleTypeEdit
+        path: '/type/:id',
+        component: ArticleTypeDetail
       },
       {
         title: 'Tag',

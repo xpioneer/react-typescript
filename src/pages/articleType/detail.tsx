@@ -1,44 +1,76 @@
 import React from 'react'
-import { useParams, useHistory } from 'react-router-dom'
-import { Row, Col, Form, Input, Button, DatePicker, Select, Checkbox, Badge } from 'antd'
+import { useHistory } from 'react-router-dom'
+import {
+  Row, Col, Form, Input, Button,
+  Spin,
+  FormItemProps,
+  Space
+} from 'antd'
+import { useArticleTypeDetail } from './useDetail'
 
-const FormItem = Form.Item
-
-const ArticleTypeDetail: React.FC = () => {
-
-  const {id} = useParams<{id: string}>()
-  const his = useHistory<{id: string}>()
-
-  const back = () => {
-    // this.props.history.go(-1)
+const formLayout: FormItemProps = {
+  labelCol: {
+    span: 4,
+  },
+  wrapperCol: {
+    span: 16
   }
-
-  console.log({id, his})
-  
-
-    return <React.Fragment>
-      <Form className="search-form" layout="horizontal">
-        <h3>文章类型详情</h3>
-        <Row gutter={24}>
-          <Col span={18}>
-            <FormItem label="类型名称" labelCol={{sm: {span: 4}}} wrapperCol={{sm: { span: 20 }}}>
-              <Input placeholder="类型名称" value={mainData.name} onChange={e => inputChange(e.target.value, 'name')}/>
-            </FormItem>
-          </Col>
-          <Col span={18}>
-            <FormItem label="备注" labelCol={{sm: {span: 4}}} wrapperCol={{sm: { span: 20 }}}>
-              <Input.TextArea rows={4} placeholder="备注" value={mainData.remark} onChange={e => inputChange(e.target.value, 'remark')}/>
-            </FormItem>
-          </Col>
-        </Row>
-        <Row>
-          <Col span={24} offset={3}>
-            <Button onClick={(e: any) => update()} type="primary">保存</Button>
-            <Button onClick={this.back}>取消</Button>
-          </Col>
-        </Row>
-      </Form>
-    </React.Fragment>
 }
 
-export default ArticleTypeDetail
+const ArticleTypeDetailPage: React.FC = () => {
+
+  const {
+    form,
+    isEdit,
+    loading,
+    onSave,
+  } = useArticleTypeDetail()
+
+  const history = useHistory<{id: string}>()
+
+  return <Spin spinning={loading}>
+    <h3>文章类型详情</h3>
+    <Form
+      form={form}
+      {...formLayout}
+      className="search-form"
+      onFinish={onSave}
+    >
+      <Form.Item hidden name="id"/>
+      <Row gutter={24}>
+        <Col span={24}>
+          <Form.Item name="name" label="类型名称" rules={[{required: true}]}>
+            <Input placeholder="类型名称"/>
+          </Form.Item>
+        </Col>
+        <Col span={24}>
+          <Form.Item name="remark" label="备注">
+            <Input.TextArea rows={4} placeholder="备注"/>
+          </Form.Item>
+        </Col>
+        {
+          isEdit && <>
+            <Col span={24}>
+              <Form.Item name="createdAt" label="创建时间">
+                <Input placeholder="创建时间" disabled/>
+              </Form.Item>
+            </Col>
+            <Col span={24}>
+              <Form.Item name="updatedAt" label="更新时间">
+                <Input placeholder="更新时间" disabled/>
+              </Form.Item>
+            </Col>
+          </>
+        }
+        <Col span={24} offset={4}>
+          <Space>
+            <Button htmlType='submit' type="primary">保存</Button>
+            <Button onClick={() => history.goBack()}>取消</Button>
+          </Space>
+        </Col>
+      </Row>
+    </Form>
+  </Spin>
+}
+
+export default ArticleTypeDetailPage
