@@ -1,16 +1,13 @@
-// import $http from '@utils/http'
+import { Method } from '@/types/demo'
 import { pageData2Params } from '@utils/tools'
 import { StockStats, Stock } from 'types/stock'
+import { useRequest } from './http'
 
 
 export type StockQuery = Omit<Stock & IPageParams, 'id' | 'amount'> & { noPage: boolean }
 
 export const stockPageList = (params: Partial<StockQuery> = pageData2Params()) => {
-  return $http.get<any, IPageData<Stock>>('/api/stocks', { params })
-    .then(res => {
-      console.log('get:', res)
-      return res
-    })
+  return useRequest<Stock, boolean>('/stocks', params)
 }
 
 export const getStockDetail = (id: number) => {

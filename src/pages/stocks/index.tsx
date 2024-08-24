@@ -20,8 +20,7 @@ const StockList: React.FC<ICommonProps> = ({history}) => {
     const vals = form.getFieldsValue()
     setLoading(true)
     stockPageList({...params, ...vals}).then(res => {
-      const data = data2PageData(res)
-      setPageData(data)
+      setPageData(data2PageData(res))
     }).finally(() => setLoading(false))
   }
 
