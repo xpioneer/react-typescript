@@ -1,0 +1,18 @@
+.block {
+  margin-bottom: 20px;
+  padding: 12px;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 8px, rgba(0, 0, 0, 0.12) 0px 1px 6px;
+}
+
+
+.jsonView {
+  min-height: 200px;
+  
+  :global {
+    .ant-form-item-control-input-content > div {
+      border-radius: 6px;
+      min-height: 400px;
+    }
+  }
+}

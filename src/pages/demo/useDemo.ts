@@ -1,21 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { message, UploadFile } from 'antd'
-import { APIFormTest } from 'types/demo'
+import { Form, message, UploadFile } from 'antd'
+import { APIFormTest, APIType, Method } from 'types/demo'
 
-interface IParamsData {
-  [key: string]: any
-}
-
-const fmtGetParams = (params: object) => {
-  let data = ''
-  for (let k in params) {
-    data += k + '=' + params[k] + '&'
-  }
-  data = data.substring(0, data.length - 1)
-  return data
-}
-
-const defaultParams: IParamsData = {
+const defaultParams: AnyObject = {
   query: '{}',
   varibles: '{}',
   operationName: null
@@ -23,19 +10,35 @@ const defaultParams: IParamsData = {
 
 
 export const useDemoState = () => {
-  const [response, setResponse] = useState( '')
+  const [form] = Form.useForm<APIFormTest>()
+  const [fileForm] = Form.useForm<{files: UploadFile[]}>()
 
-  const typeChange = useCallback((type: string) => {
-    // setApiType(type)
-    if (type === '/graphql') {
-      // setApiParams(JSON.stringify(defaultParams, null, '    '))
+  const [response, setResponse] = useState({})
+
+  // listener 'apiType'
+  const apiType = Form.useWatch('apiType', form)
+  
+  useEffect(() => {
+    console.log('watch type', apiType)
+    if(apiType === APIType.Graphql) {
+      form.setFieldsValue({
+        url: apiType,
+        params: JSON.stringify(defaultParams, null, 4)
+      })
     } else {
-      // setApiParams('')
+      form.setFieldsValue({
+        url: '/api',
+        params: JSON.stringify({
+          testField: 'this is testField value',
+          age: 123,
+          paid: true
+        }, null, 4)
+      })
     }
-  }, [])
+  }, [apiType])
 
   const onRequest = useCallback((data: APIFormTest) => {
-    const { url, method, apiType, params } = data
+    const { url, method, params } = data
     let jsonData = {}, error = null
     try {
       if (params) {
@@ -45,26 +48,19 @@ export const useDemoState = () => {
       error = e
     }
     if (error) {
-      message.error('参数请使用json格式')
+      message.error('参数请使用标准json格式')
       return
     }
-    if (apiType === '/api') {
-      if (method === 'GET') {
-        $http.get(url + fmtGetParams(jsonData)).then(res => {
-          setResponse(JSON.stringify(res, null, '    '))
-        })
-      } else {
-        $http[method](url, jsonData).then((res: any) => {
-          setResponse(JSON.stringify(res, null, '    '))
-        })
-      } 
-    } else {
-      $http.post(url, jsonData).then(res => {
-        setResponse(JSON.stringify(res, null, '    '))
-      }, err => {
-        setResponse(JSON.stringify(err.data, null, '    '))
-      })
-    }
+    $http({
+      url,
+      method,
+      data: method === Method.GET ? null : jsonData,
+      params: method === Method.GET ? jsonData : null
+    }).then(res => {
+      setResponse(res)
+    }, e => {
+      setResponse(e)
+    })
   }, [])
 
   const upload = useCallback((file: File) => {
@@ -80,9 +76,11 @@ export const useDemoState = () => {
 
 
   return {
-    typeChange,
-    onRequest,
+    form,
+    apiType,
+    fileForm,
     response,
+    onRequest,
     upload
   }
 }

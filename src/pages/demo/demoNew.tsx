@@ -1,26 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { Row, Col, Button, Badge, Form, Input, Select, DatePicker, Space, Upload, UploadFile } from 'antd'
+import { Row, Col, Button, Badge, Form, Input, Select, Space, Upload, UploadFile } from 'antd'
 import { MinusCircleOutlined, PlusCircleOutlined, PlusCircleFilled, PlusOutlined } from '@ant-design/icons'
 import { useDemoState } from './useDemo'
 import { apiTypeOpts, methodOpts, APIFormTest, Method, APIType } from 'types/demo'
+import { JSONView } from '@/components/jsonView'
+import styles from './demo.module.scss'
+import { DatePicker } from 'components/datePicker'
 
 const TextArea = Input.TextArea
-
-const styles: Record<string, React.CSSProperties> = {
-  block: {
-    marginBottom: '20px',
-    boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 8px, rgba(0, 0, 0, 0.12) 0px 1px 4px',
-    padding: '10px',
-    borderRadius: 6
-  },
-  flex: {
-    display: 'flex',
-    alignItems: 'center'
-  },
-  padding: {
-    padding: '10px 0'
-  }
-}
 
 const formItemLayout = {
   labelCol: {
@@ -39,16 +26,14 @@ interface FileForm {
 
 const Demo: React.FC<ICommonProps> = () => {
 
-  const [form] = Form.useForm<APIFormTest>()
-  const [fileForm] = Form.useForm<FileForm>()
-
-  const apiType = Form.useWatch('apiType', form) as APIType
-
   const [count, setCount] = useState(8)
   
   const {
-    onRequest,
+    form,
+    apiType,
+    fileForm,
     response,
+    onRequest,
   } = useDemoState()
 
   useEffect (() => {
@@ -70,13 +55,13 @@ const Demo: React.FC<ICommonProps> = () => {
   }
 
   return <div>
-    <section style={styles.block}>
+    <section className={styles.block}>
       <h3>mini测试</h3>
       <Space>
-        <Badge count={count} showZero={true} />
         <Button onClick={() => setCount(x => --x)}>
           <MinusCircleOutlined />
         </Button>
+        <Badge count={count} showZero={true} />
         <Button onClick={() => setCount(x => ++x)}>
           <PlusCircleOutlined />
         </Button>
@@ -84,7 +69,7 @@ const Demo: React.FC<ICommonProps> = () => {
       </Space>
     </section>
     
-    <section style={styles.block}>
+    <section className={styles.block}>
       <h3>接口测试</h3>
       <Form
         style={{width: '100%'}}
@@ -102,28 +87,35 @@ const Demo: React.FC<ICommonProps> = () => {
             <Button onClick={onTest}>保存测试</Button>
           </Space>
         </Form.Item>
-        <Form.Item name='url' label="API路径" rules={[{required: true}]}>
-          <Input placeholder="请输入url"/>
+        <Form.Item label="API路径" required>
+          <Row gutter={16}>
+            <Col span={14}>
+              <Form.Item noStyle name='url' rules={[{required: true}]}>
+                <Input placeholder="请输入url" disabled={apiType === APIType.Graphql}/>
+              </Form.Item>
+            </Col>
+            <Col span={5}>
+              {apiType === APIType.RESTful && <Form.Item noStyle name='method'>
+                <Select options={methodOpts}/>
+              </Form.Item>}
+            </Col>
+            <Col span={5}>
+              <Form.Item noStyle name="apiType">
+                <Select options={apiTypeOpts}/>
+              </Form.Item>
+            </Col>
+          </Row>
         </Form.Item>
-        {
-          apiType === APIType.RESTful ?
-            <Form.Item label="Method" name='method' wrapperCol={{span: 4}}>
-              <Select options={methodOpts}/>
-            </Form.Item> : null
-        }
-        <Form.Item name="apiType" label="API类型" wrapperCol={{span: 4}}>
-          <Select options={apiTypeOpts}/>
-        </Form.Item>
-        <Form.Item label="参数(json格式)" name="params">
+        <Form.Item name="params" label="参数(标准json格式)" tooltip="https://www.json.org/json-en.html">
           <TextArea rows={6}/>
         </Form.Item>
-        <Form.Item label="结果" wrapperCol={{span: 18}}>
-          <TextArea rows={24} value={response}/>
+        <Form.Item label="结果" wrapperCol={{span: 18}} className={styles.jsonView}>
+          <JSONView data={response} />
         </Form.Item>
       </Form>
     </section>
 
-    <section style={styles.block}>
+    <section className={styles.block}>
       <h3>文件上传</h3>
       <Form
         form={fileForm}

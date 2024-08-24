@@ -2,8 +2,8 @@ import { object2Options } from '@utils/tools'
 
 export interface APIFormTest {
   url: string
-  method: string
-  apiType: string
+  method: Method
+  apiType: APIType
   params: string
 }
 
