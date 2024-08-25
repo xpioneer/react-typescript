@@ -31,7 +31,7 @@ const UserCreate = lazy(() => import( /* webpackChunkName:"userCreate" */ '@page
 const BallList = lazy(() => import( /* webpackChunkName:"ballList" */ '@pages/lottery/ballListNew'))
 const BallCreate = lazy(() => import( /* webpackChunkName:"ballCreate" */ '@pages/lottery/ballCreate'))
 const BallEdit = lazy(() => import( /* webpackChunkName:"ballEdit" */ '@pages/lottery/ballEdit'))
-const BallTrend = lazy(() => import( /* webpackChunkName:"ballTrend" */ '@pages/lottery/ballTrend'))
+const BallTrend = lazy(() => import( /* webpackChunkName:"ballTrend" */ '@pages/lottery/ballTrendNew'))
 const BallChart = lazy(() => import( /* webpackChunkName:"ballChart" */ '@pages/lottery/ballChart'))
 const StockList = lazy(() => import( /* webpackChunkName:"StockList" */ '@pages/stocks'))
 const StockDetail = lazy(() => import( /* webpackChunkName:"StockDetail" */ '@pages/stocks/detail'))

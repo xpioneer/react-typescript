@@ -103,7 +103,7 @@ export const StockChart: React.FC = () => {
           name: 'Block',
           type: 'pie',
           radius: '50%',
-          center: ["70%", "50%"],
+          center: ["80%", "50%"],
           data: res.map(i => ({name: EBlock[i.block], value: i.total})),
           itemStyle: {
             color: (param) => {
