@@ -18,10 +18,10 @@ import leaveMsgEditStore from '@pages/leaveMsg/leaveMsgEditStore'
 import userListStore from '@pages/user/userListStore'
 import userEditStore from '@pages/user/userEditStore'
 import userCreateStore from '@pages/user/userCreateStore'
-import ballListStore from '@pages/lottery/ballListStore'
+// import ballListStore from '@pages/lottery/ballListStore'
 import ballCreateStore from '@pages/lottery/ballCreateStore'
 import ballEditStore from '@pages/lottery/ballEditStore'
-import ballTrendStore from '@pages/lottery/ballTrendStore'
+// import ballTrendStore from '@pages/lottery/ballTrendStore'
 import ballChartStore from '@pages/lottery/ballChartStore'
 
 import demoStore from '../pages/demo/store'
@@ -49,10 +49,10 @@ export default {
   userListStore,
   userEditStore,
   userCreateStore,
-  ballListStore,
+  // ballListStore,
   ballCreateStore,
   ballEditStore,
-  ballTrendStore,
+  // ballTrendStore,
   ballChartStore,
 
   demoStore

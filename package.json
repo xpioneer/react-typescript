@@ -25,6 +25,7 @@
     "@ant-design/icons": "^5.2.6",
     "antd": "^5.13.2",
     "axios": "^1.6.5",
+    "classnames": "^2.5.1",
     "date-fns": "^2.30.0",
     "echarts": "^5.4.3",
     "lodash": "^4.17.21",

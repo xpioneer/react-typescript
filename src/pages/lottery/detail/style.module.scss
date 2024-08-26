@@ -1,0 +1,27 @@
+
+.ball {
+  width: 32px;
+  height: 32px;
+  border-radius: 100%;
+  cursor: pointer;
+  border: 1px solid #f54646;
+  color: #f54646;
+  transition: all .3s;
+
+  &.active {
+    background-color: #f54646;
+    color: #fff;
+  }
+
+  &.blue {
+    border-color: #39f;
+    color: #39f;
+
+    &.active {
+      background-color: #39f;
+      color: #fff;
+    }
+  }
+}
+
+

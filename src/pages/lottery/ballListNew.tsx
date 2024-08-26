@@ -154,7 +154,7 @@ const BallListPage: React.FC = () => {
       </Row>
       <Flex justify={'end'}>
         <Space>
-          <Button type='primary' ghost onClick={() => history.push('comment-edit')}>
+          <Button type='primary' ghost onClick={() => history.push('ball-create')}>
             Create
           </Button>
           <Button onClick={() => form.resetFields()}>

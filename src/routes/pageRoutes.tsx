@@ -29,7 +29,7 @@ const UserList = lazy(() => import( /* webpackChunkName:"userList" */ '@pages/us
 const UserEdit = lazy(() => import( /* webpackChunkName:"userEdit" */ '@pages/user/userEdit'))
 const UserCreate = lazy(() => import( /* webpackChunkName:"userCreate" */ '@pages/user/userCreate'))
 const BallList = lazy(() => import( /* webpackChunkName:"ballList" */ '@pages/lottery/ballListNew'))
-const BallCreate = lazy(() => import( /* webpackChunkName:"ballCreate" */ '@pages/lottery/ballCreate'))
+const BallDetail = lazy(() => import( /* webpackChunkName:"ballDetail" */ '@pages/lottery/detail'))
 const BallEdit = lazy(() => import( /* webpackChunkName:"ballEdit" */ '@pages/lottery/ballEdit'))
 const BallTrend = lazy(() => import( /* webpackChunkName:"ballTrend" */ '@pages/lottery/ballTrendNew'))
 const BallChart = lazy(() => import( /* webpackChunkName:"ballChart" */ '@pages/lottery/ballChart'))
@@ -182,8 +182,8 @@ const routesConf: Partial<XRouteProps>[] = [
         component: BallList
       },
       {
-        path: '/ball/create',
-        component: BallCreate
+        path: '/ball-create',
+        component: BallDetail
       },
       {
         path: '/ball/detail/:id',
