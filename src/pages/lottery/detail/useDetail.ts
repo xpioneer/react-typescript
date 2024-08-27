@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
 import { Form } from 'antd'
+import { useParams } from 'react-router-dom'
 import { QueryForm } from '@/types/articleType'
 import { IBall } from 'models/ball'
-import { data2AntPageData } from '@/utils/tools'
+import { parseISO } from 'date-fns'
 import { useGraphQL } from '@/services/graphql'
 
 const mutation = `
@@ -10,8 +11,31 @@ mutation createBall($input: ballInput!){
   ball(input: $input){id}
 }`
 
+const query = `
+query ball($id: String!){
+  ball(id: $id){id,issue,reds,blue,pool,prizeOne,prizeOneNum,prizeTwo,prizeTwoNum,bettingNum,drawDate,createdAt}
+}`
 
-export const useCreate = () => {
+const updateBall = `
+mutation updateBall($input: ballInput!){
+  updated:editBall(input: $input)
+}`
+
+const mapData = (data: IBall, save = false) => {
+  if(save) {
+    data.blue = (data.blue as number[])[0]
+  } else {
+    (data as any).drawDate = parseISO(data.drawDate);
+    (data as any).createdAt = parseISO(data.createdAt);
+    data.blue = [data.blue as number]
+  }
+  
+  return data
+}
+
+export const useDetail = () => {
+  const {id} = useParams<{id: string}>()
+
   const [form] = Form.useForm<IBall>()
 
   const [loading, setLoading] = useState(false)
@@ -19,17 +43,40 @@ export const useCreate = () => {
   const isEdit = !!Form.useWatch('id', form)
   
   const onSave = (vals: IBall) => {
+    console.log(vals, 'form finish', mapData(vals, true))
+    // setLoading(true)
+    // useGraphQL<IBall>(
+    //   mutation,
+    //   vals
+    // ).finally(() => setLoading(false))
+  }
+
+
+  const onQuery = () => {
     setLoading(true)
     useGraphQL<IBall>(
-      mutation,
-      vals
-    ).finally(() => setLoading(false))
+      query,
+      {
+        id,
+      }
+    ).then(r => {
+      form.setFieldsValue(mapData(r))
+    })
+    .finally(() => setLoading(false))
   }
+
+  useEffect(() => {
+    if(id) {
+      onQuery()
+    }
+  }, [id])
 
   return {
     form,
+    isEdit,
     loading,
-    onSave
+    onQuery,
+    onSave,
   }
 }
 

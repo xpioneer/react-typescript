@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { 
   Row, Col, Form, Input, Button, Table, Modal, Checkbox,
-  Flex, Space, Spin, TableColumnProps, TableColumnsType, TablePaginationConfig
+  Flex, Space, Spin, TableColumnProps, TableColumnsType, TablePaginationConfig,
+  FormItemProps,
 } from 'antd'
 import { DatePicker } from 'components/datePicker'
 import { IBall } from '@models/ball'
-import { useCreate } from './useDetail'
+import { useDetail } from './useDetail'
 import styles from './style.module.scss'
 import classNames from 'classnames'
 
@@ -17,6 +18,14 @@ interface IProps {
   onChange?: (value?: number[]) => void
 }
 
+const formLayout: FormItemProps = {
+  labelCol: {
+    span: 4,
+  },
+  wrapperCol: {
+    span: 8
+  }
+}
 
 const BallSelectList: React.FC<IProps> = ({
   total = 33,
@@ -33,7 +42,6 @@ const BallSelectList: React.FC<IProps> = ({
       if (index >= 0) { // selected, delete
         vals.splice(index, 1)
       } else { // not selected
-        console.log('not ', vals, ball)
         if (vals.length < 6) { // and length < 6
           vals.push(ball)
         }
@@ -46,12 +54,11 @@ const BallSelectList: React.FC<IProps> = ({
   }
 
   useEffect(() => {
-    // setVals(value)
+    if(value && value.length > 0)
+      setVals(value)
   }, [value])
 
-  console.log('ball', value, vals)
-
-  return <Space>
+  return <Space className={styles.ballWrap}>
     {
       Array(total).fill(0).map((n, i) => {
         const ball = i + 1
@@ -61,7 +68,7 @@ const BallSelectList: React.FC<IProps> = ({
           key={ball}
           className={classNames(styles.ball, {
             [styles.blue]: !red,
-            [styles.active]: vals.includes(ball)
+            [styles.active]: value.includes(ball)
           })}
           onClick={() => onClick(ball)}
         >{ball}</Flex>
@@ -76,130 +83,124 @@ const BallCreatePage: React.FC = () => {
 
   const {
     form,
+    isEdit,
     loading,
+    onQuery,
     onSave,
-  } = useCreate()
+  } = useDetail()
 
-  const style = {
-    wrap: {
-      display: 'flex',
-      paddingTop: '10px',
-      flexWrap: 'wrap'
-    },
-    red: {
-      width: '30px',
-      height: '30px',
-      borderRadius: '100%',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      flex: '0 0 auto',
-      margin: '0 4px 4px 0',
-      cursor: 'pointer',
-      border: '1px solid #f54646',
-      color: '#f54646'
-    },
-    blue: {
-      width: '30px',
-      height: '30px',
-      borderRadius: '100%',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      flex: '0 0 auto',
-      margin: '0 4px 4px 0',
-      cursor: 'pointer',
-      border: '1px solid #39f',
-      color: '#39f'
-    }
-  }
-
-  const setActive = (type: 'red'|'blue', selected: [number], num: number) => {
-    const color =  type === 'red' ? '#f54646' : '#39f'
-    if (selected.some((v, i) => num === v)) {
-      let _style = JSON.parse(JSON.stringify(style[type]))
-      _style['backgroundColor'] = color
-      _style['color'] = '#fff'
-      return _style
-    } else {
-      return style[type]
-    }
-  }
+  const requireRule = [{
+    required: true
+  }]
 
   return <Spin spinning={loading}>
-    <Form form={form} className="search-form" layout="horizontal">
-      <h3>新增一期双色球</h3>
+    <h3>双色球详情</h3>
+    <Form
+      {...formLayout}
+      form={form}
+      className="search-form" layout="horizontal"
+      onFinish={onSave}
+    >
+      <Form.Item hidden name='id' />
       <Row gutter={24}>
         <Col span={18}>
-          <Form.Item name='issue' label="期号" labelCol={{sm: {span: 4}}} wrapperCol={{sm: { span: 8 }}}>
+          <Form.Item name='issue' label="期号" rules={requireRule}>
             <Input placeholder="期号，如：(19001)"/>
           </Form.Item>
         </Col>
-      </Row>
-      <Row>
         <Col span={18}>
-          <Form.Item label="红球" labelCol={{sm: {span: 4}}} wrapperCol={{sm: { span: 20 }}}>
+          <Form.Item name='reds' label="红球" wrapperCol={{ span: 20 }}
+             rules={[
+              ...requireRule,
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (value && value.length === 6) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject(new Error('6 red balls are needed.'));
+                }
+              }),
+            ]}
+          >
             <BallSelectList />
           </Form.Item>
         </Col>
-      </Row>
-      <Row>
         <Col span={18}>
-          <Form.Item label="蓝球" labelCol={{sm: {span: 4}}} wrapperCol={{sm: { span: 20 }}}>
+          <Form.Item name='blue' label="蓝球" wrapperCol={{ span: 20 }} rules={requireRule}>
             <BallSelectList total={16} red={false} />
           </Form.Item>
         </Col>
-      </Row>
-      <Row>
         <Col span={18}>
-          <Form.Item name='pool' label="奖金池" labelCol={{sm: {span: 4}}} wrapperCol={{sm: { span: 8 }}}>
+          <Form.Item name='pool' label="奖金池" rules={requireRule}>
             <Input placeholder="奖金池" />
           </Form.Item>
         </Col>
-      </Row>
-      <Row>
         <Col span={12}>
-          <Form.Item name='prizeOneNum' label="一等奖注数" labelCol={{sm: {span: 6}}} wrapperCol={{sm: { span: 12 }}}>
+          <Form.Item
+          name='prizeOneNum'
+          label="一等奖注数"
+          labelCol={{span: 6}}
+          wrapperCol={{ span: 12 }}
+          rules={requireRule}
+        >
             <Input placeholder="一等奖注数" />
           </Form.Item>
         </Col>
         <Col span={12}>
-          <Form.Item name='prizeOne' label="一等奖奖金" labelCol={{sm: {span: 6}}} wrapperCol={{sm: { span: 12 }}}>
+          <Form.Item
+            name='prizeOne'
+            label="一等奖奖金"
+            labelCol={{span: 6}}
+            wrapperCol={{ span: 12 }}
+            rules={requireRule}
+          >
             <Input placeholder="一等奖奖金" />
           </Form.Item>
         </Col>
-      </Row>
-      <Row>
         <Col span={12}>
-          <Form.Item name='prizeTwoNum' label="二等奖注数" labelCol={{sm: {span: 6}}} wrapperCol={{sm: { span: 12 }}}>
+          <Form.Item
+            name='prizeTwoNum'
+            label="二等奖注数"
+            labelCol={{span: 6}}
+            wrapperCol={{ span: 12 }}
+            rules={requireRule}
+          >
             <Input placeholder="二等奖注数" />
           </Form.Item>
         </Col>
         <Col span={12}>
-          <Form.Item name='prizeTwo' label="二等奖奖金" labelCol={{sm: {span: 6}}} wrapperCol={{sm: { span: 12 }}}>
+          <Form.Item
+            name='prizeTwo'
+            label="二等奖奖金"
+            labelCol={{span: 6}}
+            wrapperCol={{ span: 12 }}
+            rules={requireRule}
+          >
             <Input placeholder="二等奖奖金" />
           </Form.Item>
         </Col>
-      </Row>
-      <Row>
         <Col span={18}>
-          <Form.Item name='bettingNum' label="总投注金额" labelCol={{sm: {span: 4}}} wrapperCol={{sm: { span: 8 }}}>
+          <Form.Item name='bettingNum' label="总投注金额" rules={requireRule}>
             <Input placeholder="总投注金额" />
           </Form.Item>
         </Col>
-      </Row>
-      <Row>
         <Col span={18}>
-          <Form.Item name='drawDate' label="开奖日期" labelCol={{sm: {span: 4}}} wrapperCol={{sm: { span: 8 }}}>
+          <Form.Item name='drawDate' label="开奖日期" rules={requireRule}>
             <DatePicker />
-            {/* <Input placeholder="开奖日期" value={mainData.drawDate} onChange={e => inputChange(e.target.value, 'drawDate')}/> */}
           </Form.Item>
         </Col>
-      </Row>
-      <Row>
+        {
+          isEdit && <Col span={18}>
+            <Form.Item name='createdAt' label="创建日期">
+              <DatePicker disabled={isEdit} />
+            </Form.Item>
+          </Col>
+        }
         <Col span={24} offset={3}>
-          <Button onClick={() => {}} type="primary">保存</Button>
-          <Button onClick={() => {}}>取消</Button>
+          <Space>
+            <Button htmlType='submit' type="primary">保存</Button>
+            <Button onClick={() => history.goBack()}>取消</Button>
+          </Space>
         </Col>
       </Row>
     </Form>

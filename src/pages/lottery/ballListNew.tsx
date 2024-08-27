@@ -31,38 +31,38 @@ const BallListPage: React.FC = () => {
       title: '1',
       dataIndex: 'red1',
       width: '30px',
-      render: (text: number, record, index: number) => setColor(text, 'red')
+      render: (text: number, record, index) => setColor(text, 'red')
     }, {
       title: '2',
       dataIndex: 'red2',
       width: '30px',
-      render: (text: number, record, index: number) => setColor(text, 'red')
+      render: (text: number, record, index) => setColor(text, 'red')
     }, {
       title: '3',
       dataIndex: 'red3',
       width: '30px',
-      render: (text: number, record, index: number) => setColor(text, 'red')
+      render: (text: number, record, index) => setColor(text, 'red')
     }, {
       title: '4',
       dataIndex: 'red4',
       width: '30px',
-      render: (text: number, record, index: number) => setColor(text, 'red')
+      render: (text: number, record, index) => setColor(text, 'red')
     }, {
       title: '5',
       dataIndex: 'red5',
       width: '30px',
-      render: (text: number, record, index: number) => setColor(text, 'red')
+      render: (text: number, record, index) => setColor(text, 'red')
     }, {
       title: '6',
       dataIndex: 'red6',
       width: '30px',
-      render: (text: number, record, index: number) => setColor(text, 'red')
+      render: (text: number, record, index) => setColor(text, 'red')
     }]
   }, {
     title: '蓝球',
     dataIndex: 'blue',
     width: '30px',
-    render: (text: number, record, index: number) => setColor(text, 'blue')
+    render: (text: number, record, index) => setColor(text, 'blue')
   }, {
     title: '奖池奖金(元)',
     dataIndex: 'pool',
@@ -101,11 +101,11 @@ const BallListPage: React.FC = () => {
     title: '操作',
     dataIndex: '',
     width: '80px',
-    render: (text: string, record: IBall, index: number) => <React.Fragment><a onClick={() => onVeiw(record)}>详情</a>|<a onClick={() => showDelete(record.id)}>删除</a></React.Fragment>
+    render: (text, record, index) => <React.Fragment><a onClick={() => onVeiw(record)}>详情</a>|<a onClick={() => showDelete(record.id)}>删除</a></React.Fragment>
   }]
 
   const onVeiw = (data: IBall) => {
-    history.push(`/lottery/ball/detail/${data.id}`)
+    history.push(`/lottery/ball/${data.id}`)
   }
 
   const showDelete = (id: string) => {
@@ -157,7 +157,7 @@ const BallListPage: React.FC = () => {
           <Button type='primary' ghost onClick={() => history.push('ball-create')}>
             Create
           </Button>
-          <Button onClick={() => form.resetFields()}>
+          <Button htmlType='reset'>
             清空
           </Button>
           <Button type="primary" onClick={() => onQuery()}>

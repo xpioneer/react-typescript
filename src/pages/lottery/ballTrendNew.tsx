@@ -81,10 +81,6 @@ const BallTrendPage: React.FC = () => {
     return ''//<div style={{textAlign: 'center', color: color + '60', fontSize:'12px'}}>{num}</div>
   }
 
-  const setColor = (num: number, type: string) => {
-    return <div style={{textAlign: 'center', color: type}}>{num}</div>
-  }
-
   const showRule = () => {
     setOpen(x => !x)
   }

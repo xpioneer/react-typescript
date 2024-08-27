@@ -4,6 +4,8 @@
     "target": "es5",
     "module": "commonjs",
     "sourceMap": false,
+    "esModuleInterop": false,
+    "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "removeComments": false,
@@ -30,7 +32,7 @@
     },
   },
   "compileOnSave": false,
-  // "include": ["src/**/*"],
+  "include": ["src/**/*", "src/**/*.scss"],
   "exclude": [
     "node_modules"
   ]

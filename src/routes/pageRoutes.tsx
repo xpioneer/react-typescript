@@ -186,8 +186,8 @@ const routesConf: Partial<XRouteProps>[] = [
         component: BallDetail
       },
       {
-        path: '/ball/detail/:id',
-        component: BallEdit
+        path: '/ball/:id',
+        component: BallDetail
       },
       {
         title: 'Trend',

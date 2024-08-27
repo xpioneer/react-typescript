@@ -18,7 +18,7 @@ export interface IBall extends IBase {
 
   reds: number[]
   
-  blue: number
+  blue: number | number[]
 
   pool: number
 
