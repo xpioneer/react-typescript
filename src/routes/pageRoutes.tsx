@@ -3,7 +3,8 @@ import { RouteProps } from 'react-router-dom'
 import { NotFound }  from '@components/notFound'
 import {
   AreaChartOutlined, BarChartOutlined, BulbOutlined, DollarOutlined, ExperimentOutlined, FileSearchOutlined,
-  BookOutlined, FormOutlined, FrownOutlined, FundOutlined, HomeOutlined, MehOutlined, SmileOutlined, StockOutlined
+  BookOutlined, FormOutlined, FrownOutlined, FundOutlined, HomeOutlined, MehOutlined, SmileOutlined, StockOutlined,
+  LineChartOutlined,
 } from '@ant-design/icons'
 
 const {lazy} = React
@@ -31,12 +32,13 @@ const UserCreate = lazy(() => import( /* webpackChunkName:"userCreate" */ '@page
 const BallList = lazy(() => import( /* webpackChunkName:"ballList" */ '@pages/lottery/ballListNew'))
 const BallDetail = lazy(() => import( /* webpackChunkName:"ballDetail" */ '@pages/lottery/detail'))
 const BallEdit = lazy(() => import( /* webpackChunkName:"ballEdit" */ '@pages/lottery/ballEdit'))
-const BallTrend = lazy(() => import( /* webpackChunkName:"ballTrend" */ '@pages/lottery/ballTrendNew'))
+const BallTrend = lazy(() => import( /* webpackChunkName:"ballTrend" */ '@pages/lottery/trend'))
 const BallChart = lazy(() => import( /* webpackChunkName:"ballChart" */ '@pages/lottery/chart'))
 const StockList = lazy(() => import( /* webpackChunkName:"StockList" */ '@pages/stocks'))
 const StockDetail = lazy(() => import( /* webpackChunkName:"StockDetail" */ '@pages/stocks/detail'))
 const StockHistories = lazy(() => import( /* webpackChunkName:"StockList" */ '@pages/stocks/history'))
 const StockHistoriesDetail = lazy(() => import( /* webpackChunkName:"StockList" */ '@pages/stocks/historyDetail'))
+const StockKLine = lazy(() => import( /* webpackChunkName:"StockKLine" */ '@pages/stocks/kLine'))
 
 // demos
 const Demo = lazy(() => import( /* webpackChunkName:"demo" */ '@pages/demo/demoNew'))
@@ -223,7 +225,13 @@ const routesConf: Partial<XRouteProps>[] = [
         path: '/hitory',
         icon: <FundOutlined/>,
         component: StockHistories
-      }
+      },
+      {
+        title: 'KLine History',
+        path: '/kline',
+        icon: <LineChartOutlined />,
+        component: StockKLine
+      },
     ]
   },
   {
