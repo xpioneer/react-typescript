@@ -24,3 +24,14 @@ export interface IBall extends IBase {
 
   drawDate: string
 }
+
+export interface ChartOption {
+  name: string
+  value: number
+}
+
+export interface BallChart {
+  reds: ChartOption[]
+  blues: ChartOption[]
+  redDisList: ChartOption[][]
+}

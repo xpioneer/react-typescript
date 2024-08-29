@@ -8,7 +8,7 @@ import { GRAPHQL_API } from 'constants/index'
  */
 export const useGraphQL = <T = any, IsPageData = null>(
   query: string,
-  data: AnyObject,
+  data: AnyObject = {},
 ) => {
   return $http.post<any, GraphQLResponse<T, IsPageData>>(GRAPHQL_API, {
     query,
