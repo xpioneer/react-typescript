@@ -21,7 +21,7 @@ export default class TagEdit extends React.Component<ICommonProps> {
     const { mainData, inputChange, update } = this.props.tagEditStore
  
     return <React.Fragment>
-      <Form className="search-form" layout="horizontal">
+      <Form className="form" layout="horizontal">
         <h3>标签详情</h3>
         <Row gutter={24}>
           <Col span={18}>

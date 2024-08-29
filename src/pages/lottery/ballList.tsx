@@ -127,7 +127,7 @@ export default class BallList extends React.Component<ICommonProps> {
     const { value, loading, list, meta, drawDate, inputChange, search, clear } = this.props.ballListStore
  
     return <React.Fragment>
-      <Form className="search-form">
+      <Form className="form">
         <h3>双色球列表</h3>
         <Row gutter={24}>
           <Col span={6}>

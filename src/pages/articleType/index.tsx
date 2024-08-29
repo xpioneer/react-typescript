@@ -66,7 +66,7 @@ const ArticleTypePage: React.FC = () => {
   return <Spin spinning={loading}>
     <Form
       form={form}
-      className="search-form"
+      className="form"
     >
       <h3>文章类型列表</h3>
       <Row gutter={24}>

@@ -229,7 +229,7 @@ const BallTrendPage: React.FC = () => {
         </tbody></table> </Modal>
     <Form
       form={form}
-      className="search-form"
+      className="form"
     >
         <h3>双色球趋势</h3>
         <Row gutter={24}>

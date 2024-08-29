@@ -13,6 +13,11 @@ query ballPages($page: Int, $pageSize: Int, $order: pageOrder, $issue: String, $
   }
 }`
 
+const mutation = `
+mutation delete($id: String!){
+  delBall(id: $id)
+}`
+
 export const useList = () => {
   const [form] = Form.useForm()
   
@@ -35,6 +40,15 @@ export const useList = () => {
     }).finally(() => setLoading(false))
   }
 
+  const onDelete = (id: string) => {
+    return useGraphQL<boolean>(
+      mutation,
+      { id }
+    ).then(() => {
+      onQuery()
+    })
+  }
+
   useEffect(() => {
     onQuery()
   }, [])
@@ -44,5 +58,6 @@ export const useList = () => {
     loading,
     pageData,
     onQuery,
+    onDelete,
   }
 }

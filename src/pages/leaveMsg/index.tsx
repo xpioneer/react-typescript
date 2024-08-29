@@ -59,7 +59,7 @@ const LeaveMsgPage: React.FC = () => {
   return <Spin spinning={loading}>
     <Form
       form={form}
-      className="search-form"
+      className="form"
     >
       <h3>留言列表</h3>
       <Row gutter={24}>

@@ -71,7 +71,7 @@ export default class BallCreate extends React.Component<ICommonProps> {
     const { redBalls, blueBalls, reds, blues, selectBall, mainData, inputChange, save } = this.props.ballCreateStore
  
     return <React.Fragment>
-      <Form className="search-form" layout="horizontal">
+      <Form className="form" layout="horizontal">
         <h3>新增一期双色球</h3>
         <Row gutter={24}>
           <Col span={18}>

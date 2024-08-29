@@ -67,7 +67,7 @@ export default class ArticleTypeList extends React.Component<ICommonProps> {
     const { value, loading, list, meta, createdAt, inputChange, search, clear } = this.props.articleTypeListStore
  
     return <React.Fragment>
-      <Form className="search-form">
+      <Form className="form">
         <h3>文章类型列表</h3>
         <Row gutter={24}>
           <Col span={6}>

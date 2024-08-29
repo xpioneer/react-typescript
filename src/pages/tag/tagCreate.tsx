@@ -24,7 +24,7 @@ export default class TagCreate extends React.Component<ICommonProps> {
     const { mainData, inputChange, save } = this.props.tagCreateStore
  
     return <React.Fragment>
-      <Form className="search-form" layout="horizontal">
+      <Form className="form" layout="horizontal">
         <h3>新增标签</h3>
         <Row gutter={24}>
           <Col span={18}>

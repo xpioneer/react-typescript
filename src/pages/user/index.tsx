@@ -72,7 +72,7 @@ const UserPage: React.FC = () => {
   }
 
   return <Spin spinning={loading}>
-    <Form form={form} className="search-form">
+    <Form form={form} className="form">
       <h3>用户列表</h3>
       <Row gutter={24}>
         <Col span={6}>

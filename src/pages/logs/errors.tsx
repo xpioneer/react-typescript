@@ -247,7 +247,7 @@ export default class ErrorsLog extends React.Component<ICommonProps> {
         onOk={() => this.viewDetail('')}
         onCancel={() => this.viewDetail('')}
       > {this.wrapHtml(detailInfo)} </Modal>
-      <Form className="search-form">
+      <Form className="form">
         <h3>错误日志</h3>
         <Row gutter={24}>
           <Col span={6}>

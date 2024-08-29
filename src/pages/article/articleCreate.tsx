@@ -37,7 +37,7 @@ export default class ArticleCreate extends React.Component<ICommonProps> {
     const { mainData, typeList, tagList, tagChange, inputChange, save } = this.props.articleCreateStore
  
     return <React.Fragment>
-      <Form className="search-form" layout="horizontal">
+      <Form className="form" layout="horizontal">
         <h3>文章详情</h3>
         <Row gutter={24}>
           <Col span={18}>

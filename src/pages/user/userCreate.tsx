@@ -35,7 +35,7 @@ export default class UserCreate extends React.Component<ICommonProps> {
     const { mainData, inputChange, save, password, pwdChange } = this.props.userCreateStore
  
     return <React.Fragment>
-      <Form className="search-form" layout="horizontal">
+      <Form className="form" layout="horizontal">
         <h3>新增用户</h3>
         <Row gutter={24}>
           <Col span={18}>

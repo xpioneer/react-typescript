@@ -32,7 +32,7 @@ export default class UserEdit extends React.Component<ICommonProps> {
     const { mainData, inputChange, update } = this.props.userEditStore
  
     return <React.Fragment>
-      <Form className="search-form" layout="horizontal">
+      <Form className="form" layout="horizontal">
         <h3>用户详情</h3>
         <Row gutter={24}>
           <Col span={18}>

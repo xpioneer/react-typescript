@@ -24,7 +24,7 @@ export default class ArticleTypeCreate extends React.Component<ICommonProps> {
     const { mainData, inputChange, save } = this.props.articleTypeCreateStore
  
     return <React.Fragment>
-      <Form className="search-form" layout="horizontal">
+      <Form className="form" layout="horizontal">
         <h3>新增文章类型</h3>
         <Row gutter={24}>
           <Col span={18}>

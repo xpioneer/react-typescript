@@ -18,7 +18,8 @@ const BallListPage: React.FC = () => {
     form,
     loading,
     pageData,
-    onQuery
+    onQuery,
+    onDelete,
   } = useList()
 
   const columns: TableColumnsType<IBall> = [{
@@ -98,6 +99,12 @@ const BallListPage: React.FC = () => {
     key: 'drawDate',
     sorter: true
   }, {
+    title: '创建日期',
+    // width: '100px',
+    dataIndex: 'createdAt',
+    key: 'createdAt',
+    sorter: true
+  }, {
     title: '操作',
     dataIndex: '',
     width: '80px',
@@ -112,7 +119,8 @@ const BallListPage: React.FC = () => {
     Modal.confirm({
       title: '确认删除',
       content: '删除后该条记录将无法恢复',
-      // onOk: () => this.props.ballListStore.deleteBall(id)
+      okType: 'danger',
+      onOk: () => onDelete(id)
     })
   }
 
@@ -137,7 +145,7 @@ const BallListPage: React.FC = () => {
   return <Spin spinning={loading}>
     <Form
       form={form}
-      className="search-form"
+      className="form"
     >
       <h3>双色球列表</h3>
       <Row gutter={24}>

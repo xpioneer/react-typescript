@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { 
-  Row, Col, Form, Input, Button, Table, Modal, Checkbox,
+  Row, Col, Form, Input, Button, InputNumber, Modal, Checkbox,
   Flex, Space, Spin, TableColumnProps, TableColumnsType, TablePaginationConfig,
   FormItemProps,
 } from 'antd'
 import { DatePicker } from 'components/datePicker'
-import { IBall } from '@models/ball'
 import { useDetail } from './useDetail'
 import styles from './style.module.scss'
 import classNames from 'classnames'
@@ -85,7 +84,6 @@ const BallCreatePage: React.FC = () => {
     form,
     isEdit,
     loading,
-    onQuery,
     onSave,
   } = useDetail()
 
@@ -98,7 +96,7 @@ const BallCreatePage: React.FC = () => {
     <Form
       {...formLayout}
       form={form}
-      className="search-form" layout="horizontal"
+      className="form" layout="horizontal"
       onFinish={onSave}
     >
       <Form.Item hidden name='id' />
@@ -143,7 +141,7 @@ const BallCreatePage: React.FC = () => {
           wrapperCol={{ span: 12 }}
           rules={requireRule}
         >
-            <Input placeholder="一等奖注数" />
+            <InputNumber placeholder="一等奖注数" />
           </Form.Item>
         </Col>
         <Col span={12}>
@@ -154,7 +152,7 @@ const BallCreatePage: React.FC = () => {
             wrapperCol={{ span: 12 }}
             rules={requireRule}
           >
-            <Input placeholder="一等奖奖金" />
+            <InputNumber placeholder="一等奖奖金" />
           </Form.Item>
         </Col>
         <Col span={12}>
@@ -165,7 +163,7 @@ const BallCreatePage: React.FC = () => {
             wrapperCol={{ span: 12 }}
             rules={requireRule}
           >
-            <Input placeholder="二等奖注数" />
+            <InputNumber placeholder="二等奖注数" />
           </Form.Item>
         </Col>
         <Col span={12}>
@@ -176,12 +174,12 @@ const BallCreatePage: React.FC = () => {
             wrapperCol={{ span: 12 }}
             rules={requireRule}
           >
-            <Input placeholder="二等奖奖金" />
+            <InputNumber placeholder="二等奖奖金" />
           </Form.Item>
         </Col>
         <Col span={18}>
           <Form.Item name='bettingNum' label="总投注金额" rules={requireRule}>
-            <Input placeholder="总投注金额" />
+            <InputNumber placeholder="总投注金额" />
           </Form.Item>
         </Col>
         <Col span={18}>

@@ -69,6 +69,7 @@ const ErrorsLogPage: React.FC = () => {
     title: '操作',
     dataIndex: '',
     width: '60px',
+    fixed: 'right',
     render: (text: string, record) => <Button size="small" type="primary" onClick={() => onViewDetail(record)}>详情</Button>,
   }]
 
@@ -194,7 +195,7 @@ const ErrorsLogPage: React.FC = () => {
   }
  
   return <Spin spinning={loading}>
-    <Form className="search-form">
+    <Form className="form">
       <h3>错误日志</h3>
       <Row gutter={24}>
         <Col span={6}>
@@ -231,6 +232,7 @@ const ErrorsLogPage: React.FC = () => {
     </Form>
     <Table
       size='small'
+      scroll={{x: 1600}}
       columns={columns}
       rowKey={(record: any) => record.id}
       dataSource={pageData.data}

@@ -61,7 +61,7 @@ const APILogPage: React.FC = () => {
   }, {
     title: '操作',
     dataIndex: '',
-    width: '80px',
+    width: '60px',
     fixed: 'right',
     render: (text: string, record, index: number) => <Button size="small" type="primary" onClick={() => onViewDetail(record)}>详情</Button>,
   }]
@@ -177,7 +177,7 @@ const APILogPage: React.FC = () => {
   return <Spin spinning={loading}>
     <Form
       form={form}
-      className="search-form"
+      className="form"
     >
       <h3>API请求日志</h3>
       <Row gutter={24}>
@@ -210,6 +210,7 @@ const APILogPage: React.FC = () => {
     </Form>
     <Table
       size='small'
+      scroll={{x: 1600}}
       columns={columns}
       rowKey={(record: any) => record.id}
       dataSource={pageData.data}

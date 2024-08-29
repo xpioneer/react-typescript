@@ -70,7 +70,7 @@ const CommentPage: React.FC = () => {
   return <Spin spinning={loading}>
     <Form
       form={form}
-      className="search-form"
+      className="form"
     >
       <h3>评论列表</h3>
       <Row gutter={24}>

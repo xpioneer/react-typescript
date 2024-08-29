@@ -1,17 +1,18 @@
 import { useState, useEffect } from 'react'
 import { Form } from 'antd'
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
+import { debounce } from 'utils/debounce'
 import { QueryForm } from '@/types/articleType'
 import { IBall } from 'models/ball'
 import { parseISO } from 'date-fns'
 import { useGraphQL } from '@/services/graphql'
 
 const mutation = `
-mutation createBall($input: ballInput!){
-  saveBall(input: $input){id}
+mutation saveBall($input: ballInput!){
+  saveBall(input: $input)
 }`
 
-const mutation1 = `
+const createBall = `
 mutation createBall($input: ballInput!){
   ball(input: $input){id}
 }`
@@ -28,7 +29,8 @@ mutation updateBall($input: ballInput!){
 
 const mapData = (data: IBall, save = false) => {
   if(save) {
-    data.blue = (data.blue as number[])[0]
+    data.blue = (data.blue as number[])[0];
+    (data as any).createdAt = undefined
   } else {
     (data as any).drawDate = parseISO(data.drawDate);
     (data as any).createdAt = parseISO(data.createdAt);
@@ -40,6 +42,7 @@ const mapData = (data: IBall, save = false) => {
 
 export const useDetail = () => {
   const {id} = useParams<{id: string}>()
+  const history = useHistory()
 
   const [form] = Form.useForm<IBall>()
 
@@ -47,14 +50,14 @@ export const useDetail = () => {
 
   const isEdit = !!Form.useWatch('id', form)
   
-  const onSave = (vals: IBall) => {
-    console.log(vals, 'form finish', mapData(vals, true))
-    // setLoading(true)
-    // useGraphQL<IBall>(
-    //   mutation,
-    //   vals
-    // ).finally(() => setLoading(false))
-  }
+  const onSave = debounce((vals: IBall) => {
+    setLoading(true)
+    useGraphQL<IBall>(
+      mutation,
+      { input: mapData(vals, true) }
+    ).then(r => history.go(-1))
+    .finally(() => setLoading(false))
+  })
 
 
   const onQuery = () => {
@@ -64,9 +67,7 @@ export const useDetail = () => {
       {
         id,
       }
-    ).then(r => {
-      form.setFieldsValue(mapData(r))
-    })
+    ).then(r => form.setFieldsValue(mapData(r)))
     .finally(() => setLoading(false))
   }
 

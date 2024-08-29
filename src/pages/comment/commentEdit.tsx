@@ -21,7 +21,7 @@ export default class CommentEdit extends React.Component<ICommonProps> {
     const { mainData } = this.props.commentEditStore
  
     return <React.Fragment>
-      <Form className="search-form" layout="horizontal">
+      <Form className="form" layout="horizontal">
         <h3>评论详情</h3>
         <Row gutter={24}>
           <Col span={18}>

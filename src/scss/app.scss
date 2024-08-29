@@ -14,10 +14,10 @@
 }
 
 /* search-form */
-.ant-form.search-form {
+.ant-form.form {
   padding-bottom: 20px;
 
-  .ant-picker {
+  .ant-picker, .ant-input-number {
     width: 100%;
   }
 }

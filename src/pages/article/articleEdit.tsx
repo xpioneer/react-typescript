@@ -34,7 +34,7 @@ export default class ArticleEdit extends React.Component<ICommonProps> {
     const { mainData, typeList, tagList, tagChange, inputChange, update } = this.props.articleEditStore
  
     return <React.Fragment>
-      <Form className="search-form" layout="horizontal">
+      <Form className="form" layout="horizontal">
         <h3>文章详情</h3>
         <Row gutter={24}>
           <Col span={18}>

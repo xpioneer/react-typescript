@@ -33,7 +33,7 @@ const ArticleTypeDetailPage: React.FC = () => {
     <Form
       form={form}
       {...formLayout}
-      className="search-form"
+      className="form"
       onFinish={onSave}
     >
       <Form.Item hidden name="id"/>

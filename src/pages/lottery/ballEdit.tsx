@@ -67,7 +67,7 @@ export default class BallEdit extends React.Component<ICommonProps> {
     const { redBalls, blueBalls, reds, blues, selectBall, mainData, inputChange, save } = this.props.ballEditStore
  
     return <React.Fragment>
-      <Form className="search-form" layout="horizontal">
+      <Form className="form" layout="horizontal">
         <h3>双色球详情</h3>
         <Row gutter={24}>
           <Col span={18}>
