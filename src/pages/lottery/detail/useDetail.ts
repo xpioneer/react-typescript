@@ -8,6 +8,11 @@ import { useGraphQL } from '@/services/graphql'
 
 const mutation = `
 mutation createBall($input: ballInput!){
+  saveBall(input: $input){id}
+}`
+
+const mutation1 = `
+mutation createBall($input: ballInput!){
   ball(input: $input){id}
 }`
 
