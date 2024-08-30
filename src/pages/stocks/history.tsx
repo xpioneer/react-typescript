@@ -55,13 +55,25 @@ const StockHistoryList: React.FC = () => {
     stockHistoryTotal().then(setTotal)
   }, [])
 
+  const onSelect = (id: number) => {
+    onQuery({id, page: 1, pageSize: 10} as any)
+  }
+
 
   return <Spin spinning={loading}>
     <Form className="mgb16" form={form}>
       <Row gutter={16}>
         <Col span={6}>
           <Form.Item name="id">
-            <Select allowClear showSearch filterOption={false} placeholder="Name/Code" options={stockOpts} onSearch={onSelectSearch}/>
+            <Select
+              allowClear
+              showSearch
+              filterOption={false}
+              placeholder="Name/Code"
+              options={stockOpts}
+              onSearch={onSelectSearch}
+              onSelect={onSelect}
+            />
           </Form.Item>
         </Col>
       </Row>

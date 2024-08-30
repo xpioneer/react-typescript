@@ -26,8 +26,8 @@
   }
 
   interface IPageData<T = any> {
-    list?: T[]
-    data: T[]
+    list?: T[] // graphql 返回数据
+    data: T[] // restful 返回数据
     meta: Partial<IPager>
     msg?: string
     status?: number

@@ -32,11 +32,13 @@ export const useRequest = <T = any, PageData = null>(
   data?: AnyObject,
   method = Method.GET,
 ) => {
+  const isGetMethod = method === Method.GET
+  console.log(url, data, method, '>>> request')
   return $http<any, PageData extends boolean ? IPageData<T> : T>({
     baseURL: APIType.RESTful,
     url,
     method,
-    data: method === Method.GET ? null : data,
-    params: method === Method.GET ? data : null
+    data: isGetMethod ? null : data,
+    params: isGetMethod ? data : null
   })
 }

@@ -13,7 +13,6 @@ export const debounce = <T extends AnyFunc>(
 ): DebouncedFunc<T> => {
   let timer: number
   const later = (context: any, ...args: any[]) => {
-    if (!immediate) fn.apply(context, args);
     window.clearTimeout(timer);
     timer = window.setTimeout(() => {
       fn.apply(context, args);
@@ -23,7 +22,7 @@ export const debounce = <T extends AnyFunc>(
     if (immediate && !timer) {
       fn.apply(this, args);
     }
-    later(this, args)
+    later(this, ...args)
   }
   debounced.cancel = () => {
     window.clearTimeout(timer)
