@@ -4,7 +4,7 @@ import { GRAPHQL_API } from '@constants/index'
 import { QueryForm } from '@/types/articleType'
 import { IUser } from 'models/user'
 import { data2AntPageData } from '@/utils/tools'
-import { useGraphQL } from '@/services/graphql'
+import { useGraphQL } from '@/services/http'
 
 const query = `
 query userPages($page: Int, $pageSize: Int, $order: pageOrder, $nickName: String, $username: String, $userType: Int, $createdAt: [String]){
@@ -23,7 +23,7 @@ export const useList = () => {
   const onQuery = (page = 1, pageSize = 10, order: AnyObject = {createdAt: 'DESC'}) => {
     const vals = form.getFieldsValue()
     setLoading(true)
-    useGraphQL<IUser, boolean>(
+    useGraphQL<{users: IUser}, true>(
       query,
       {
         page,
@@ -32,7 +32,7 @@ export const useList = () => {
         ...vals
       }
     ).then(res => {
-      setPageData(data2AntPageData(res))
+      setPageData(data2AntPageData(res.users))
     }).finally(() => setLoading(false))
   }
 

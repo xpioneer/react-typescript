@@ -3,7 +3,7 @@ import { Form } from 'antd'
 import { QueryForm } from '@/types/articleType'
 import { IArticle } from 'models/article'
 import { data2AntPageData } from '@/utils/tools'
-import { useGraphQL } from '@/services/graphql'
+import { useGraphQL } from '@/services/http'
 
 const query = `
 query articlePages($page: Int, $pageSize: Int, $order: pageOrder, $title: String, $abstract: String, $tag: String, $createdAt: [String]){
@@ -22,7 +22,7 @@ export const useList = () => {
   const onQuery = (page = 1, pageSize = 10, order = {createdAt: 'DESC'}) => {
     const vals = form.getFieldsValue()
     setLoading(true)
-    useGraphQL<IArticle, boolean>(
+    useGraphQL<{articles: IArticle}, true>(
       query,
       {
         page,
@@ -31,7 +31,7 @@ export const useList = () => {
         ...vals
       }
     ).then(res => {
-      setPageData(data2AntPageData(res))
+      setPageData(data2AntPageData(res.articles))
     }).finally(() => setLoading(false))
   }
 

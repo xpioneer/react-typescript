@@ -3,9 +3,9 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { GRAPHQL_API } from '@/constants'
 import { IArticleType } from 'models/articleType'
-import { useGraphQL } from '@/services/graphql'
+import { useGraphQL } from '@/services/http'
 
-const getArticleTypeById = `
+const query = `
 query getArticleType($id: String!){
   articleType(id: $id){
     id
@@ -17,7 +17,7 @@ query getArticleType($id: String!){
 }`
 
 // 这里放开了id的限制，update和insert共用一个mutation，后面再改。
-const postArticleType = `
+const mutation = `
 mutation updateArticleType($id: String, $name: String!, $remark: String){
   editArticleType(id: $id, name: $name, remark: $remark){
     id
@@ -36,8 +36,8 @@ export const useArticleTypeDetail = () => {
   
   const onSave = (vals: IArticleType) => {
     setLoading(true)
-    useGraphQL<IArticleType>(
-      postArticleType,
+    useGraphQL<{id: string}>(
+      mutation,
       {
         ...vals
       }
@@ -46,12 +46,12 @@ export const useArticleTypeDetail = () => {
 
   const onQuery = () => {
     setLoading(true)
-    useGraphQL<IArticleType>(
-      getArticleTypeById,
+    useGraphQL<{articleType: IArticleType}>(
+      query,
       {
         id,
       }
-    ).then(form.setFieldsValue)
+    ).then(res => form.setFieldsValue(res.articleType))
     .finally(() => setLoading(false))
   }
 

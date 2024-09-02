@@ -7,10 +7,10 @@ import { GRAPHQL_API } from '@constants/index'
 import { ITag } from 'models/tag'
 import { QueryForm } from 'types/articleType'
 import { data2AntPageData } from '@/utils/tools'
-import { useGraphQL } from '@/services/graphql'
+import { useGraphQL } from '@/services/http'
 
 
-const queryTagPages = `
+const query = `
 query articleTags($page: Int, $pageSize: Int, $order: pageOrder, $name: String, $createdAt: [String]){
   tags(page: $page, pageSize: $pageSize, order: $order, name: $name, createdAt: $createdAt){
     list{id,name,remark,createdAt,createdBy,updatedAt}
@@ -31,14 +31,14 @@ export const useTag = () => {
     }
     const vals = form.getFieldsValue()
     setLoading(true)
-    useGraphQL<ITag, boolean>(
-      queryTagPages,
+    useGraphQL<{tags: ITag}, true>(
+      query,
       {
         ...params,
         ...vals
       }
     ).then(res => {
-      setPageData(data2AntPageData(res))
+      setPageData(data2AntPageData(res.tags))
     }).finally(() => setLoading(false))
   }
 

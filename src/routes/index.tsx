@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import Loading from '@components/loading'
 
 const Home = lazy(() => import( /* webpackChunkName:"home" */'@pages/home/home'))
-const Login = lazy(() => import( /* webpackChunkName:"login" */'@pages/login/loginNew'))
+const Login = lazy(() => import( /* webpackChunkName:"login" */'@pages/login'))
 const Register = lazy(() => import( /* webpackChunkName:"register" */'@pages/register'))
 
 export const Routes: React.FC = () => {

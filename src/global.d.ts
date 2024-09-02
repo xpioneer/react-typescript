@@ -9,7 +9,7 @@
 
   type GraphQLResponse<T = any, IsPageData = null> = {
     data: {
-      [key in string]: IsPageData extends boolean ? IPageData<T> : T
+      [Key in keyof T]: IsPageData extends true ? IPageData<T[Key]> : T[Key]
     }
   }
 

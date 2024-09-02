@@ -97,10 +97,10 @@ const CommentPage: React.FC = () => {
       </Row>
       <Flex justify={'end'}>
         <Space>
-          <Button type='primary' ghost onClick={() => history.push('comment-edit')}>
+          <Button type='primary' ghost onClick={() => history.push('article-new')}>
             Create
           </Button>
-          <Button onClick={() => form.resetFields()}>
+          <Button htmlType='reset'>
             清空
           </Button>
           <Button type="primary" onClick={() => onQuery()}>

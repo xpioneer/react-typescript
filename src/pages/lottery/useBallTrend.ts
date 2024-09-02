@@ -3,7 +3,7 @@ import { Form } from 'antd'
 import { QueryForm } from '@/types/articleType'
 import { IBall } from 'models/ball'
 import { data2AntPageData } from '@/utils/tools'
-import { useGraphQL } from '@/services/graphql'
+import { useGraphQL } from '@/services/http'
 
 const query = `
 query ballPages($page: Int, $pageSize: Int, $order: pageOrder, $issue: String, $drawDate: [String]){
@@ -28,7 +28,7 @@ export const useList = () => {
   const onQuery = (page = 1, pageSize = 40, order = {createdAt: 'DESC'}) => {
     const vals = form.getFieldsValue()
     setLoading(true)
-    useGraphQL<IBall, boolean>(
+    useGraphQL<{balls: IBall}, true>(
       query,
       {
         ...vals,
@@ -37,7 +37,7 @@ export const useList = () => {
         order,
       }
     ).then(res => {
-      setPageData(data2AntPageData(res))
+      setPageData(data2AntPageData(res.balls))
     }).finally(() => setLoading(false))
   }
 

@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import { Form } from 'antd'
 import { QueryForm } from '@/types/articleType'
-import { IArticle } from 'models/article'
+import { IBall } from 'models/ball'
 import { data2AntPageData } from '@/utils/tools'
-import { useGraphQL } from '@/services/graphql'
+import { useGraphQL } from '@/services/http'
 
 const query = `
 query ballPages($page: Int, $pageSize: Int, $order: pageOrder, $issue: String, $drawDate: [String]){
@@ -27,7 +27,7 @@ export const useList = () => {
   const onQuery = (page = 1, pageSize = 20, order = {createdAt: 'DESC'}) => {
     const vals = form.getFieldsValue()
     setLoading(true)
-    useGraphQL<IArticle, boolean>(
+    useGraphQL<{balls: IBall}, true>(
       query,
       {
         page,
@@ -36,7 +36,7 @@ export const useList = () => {
         ...vals
       }
     ).then(res => {
-      setPageData(data2AntPageData(res))
+      setPageData(data2AntPageData(res.balls))
     }).finally(() => setLoading(false))
   }
 

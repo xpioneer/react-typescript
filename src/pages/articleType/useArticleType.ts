@@ -5,7 +5,7 @@ import { startOfDay, endOfDay } from 'date-fns'
 import { GRAPHQL_API } from '@constants/index'
 import { ArticleType, QueryForm } from 'types/articleType'
 import { data2AntPageData } from '@/utils/tools'
-import { useGraphQL } from '@/services/graphql'
+import { useGraphQL } from '@/services/http'
 
 const queryArticleTypes = `
 query articleTypePages($page: Int, $pageSize: Int, $order: pageOrder, $name: String, $createdAt: [String]){
@@ -24,7 +24,7 @@ export const useArticleType = () => {
   const onQuery = (page = 1, pageSize = 10) => {
     const vals = form.getFieldsValue()
     setLoading(true)
-    useGraphQL<ArticleType, boolean>(
+    useGraphQL<{articleTypes: ArticleType}, true>(
       queryArticleTypes,
       {
         page,
@@ -32,7 +32,7 @@ export const useArticleType = () => {
         ...vals
       }
     ).then(res => {
-      setPageData(data2AntPageData(res))
+      setPageData(data2AntPageData(res.articleTypes))
     }).finally(() => setLoading(false))
   }
 

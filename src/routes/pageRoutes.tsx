@@ -14,7 +14,7 @@ const Chart = lazy(() => import( /* webpackChunkName:"charts" */ '@pages/charts'
 const LogApi = lazy(() => import( /* webpackChunkName:"logApi" */ '@pages/logs/apiNew'))
 const LogErrors = lazy(() => import( /* webpackChunkName:"logErrors" */ '@pages/logs/errorsNew'))
 const ArticleList = lazy(() => import( /* webpackChunkName:"articleList" */ '@pages/article'))
-const ArticleEdit = lazy(() => import( /* webpackChunkName:"articleEdit" */ '@pages/article/articleEdit'))
+const ArticleDetail = lazy(() => import( /* webpackChunkName:"articleDetail" */ '@pages/article/detail'))
 const ArticleCreate = lazy(() => import( /* webpackChunkName:"articleCreate" */ '@pages/article/articleCreate'))
 const ArticleTypeList = lazy(() => import( /* webpackChunkName:"articleTypeList" */ '@pages/articleType'))
 const ArticleTypeDetail = lazy(() => import( /* webpackChunkName:"articleTypeDeital" */ '@pages/articleType/detail'))
@@ -101,12 +101,12 @@ const routesConf: Partial<XRouteProps>[] = [
         component: ArticleList
       },
       {
-        path: '/article/create',
-        component: ArticleCreate
+        path: '/article-new',
+        component: ArticleDetail
       },
       {
-        path: '/article/detail/:id',
-        component: ArticleEdit
+        path: '/article/:id',
+        component: ArticleDetail
       },
       {
         title: 'Type',

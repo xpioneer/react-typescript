@@ -4,7 +4,7 @@ import { GRAPHQL_API } from '@constants/index'
 import { QueryForm } from '@/types/articleType'
 import { ILeaveMsg } from 'models/leaveMsg'
 import { data2AntPageData } from '@/utils/tools'
-import { useGraphQL } from '@/services/graphql'
+import { useGraphQL } from '@/services/http'
 
 const query = `
 query leaveMsgPages($page: Int, $pageSize: Int, $order: pageOrder, $description: String, $createdAt: [String]){
@@ -23,7 +23,7 @@ export const useList = () => {
   const onQuery = (page = 1, pageSize = 10, order = {createdAt: 'DESC'}) => {
     const vals = form.getFieldsValue()
     setLoading(true)
-    useGraphQL<ILeaveMsg, boolean>(
+    useGraphQL<{leaveMsgs: ILeaveMsg}, true>(
       query,
       {
         page,
@@ -32,7 +32,7 @@ export const useList = () => {
         ...vals
       }
     ).then(res => {
-      setPageData(data2AntPageData(res))
+      setPageData(data2AntPageData(res.leaveMsgs))
     }).finally(() => setLoading(false))
   }
 

@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { GRAPHQL_API } from '@/constants'
 import { ITag } from '@models/tag'
-import { useGraphQL } from '@/services/graphql'
+import { useGraphQL } from '@/services/http'
 
 const query = `
 query getTag($id: String!){
@@ -30,12 +30,13 @@ export const useDetail = () => {
   const [form] = Form.useForm<ITag>()
 
   const [loading, setLoading] = useState(false)
+  
 
   const isEdit = !!Form.useWatch('id', form)
   
   const onSave = (vals: ITag) => {
     setLoading(true)
-    useGraphQL<ITag>(
+    useGraphQL<{id: string}>(
       mutation,
       vals
     ).finally(() => setLoading(false))
@@ -43,10 +44,10 @@ export const useDetail = () => {
 
   const onQuery = () => {
     setLoading(true)
-    useGraphQL<ITag>(
+    useGraphQL<{tag: ITag}>(
       query,
       { id }
-    ).then(form.setFieldsValue)
+    ).then(res => form.setFieldsValue(res.tag))
     .finally(() => setLoading(false))
   }
 

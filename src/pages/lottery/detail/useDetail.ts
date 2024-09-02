@@ -5,7 +5,7 @@ import { debounce } from 'utils/debounce'
 import { QueryForm } from '@/types/articleType'
 import { IBall } from 'models/ball'
 import { parseISO } from 'date-fns'
-import { useGraphQL } from '@/services/graphql'
+import { useGraphQL } from 'services/http'
 
 const mutation = `
 mutation saveBall($input: ballInput!){

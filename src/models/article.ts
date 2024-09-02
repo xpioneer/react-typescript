@@ -6,4 +6,6 @@ export interface IArticle extends IBase {
   abstract: string
 
   description: string
+
+  tag: string[]
 }

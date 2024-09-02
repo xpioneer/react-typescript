@@ -83,7 +83,7 @@ export const useKLine = () => {
       data.volumes.push(i.volume)
     })
 
-    console.log(data.days, '>>>>')
+    // console.log(data.days, '>>>>')
 
     const calculateMA = (dayCount: number) => {
       var result = [];
@@ -313,7 +313,7 @@ export const useKLine = () => {
       pageSize: 30 * 250,
       noPage: true
     }).then(res => {
-      console.log(res, '>>>return')
+      // console.log(res, '>>>return')
       setOption(res, id)
     }).finally(() => setLoading(false))
   }

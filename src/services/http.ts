@@ -9,14 +9,13 @@ import { Method, APIType } from '@/types/demo'
  */
 export const useGraphQL = <T = any, IsPageData = null>(
   query: string,
-  data: AnyObject,
+  variables: AnyObject = {},
 ) => {
   return $http.post<any, GraphQLResponse<T, IsPageData>>(APIType.Graphql, {
     query,
-    variables: data
+    variables
   }).then(res => {
-    const keys = Object.keys(res.data)
-    return res.data[keys[0]]
+    return res.data
   })
 }
 
@@ -33,8 +32,7 @@ export const useRequest = <T = any, PageData = null>(
   method = Method.GET,
 ) => {
   const isGetMethod = method === Method.GET
-  console.log(url, data, method, '>>> request')
-  return $http<any, PageData extends boolean ? IPageData<T> : T>({
+  return $http<any, PageData extends true ? IPageData<T> : T>({
     baseURL: APIType.RESTful,
     url,
     method,
