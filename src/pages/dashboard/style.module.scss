@@ -1,0 +1,16 @@
+
+.dashboard {
+  color: var(--main-txt-color);
+  background-color: var(--main-bg-color);
+
+  h2 {
+    text-align: center;
+    padding: 20px;
+  }
+
+  .chart {
+    height: 600px;
+    width: 100%;
+    padding: 8px;
+  }
+}

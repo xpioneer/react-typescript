@@ -1,24 +1,16 @@
-import * as React from 'react'
-// import styles from './style.scss'
-
-// export default class Dashboard extends React.Component {
-//   render () {
-//     return <div>
-//       <p>Welcome to Dashboard!</p>
-//       <div>GraphQL Application. </div>
-//       {/* <p style={{width: '400px', height: '40PX', fontSize: '24px'}}>测试rem</p> */}
-//       <div>66px</div>
-//       <div className="testcss">9999</div>
-//     </div>
-//   }
-// }
+import React, { useEffect } from 'react'
+import { useData } from './useData'
+import styles from './style.module.scss'
 
 export default function Dashboard() {
-  return <div>
-    <p>Welcome to Dashboard!</p>
-    <div>GraphQL Application. </div>
-    {/* <p style={{width: '400px', height: '40PX', fontSize: '24px'}}>测试rem</p> */}
-    <div>66px</div>
-    <div className="testcss">9999</div>
+  const {
+    pathRef,
+    statusRef,
+  } = useData()
+
+  return <div className={styles.dashboard} style={{width: '100%'}}>
+    <h2>Welcome to Dashboard!</h2>
+    <div className={styles.chart} ref={pathRef}></div>
+    <div className={styles.chart} ref={statusRef}></div>
   </div>
 }

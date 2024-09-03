@@ -7,7 +7,7 @@ import { useRequest } from './http'
 export type StockQuery = Omit<Stock & IPageParams, 'id' | 'amount'> & { noPage: boolean }
 
 export const stockPageList = (params: Partial<StockQuery> = pageData2Params()) => {
-  return useRequest<Stock, boolean>('/stocks', params)
+  return useRequest<Stock, true>('/stocks', params)
 }
 
 export const getStockDetail = (id: number) => {
