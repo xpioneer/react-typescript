@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useMemo } from 'react'
 import { useHistory } from 'react-router-dom'
 import {
   Row, Col, Form, Input, Button, Table, Modal,
@@ -15,10 +15,23 @@ const CommentPage: React.FC = () => {
 
   const {
     form,
+    optsRef,
     loading,
     pageData,
     onQuery
   } = useList()
+
+  const { types, tags } = optsRef.current
+
+  const typeKV = useMemo(() => types.reduce<AnyObject<string>>((acc, cur) => {
+    acc[cur.id] = cur.name
+    return acc
+  }, {}), [types])
+
+  const tagKV = useMemo(() => tags.reduce<AnyObject<string>>((acc, cur) => {
+    acc[cur.id] = cur.name
+    return acc
+  }, {}), [tags])
 
   const columns: ColumnsType<IArticle> = [{
     title: 'ID',
@@ -39,8 +52,23 @@ const CommentPage: React.FC = () => {
     dataIndex: 'abstract',
     width: '120px',
   }, {
+    title: '类型',
+    dataIndex: 'typeId',
+    width: '80px',
+    render: (typeId: string) => typeKV[typeId],
+  }, {
+    title: '标签',
+    dataIndex: 'tag',
+    width: '80px',
+    render: (tag: string) => {
+      if(tag.length <= 32) {
+        return tag
+      }
+      return tag.split(',').map(t => tagKV[t]).join(',')
+    },
+  }, {
     title: '创建时间',
-    width: '70px',
+    width: '120px',
     dataIndex: 'createdAt',
     key: 'createdAt',
     sorter: true
@@ -50,6 +78,7 @@ const CommentPage: React.FC = () => {
     title: '操作',
     dataIndex: '',
     width: '30px',
+    fixed: 'right',
     render: (text: string, record, index) => <Button size="small" type="primary" onClick={() => onView(record)}>详情</Button>,
   }]
 
@@ -112,6 +141,7 @@ const CommentPage: React.FC = () => {
     <Table
       bordered
       size='small'
+      scroll={{ x: 1200 }}
       columns={columns}
       rowKey={(record: any) => record.id}
       dataSource={pageData.data}

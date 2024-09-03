@@ -1,14 +1,14 @@
 import { Form } from 'antd'
 import { useState, useEffect, useRef } from 'react'
 import { useParams } from 'react-router-dom'
-import { IArticle } from 'models/article'
+import { IArticle, ArticlesData } from 'models/article'
 import { IArticleType } from 'models/articleType'
 import { ITag } from 'models/tag'
 import { useGraphQL } from '@/services/http'
 import { parseISO } from 'date-fns'
 
 const query = `
-query article($id: String!){
+query article($id: String){
   article(id: $id){
     id,title,abstract,description,isTop,tag,createdAt,createdBy,
     typeId
@@ -22,25 +22,25 @@ query article($id: String!){
 }`
 
 const mutation = `
-mutation upateArticle($id: String!, $title: String!, $abstract: String!, $typeId: String!, $description: String!, $isTop: Int, $tag: String!,){
+mutation upateArticle($id: String, $title: String!, $abstract: String!, $typeId: String!, $description: String!, $isTop: Int, $tag: String!,){
   editArticle(id: $id, title: $title, abstract: $abstract, typeId: $typeId, description: $description, isTop: $isTop, tag: $tag){
     id
   }
 }`
 
 
-type ResData = {
-  article: IArticle
-  articleTypes: {
-    list: IArticleType[]
-  }
-  tags: {
-    list: ITag[]
-  }
-}
+// type ResData = {
+//   article: IArticle
+//   articleTypes: {
+//     list: IArticleType[]
+//   }
+//   tags: {
+//     list: ITag[]
+//   }
+// }
 
-const mapData = (data: IArticle) => {
-  if(data.id) {
+const mapData = (data: IArticle, save = false) => {
+  if(save) {
     (data as any).tag = data.tag.join(',');
     (data as any).createdAt = undefined
   } else {
@@ -69,9 +69,9 @@ export const useDetail = () => {
   const isEdit = !!Form.useWatch('id', form)
   
   const onSave = (vals: IArticle) => {
-    const variables = mapData(vals)
+    const variables = mapData(vals, true)
     setLoading(true)
-    useGraphQL<boolean>(
+    return useGraphQL<boolean>(
       mutation,
       variables
     ).finally(() => setLoading(false))
@@ -79,13 +79,14 @@ export const useDetail = () => {
 
   const onQuery = () => {
     setLoading(true)
-    useGraphQL<ResData>(
+    useGraphQL<ArticlesData>(
       query,
       { id }
     ).then(res => {
-      (res.article as any).createdAt = parseISO(res.article.createdAt);
-      res.article.tag = (res.article as any).tag.split(',')
-      form.setFieldsValue(res.article)
+      const article = res.article;
+      if(article) {
+        form.setFieldsValue(mapData(article))
+      }
       // 减少渲染，谨慎使用
       optsRef.current = {
         types: res.articleTypes.list,
@@ -96,9 +97,7 @@ export const useDetail = () => {
   }
 
   useEffect(() => {
-    if(id) {
-      onQuery()
-    }
+    onQuery()
   }, [id])
 
   return {

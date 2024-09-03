@@ -9,7 +9,7 @@ import {
   Checkbox,
 } from 'antd'
 import { useDetail } from './useDetail'
-import { object2Options } from '@/utils/tools'
+import { IArticle } from 'models/article'
 import { QuillEditor } from 'components/editor/new'
 import { DatePicker } from 'components/datePicker'
 
@@ -36,7 +36,9 @@ const ArticleDetailPage: React.FC = () => {
 
   const { types, tags } = optsRef.current
 
-  // console.log(types, tags, 'typeList, tagList', form.getFieldValue('id'))
+  const onFinish = (vals: IArticle) => {
+    onSave(vals).then(history.goBack)
+  }
 
   return <Spin spinning={loading}>
     <h3>文章详情</h3>
@@ -44,7 +46,7 @@ const ArticleDetailPage: React.FC = () => {
       form={form}
       {...formLayout}
       className="form"
-      onFinish={onSave}
+      onFinish={onFinish}
     >
       <Form.Item hidden name="id"/>
       <Row gutter={24}>
@@ -87,11 +89,13 @@ const ArticleDetailPage: React.FC = () => {
             }))} />
           </Form.Item>
         </Col>
-        <Col span={24}>
-          <Form.Item label="创建时间" name="createdAt">
-            <DatePicker disabled={isEdit} />
-          </Form.Item>
-        </Col>
+        {
+          isEdit && <Col span={24}>
+            <Form.Item label="创建时间" name="createdAt">
+              <DatePicker disabled />
+            </Form.Item>
+          </Col>
+        }
       </Row>
       <Col span={24} offset={4}>
         <Space>
