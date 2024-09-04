@@ -2,6 +2,7 @@
 .dashboard {
   color: var(--main-txt-color);
   background-color: var(--main-bg-color);
+  padding: 20px;
 
   h2 {
     text-align: center;
@@ -9,8 +10,10 @@
   }
 
   .chart {
-    height: 600px;
+    height: 400px;
     width: 100%;
     padding: 8px;
+    margin-bottom: 24px;
+    border: 1px solid var(--main-border-color);
   }
 }

@@ -22,6 +22,7 @@ import {
   BarSeriesOption,
   LineChart,
   LineSeriesOption,
+  RadarChart,
 } from 'echarts/charts'
 import { CanvasRenderer } from 'echarts/renderers'
 import { format } from 'date-fns'
@@ -41,6 +42,7 @@ Echarts.use([
   CanvasRenderer,
   LegendComponent,
   LineChart,
+  RadarChart,
 ])
 
 type EChartsOption = Echarts.ComposeOption<
@@ -201,6 +203,7 @@ const setOptions = (data: {
 export const useData = () => {
   const pathRef = useRef<HTMLDivElement>(null)
   const statusRef = useRef<HTMLDivElement>(null)
+  const scatterRef = useRef<HTMLDivElement>(null)
 
   const setChartData = (data: StatsData) => {
     const normalMap = data.statusCnt.apiCnt.reduce<AnyObject<number>>((p, c) => {
@@ -229,8 +232,131 @@ export const useData = () => {
       normalData,
       errData,
     }, statusRef.current!)
+
+    setScatterData(data)
   }
 
+  const setScatterData = (data: StatsData) => {
+    const names: string[] = [], values: number[] = [], indicator: any[] = []
+
+    data.statusCnt.errCnt.sort((a, b) => b.count - a.count).map((item) => {
+      names.push(item.name)
+      values.push(item.count)
+      indicator.push({
+        name: item.name,
+        max: item.count < 100 ? 100 : 200
+      })
+      return [item.name, item.count]
+    })
+    
+    Echarts.init(pathRef.current!, null, {
+      width: pathRef.current!.clientWidth - 16
+    }).setOption({
+      title: {
+        text: 'Error Status Chart',
+        left: 'center',
+      },
+      grid: [
+        {
+          left: '3%',
+          right: '15%',
+          bottom: '3%',
+          containLabel: true
+        },
+      ],
+      xAxis: [
+        {
+          type: 'value'
+        }
+      ],
+      yAxis: [
+        {
+          type: 'category',
+          boundaryGap: true,
+          data: names,
+          axisTick: {
+            alignWithLabel: true
+          }
+        }
+      ],
+      legend: {
+        data: ['Error']
+      },
+      tooltip: {
+        backgroundColor: 'rgba(255,255,255,0.7)',
+        formatter: function (param: any) {
+          const {name, value, dataIndex} = param
+          const isArray = Array.isArray(value)
+          return `${name}: ${isArray ? value[dataIndex] : value}`
+        }
+      },
+      radar: {
+        center: ['85%', '45%'],
+        // radius: '60%',
+        // shape: 'circle',
+        indicator,
+        axisName: {
+          color: '#64AFE9',
+          // backgroundColor: '#666',
+          borderRadius: 3,
+          padding: [3, 5]
+        },
+        splitArea: {
+          areaStyle: {
+            color: ['#77EADF', '#26C3BE', '#64AFE9', '#428BD4'],
+            shadowColor: 'rgba(0, 0, 0, 0.2)',
+            shadowBlur: 10
+          }
+        },
+        axisLine: {
+          lineStyle: {
+            color: 'rgba(211, 253, 250, 0.8)'
+          }
+        },
+        splitLine: {
+          lineStyle: {
+            color: 'rgba(211, 253, 250, 0.8)'
+          }
+        }
+      },
+      series: [
+        {
+          name: 'Bar number',
+          type: 'bar',
+          barWidth: '60%',
+          data: values,
+        },
+        {
+          name: 'Error Status',
+          type: 'radar',
+          data: [
+            {
+              value: values,
+              // name: 'Error total',
+            },
+          ],
+          label: {
+            show: true,
+            formatter: function (params: any) {
+              return params.value;
+            }
+          },
+          areaStyle: {
+            color: new Echarts.graphic.RadialGradient(0.1, 0.6, 1, [
+              {
+                color: 'rgba(255, 145, 124, 0.1)',
+                offset: 0
+              },
+              {
+                color: 'rgba(255, 145, 124, 0.9)',
+                offset: 1
+              }
+            ])
+          }
+        }
+      ]
+    })
+  }
   const onQuery = () => {
     useRequest<StatsData>('/log/stats').then(setChartData)
   }

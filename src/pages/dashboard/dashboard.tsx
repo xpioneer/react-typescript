@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useData } from './useData'
 import styles from './style.module.scss'
+import { Col, Row } from 'antd'
 
 export default function Dashboard() {
   const {
@@ -10,7 +11,11 @@ export default function Dashboard() {
 
   return <div className={styles.dashboard} style={{width: '100%'}}>
     <h2>Welcome to Dashboard!</h2>
-    <div className={styles.chart} ref={pathRef}></div>
+    <Row>
+      <Col span={24}>
+      <div className={styles.chart} ref={pathRef}></div>
+    </Col>
+    </Row>
     <div className={styles.chart} ref={statusRef}></div>
   </div>
 }
