@@ -22,7 +22,7 @@
     "lintcss:fix": "stylelint --syntax scss src/**/*.scss --fix"
   },
   "dependencies": {
-    "@ant-design/icons": "^5.2.6",
+    "@ant-design/icons": "^5.4.0",
     "antd": "^5.13.2",
     "axios": "^1.6.5",
     "classnames": "^2.5.1",

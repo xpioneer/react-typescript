@@ -17,6 +17,7 @@ $step: 8;
   $val: $start;
 
   .mgtrbl#{$val} { margin: $val + px !important; }
+  .mg#{$val} { margin: $val + px !important; }
   .mgtb#{$val} { margin: $val + px 0 !important; }
   .mglr#{$val} { margin: 0 $val + px !important; }
   .mgt#{$val} { margin-top: $val + px !important; }
@@ -25,6 +26,7 @@ $step: 8;
   .mgl#{$val} { margin-left: $val + px !important; }
 
   .pdtrbl#{$val} { padding: $val + px !important; }
+  .pd#{$val} { padding: $val + px !important; }
   .pdtb#{$val} { padding: $val + px 0 !important; }
   .pdlr#{$val} { padding: 0 $val + px !important; }
   .pdt#{$val} { padding-top: $val + px !important; }

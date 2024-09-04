@@ -12,7 +12,7 @@ const DEFAULT_PATH_LEN = 2
 
 const setMenuKeys = (paths: string[], end = DEFAULT_PATH_LEN) => `/${paths.slice(0, end).join('/')}`
 
-const LeftMenu: React.FC<ICommonProps> = (props) => {
+const LeftMenu: React.FC<ICommonProps<AnyObject>> = (props) => {
   const { location, history } = props
   const [openKeys, setOpenKeys] = useState<string[]>([])
   const [selectedKeys, setSelectedKeys] = useState<string[]>([])

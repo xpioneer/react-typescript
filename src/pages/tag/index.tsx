@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useHistory } from 'react-router-dom'
 import {
-  Row, Col, Form, Input, Button, Table, Modal, DatePicker,
+  Row, Col, Form, Input, Button, Table, DatePicker,
   TableColumnsType, Spin,
   Flex, Space,
 } from 'antd'
@@ -9,7 +9,7 @@ import {
 import { ITag } from '@models/tag'
 import { useTag } from './useTag'
 
-const TagPage: React.FC<ICommonProps> = () => {
+const TagPage: React.FC<ICommonProps<AnyObject>> = () => {
 
   const history = useHistory()
 

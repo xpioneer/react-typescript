@@ -4,11 +4,12 @@ import { UserInfo } from 'types/user'
 export type ValueOfStore = Store[keyof Store]
 
 export enum ACTION_TYPE {
+  SET_DARK,
+  SET_PRIMARY,
   SET_AUTHORIZED,
   SET_LANG,
   SET_LOADING,
   SET_USER_INFO,
-  SET_COLLAPSED,
 }
 
 export type Action<T = ValueOfStore> = {
@@ -16,7 +17,17 @@ export type Action<T = ValueOfStore> = {
   payload: T
 }
 
-// action
+// actions
+export const setDark = (payload = false) => ({
+  type: ACTION_TYPE.SET_DARK,
+  payload
+})
+
+export const setPrimary = (payload = '#e87722') => ({
+  type: ACTION_TYPE.SET_PRIMARY,
+  payload
+})
+
 export const setAuthorized = (payload = false) => ({
   type: ACTION_TYPE.SET_AUTHORIZED,
   payload
@@ -29,11 +40,6 @@ export const setLang = (payload: LangKeys = 'zh-CN') => ({
 
 export const setLoading = (payload = false) => ({
   type: ACTION_TYPE.SET_LOADING,
-  payload
-})
-
-export const setCollapsed = (payload = false) => ({
-  type: ACTION_TYPE.SET_COLLAPSED,
   payload
 })
 

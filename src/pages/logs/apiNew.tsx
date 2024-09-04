@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { Row, Col, Form, Input, Button, Table, Modal, Badge, Flex, Space, Spin } from 'antd'
+import { Row, Col, Form, Input, Button, Table, Badge, Flex, Space, Spin } from 'antd'
 import { ColumnProps } from 'antd/lib/table'
 import styles from './style.module.scss'
 import { APILog, RequestStatus } from 'types/api'
 import { useApi } from './useApi'
 import { DatePicker } from 'components/datePicker'
 import { JSONView } from 'components/jsonView'
-
+import { modal } from 'components/message'
 
 const APILogPage: React.FC = () => {
 
@@ -71,16 +71,25 @@ const APILogPage: React.FC = () => {
   }
 
   // 查看Url/参数详情
-  const showParamsDetail = (str: any, title: string) => {
-    Modal.info({
-      title,
-      content: str,
-    })
+  const showParamsDetail = (data: any, title: string) => {
+    if(typeof data === 'string') {
+      modal.info({
+        title,
+        content: data,
+      })
+    } else {
+      modal.info({
+        title,
+        width: '75%',
+        className: styles.large,
+        content: <JSONView data={data} />,
+      })
+    }
   }
 
   // 查看日志详情
   const onViewDetail = (data: any) => {
-    Modal.info({
+    modal.info({
       title: '日志详情',
       width: '75%',
       className: styles.large,

@@ -1,23 +1,31 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import { Form, Input, Button, Checkbox, Space, Flex } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { onLogin } from '../../services/account'
 import { LoginForm } from '@/types/account'
 import { storage } from "@utils/tools"
 import { JWT_TOKEN, REDIRECT_URL } from "@constants/index"
+import { useAppStore, setAuthorized } from '@/stores/store'
 
 
 const LoginPage: React.FC = () => {
+
+  const history = useHistory()
+
+  const [, dispatch] = useAppStore()
 
   const [form] = Form.useForm<LoginForm>()
 
   const [loading, setLoading] = useState(false)
 
   const onFinish = (values: LoginForm) => {
+    setLoading(true)
     onLogin(values).then(res => {
       storage.set(JWT_TOKEN, res) // store jwt token
-      window.location.replace(sessionStorage.getItem(REDIRECT_URL) || '/')
-    })
+      dispatch(setAuthorized(true))
+      history.replace(sessionStorage.getItem(REDIRECT_URL) || '/')
+    }).finally(() => setLoading(false))
   }
 
 

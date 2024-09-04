@@ -1,7 +1,7 @@
 import React from 'react'
 import {
   Row, Col, Form, Input, Button, Flex, Space,
-  Table, Modal, Badge, TableColumnProps,
+  Table, Badge, TableColumnProps,
   Spin,
 } from 'antd'
 import { DatePicker } from 'components/datePicker'
@@ -11,6 +11,7 @@ import { RequestStatus } from 'types/api'
 import { useErrors } from './useErrors'
 import styles from './style.module.scss'
 import { JSONView } from 'components/jsonView'
+import { modal } from 'components/message'
 
 const ErrorsLogPage: React.FC = () => {
 
@@ -76,12 +77,12 @@ const ErrorsLogPage: React.FC = () => {
   // 查看Url/参数详情
   const showParamsDetail = (data: any, title: string) => {
     if(typeof data === 'string') {
-      Modal.info({
+      modal.info({
         title,
         content: data,
       })
     } else {
-      Modal.info({
+      modal.info({
         title,
         width: '75%',
         className: styles.large,
@@ -92,7 +93,7 @@ const ErrorsLogPage: React.FC = () => {
 
   // 查看日志详情
   const onViewDetail = (data: any) => {
-    Modal.info({
+    modal.info({
       title: '日志详情',
       width: '75%',
       className: styles.large,

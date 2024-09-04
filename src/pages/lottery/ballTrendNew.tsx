@@ -7,6 +7,7 @@ import {
 import { ColumnProps } from 'antd/lib/table'
 import { IBall } from '@models/ball'
 import { useList } from './useBallTrend'
+import { modal } from 'components/message'
 
 const FormItem = Form.Item
 
@@ -65,7 +66,7 @@ const BallTrendPage: React.FC = () => {
   }
 
   const showDelete = (id: string) => {
-    Modal.confirm({
+    modal.confirm({
       title: '确认删除',
       content: '删除后该条记录将无法恢复',
       // onOk: () => this.props.ballTrendStore.deleteBall(id)

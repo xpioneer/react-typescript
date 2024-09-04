@@ -72,6 +72,11 @@
     background: rgba(245, 245, 245, 0.5);
   }
 }
+.ant-form-item-has-error {
+  .ql-snow {
+    border-color: #ff4d4f !important;
+  }
+}
 
 /* trend-table-list */
 .trend-table-list {

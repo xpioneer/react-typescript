@@ -9,3 +9,7 @@ export const REDIRECT_URL = 'REDIRECT_URL'
 
 // graphql api modal
 export const GRAPHQL_API = '/graphql'
+
+export const PRIMARY_COLOR = '#087ea4'
+
+export const PRIMARY_KEY = 'PRIMARY_KEY'

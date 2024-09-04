@@ -1,5 +1,6 @@
 import { AxiosResponse } from 'axios'
 import { REDIRECT_URL } from '@constants/index'
+import { message as $msg } from 'components/message'
 
 class HttpHelper {
   private store: any
