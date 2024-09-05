@@ -2,7 +2,7 @@ import { Spin, Form, Row, Col, Select } from 'antd'
 import React from 'react'
 import { useKLine } from './useKLine'
 
-const DayKLineChart: React.FC<{id: string}> = ({id}) => {
+const DayKLineChart: React.FC = () => {
 
   const {
     loading,

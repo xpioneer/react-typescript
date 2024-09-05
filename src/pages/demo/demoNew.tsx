@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { Row, Col, Button, Badge, Form, Input, Select, Space, Upload, UploadFile } from 'antd'
+import { Row, Col, Button, Badge, Form, Input, Select, Space, Upload, UploadFile, Flex } from 'antd'
 import { MinusCircleOutlined, PlusCircleOutlined, PlusCircleFilled, PlusOutlined } from '@ant-design/icons'
 import { useDemoState } from './useDemo'
 import { apiTypeOpts, methodOpts, APIFormTest, Method, APIType } from 'types/demo'
 import { JSONView } from '@/components/jsonView'
 import styles from './demo.module.scss'
 import { DatePicker } from 'components/datePicker'
+import { TestComponent, TestComponent2 } from './components/test'
 
 const TextArea = Input.TextArea
 
@@ -55,6 +56,12 @@ const Demo: React.FC<ICommonProps> = () => {
   }
 
   return <div>
+    <section className={styles.block}>
+      <Space size='large'>
+        <TestComponent/>
+        <TestComponent2/>
+      </Space>
+    </section>
     <section className={styles.block}>
       <h3>mini测试</h3>
       <Space>

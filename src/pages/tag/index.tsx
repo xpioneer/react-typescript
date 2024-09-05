@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import {
   Row, Col, Form, Input, Button, Table, DatePicker,
   TableColumnsType, Spin,
@@ -11,7 +11,7 @@ import { useTag } from './useTag'
 
 const TagPage: React.FC<ICommonProps<AnyObject>> = () => {
 
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const {
     form,
@@ -52,12 +52,8 @@ const TagPage: React.FC<ICommonProps<AnyObject>> = () => {
   }]
 
   const onView = (data: ITag) => {
-    history.push(`tag/${data.id}`)
+    navigate(`tag/${data.id}`)
   }
-
-  // const create = () => {
-  //   this.props.history.push('/blog/tag/create')
-  // }
   
   return <Spin spinning={loading}>
     <Form form={form}>
@@ -76,7 +72,7 @@ const TagPage: React.FC<ICommonProps<AnyObject>> = () => {
       </Row>
       <Flex className='mgb16' justify={'end'}>
         <Space>
-          <Button type='primary' ghost onClick={() => history.push('tag-new')}>
+          <Button type='primary' ghost onClick={() => navigate('tag-new')}>
             Create
           </Button>
           <Button onClick={() => form.resetFields()}>

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import {
   Row, Col, Form, Input, Button, Table,
   Flex, Space, Spin, TableColumnsType
@@ -13,7 +13,7 @@ import { modal } from 'components/message'
 
 const BallListPage: React.FC = () => {
 
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const {
     form,
@@ -113,7 +113,7 @@ const BallListPage: React.FC = () => {
   }]
 
   const onVeiw = (data: IBall) => {
-    history.push(`/lottery/ball/${data.id}`)
+    navigate(`/lottery/ball/${data.id}`)
   }
 
   const showDelete = (id: string) => {
@@ -163,7 +163,7 @@ const BallListPage: React.FC = () => {
       </Row>
       <Flex justify={'end'}>
         <Space>
-          <Button type='primary' ghost onClick={() => history.push('ball-create')}>
+          <Button type='primary' ghost onClick={() => navigate('ball-create')}>
             Create
           </Button>
           <Button htmlType='reset'>

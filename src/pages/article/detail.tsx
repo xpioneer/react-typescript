@@ -1,5 +1,5 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import {
   Row, Col, Form, Input, Button,
   Spin,
@@ -32,7 +32,7 @@ const ArticleDetailPage: React.FC = () => {
     onSave,
   } = useDetail()
 
-  const history = useHistory<{id: string}>()
+  const navigate = useNavigate<{id: string}>()
 
   const { types, tags } = optsRef.current
 

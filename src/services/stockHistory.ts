@@ -10,7 +10,7 @@ export const stockHistoryPageList = (params: Partial<StockQuery> = pageData2Para
 }
 
 export const stockHistoryTotal = () => {
-  return useRequest<number>('/stockhistory/total')
+  return useRequest<number>('/stockhistory/total').then(res => res.data)
   // return $http.get<any, IResponseData<number>>('/api/stockhistory/total').then(res => res.data)
 }
 

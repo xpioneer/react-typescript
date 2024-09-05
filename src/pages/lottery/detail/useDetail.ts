@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Form } from 'antd'
-import { useParams, useHistory } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { debounce } from 'utils/debounce'
 import { QueryForm } from '@/types/articleType'
 import { IBall } from 'models/ball'
@@ -42,7 +42,7 @@ const mapData = (data: IBall, save = false) => {
 
 export const useDetail = () => {
   const {id} = useParams<{id: string}>()
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const [form] = Form.useForm<IBall>()
 

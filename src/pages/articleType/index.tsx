@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import {
   Row, Col, Form, Input, Button, Table, Modal,
   TableColumnProps, Flex, Space, Spin,
@@ -11,7 +11,7 @@ import { useArticleType } from './useArticleType'
 
 const ArticleTypePage: React.FC = () => {
 
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const {
     form,
@@ -60,7 +60,7 @@ const ArticleTypePage: React.FC = () => {
   }]
 
   const onView = (data: IArticleType) => {
-    history.push(`type/${data.id}`)
+    navigate(`type/${data.id}`)
   }
 
   return <Spin spinning={loading}>
@@ -83,7 +83,7 @@ const ArticleTypePage: React.FC = () => {
       </Row>
       <Flex className='mgb16' justify={'end'}>
         <Space>
-          <Button type='primary' ghost onClick={() => history.push('type-new')}>
+          <Button type='primary' ghost onClick={() => navigate('type-new')}>
             Create
           </Button>
           <Button onClick={() => form.resetFields()}>

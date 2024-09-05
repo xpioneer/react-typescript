@@ -196,7 +196,7 @@ const ErrorsLogPage: React.FC = () => {
   }
  
   return <Spin spinning={loading}>
-    <Form className="form">
+    <Form className="form" form={form}>
       <h3>错误日志</h3>
       <Row gutter={24}>
         <Col span={6}>

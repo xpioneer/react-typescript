@@ -1,5 +1,5 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import {
   Row, Col, Form, Input, Button,
   Spin,
@@ -26,7 +26,7 @@ const ArticleTypeDetailPage: React.FC = () => {
     onSave,
   } = useArticleTypeDetail()
 
-  const history = useHistory<{id: string}>()
+  const navigate = useNavigate<{id: string}>()
 
   return <Spin spinning={loading}>
     <h3>文章类型详情</h3>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { Link, withRouter } from 'react-router-dom'
+import { Link, useLocation, } from 'react-router-dom'
 import { Layout, Menu } from 'antd'
-import { XRouteProps, LeftMenuConfig } from 'routes/pageRoutes'
+import { MenuItem, LeftMenuConfig } from 'routes/routeConf'
 import styles from './siderbar.module.scss'
 
 const { Sider } = Layout
@@ -10,41 +10,35 @@ const { SubMenu } = Menu
 const DEFAULT_PATH_LEN = 2
 
 
-const setMenuKeys = (paths: string[], end = DEFAULT_PATH_LEN) => `/${paths.slice(0, end).join('/')}`
+const setMenuKeys = (paths: string[], end = DEFAULT_PATH_LEN) => paths.slice(0, end)
 
-const LeftMenu: React.FC<ICommonProps<AnyObject>> = (props) => {
-  const { location, history } = props
+export const SiderBar: React.FC = () => {
+  const { pathname } = useLocation()
   const [openKeys, setOpenKeys] = useState<string[]>([])
   const [selectedKeys, setSelectedKeys] = useState<string[]>([])
-  const [menuList, setMenuList] = useState<XRouteProps[]>([])
+  const [menuList, setMenuList] = useState<MenuItem[]>([])
 
   useEffect(() => {
-    const { pathname } = location
     // window.USER.headerMenuKey为头部菜单选中项，根据配置拿到对应左侧菜单，过滤出有权限的左侧菜单
     const pathList = pathname.split('/').filter(p => p)
-    const realMenus = LeftMenuConfig()
 
     // console.log(pathList, 'realMenus', realMenus, pathname)
     // 路由更新时更新左侧菜单选中和展开项
-    if (realMenus.length > 0) {
-      setMenuList(realMenus)
       const _openKeys = setMenuKeys(pathList, 1)
-      const isTopMenu = realMenus.findIndex(item => item.path === pathname) >= 0
+      const _selectedKeys = setMenuKeys(pathList).slice(-1)
+      setOpenKeys(_openKeys)
+      setSelectedKeys(_selectedKeys)
+  }, [pathname])
 
-      setOpenKeys([_openKeys])
-      if (isTopMenu) {
-        setSelectedKeys([_openKeys])
-      } else {
-        setSelectedKeys([setMenuKeys(pathList)])
-      }
-    }
-  }, [location.pathname])
+  useEffect(() => {
+    const realMenus = LeftMenuConfig()
+    setMenuList(realMenus)
+  }, [])
 
   const onOpenChange = (keys: string[]): void => {
     setOpenKeys(keys)
   }
 
-  // console.log(styles, 'styles')
 
   return (
     <Sider collapsible width={220}>
@@ -67,8 +61,9 @@ const LeftMenu: React.FC<ICommonProps<AnyObject>> = (props) => {
         selectedKeys={selectedKeys}
         onOpenChange={onOpenChange}
         style={{ height: '100%', borderRight: 0 }}
+        items={menuList}
       >
-        {menuList.map((item) => {
+        {/* {menuList.map((item) => {
           if (item.subRoute && item.subRoute.length > 0) {
             return (
               <SubMenu key={String(item.path)} title={item.title} icon={item.icon}>
@@ -85,10 +80,10 @@ const LeftMenu: React.FC<ICommonProps<AnyObject>> = (props) => {
               <Link to={String(item.path)}>{item.title}</Link>
             </Menu.Item>
           )
-        })}
+        })} */}
       </Menu>
     </Sider>
   )
 }
 
-export default withRouter(LeftMenu)
+// export default withRouter(LeftMenu)

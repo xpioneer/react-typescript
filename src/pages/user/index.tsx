@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { Row, Col, Form, Input, Button, Table, Select, Flex, Spin, Space } from 'antd'
 import { DatePicker } from 'components/datePicker'
 import { IUser } from '@models/user'
@@ -9,7 +9,7 @@ import { ColumnsType, TablePaginationConfig, SorterResult, SortOrder } from 'ant
 
 const UserPage: React.FC = () => {
 
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const {
     form,
@@ -59,7 +59,7 @@ const UserPage: React.FC = () => {
   }]
 
   const onView = (data: IUser) => {
-    history.push(`/user/${data.id}`)
+    navigate(`/user/${data.id}`)
   }
 
   const onChange = ({current, pageSize}: TablePaginationConfig, filters: any, sorter: any) => {
@@ -98,7 +98,7 @@ const UserPage: React.FC = () => {
       </Row>
       <Flex className='mgb16' justify={'end'}>
         <Space>
-          <Button type='primary' ghost onClick={() => history.push('leavemsg-edit')}>
+          <Button type='primary' ghost onClick={() => navigate('leavemsg-edit')}>
             Create
           </Button>
           <Button onClick={() => form.resetFields()}>

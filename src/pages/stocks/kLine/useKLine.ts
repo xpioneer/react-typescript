@@ -314,7 +314,7 @@ export const useKLine = () => {
       noPage: true
     }).then(res => {
       // console.log(res, '>>>return')
-      setOption(res, id)
+      setOption(res.data, id)
     }).finally(() => setLoading(false))
   }
 
@@ -329,7 +329,7 @@ export const useKLine = () => {
       pageSize: 100,
       noPage: true
     }).then(res => {
-      const list = res.data.map<IOption<number>>(item => ({value: item.id, label: item.name}))
+      const list = res.map<IOption<number>>(item => ({value: item.id, label: item.name}))
       setStockOpts(list)
     })
   }, 500)

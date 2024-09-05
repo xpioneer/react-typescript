@@ -1,5 +1,5 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import {
   Row, Col, Form, Input, Button,
   Spin,
@@ -26,7 +26,7 @@ const TagDetailPage: React.FC = () => {
     onSave,
   } = useDetail()
 
-  const history = useHistory<{id: string}>()
+  const navigate = useNavigate<{id: string}>()
 
   return <Spin spinning={loading}>
     <h3>文章标签详情</h3>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { 
   Row, Col, Form, Input, Button, InputNumber, Modal, Checkbox,
   Flex, Space, Spin, TableColumnProps, TableColumnsType, TablePaginationConfig,
@@ -78,7 +78,7 @@ const BallSelectList: React.FC<IProps> = ({
 
 const BallCreatePage: React.FC = () => {
 
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const {
     form,

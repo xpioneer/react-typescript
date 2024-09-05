@@ -11,7 +11,7 @@ declare global {
   
   const $notice: NotificationInstance
   
-  interface ICommonProps<P extends AnyObject> extends RouteComponentProps<P>, AnyObject {
+  interface ICommonProps<P extends AnyObject = any> extends RouteComponentProps<P>, AnyObject {
     [key: string]: any
   }
 }

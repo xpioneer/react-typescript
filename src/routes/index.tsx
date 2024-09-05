@@ -1,23 +1,38 @@
-import React, { lazy, Suspense } from 'react'
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
-import useAntApp from 'components/message'
-import Loading from '@components/loading'
+import React from 'react'
+import { ConfigProvider, theme, App } from 'antd'
+import zh_CN from 'antd/lib/locale/zh_CN'
+import en_CN from 'antd/lib/locale/en_US'
+import { useAppStore } from 'stores/store'
+import { Routes } from './pageRoutes'
+import { LangKeys } from 'types/global'
 
-const Home = lazy(() => import( /* webpackChunkName:"home" */'@pages/home/home'))
-const Login = lazy(() => import( /* webpackChunkName:"login" */'@pages/login'))
-const Register = lazy(() => import( /* webpackChunkName:"register" */'@pages/register'))
 
-export const Routes: React.FC = () => {
-  const app = useAntApp()
+const AntdLocale: Record<LangKeys, typeof zh_CN> = {
+  'zh-CN': zh_CN,
+  'en-US': en_CN,
+}
 
-  return <Router>
-    <Suspense fallback={<Loading size="large"/>}>
-      <Switch>
-        <Route path="/login" exact component={(props: any) => <Login {...props}/>}/>
-        <Route path="/register" exact component={(props: any) => <Register {...props}/>}/>
-        <Route path="/" component={(props: any) => <Home {...props}/>}/>
-        <Redirect to="*"/>
-      </Switch>
-    </Suspense>
-  </Router>
+export const Navigation: React.FC = () => {
+
+  const [{
+    lang,
+    dark,
+    primary,
+  }] = useAppStore()
+
+  return (
+    <ConfigProvider
+      locale={AntdLocale[lang]}
+      theme={{
+        algorithm: dark ? theme.darkAlgorithm : theme.defaultAlgorithm,
+        token: {
+          colorPrimary: primary,
+        },
+      }}
+    >
+      <App>
+        <Routes />
+      </App>
+    </ConfigProvider>
+  )
 }

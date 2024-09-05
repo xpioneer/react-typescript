@@ -7,14 +7,14 @@ import { useRequest } from './http'
 export type StockQuery = Omit<Stock & IPageParams, 'id' | 'amount'> & { noPage: boolean }
 
 export const stockPageList = (params: Partial<StockQuery> = pageData2Params()) => {
-  return useRequest<Stock, true>('/stocks', params)
+  return useRequest<Stock[]>('/stocks', params).then(res => res.data)
 }
 
 export const getStockDetail = (id: number) => {
-  return $http.get<any, IResponseData<Stock>>(`/api/stocks/${id}`).then(res => res.data)
+  return useRequest<Stock>(`/stocks/${id}`).then(res => res.data)
 }
 
 
 export const getStockChartCount = () => {
-  return $http.get<StockStats[]>('/api/stock/chartCount').then(res => res.data)
+  return useRequest<StockStats[]>('/stock/chartCount').then(res => res.data)
 }

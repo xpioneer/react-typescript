@@ -44,8 +44,7 @@ const StockHistoryList: React.FC = () => {
       pageSize: 100,
       noPage: true
     }).then(res => {
-      const list = res.data.map<IOption<number>>(item => ({value: item.id, label: item.name}))
-      console.log(res, 'res===', list)
+      const list = res.map<IOption<number>>(item => ({value: item.id, label: item.name}))
       setStockOpts(list)
     })
   }, 500)

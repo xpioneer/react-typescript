@@ -1,321 +1,37 @@
-import * as React from 'react'
-import { RouteProps } from 'react-router-dom'
-import { NotFound }  from '@components/notFound'
+import React, { lazy, Suspense } from 'react'
 import {
-  AreaChartOutlined, BarChartOutlined, BulbOutlined, DollarOutlined, ExperimentOutlined, FileSearchOutlined,
-  BookOutlined, FormOutlined, FrownOutlined, FundOutlined, HomeOutlined, MehOutlined, SmileOutlined, StockOutlined,
-  LineChartOutlined,
-} from '@ant-design/icons'
+  createBrowserRouter,
+  RouterProvider,
+  RouteObject
+} from 'react-router-dom'
+import useAntApp from 'components/message'
+import Loading from '@components/loading'
+import { routes } from './routeConf'
 
-const {lazy} = React
+const Home = lazy(() => import(/* webpackChunkName:"home" */ '@pages/home/home'))
+const Login = lazy(() => import(/* webpackChunkName:"login" */ '@pages/login'))
+const Register = lazy(() => import( /* webpackChunkName:"register" */'@pages/register'))
 
-const Dashboard = lazy(() => import( /* webpackChunkName:"dashboard" */ '@pages/dashboard/dashboard'))
-const Chart = lazy(() => import( /* webpackChunkName:"charts" */ '@pages/charts'))
-const LogApi = lazy(() => import( /* webpackChunkName:"logApi" */ '@pages/logs/apiNew'))
-const LogErrors = lazy(() => import( /* webpackChunkName:"logErrors" */ '@pages/logs/errorsNew'))
-const ArticleList = lazy(() => import( /* webpackChunkName:"articleList" */ '@pages/article'))
-const ArticleDetail = lazy(() => import( /* webpackChunkName:"articleDetail" */ '@pages/article/detail'))
-const ArticleCreate = lazy(() => import( /* webpackChunkName:"articleCreate" */ '@pages/article/articleCreate'))
-const ArticleTypeList = lazy(() => import( /* webpackChunkName:"articleTypeList" */ '@pages/articleType'))
-const ArticleTypeDetail = lazy(() => import( /* webpackChunkName:"articleTypeDeital" */ '@pages/articleType/detail'))
-const ArticleTypeCreate = lazy(() => import( /* webpackChunkName:"articleTypeCreate" */ '@pages/articleType/articleTypeCreate'))
-const TagList = lazy(() => import( /* webpackChunkName:"tagList" */ '@pages/tag'))
-const TagDetail = lazy(() => import( /* webpackChunkName:"tagEdit" */ '@pages/tag/detail'))
-const TagCreate = lazy(() => import( /* webpackChunkName:"tagCreate" */ '@pages/tag/tagCreate'))
-const CommentList = lazy(() => import( /* webpackChunkName:"commentList" */ '@pages/comment'))
-const CommentEdit = lazy(() => import( /* webpackChunkName:"commentEdit" */ '@pages/comment/commentEdit'))
-const LeaveMsgList = lazy(() => import( /* webpackChunkName:"leaveMsgList" */ '@pages/leaveMsg'))
-const LeaveMsgEdit = lazy(() => import( /* webpackChunkName:"leaveMsgEdit" */ '@pages/leaveMsg/leaveMsgEdit'))
-const UserList = lazy(() => import( /* webpackChunkName:"userList" */ '@pages/user'))
-const UserEdit = lazy(() => import( /* webpackChunkName:"userEdit" */ '@pages/user/userEdit'))
-const UserCreate = lazy(() => import( /* webpackChunkName:"userCreate" */ '@pages/user/userCreate'))
-const BallList = lazy(() => import( /* webpackChunkName:"ballList" */ '@pages/lottery/ballListNew'))
-const BallDetail = lazy(() => import( /* webpackChunkName:"ballDetail" */ '@pages/lottery/detail'))
-const BallEdit = lazy(() => import( /* webpackChunkName:"ballEdit" */ '@pages/lottery/ballEdit'))
-const BallTrend = lazy(() => import( /* webpackChunkName:"ballTrend" */ '@pages/lottery/trend'))
-const BallChart = lazy(() => import( /* webpackChunkName:"ballChart" */ '@pages/lottery/chart'))
-const StockList = lazy(() => import( /* webpackChunkName:"StockList" */ '@pages/stocks'))
-const StockDetail = lazy(() => import( /* webpackChunkName:"StockDetail" */ '@pages/stocks/detail'))
-const StockHistories = lazy(() => import( /* webpackChunkName:"StockList" */ '@pages/stocks/history'))
-const StockHistoriesDetail = lazy(() => import( /* webpackChunkName:"StockList" */ '@pages/stocks/historyDetail'))
-const StockKLine = lazy(() => import( /* webpackChunkName:"StockKLine" */ '@pages/stocks/kLine'))
-
-// demos
-const Demo = lazy(() => import( /* webpackChunkName:"demo" */ '@pages/demo/demoNew'))
-const DemoMobx = lazy(() => import( /* webpackChunkName:"demo" */ '@pages/demo/demoMobx'))
-const DemoRedux = lazy(() => import( /* webpackChunkName:"demo" */ '@pages/demo/demoRedux'))
-
-export interface XRouteProps extends RouteProps {
-  title?: string
-  icon?: React.ReactNode
-  meta?: {
-    title: string;
+const globalRoutes: RouteObject[] = [
+  {
+    path: 'login',
+    element: <Login />,
+  },
+  {
+    path: 'register',
+    element: <Register />,
+  },
+  {
+    path: '',
+    element: <Home />,
+    children: routes,
   }
-  subRoute?: XRouteProps[]
-}
-
-/**
- * 子级页面路由的path请保持与父级path有相同的Menu前缀，确保菜单选中
- */
-const routesConf: Partial<XRouteProps>[] = [
-  {
-    title: 'Dashboard',
-    path: '/',
-    icon: <HomeOutlined/>,
-    component: Dashboard,
-  },
-  {
-    title: 'Charts',
-    path: '/charts',
-    icon: <AreaChartOutlined/>,
-    component: Chart
-  },
-  {
-    title: 'Log',
-    icon: <FileSearchOutlined/>,
-    path: '/log',
-    subRoute: [
-      {
-        title: 'API',
-        path: '/api',
-        icon: <MehOutlined/>,
-        component: LogApi
-      },
-      {
-        title: 'Errors',
-        path: '/errors',
-        icon: <FrownOutlined/>,
-        component: LogErrors
-      },
-    ]
-  },
-  {
-    title: 'Blog',
-    icon: <BookOutlined/>,
-    path: '/blog',
-    subRoute: [
-      {
-        title: 'Essay',
-        path: '/article',
-        icon: <FormOutlined/>,
-        component: ArticleList
-      },
-      {
-        path: '/article-new',
-        component: ArticleDetail
-      },
-      {
-        path: '/article/:id',
-        component: ArticleDetail
-      },
-      {
-        title: 'Type',
-        path: '/type',
-        icon: <FormOutlined/>,
-        component: ArticleTypeList
-      },
-      {
-        path: '/type-new',
-        component: ArticleTypeDetail
-      },
-      {
-        path: '/type/:id',
-        component: ArticleTypeDetail
-      },
-      {
-        title: 'Tag',
-        path: '/tag',
-        icon: <FormOutlined/>,
-        component: TagList
-      },
-      {
-        path: '/tag-new',
-        component: TagDetail
-      },
-      {
-        path: '/tag/:id',
-        component: TagDetail
-      },
-      {
-        title: 'Comment',
-        path: '/comment',
-        icon: <FormOutlined/>,
-        component: CommentList
-      },
-      {
-        path: '/comment/detail/:id',
-        component: CommentEdit
-      },
-      {
-        title: 'Message',
-        path: '/message',
-        icon: <FormOutlined/>,
-        component: LeaveMsgList
-      },
-      {
-        path: '/message/detail/:id',
-        component: LeaveMsgEdit
-      },
-      {
-        title: 'User',
-        path: '/user',
-        icon: <FormOutlined/>,
-        component: UserList
-      },
-      {
-        path: '/user/create',
-        component: UserCreate
-      },
-      {
-        path: '/user/detail/:id',
-        component: UserEdit
-      },
-    ]
-  },
-  {
-    title: 'Lottery',
-    path: '/lottery',
-    icon: <SmileOutlined/>,
-    subRoute: [
-      {
-        title: 'DoubleBall',
-        path: '/ball',
-        icon: <DollarOutlined/>,
-        component: BallList
-      },
-      {
-        path: '/ball-create',
-        component: BallDetail
-      },
-      {
-        path: '/ball/:id',
-        component: BallDetail
-      },
-      {
-        title: 'Trend',
-        path: '/trend',
-        icon: <FundOutlined/>,
-        component: BallTrend
-      },
-      {
-        title: 'Chart',
-        path: '/chart',
-        icon: <BarChartOutlined/>,
-        component: BallChart
-      }
-    ]
-  },
-  {
-    title: 'Stocks',
-    path: '/stocks',
-    icon: <StockOutlined/>,
-    subRoute: [
-      {
-        title: 'Stocks',
-        path: '/list',
-        icon: <StockOutlined/>,
-        component: StockList
-      },
-      {
-        path: '/detail/:id',
-        component: StockDetail
-      },
-      {
-        title: 'Trade History',
-        path: '/hitory',
-        icon: <FundOutlined/>,
-        component: StockHistories
-      },
-      {
-        title: 'KLine History',
-        path: '/kline',
-        icon: <LineChartOutlined />,
-        component: StockKLine
-      },
-    ]
-  },
-  {
-    title: 'Demos',
-    path: '/demos',
-    icon: <BulbOutlined/>,
-    subRoute: [
-      {
-        title: 'Demo Page',
-        path: '/demo',
-        icon: <ExperimentOutlined/>,
-        component: Demo
-      },
-      {
-        title: 'Redux',
-        path: '/redux',
-        icon: <ExperimentOutlined/>,
-        component: DemoRedux
-      },
-      {
-        title: 'Mobx',
-        path: '/mobx',
-        icon: <ExperimentOutlined/>,
-        component: DemoMobx
-      },
-    ]
-  },
 ]
+export const Routes: React.FC = () => {
+  const app = useAntApp() // just init
+  const router = createBrowserRouter(globalRoutes)
 
-const routes = routesConf.reduce<XRouteProps[]>((prev, cur) => {
-  if (cur.subRoute) {
-    let _cur: XRouteProps = {}
-    if (cur.component) {
-      _cur = {
-        title: cur.title,
-        path: cur.path,
-        component: cur.component,
-        meta: cur.meta,
-      }
-      prev.push(_cur)
-    }
-    return prev.concat(cur.subRoute.map((item) => {
-      const _item = { ...item }
-      _item.path = cur.path + String(_item.path)
-      return _item
-    }))
-  }
-  return prev.concat(cur)
-}, [])
-
-routes.push({
-  path: '*',
-  component: NotFound
-})
-
-
-const LeftMenuConfig = () => routesConf
-  .filter(route => typeof route.title === 'string')
-  .map<XRouteProps>(
-  (route) => {
-    let subRoute: XRouteProps[] = []
-    if (route.subRoute && route.subRoute.length > 0) {
-      subRoute = route.subRoute
-        .filter(_route => typeof _route.title === 'string')
-        .map(_route => ({
-          path: route.path + String(_route.path),
-          title: _route.title,
-          icon: _route.icon
-        }))
-    }
-    return {
-      icon: route.icon,
-      path: route.path,
-      title: route.title,
-      subRoute,
-    }
-  }
-)
-
-
-// console.log(routesConf, routes, 'LeftMenuConfig')
-
-export {
-  routesConf,
-  routes,
-  LeftMenuConfig
+  return <Suspense fallback={<Loading size="large"/>}>
+    <RouterProvider router={router}/>
+  </Suspense>
 }

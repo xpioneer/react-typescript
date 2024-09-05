@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import {
   Row, Col, Form, Input, Button, DatePicker, Table, Modal, Select,
   Flex, Space, Spin, TableColumnProps, TableColumnsType, TablePaginationConfig
@@ -24,7 +24,7 @@ const BallTrendPage: React.FC = () => {
   ]
   const blueBalls = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
 
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const {
     form,
@@ -62,7 +62,7 @@ const BallTrendPage: React.FC = () => {
 ]
 
   const onView = (data: IBall) => {
-    history.push(`/lottery-ball/${data.id}`)
+    navigate(`/lottery-ball/${data.id}`)
   }
 
   const showDelete = (id: string) => {

@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import {
   Row, Col, Form, Input, Button, Table, Modal,
   Flex, Space, Spin,
@@ -11,7 +11,7 @@ import { ColumnsType, TablePaginationConfig, SorterResult, SortOrder } from 'ant
 
 const CommentPage: React.FC = () => {
 
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const {
     form,
@@ -83,7 +83,7 @@ const CommentPage: React.FC = () => {
   }]
 
   const onView = (data: IArticle) => {
-    history.push(`article/${data.id}`)
+    navigate(`article/${data.id}`)
   }
 
   const onChange = ({current, pageSize}: TablePaginationConfig, filters: any, sorter: any) => {
@@ -126,7 +126,7 @@ const CommentPage: React.FC = () => {
       </Row>
       <Flex justify={'end'}>
         <Space>
-          <Button type='primary' ghost onClick={() => history.push('article-new')}>
+          <Button type='primary' ghost onClick={() => navigate('article-new')}>
             Create
           </Button>
           <Button htmlType='reset'>

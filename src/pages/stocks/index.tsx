@@ -6,8 +6,11 @@ import { data2PageData, pageData2Params } from '../../utils/tools'
 import { Stock, EMarket, EBlock } from '../../types/stock'
 import { object2Options } from '@utils/tools'
 import { StockChart } from './components/stockChart'
+import { useNavigate } from 'react-router-dom'
 
-const StockList: React.FC<ICommonProps> = ({history}) => {
+const StockList: React.FC = () => {
+
+  const navigate = useNavigate()
 
   const [form] = Form.useForm<StockQuery>()
 
@@ -25,7 +28,7 @@ const StockList: React.FC<ICommonProps> = ({history}) => {
   }
 
   const onOpts = (data: Stock) => {
-    history.push(`/stocks/detail/${data.id}`)
+    navigate(`/stocks/detail/${data.id}`)
   }
 
   useEffect(() => {

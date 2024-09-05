@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { Form, Input, Button, Checkbox, Space, Flex } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { onLogin } from '../../services/account'
@@ -11,7 +11,7 @@ import { useAppStore, setAuthorized } from '@/stores/store'
 
 const LoginPage: React.FC = () => {
 
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const [, dispatch] = useAppStore()
 
@@ -24,7 +24,7 @@ const LoginPage: React.FC = () => {
     onLogin(values).then(res => {
       storage.set(JWT_TOKEN, res) // store jwt token
       dispatch(setAuthorized(true))
-      history.replace(sessionStorage.getItem(REDIRECT_URL) || '/')
+      navigate(sessionStorage.getItem(REDIRECT_URL) || '/')
     }).finally(() => setLoading(false))
   }
 

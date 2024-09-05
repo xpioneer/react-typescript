@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { Row, Col, Form, Input, Button, Table, Flex, Spin, Space } from 'antd'
 import { DatePicker } from 'components/datePicker'
 import { ILeaveMsg } from '@models/leaveMsg'
@@ -9,7 +9,7 @@ import { ColumnsType, TablePaginationConfig, SorterResult, SortOrder } from 'ant
 
 const LeaveMsgPage: React.FC = () => {
 
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const {
     form,
@@ -44,7 +44,7 @@ const LeaveMsgPage: React.FC = () => {
   }]
 
   const onView = (data: ILeaveMsg) => {
-    history.push(`message/${data.id}`)
+    navigate(`message/${data.id}`)
   }
 
   const onChange = ({current, pageSize}: TablePaginationConfig, filters: any, sorter: any) => {
@@ -76,7 +76,7 @@ const LeaveMsgPage: React.FC = () => {
       </Row>
       <Flex className='mgb16' justify={'end'}>
         <Space>
-          <Button type='primary' ghost onClick={() => history.push('leavemsg-edit')}>
+          <Button type='primary' ghost onClick={() => navigate('leavemsg-edit')}>
             Create
           </Button>
           <Button onClick={() => form.resetFields()}>
