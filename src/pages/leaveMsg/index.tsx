@@ -44,7 +44,7 @@ const LeaveMsgPage: React.FC = () => {
   }]
 
   const onView = (data: ILeaveMsg) => {
-    navigate(`message/${data.id}`)
+    navigate(`${data.id}`)
   }
 
   const onChange = ({current, pageSize}: TablePaginationConfig, filters: any, sorter: any) => {

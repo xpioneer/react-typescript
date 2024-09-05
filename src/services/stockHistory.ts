@@ -15,6 +15,6 @@ export const stockHistoryTotal = () => {
 }
 
 export const stockHistoryList = (data = {}) => {
-  return useRequest<StockHistory, true>('/stockline', data)
+  return useRequest<StockHistory[]>('/stockline', data).then(res => res.data)
   // return useRequest<StockHistory, boolean>('/stockline', data).then(res => res.data)
 }

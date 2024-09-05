@@ -143,7 +143,7 @@ export const useChart = () => {
 
   const onQuery = () => {
     setLoading(true)
-    useGraphQL<BallChart>(query).then(setOptions).finally(() => setLoading(false))
+    useGraphQL<{ballCount: BallChart}>(query).then(r => r.ballCount).then(setOptions).finally(() => setLoading(false))
   }
 
   useEffect(() => {

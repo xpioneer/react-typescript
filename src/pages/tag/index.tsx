@@ -52,7 +52,7 @@ const TagPage: React.FC<ICommonProps<AnyObject>> = () => {
   }]
 
   const onView = (data: ITag) => {
-    navigate(`tag/${data.id}`)
+    navigate(`${data.id}`)
   }
   
   return <Spin spinning={loading}>

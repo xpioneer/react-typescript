@@ -358,7 +358,7 @@ export const useData = () => {
     })
   }
   const onQuery = () => {
-    useRequest<StatsData>('/log/stats').then(setChartData)
+    useRequest<StatsData>('/log/stats').then(r => r.data).then(setChartData)
   }
 
   useEffect(() => {

@@ -113,7 +113,7 @@ const BallListPage: React.FC = () => {
   }]
 
   const onVeiw = (data: IBall) => {
-    navigate(`/lottery/ball/${data.id}`)
+    navigate(`${data.id}`)
   }
 
   const showDelete = (id: string) => {

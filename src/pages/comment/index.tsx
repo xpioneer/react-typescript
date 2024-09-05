@@ -55,7 +55,7 @@ const CommentPage: React.FC = () => {
   }]
 
   const onView = (data: IComment) => {
-    navigate(`comment/${data.id}`)
+    navigate(`${data.id}`)
   }
 
   const onChange = ({current, pageSize}: TablePaginationConfig, filters: any, sorter: any) => {

@@ -28,7 +28,7 @@ const StockList: React.FC = () => {
   }
 
   const onOpts = (data: Stock) => {
-    navigate(`/stocks/detail/${data.id}`)
+    navigate(`${data.id}`)
   }
 
   useEffect(() => {

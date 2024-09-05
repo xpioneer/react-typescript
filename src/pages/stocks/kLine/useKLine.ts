@@ -15,6 +15,7 @@ import {
   VisualMapComponentOption,
   DataZoomComponent,
   DataZoomComponentOption,
+  LegendComponent,
   // MarkLineComponentOption,
 } from 'echarts/components'
 import {
@@ -41,7 +42,8 @@ Echarts.use([
   DataZoomComponent,
   CandlestickChart,
   BarChart,
-  CanvasRenderer
+  CanvasRenderer,
+  LegendComponent,
 ])
 
 type EChartsOption = Echarts.ComposeOption<
@@ -77,7 +79,7 @@ export const useKLine = () => {
       volumes: []
     }
     // Each item: open，close，lowest，highest
-    list.map(i => {
+    list.forEach(i => {
       data.days.push(format(i.timestamp, 'yyyy/MM/dd')),
       data.values.push([i.open, i.close, i.low, i.high]),
       data.volumes.push(i.volume)
@@ -313,8 +315,7 @@ export const useKLine = () => {
       pageSize: 30 * 250,
       noPage: true
     }).then(res => {
-      // console.log(res, '>>>return')
-      setOption(res.data, id)
+      setOption(res, id)
     }).finally(() => setLoading(false))
   }
 
@@ -329,7 +330,7 @@ export const useKLine = () => {
       pageSize: 100,
       noPage: true
     }).then(res => {
-      const list = res.map<IOption<number>>(item => ({value: item.id, label: item.name}))
+      const list = res.data.map<IOption<number>>(item => ({value: item.id, label: item.name}))
       setStockOpts(list)
     })
   }, 500)

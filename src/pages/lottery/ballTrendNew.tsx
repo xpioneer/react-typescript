@@ -62,7 +62,7 @@ const BallTrendPage: React.FC = () => {
 ]
 
   const onView = (data: IBall) => {
-    navigate(`/lottery-ball/${data.id}`)
+    navigate(`${data.id}`)
   }
 
   const showDelete = (id: string) => {

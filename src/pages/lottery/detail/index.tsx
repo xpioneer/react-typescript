@@ -197,7 +197,7 @@ const BallCreatePage: React.FC = () => {
         <Col span={24} offset={3}>
           <Space>
             <Button htmlType='submit' type="primary">保存</Button>
-            <Button onClick={() => history.goBack()}>取消</Button>
+            <Button onClick={() => navigate(-1)}>取消</Button>
           </Space>
         </Col>
       </Row>

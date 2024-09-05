@@ -59,7 +59,7 @@ const UserPage: React.FC = () => {
   }]
 
   const onView = (data: IUser) => {
-    navigate(`/user/${data.id}`)
+    navigate(`${data.id}`)
   }
 
   const onChange = ({current, pageSize}: TablePaginationConfig, filters: any, sorter: any) => {

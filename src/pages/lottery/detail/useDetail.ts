@@ -62,12 +62,12 @@ export const useDetail = () => {
 
   const onQuery = () => {
     setLoading(true)
-    useGraphQL<IBall>(
+    useGraphQL<{ball: IBall}>(
       query,
       {
         id,
       }
-    ).then(r => form.setFieldsValue(mapData(r)))
+    ).then(r => form.setFieldsValue(mapData(r.ball)))
     .finally(() => setLoading(false))
   }
 
