@@ -16,7 +16,7 @@ export const reducer = (
     case ACTION_TYPE.SET_PRIMARY:
       return {
         ...state,
-        primary: payload as string
+        colorPrimary: payload as string
       }
     case ACTION_TYPE.SET_AUTHORIZED:
       return {

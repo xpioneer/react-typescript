@@ -14,9 +14,16 @@
     height: 100%;
   }
 
-  // .form {
-  //   max-width: 300px;
-  //   margin: 0 auto;
-  //   padding-top: 15%;
-  // }
+  .form {
+    position: relative;
+    z-index: 1;
+
+    h2 {
+      color: var(--main-txt-color);
+    }
+
+    :global(.ant-checkbox-wrapper) {
+      color: var(--main-txt-color);
+    }
+  }
 }

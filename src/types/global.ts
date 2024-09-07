@@ -11,8 +11,8 @@ export type LangKeys = keyof typeof LangI18n
 
 
 export class Store {
-  dark = false
-  primary = storage.get(PRIMARY_KEY) || PRIMARY_COLOR
+  dark = window.matchMedia('(prefers-color-scheme: dark)').matches
+  colorPrimary = storage.get(PRIMARY_KEY) || PRIMARY_COLOR
   lang: LangKeys = 'zh-CN'
   authorized = isLogged()
   loading = false

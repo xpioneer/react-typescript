@@ -42,9 +42,9 @@ const StockHistoriesDetail = lazy(() => import( /* webpackChunkName:"StockList" 
 const StockKLine = lazy(() => import( /* webpackChunkName:"StockKLine" */ '@pages/stocks/kLine'))
 
 // demos
-const Demo = lazy(() => import( /* webpackChunkName:"demo" */ '@pages/demo/demoNew'))
-const DemoMobx = lazy(() => import( /* webpackChunkName:"demo" */ '@pages/demo/demoMobx'))
-const DemoRedux = lazy(() => import( /* webpackChunkName:"demo" */ '@pages/demo/demoRedux'))
+const Demo = lazy(() => import( /* webpackChunkName:"demo" */ '@pages/demos/demoNew'))
+const DemoMobx = lazy(() => import( /* webpackChunkName:"demo" */ '@pages/demos/demoMobx'))
+const DemoRedux = lazy(() => import( /* webpackChunkName:"demo" */ '@pages/demos/demoRedux'))
 
 type XRouteObject = RouteObject & {
   title?: string

@@ -17,7 +17,7 @@ export const Navigation: React.FC = () => {
   const [{
     lang,
     dark,
-    primary,
+    colorPrimary,
   }] = useAppStore()
 
   return (
@@ -26,7 +26,7 @@ export const Navigation: React.FC = () => {
       theme={{
         algorithm: dark ? theme.darkAlgorithm : theme.defaultAlgorithm,
         token: {
-          colorPrimary: primary,
+          colorPrimary,
         },
       }}
     >
