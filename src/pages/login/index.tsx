@@ -6,7 +6,7 @@ import { onLogin } from '../../services/account'
 import { LoginForm } from '@/types/account'
 import { storage } from "@utils/tools"
 import { JWT_TOKEN, REDIRECT_URL } from "@constants/index"
-import { useAppStore, setAuthorized } from '@/stores/store'
+import { useAppStore, setAuthorized } from '@/stores'
 import { WaveComponent } from './wave'
 import styles from './style.module.scss'
 

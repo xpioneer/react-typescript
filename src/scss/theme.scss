@@ -12,3 +12,8 @@ $main-color: #fff;
     --main-txt-color: #ddd;
   }
 }
+
+body[theme="dark"] {
+  --main-bg-color: #000;
+  --main-txt-color: #ddd;
+}

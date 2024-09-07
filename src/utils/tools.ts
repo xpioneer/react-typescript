@@ -1,4 +1,4 @@
-import { JWT_TOKEN } from '@/constants'
+import { EXCLUDE_KEYS, JWT_TOKEN } from '@/constants'
 import { format } from 'date-fns'
 import { EDateFormat } from 'types/base'
 
@@ -22,8 +22,17 @@ export const storage = {
     localStorage.removeItem(key)
   },
 
-  clear: (): void => {
-    localStorage.clear()
+  clear(exclude = false) {
+    if(exclude) {
+      Object.keys(localStorage).forEach(key => {
+        console.log(EXCLUDE_KEYS, key)
+        if(!EXCLUDE_KEYS.includes(key)) {
+          this.remove(key)
+        }
+      })
+    } else {
+      localStorage.clear()
+    }
   }
 }
 

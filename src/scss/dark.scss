@@ -10,3 +10,13 @@
     color: #4e9eff;
   }
 }
+
+/* custom dark mode */
+body[theme=dark] {
+  background-color: var(--main-bg-color);
+  color: var(--main-txt-color);
+
+  a {
+    color: #4e9eff;
+  }
+}

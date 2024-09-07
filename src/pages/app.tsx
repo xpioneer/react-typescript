@@ -1,5 +1,5 @@
 import React, { useReducer } from 'react'
-import { AppStore, reducer, initState } from 'stores/store'
+import { AppStore, reducer, initState } from 'stores'
 import { Navigation } from 'routes/index'
 
 const App: React.FC = () => {

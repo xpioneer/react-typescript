@@ -1,15 +1,9 @@
 import { AxiosResponse } from 'axios'
 import { REDIRECT_URL } from '@constants/index'
 import { message as $msg } from 'components/message'
+import { storage } from './tools'
 
 class HttpHelper {
-  private store: any
-  private seStore: any
-
-  constructor () {
-    this.store = localStorage
-    this.seStore = sessionStorage
-  }
 
   public successHelper (res: AxiosResponse<any>): void {
     const url = res.config.url?.split('?')[0]!
@@ -20,7 +14,8 @@ class HttpHelper {
         if (path[1] === '/login') {
           $msg.success('登陆成功')
         } else if (path[1] === '/logout') {
-          this.store.clear()
+          storage.clear(true)
+          sessionStorage.clear()
           $msg.success('退出登录成功')
           setTimeout(() => {
             location.href = '/login'
@@ -57,9 +52,9 @@ class HttpHelper {
         }
         break
       case 401 :
-        this.store.clear()
+        storage.clear(true)
         $msg.error('请重新登录')
-        this.seStore.setItem(REDIRECT_URL, location.pathname)
+        sessionStorage.setItem(REDIRECT_URL, location.pathname)
         setTimeout(() => {
           location.href = '/login'
         }, 1000)

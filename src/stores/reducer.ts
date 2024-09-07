@@ -6,7 +6,7 @@ export const reducer = (
   state: Store,
   { type, payload }: Action
 ): Store => {
-  console.log(type, payload)
+  // console.log(type, payload)
   switch(type) {
     case ACTION_TYPE.SET_DARK:
       return {
