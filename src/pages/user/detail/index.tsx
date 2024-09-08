@@ -9,11 +9,11 @@ import {
 } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { useUserDetail } from './useDetail'
-import { userSexOpts, userTypeOpts } from '@/models/user'
+import { User, userSexOpts, userTypeOpts } from '@/models/user'
 
 const formLayout: FormItemProps = {
   labelCol: {
-    span: 4,
+    span: 6,
   },
   wrapperCol: {
     span: 12
@@ -31,19 +31,23 @@ const ArticleTypeDetailPage: React.FC = () => {
 
   const navigate = useNavigate()
 
+  const onFinish = (vals: User) => {
+    onSave(vals).then(() => navigate(-1))
+  }
+
   return <Spin spinning={loading}>
     <h3>用户详情</h3>
     <Form
       form={form}
       {...formLayout}
       className="form"
-      onFinish={onSave}
+      onFinish={onFinish}
     >
       <Form.Item hidden name="id"/>
       <Row gutter={24}>
         <Col span={24}>
           <Form.Item label="用户名" name="username" rules={[{required: true}]}>
-              <Input placeholder="用户名" />
+            <Input placeholder="用户名" disabled={isEdit} />
           </Form.Item>
         </Col>
         <Col span={24}>
@@ -52,7 +56,7 @@ const ArticleTypeDetailPage: React.FC = () => {
           </Form.Item>
         </Col>
         <Col span={24}>
-          <Form.Item label="用户密码" name="password" rules={[{required: true}]}>
+          <Form.Item label="用户密码" name="password" rules={[{required: !isEdit, min: 6}]}>
               <Input prefix={<LockOutlined />} type="password" placeholder="User Password" />
           </Form.Item>
         </Col>
@@ -62,7 +66,7 @@ const ArticleTypeDetailPage: React.FC = () => {
             label="确认密码"
             dependencies={['password']}
             rules={[
-              {required: true},
+              {required: !isEdit},
               ({ getFieldValue }) => ({
                 validator(_, value) {
                   if (!value || getFieldValue('password') === value) {

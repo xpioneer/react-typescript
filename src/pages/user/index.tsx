@@ -1,10 +1,12 @@
 import * as React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Row, Col, Form, Input, Button, Table, Select, Flex, Spin, Space } from 'antd'
+import { dateFormat } from '@/utils/tools'
 import { DatePicker } from 'components/datePicker'
-import { User } from '@models/user'
+import { User, UserSex, UserType, userTypeOpts } from '@models/user'
 import { useList } from './useList'
 import { ColumnsType, TablePaginationConfig, SorterResult, SortOrder } from 'antd/lib/table/interface'
+import { DateFormat } from '@/types/base'
 
 
 const UserPage: React.FC = () => {
@@ -17,13 +19,6 @@ const UserPage: React.FC = () => {
     pageData,
     onQuery
   } = useList()
-
-  const userTypeList = [
-    {label: '请选择', value: ''},
-    {label: '超级用户', value: 0},
-    {label: '普通用户', value: 1},
-    {label: '测试用户', value: 9},
-  ]
 
   const columns: ColumnsType<User> = [{
     title: 'ID',
@@ -40,7 +35,13 @@ const UserPage: React.FC = () => {
   }, {
     title: '用户类型',
     dataIndex: 'userType',
-    width: '100px',
+    width: '80px',
+    render: (value: number) => UserType[value],
+  }, {
+    title: '性别',
+    dataIndex: 'sex',
+    width: '40px',
+    render: (value: number) => UserSex[value],
   }, {
     title: '备注',
     dataIndex: 'remark',
@@ -51,6 +52,12 @@ const UserPage: React.FC = () => {
     dataIndex: 'createdAt',
     key: 'createdAt',
     sorter: true
+  }, {
+    title: '更新时间',
+    width: '120px',
+    dataIndex: 'updatedAt',
+    key: 'updatedAt',
+    render: (value: string) => dateFormat(value, DateFormat.DateTime),
   }, {
     title: '操作',
     dataIndex: '',
@@ -87,7 +94,7 @@ const UserPage: React.FC = () => {
         </Col>
         <Col span={6}>
           <Form.Item name="userType">
-            <Select placeholder="用户类型" options={userTypeList} />
+            <Select placeholder="用户类型" options={userTypeOpts} />
           </Form.Item>
         </Col>
         <Col span={6}>

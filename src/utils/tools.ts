@@ -1,5 +1,5 @@
 import { EXCLUDE_KEYS, JWT_TOKEN } from '@/constants'
-import { format } from 'date-fns'
+import { format, isDate, isValid, parseISO } from 'date-fns'
 import { DateFormat } from 'types/base'
 
 export const object2Str = (o: string|object): string => {
@@ -113,9 +113,9 @@ export const dateFormat = (date: number | string | Date, pattern = DateFormat.Da
   let str = ''
   try {
     if(date) {
-      const _date = new Date(date)
-      if(!isNaN(+_date)) {
-        str = format(_date, pattern)
+      const msTimestamp = +date
+      if(!isNaN(msTimestamp)) {
+        str = format(new Date(msTimestamp), pattern)
       }
     }
   } catch(e) {

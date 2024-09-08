@@ -1,25 +1,27 @@
 import { Form } from 'antd'
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { GRAPHQL_API } from '@/constants'
 import { User } from 'models/user'
 import { useGraphQL } from '@/services/http'
 
 const query = `
 query getUser($id: String!){
-  articleType(id: $id){
+  user(id: $id){
     id
-    name
-    remark
+    username
+    nickName
+    userType
+    sex
     createdAt
     updatedAt
+    remark
   }
 }`
 
 // 这里放开了id的限制，update和insert共用一个mutation，后面再改。
 const mutation = `
-mutation createUser($username: String!, $nickName: String!, $password: String!, $userType: Int!, $sex: Int!, $remark: String){
-  user(username: $username, nickName: $nickName, password: $password, userType: $userType, sex: $sex remark: $remark){id}
+mutation saveUser($id: String, $username: String, $nickName: String!, $password: String, $userType: Int!, $sex: Int!, $remark: String){
+  editUser(id: $id, username: $username, nickName: $nickName, password: $password, userType: $userType, sex: $sex, remark: $remark){id}
 }`
 
 
@@ -34,7 +36,7 @@ export const useUserDetail = () => {
   
   const onSave = (vals: User) => {
     setLoading(true)
-    useGraphQL<{id: string}>(
+    return useGraphQL<{id: string}>(
       mutation,
       {
         ...vals
@@ -55,7 +57,7 @@ export const useUserDetail = () => {
 
   useEffect(() => {
     if(id) {
-      // onQuery()
+      onQuery()
     }
   }, [id])
 

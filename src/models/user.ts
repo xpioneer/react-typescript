@@ -16,7 +16,8 @@ export class User extends BaseModel {
 
 export enum UserType {
   超级用户 = 0,
-  普通用户 = 1,
+  管理员 = 1,
+  普通用户 = 2,
   测试用户 = 9,
 }
 

@@ -7,7 +7,7 @@ import { useGraphQL } from '@/services/http'
 const query = `
 query userPages($page: Int, $pageSize: Int, $order: pageOrder, $nickName: String, $username: String, $userType: Int, $createdAt: [String]){
   users(page: $page, pageSize: $pageSize, order: $order, nickName: $nickName, username: $username, userType: $userType, createdAt: $createdAt){
-    list{id,nickName,username,userType,remark,createdAt}
+    list{id,nickName,username,userType,remark,sex,createdAt,updatedAt}
     meta{current,total,pageSize}
   }
 }`
