@@ -1,6 +1,7 @@
-import { IBase } from './base'
+import { object2Options } from '@/utils/tools'
+import { BaseModel } from './base'
 
-export interface IUser extends IBase {
+export class User extends BaseModel {
 
   username: string
 
@@ -12,3 +13,19 @@ export interface IUser extends IBase {
 
   remark: string
 }
+
+export enum UserType {
+  超级用户 = 0,
+  普通用户 = 1,
+  测试用户 = 9,
+}
+
+export const userTypeOpts = object2Options(UserType)
+
+
+export enum UserSex {
+  女 = 0,
+  男 = 1,
+}
+
+export const userSexOpts = object2Options(UserSex)

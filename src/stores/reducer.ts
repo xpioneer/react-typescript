@@ -1,5 +1,5 @@
 import { Store } from 'types/global'
-import { UserInfo } from 'types/user'
+import { User } from 'models/user'
 import { ACTION_TYPE, Action, } from './actions'
 
 export const reducer = (
@@ -31,7 +31,7 @@ export const reducer = (
     case ACTION_TYPE.SET_USER_INFO:
       return {
         ...state,
-        userInfo: payload as UserInfo
+        userInfo: payload as User
       }
 
     default:

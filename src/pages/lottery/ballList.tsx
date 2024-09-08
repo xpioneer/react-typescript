@@ -1,8 +1,8 @@
 import * as React from 'react'
 import {inject, observer} from 'mobx-react'
-import { Row, Col, Form, Input, Button, DatePicker, Table, Modal, Badge, } from 'antd'
-import { ColumnProps } from 'antd/lib/table'
-import { IBall } from '@models/ball'
+import { Row, Col, Form, Input, Button, DatePicker, Table, Modal, TableColumnsType, } from 'antd'
+import { ColumnProps, ColumnType } from 'antd/lib/table'
+import { Ball } from '@models/ball'
 
 const FormItem = Form.Item
 
@@ -11,7 +11,7 @@ const FormItem = Form.Item
 @observer
 export default class BallList extends React.Component<ICommonProps> {
 
-  columns: ColumnProps<IBall>[] = [{
+  columns: TableColumnsType<Ball> = [{
     title: '期号',
     dataIndex: 'issue',
     // width: '15%',
@@ -21,38 +21,38 @@ export default class BallList extends React.Component<ICommonProps> {
       title: '1',
       dataIndex: 'red1',
       width: '30px',
-      render: (text: number, record: IBall, index: number) => this.setColor(text, 'red')
+      render: (text: number, record: Ball, index: number) => this.setColor(text, 'red')
     }, {
       title: '2',
       dataIndex: 'red2',
       width: '30px',
-      render: (text: number, record: IBall, index: number) => this.setColor(text, 'red')
+      render: (text: number, record: Ball, index: number) => this.setColor(text, 'red')
     }, {
       title: '3',
       dataIndex: 'red3',
       width: '30px',
-      render: (text: number, record: IBall, index: number) => this.setColor(text, 'red')
+      render: (text: number, record: Ball, index: number) => this.setColor(text, 'red')
     }, {
       title: '4',
       dataIndex: 'red4',
       width: '30px',
-      render: (text: number, record: IBall, index: number) => this.setColor(text, 'red')
+      render: (text: number, record: Ball, index: number) => this.setColor(text, 'red')
     }, {
       title: '5',
       dataIndex: 'red5',
       width: '30px',
-      render: (text: number, record: IBall, index: number) => this.setColor(text, 'red')
+      render: (text: number, record: Ball, index: number) => this.setColor(text, 'red')
     }, {
       title: '6',
       dataIndex: 'red6',
       width: '30px',
-      render: (text: number, record: IBall, index: number) => this.setColor(text, 'red')
+      render: (text: number, record: Ball, index: number) => this.setColor(text, 'red')
     }]
   }, {
     title: '蓝球',
     dataIndex: 'blue',
     width: '30px',
-    render: (text: number, record: IBall, index: number) => this.setColor(text, 'blue')
+    render: (text: number, record: Ball, index: number) => this.setColor(text, 'blue')
   }, {
     title: '奖池奖金(元)',
     dataIndex: 'pool',
@@ -91,10 +91,10 @@ export default class BallList extends React.Component<ICommonProps> {
     title: '操作',
     dataIndex: '',
     width: '80px',
-    render: (text: string, record: IBall, index: number) => <React.Fragment><a onClick={() => this.viewDetail(record)}>详情</a>|<a onClick={() => this.showDelete(record.id)}>删除</a></React.Fragment>
+    render: (text: string, record: Ball, index: number) => <React.Fragment><a onClick={() => this.viewDetail(record)}>详情</a>|<a onClick={() => this.showDelete(record.id)}>删除</a></React.Fragment>
   }]
 
-  viewDetail (data: IBall) {
+  viewDetail (data: Ball) {
     this.props.history.push(`/lottery/ball/detail/${data.id}`)
   }
 

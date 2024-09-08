@@ -34,11 +34,11 @@ class ballListStore {
     if (type === 'drawDate') {
       this.drawDate = value
       const range = value
-      this.value[type] = range.map((d: Moment, index: number) => {
+      this.value[type] = range.map((d: any, index: number) => {
         return index > 0 ? d.format('YYYY-MM-DD 23:59:59:999') : d.format('YYYY-MM-DD 00:00:00:000')
       })
     } else {
-      this.value[type] = value.trim()
+      (this.value as any)[type] = value.trim()
     }
   }
 
@@ -57,7 +57,7 @@ class ballListStore {
     this.value['page'] = pagination.current || 1
 
     if (orders && Object.keys(orders).length > 0) {
-      this.value.order[orders.field] = orders.order === 'ascend' ? 'ASC' : 'DESC'
+      (this.value as any).order[orders.field] = orders.order === 'ascend' ? 'ASC' : 'DESC'
     }
     
     this.fetch(this.value)

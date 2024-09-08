@@ -5,7 +5,7 @@ import {
   Flex, Space, Spin,
 } from 'antd'
 import { DatePicker } from 'components/datePicker'
-import { IArticle } from '@models/article'
+import { Article } from '@models/article'
 import { useList } from './useList'
 import { ColumnsType, TablePaginationConfig, SorterResult, SortOrder } from 'antd/lib/table/interface'
 
@@ -33,7 +33,7 @@ const CommentPage: React.FC = () => {
     return acc
   }, {}), [tags])
 
-  const columns: ColumnsType<IArticle> = [{
+  const columns: ColumnsType<Article> = [{
     title: 'ID',
     dataIndex: 'id',
     // sorter: true,
@@ -82,7 +82,7 @@ const CommentPage: React.FC = () => {
     render: (text: string, record, index) => <Button size="small" type="primary" onClick={() => onView(record)}>详情</Button>,
   }]
 
-  const onView = (data: IArticle) => {
+  const onView = (data: Article) => {
     navigate(`${data.id}`)
   }
 

@@ -35,7 +35,7 @@ class articleListStore {
         return index > 0 ? endOfDay(d) : startOfDay(d)
       })
     } else {
-      this.value[type] = value.trim()
+      (this.value as any)[type] = value.trim()
     }
   }
 
@@ -56,7 +56,7 @@ class articleListStore {
     this.value['page'] = pagination.current || 1
 
     if (orders && Object.keys(orders).length > 0) {
-      this.value.order[orders.field] = orders.order === 'ascend' ? 'ASC' : 'DESC'
+      (this.value as any).order[orders.field] = orders.order === 'ascend' ? 'ASC' : 'DESC'
     }
     
     this.fetch(this.value)

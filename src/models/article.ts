@@ -1,8 +1,8 @@
-import { IBase } from './base'
-import { IArticleType } from './articleType'
-import { ITag } from './tag'
+import { BaseModel } from './base'
+import { ArticleType } from './articleType'
+import { Tag } from './tag'
 
-export interface IArticle extends IBase {
+export interface Article extends BaseModel {
   title: string
 
   abstract: string
@@ -13,12 +13,12 @@ export interface IArticle extends IBase {
 }
 
 export type ArticlesData = {
-  articles?: IPageData<IArticle>
-  article?: IArticle
+  articles?: IPageData<Article>
+  article?: Article
   articleTypes: {
-    list: IArticleType[]
+    list: ArticleType[]
   }
   tags: {
-    list: ITag[]
+    list: Tag[]
   }
 }

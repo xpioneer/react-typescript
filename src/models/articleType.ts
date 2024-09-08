@@ -1,6 +1,6 @@
-import { IBase } from './base'
+import { BaseModel } from './base'
 
-export interface IArticleType extends IBase {
+export interface ArticleType extends BaseModel {
 
   name: string
 

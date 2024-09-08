@@ -1,11 +1,6 @@
-
 import { useState, useEffect } from 'react'
 import { Form } from 'antd'
-import { serialize } from '@utils/params'
-import { startOfDay, endOfDay } from 'date-fns'
-import { GRAPHQL_API } from '@constants/index'
-import { ITag } from 'models/tag'
-import { QueryForm } from 'types/articleType'
+import { Tag } from 'models/tag'
 import { data2AntPageData } from '@/utils/tools'
 import { useGraphQL } from '@/services/http'
 
@@ -19,10 +14,10 @@ query articleTags($page: Int, $pageSize: Int, $order: pageOrder, $name: String, 
 }`
 
 export const useTag = () => {
-  const [form] = Form.useForm<QueryForm>()
+  const [form] = Form.useForm()
   
   const [loading, setLoading] = useState(false)
-  const [pageData, setPageData] = useState(data2AntPageData<ITag>())
+  const [pageData, setPageData] = useState(data2AntPageData<Tag>())
 
   const onQuery = (page = 1, pageSize = 10) => {
     const params = {
@@ -31,7 +26,7 @@ export const useTag = () => {
     }
     const vals = form.getFieldsValue()
     setLoading(true)
-    useGraphQL<{tags: ITag}, true>(
+    useGraphQL<{tags: Tag}, true>(
       query,
       {
         ...params,

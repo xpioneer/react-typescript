@@ -26,7 +26,7 @@ const ArticleTypeDetailPage: React.FC = () => {
     onSave,
   } = useArticleTypeDetail()
 
-  const navigate = useNavigate<{id: string}>()
+  const navigate = useNavigate()
 
   return <Spin spinning={loading}>
     <h3>文章类型详情</h3>
@@ -65,7 +65,7 @@ const ArticleTypeDetailPage: React.FC = () => {
         <Col span={24} offset={4}>
           <Space>
             <Button htmlType='submit' type="primary">保存</Button>
-            <Button onClick={() => history.goBack()}>取消</Button>
+            <Button onClick={() => navigate(-1)}>取消</Button>
           </Space>
         </Col>
       </Row>

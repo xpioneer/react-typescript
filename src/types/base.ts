@@ -10,7 +10,7 @@ export class BaseModel {
 }
 
 
-export enum EDateFormat {
+export enum DateFormat {
   Date = 'yyyy-MM-hh',
   DateTime = 'yyyy-MM-hh HH:mm:ss',
   DateTimeM = 'yyyy-MM-hh HH:mm'

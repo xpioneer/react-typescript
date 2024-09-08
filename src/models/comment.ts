@@ -1,6 +1,6 @@
-import { IBase } from './base'
+import { BaseModel } from './base'
 
-export interface IComment extends IBase {
+export interface Comment extends BaseModel {
 
   description: string
 

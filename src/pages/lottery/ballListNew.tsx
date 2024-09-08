@@ -5,7 +5,7 @@ import {
   Flex, Space, Spin, TableColumnsType
 } from 'antd'
 import { DatePicker } from 'components/datePicker'
-import { IBall } from '@models/ball'
+import { Ball } from '@models/ball'
 import { useList } from './useBallList'
 import { ColumnsType, TablePaginationConfig, SorterResult, SortOrder } from 'antd/lib/table/interface'
 import { modal } from 'components/message'
@@ -23,7 +23,7 @@ const BallListPage: React.FC = () => {
     onDelete,
   } = useList()
 
-  const columns: TableColumnsType<IBall> = [{
+  const columns: TableColumnsType<Ball> = [{
     title: '期号',
     dataIndex: 'issue',
     // width: '15%',
@@ -112,7 +112,7 @@ const BallListPage: React.FC = () => {
     render: (text, record, index) => <React.Fragment><a onClick={() => onVeiw(record)}>详情</a>|<a onClick={() => showDelete(record.id)}>删除</a></React.Fragment>
   }]
 
-  const onVeiw = (data: IBall) => {
+  const onVeiw = (data: Ball) => {
     navigate(`${data.id}`)
   }
 

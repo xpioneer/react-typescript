@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Row, Col, Form, Input, Button, Table, Select, Flex, Spin, Space } from 'antd'
 import { DatePicker } from 'components/datePicker'
-import { IUser } from '@models/user'
+import { User } from '@models/user'
 import { useList } from './useList'
 import { ColumnsType, TablePaginationConfig, SorterResult, SortOrder } from 'antd/lib/table/interface'
 
@@ -25,7 +25,7 @@ const UserPage: React.FC = () => {
     {label: '测试用户', value: 9},
   ]
 
-  const columns: ColumnsType<IUser> = [{
+  const columns: ColumnsType<User> = [{
     title: 'ID',
     dataIndex: 'id',
     width: '15%',
@@ -55,10 +55,10 @@ const UserPage: React.FC = () => {
     title: '操作',
     dataIndex: '',
     width: '80px',
-    render: (text: string, record: IUser, index: number) => <Button size="small" type="primary" onClick={() => onView(record)}>详情</Button>
+    render: (text: string, record) => <Button size="small" type="primary" onClick={() => onView(record)}>详情</Button>
   }]
 
-  const onView = (data: IUser) => {
+  const onView = (data: User) => {
     navigate(`${data.id}`)
   }
 

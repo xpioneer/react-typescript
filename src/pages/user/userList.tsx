@@ -3,7 +3,7 @@ import {inject, observer} from 'mobx-react'
 import { Row, Col, Form, Select, Input, Button, Table, Modal, DatePicker, } from 'antd'
 // import { DatePicker } from 'components/datePicker'
 import { ColumnProps } from 'antd/lib/table'
-import { IUser } from '@models/user'
+import { User } from '@models/user'
 
 const FormItem = Form.Item
 
@@ -27,7 +27,7 @@ export default class UserList extends React.Component<ICommonProps> {
     {name: '测试用户', value: 9},
   ]
 
-  columns: ColumnProps<IUser>[] = [{
+  columns: ColumnProps<User>[] = [{
     title: 'ID',
     dataIndex: 'id',
     width: '15%',
@@ -57,10 +57,10 @@ export default class UserList extends React.Component<ICommonProps> {
     title: '操作',
     dataIndex: '',
     width: '80px',
-    render: (text: string, record: IUser, index: number) => <Button size="small" type="primary" onClick={() => this.viewDetail(record)}>详情</Button>
+    render: (text: string, record, index) => <Button size="small" type="primary" onClick={() => this.viewDetail(record)}>详情</Button>
   }]
 
-  viewDetail (data: IUser) {
+  viewDetail (data: User) {
     this.props.history.push(`/blog/user/detail/${data.id}`)
   }
 

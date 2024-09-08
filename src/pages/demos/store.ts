@@ -5,7 +5,7 @@ interface IParamsData {
   [key: string]: any
 }
 
-const fmtGetParams = (params: object) => {
+const fmtGetParams = (params: AnyObject) => {
   let data = ''
   for (let k in params) {
     data += k + '=' + params[k] + '&'
@@ -113,7 +113,7 @@ class DemoStore {
   @action upload = () => {
     console.log(this.fileVal)
     if (!this.fileVal) {
-      $msg.warn('请选择文件')
+      $msg.warning('请选择文件')
       return
     }
     const fd = new FormData()

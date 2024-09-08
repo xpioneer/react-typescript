@@ -5,7 +5,7 @@ import {
   Flex, Space, Spin, TableColumnProps, TableColumnsType, TablePaginationConfig
 } from 'antd'
 import { ColumnProps } from 'antd/lib/table'
-import { IBall } from '@models/ball'
+import { Ball } from '@models/ball'
 import { useList } from './useBallTrend'
 import { modal } from 'components/message'
 
@@ -43,25 +43,25 @@ const BallTrendPage: React.FC = () => {
     return <div style={{color}}>{ball}</div>
   }
 
-  const columns: ColumnProps<IBall>[] = [{
+  const columns: ColumnProps<Ball>[] = [{
     title: '期号',
     dataIndex: 'issue',
     // width: '15%',
   },
   // red balls
-  ...redBalls.map<ColumnProps<IBall>>(i => ({
+  ...redBalls.map<ColumnProps<Ball>>(i => ({
     title: <BallCom ball={i} color='#f5464680' />,
     dataIndex: i,
     render: (text, record, index: number) => setBall(record, i, 'red')
   })),
-  ...blueBalls.map<ColumnProps<IBall>>(i => ({
+  ...blueBalls.map<ColumnProps<Ball>>(i => ({
     title: <BallCom ball={i} color='#3399ff80' />,
     dataIndex: i,
     render: (text, record, index: number) => setBall(record, i, 'blue')
   })),
 ]
 
-  const onView = (data: IBall) => {
+  const onView = (data: Ball) => {
     navigate(`${data.id}`)
   }
 
@@ -73,7 +73,7 @@ const BallTrendPage: React.FC = () => {
     })
   }
 
-  const setBall = (data: IBall, num: number, type: 'red'|'blue') => {
+  const setBall = (data: Ball, num: number, type: 'red'|'blue') => {
     const color =  type === 'red' ? '#f54646' : '#3399ff'
     const active = type === 'red' ? data.reds.some(v => v === num) : data.blue === num
     if (active) {

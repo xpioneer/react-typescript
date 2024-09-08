@@ -1,5 +1,5 @@
 import { isLogged, storage } from '@/utils/tools'
-import { UserInfo } from 'types/user'
+import { User } from 'models/user'
 import { PREFERS_COLOR_SCHEME_DARK, PRIMARY_COLOR, COLOR_PRIMARY_KEY, CUSTOM_DARK_MODE } from '@/constants'
 
 export enum LangI18n {
@@ -16,5 +16,5 @@ export class Store {
   lang: LangKeys = 'zh-CN'
   authorized = isLogged()
   loading = false
-  userInfo = new UserInfo
+  userInfo = new User
 }

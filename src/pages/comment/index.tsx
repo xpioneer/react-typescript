@@ -5,7 +5,7 @@ import {
   Flex, Space, Spin,
 } from 'antd'
 import { DatePicker } from 'components/datePicker'
-import { IComment } from '@models/comment'
+import { Comment } from '@models/comment'
 import { useList } from './useList'
 import { ColumnsType, TablePaginationConfig, SorterResult, SortOrder } from 'antd/lib/table/interface'
 
@@ -20,7 +20,7 @@ const CommentPage: React.FC = () => {
     onQuery
   } = useList()
 
-  const columns: ColumnsType<IComment> = [{
+  const columns: ColumnsType<Comment> = [{
     title: 'ID',
     dataIndex: 'id',
     width: '10%',
@@ -51,10 +51,10 @@ const CommentPage: React.FC = () => {
     title: '操作',
     dataIndex: '',
     width: '80px',
-    render: (text: string, record: IComment, index: number) => <Button size="small" type="primary" onClick={() => onView(record)}>详情</Button>
+    render: (text: string, record: Comment, index: number) => <Button size="small" type="primary" onClick={() => onView(record)}>详情</Button>
   }]
 
-  const onView = (data: IComment) => {
+  const onView = (data: Comment) => {
     navigate(`${data.id}`)
   }
 

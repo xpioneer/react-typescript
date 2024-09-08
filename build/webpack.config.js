@@ -4,6 +4,7 @@ const path = require('path'),
   CopyWebpackPlugin = require('copy-webpack-plugin'),
   MiniCssExtractPlugin = require("mini-css-extract-plugin");
   // {GenerateSW} = require('workbox-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 const DonePlugin = require('./donePlugin')
 const _PROD_ = process.env.NODE_ENV === 'production';
@@ -182,6 +183,11 @@ module.exports = {
   },
 
   plugins: [
+    new ForkTsCheckerWebpackPlugin({
+      typescript: {
+        configFile: resolve('tsconfig.json')
+      }
+    }),
     // new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /zh-cn/),
     new DonePlugin(),
     // new webpack.DefinePlugin({

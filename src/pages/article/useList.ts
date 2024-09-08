@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
 import { Form } from 'antd'
-import { IArticleType } from 'models/articleType'
-import { ITag } from 'models/tag'
-import { IArticle, ArticlesData } from 'models/article'
+import { ArticleType } from 'models/articleType'
+import { Tag } from 'models/tag'
+import { Article, ArticlesData } from 'models/article'
 import { data2AntPageData } from '@/utils/tools'
 import { useGraphQL } from '@/services/http'
 
@@ -24,11 +24,11 @@ export const useList = () => {
   const [form] = Form.useForm()
   
   const [loading, setLoading] = useState(false)
-  const [pageData, setPageData] = useState(data2AntPageData<IArticle>())
+  const [pageData, setPageData] = useState(data2AntPageData<Article>())
 
   const optsRef = useRef<{
-    types: IArticleType[]
-    tags: ITag[]
+    types: ArticleType[]
+    tags: Tag[]
   }>({
     types: [],
     tags: [],

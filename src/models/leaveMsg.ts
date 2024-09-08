@@ -1,6 +1,6 @@
-import { IBase } from './base'
+import { BaseModel } from './base'
 
-export interface ILeaveMsg extends IBase {
+export interface LeaveMsg extends BaseModel {
 
   description: string
   

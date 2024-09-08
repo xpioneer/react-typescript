@@ -4,8 +4,8 @@ class Params {
     // 
   }
 
-  public fmtPost (data: any) {
-    const obj = {}
+  public fmtPost (data: AnyObject) {
+    const obj: AnyObject = {}
     for (const key in data) {
       if (data[key] !== undefined && data[key] !== '' && data[key] !== null && typeof(data[key]) !== 'object') {
         obj[key] = data[key]

@@ -1,8 +1,7 @@
 import { Form } from 'antd'
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { GRAPHQL_API } from '@/constants'
-import { ITag } from '@models/tag'
+import { Tag } from '@models/tag'
 import { useGraphQL } from '@/services/http'
 
 const query = `
@@ -27,14 +26,14 @@ mutation updateTag($id: String, $name: String!, $remark: String){
 export const useDetail = () => {
   const {id} = useParams<{id: string}>()
 
-  const [form] = Form.useForm<ITag>()
+  const [form] = Form.useForm<Tag>()
 
   const [loading, setLoading] = useState(false)
   
 
   const isEdit = !!Form.useWatch('id', form)
   
-  const onSave = (vals: ITag) => {
+  const onSave = (vals: Tag) => {
     setLoading(true)
     useGraphQL<{id: string}>(
       mutation,
@@ -44,7 +43,7 @@ export const useDetail = () => {
 
   const onQuery = () => {
     setLoading(true)
-    useGraphQL<{tag: ITag}>(
+    useGraphQL<{tag: Tag}>(
       query,
       { id }
     ).then(res => form.setFieldsValue(res.tag))

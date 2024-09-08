@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Form } from 'antd'
-import { QueryForm } from '@/types/articleType'
-import { IBall } from 'models/ball'
+import { Ball } from 'models/ball'
 import { data2AntPageData } from '@/utils/tools'
 import { useGraphQL } from '@/services/http'
 
@@ -23,12 +22,12 @@ export const useList = () => {
   const [form] = Form.useForm()
   
   const [loading, setLoading] = useState(false)
-  const [pageData, setPageData] = useState(data2AntPageData<IBall>())
+  const [pageData, setPageData] = useState(data2AntPageData<Ball>())
 
   const onQuery = (page = 1, pageSize = 40, order = {createdAt: 'DESC'}) => {
     const vals = form.getFieldsValue()
     setLoading(true)
-    useGraphQL<{balls: IBall}, true>(
+    useGraphQL<{balls: Ball}, true>(
       query,
       {
         ...vals,

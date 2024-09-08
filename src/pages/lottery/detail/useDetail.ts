@@ -2,8 +2,7 @@ import { useState, useEffect } from 'react'
 import { Form } from 'antd'
 import { useParams, useNavigate } from 'react-router-dom'
 import { debounce } from 'utils/debounce'
-import { QueryForm } from '@/types/articleType'
-import { IBall } from 'models/ball'
+import { Ball } from 'models/ball'
 import { parseISO } from 'date-fns'
 import { useGraphQL } from 'services/http'
 
@@ -27,7 +26,7 @@ mutation updateBall($input: ballInput!){
   updated:editBall(input: $input)
 }`
 
-const mapData = (data: IBall, save = false) => {
+const mapData = (data: Ball, save = false) => {
   if(save) {
     data.blue = (data.blue as number[])[0];
     (data as any).createdAt = undefined
@@ -44,15 +43,15 @@ export const useDetail = () => {
   const {id} = useParams<{id: string}>()
   const navigate = useNavigate()
 
-  const [form] = Form.useForm<IBall>()
+  const [form] = Form.useForm<Ball>()
 
   const [loading, setLoading] = useState(false)
 
   const isEdit = !!Form.useWatch('id', form)
   
-  const onSave = debounce((vals: IBall) => {
+  const onSave = debounce((vals: Ball) => {
     setLoading(true)
-    useGraphQL<IBall>(
+    useGraphQL<Ball>(
       mutation,
       { input: mapData(vals, true) }
     ).then(r => history.go(-1))
@@ -62,7 +61,7 @@ export const useDetail = () => {
 
   const onQuery = () => {
     setLoading(true)
-    useGraphQL<{ball: IBall}>(
+    useGraphQL<{ball: Ball}>(
       query,
       {
         id,

@@ -105,7 +105,7 @@ export default class APILog extends React.Component<ICommonProps> {
   formatHeader = (data: any) => {
     const type = typeof(data)
     if (type === 'string') {
-      let headerObj = ''
+      let headerObj: AnyObject = {}
       try {
         headerObj = JSON.parse(data)
       } catch (e) {

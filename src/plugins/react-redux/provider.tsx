@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { IAnyObject, ICreateStore } from '../redux/model'
-import PropTypes from 'prop-types'
+const PropTypes = require('prop-types')
 
 interface IProviderProps{
   store: IAnyObject
+  children: React.ReactNode
 }
 
 export class ReduxProvider extends Component<IProviderProps, ICreateStore> {
@@ -32,7 +33,7 @@ export class ReduxProvider extends Component<IProviderProps, ICreateStore> {
   }
 
   render () {
-    // console.log('$store', )
+    console.log('$store', this.props.children)
     return this.props.children
   }
 }
@@ -40,9 +41,9 @@ export class ReduxProvider extends Component<IProviderProps, ICreateStore> {
 
 // createContext
 
-export const { Provider, Consumer } = React.createContext(null)
+export const { Provider, Consumer } = React.createContext<IAnyObject | null>(null)
 
 export const ReduxProvider1: React.FC<IProviderProps> = (props) => {
 
-  return <Provider value={props.store}>{props.children}</Provider>
+  return <Provider value={props.store}>{(props as any).children}</Provider>
 }

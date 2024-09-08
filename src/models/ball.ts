@@ -1,6 +1,6 @@
-import { IBase } from './base'
+import { BaseModel } from './base'
 
-export interface IBall extends IBase {
+export interface Ball extends BaseModel {
 
   issue: number
 

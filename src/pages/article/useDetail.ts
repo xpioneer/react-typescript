@@ -1,9 +1,9 @@
 import { Form } from 'antd'
 import { useState, useEffect, useRef } from 'react'
 import { useParams } from 'react-router-dom'
-import { IArticle, ArticlesData } from 'models/article'
-import { IArticleType } from 'models/articleType'
-import { ITag } from 'models/tag'
+import { Article, ArticlesData } from 'models/article'
+import { ArticleType } from 'models/articleType'
+import { Tag } from 'models/tag'
 import { useGraphQL } from '@/services/http'
 import { parseISO } from 'date-fns'
 
@@ -30,16 +30,16 @@ mutation upateArticle($id: String, $title: String!, $abstract: String!, $typeId:
 
 
 // type ResData = {
-//   article: IArticle
+//   article: Article
 //   articleTypes: {
-//     list: IArticleType[]
+//     list: ArticleType[]
 //   }
 //   tags: {
-//     list: ITag[]
+//     list: Tag[]
 //   }
 // }
 
-const mapData = (data: IArticle, save = false) => {
+const mapData = (data: Article, save = false) => {
   if(save) {
     (data as any).tag = data.tag.join(',');
     (data as any).createdAt = undefined
@@ -54,13 +54,13 @@ const mapData = (data: IArticle, save = false) => {
 export const useDetail = () => {
   const {id} = useParams<{id: string}>()
 
-  const [form] = Form.useForm<IArticle>()
+  const [form] = Form.useForm<Article>()
 
   const [loading, setLoading] = useState(false)
 
   const optsRef = useRef<{
-    types: IArticleType[]
-    tags: ITag[]
+    types: ArticleType[]
+    tags: Tag[]
   }>({
     types: [],
     tags: [],
@@ -68,7 +68,7 @@ export const useDetail = () => {
 
   const isEdit = !!Form.useWatch('id', form)
   
-  const onSave = (vals: IArticle) => {
+  const onSave = (vals: Article) => {
     const variables = mapData(vals, true)
     setLoading(true)
     return useGraphQL<boolean>(

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import {inject, observer} from 'mobx-react'
 import { Row, Col, Form, Button } from 'antd'
-import { IBall } from '@models/ball'
+import { Ball } from '@models/ball'
 import * as Echart from 'echarts/core'
 import { LegendComponent, TitleComponent, TooltipComponent, GridComponent } from 'echarts/components'
 import { BarChart, LineChart  } from 'echarts/charts'
@@ -47,7 +47,7 @@ export default class BallChart extends React.Component<ICommonProps> {
   ]
   blueBalls: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
 
-  setBall = (data: IBall, num: number, type: 'red'|'blue') => {
+  setBall = (data: Ball, num: number, type: 'red'|'blue') => {
     const color =  type === 'red' ? '#f54646' : '#3399ff'
   }
 

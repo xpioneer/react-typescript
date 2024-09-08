@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Form } from 'antd'
-import { GRAPHQL_API } from '@constants/index'
-import { QueryForm } from '@/types/articleType'
-import { IUser } from 'models/user'
+import { User } from 'models/user'
 import { data2AntPageData } from '@/utils/tools'
 import { useGraphQL } from '@/services/http'
 
@@ -15,15 +13,15 @@ query userPages($page: Int, $pageSize: Int, $order: pageOrder, $nickName: String
 }`
 
 export const useList = () => {
-  const [form] = Form.useForm<QueryForm>()
+  const [form] = Form.useForm()
   
   const [loading, setLoading] = useState(false)
-  const [pageData, setPageData] = useState(data2AntPageData<IUser>())
+  const [pageData, setPageData] = useState(data2AntPageData<User>())
 
   const onQuery = (page = 1, pageSize = 10, order: AnyObject = {createdAt: 'DESC'}) => {
     const vals = form.getFieldsValue()
     setLoading(true)
-    useGraphQL<{users: IUser}, true>(
+    useGraphQL<{users: User}, true>(
       query,
       {
         page,

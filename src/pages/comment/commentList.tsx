@@ -3,7 +3,7 @@ import {inject, observer} from 'mobx-react'
 import { Row, Col, Form, Input, Button, Table, Modal, DatePicker, } from 'antd'
 // import { DatePicker } from 'components/datePicker'
 import { ColumnProps } from 'antd/lib/table'
-import { IComment } from '@models/comment'
+import { Comment } from '@models/comment'
 
 const FormItem = Form.Item
 
@@ -20,7 +20,7 @@ export default class CommentList extends React.Component<ICommonProps> {
     detailInfo: {}
   }
 
-  columns: ColumnProps<IComment>[] = [{
+  columns: ColumnProps<Comment>[] = [{
     title: 'ID',
     dataIndex: 'id',
     width: '15%',
@@ -46,10 +46,10 @@ export default class CommentList extends React.Component<ICommonProps> {
     title: '操作',
     dataIndex: '',
     width: '80px',
-    render: (text: string, record: IComment, index: number) => <Button size="small" type="primary" onClick={() => this.viewDetail(record)}>详情</Button>
+    render: (text: string, record) => <Button size="small" type="primary" onClick={() => this.viewDetail(record)}>详情</Button>
   }]
 
-  viewDetail (data: IComment) {
+  viewDetail (data: Comment) {
     this.props.history.push(`/blog/comment/${data.id}`)
   }
   

@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Row, Col, Form, Input, Button, Table, Flex, Spin, Space } from 'antd'
 import { DatePicker } from 'components/datePicker'
-import { ILeaveMsg } from '@models/leaveMsg'
+import { LeaveMsg } from '@models/leaveMsg'
 import { useList } from './useList'
 import { ColumnsType, TablePaginationConfig, SorterResult, SortOrder } from 'antd/lib/table/interface'
 
@@ -18,7 +18,7 @@ const LeaveMsgPage: React.FC = () => {
     onQuery
   } = useList()
 
-  const columns: ColumnsType<ILeaveMsg> = [{
+  const columns: ColumnsType<LeaveMsg> = [{
     title: 'ID',
     dataIndex: 'id',
     width: '15%',
@@ -40,10 +40,10 @@ const LeaveMsgPage: React.FC = () => {
     title: '操作',
     dataIndex: '',
     width: '80px',
-    render: (text: string, record: ILeaveMsg, index: number) => <Button size="small" type="primary" onClick={() => onView(record)}>详情</Button>
+    render: (text: string, record) => <Button size="small" type="primary" onClick={() => onView(record)}>详情</Button>
   }]
 
-  const onView = (data: ILeaveMsg) => {
+  const onView = (data: LeaveMsg) => {
     navigate(`${data.id}`)
   }
 

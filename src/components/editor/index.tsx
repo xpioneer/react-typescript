@@ -4,9 +4,9 @@ import * as Q from 'quill'
 // const ImageResize = require('quill-image-resize-module/src/ImageResize.js');
 // console.log(ImageResize, 'imageresize')
 interface IQuillOptions extends QuillOptionsStatic {
-  // imageResize: {
-  //   displaySize: boolean
-  // }
+  imageResize: {
+    displaySize: boolean
+  }
 }
 
 const Quill: any = Q
@@ -58,7 +58,7 @@ export default class QuillEditorComponent extends React.Component<IEditor> {
     theme: 'snow',
   }
 
-  $editor: HTMLDivElement = null
+  $editor: HTMLDivElement | null = null
   
   componentDidMount () {
     const { onChange } = this.props

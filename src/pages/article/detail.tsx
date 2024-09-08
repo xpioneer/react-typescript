@@ -9,7 +9,7 @@ import {
   Checkbox,
 } from 'antd'
 import { useDetail } from './useDetail'
-import { IArticle } from 'models/article'
+import { Article } from 'models/article'
 import { QuillEditor } from 'components/editor/new'
 import { DatePicker } from 'components/datePicker'
 
@@ -32,12 +32,16 @@ const ArticleDetailPage: React.FC = () => {
     onSave,
   } = useDetail()
 
-  const navigate = useNavigate<{id: string}>()
+  const navigate = useNavigate()
 
   const { types, tags } = optsRef.current
 
-  const onFinish = (vals: IArticle) => {
-    onSave(vals).then(history.goBack)
+  const goBack = () => {
+    navigate(-1)
+  }
+
+  const onFinish = (vals: Article) => {
+    onSave(vals).then(goBack)
   }
 
   return <Spin spinning={loading}>
@@ -100,7 +104,7 @@ const ArticleDetailPage: React.FC = () => {
       <Col span={24} offset={4}>
         <Space>
           <Button htmlType='submit' type="primary">保存</Button>
-          <Button onClick={history.goBack}>取消</Button>
+          <Button onClick={goBack}>取消</Button>
         </Space>
       </Col>
     </Form>

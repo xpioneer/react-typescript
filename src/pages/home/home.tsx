@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { Layout } from 'antd'
 import { Outlet } from 'react-router-dom'
-import { AuthorizedRoutes } from 'routes/authorizedRoutes'
 import { HeaderComponent } from './components/header'
 import Footer from './components/footer'
 import { SiderBar } from './components/siderbar'

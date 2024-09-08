@@ -6,7 +6,7 @@ import {
   Flex, Space,
 } from 'antd'
 // import { DatePicker } from 'components/datePicker'
-import { ITag } from '@models/tag'
+import { Tag } from '@models/tag'
 import { useTag } from './useTag'
 
 const TagPage: React.FC<ICommonProps<AnyObject>> = () => {
@@ -20,7 +20,7 @@ const TagPage: React.FC<ICommonProps<AnyObject>> = () => {
     onQuery
   } = useTag()
 
-  const columns: TableColumnsType<ITag> = [{
+  const columns: TableColumnsType<Tag> = [{
     title: 'ID',
     dataIndex: 'id',
     width: '15%',
@@ -48,10 +48,10 @@ const TagPage: React.FC<ICommonProps<AnyObject>> = () => {
     title: '操作',
     dataIndex: '',
     width: '80px',
-    render: (text: string, record: ITag, index: number) => <Button size="small" type="primary" onClick={() => onView(record)}>详情</Button>
+    render: (text: string, record) => <Button size="small" type="primary" onClick={() => onView(record)}>详情</Button>
   }]
 
-  const onView = (data: ITag) => {
+  const onView = (data: Tag) => {
     navigate(`${data.id}`)
   }
   

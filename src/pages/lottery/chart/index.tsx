@@ -1,6 +1,5 @@
 import React, { useState, useRef } from 'react'
 import { Row, Col, Form, Button, Spin } from 'antd'
-import { IBall } from '@models/ball'
 import * as Echart from 'echarts/core'
 import { LegendComponent, TitleComponent, TooltipComponent, GridComponent } from 'echarts/components'
 import { BarChart, LineChart  } from 'echarts/charts'

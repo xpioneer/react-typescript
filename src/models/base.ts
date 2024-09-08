@@ -1,5 +1,5 @@
 
-export interface IBase {
+export class BaseModel {
   id: string
 
   createdAt: string

@@ -78,7 +78,7 @@ class ballCreateStore {
         })
       })
     } else {
-      $msg.warn('请检查数据填写完整性和格式')
+      $msg.warning('请检查数据填写完整性和格式')
     }
     
   }

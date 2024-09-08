@@ -108,14 +108,14 @@ export default class ErrorsLog extends React.Component<ICommonProps> {
   }
 
   // 错误堆栈信息
-  errorStack = (errs: [string|{[key: string]: any}]) => {
+  errorStack = (errs: [string| AnyObject]) => {
     return <React.Fragment>
       {
         typeof(errs[0]) === 'string' ?errs.map((e, index) => {
           const r = e.match(/^\s*[^\w]/)
           const paddingLeft = r ? r[0].length * 8 : 0
-          return <div style={{paddingLeft, color: 'red'}} key={index}>{e}</div>
-        }) : errs.map((obj: {[key: string]: any}, index) => {
+          return <div style={{paddingLeft, color: 'red'}} key={index}>{e.toString()}</div>
+        }) : errs.map((obj: any, index) => {
           const keys = Object.keys(obj).map((key, i) => {
             return <div key={i}>{key}：{typeof(obj[key]) === 'object' ? JSON.stringify(obj[key]) : obj[key]}</div>
           })

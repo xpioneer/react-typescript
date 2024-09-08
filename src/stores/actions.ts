@@ -1,5 +1,5 @@
 import { Store, LangKeys } from 'types/global'
-import { UserInfo } from 'types/user'
+import { User } from 'models/user'
 
 export type ValueOfStore = Store[keyof Store]
 
@@ -43,7 +43,7 @@ export const setLoading = (payload = false) => ({
   payload
 })
 
-export const setUserInfo = (payload: UserInfo) => ({
+export const setUserInfo = (payload: User) => ({
   type: ACTION_TYPE.SET_USER_INFO,
   payload
 })

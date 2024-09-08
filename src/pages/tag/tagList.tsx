@@ -3,7 +3,7 @@ import {inject, observer} from 'mobx-react'
 import { Row, Col, Form, Input, Button, Table, Modal, DatePicker, } from 'antd'
 // import { DatePicker } from 'components/datePicker'
 import { ColumnProps } from 'antd/lib/table'
-import { ITag } from '@models/tag'
+import { Tag } from '@models/tag'
 
 const FormItem = Form.Item
 
@@ -20,7 +20,7 @@ export default class ArticleTypeList extends React.Component<ICommonProps> {
     detailInfo: {}
   }
 
-  columns: ColumnProps<ITag>[] = [{
+  columns: ColumnProps<Tag>[] = [{
     title: 'ID',
     dataIndex: 'id',
     width: '15%',
@@ -42,10 +42,10 @@ export default class ArticleTypeList extends React.Component<ICommonProps> {
     title: '操作',
     dataIndex: '',
     width: '80px',
-    render: (text: string, record: ITag, index: number) => <Button size="small" type="primary" onClick={() => this.viewDetail(record)}>详情</Button>
+    render: (text: string, record) => <Button size="small" type="primary" onClick={() => this.viewDetail(record)}>详情</Button>
   }]
 
-  viewDetail (data: ITag) {
+  viewDetail (data: Tag) {
     this.props.history.push(`/blog/tag/detail/${data.id}`)
   }
 

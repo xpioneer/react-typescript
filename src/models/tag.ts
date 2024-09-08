@@ -1,6 +1,6 @@
-import { IBase } from './base'
+import { BaseModel } from './base'
 
-export interface ITag extends IBase {
+export interface Tag extends BaseModel {
 
   name: string
 

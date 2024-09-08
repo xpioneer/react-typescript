@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Form } from 'antd'
-import { QueryForm } from '@/types/articleType'
-import { IComment } from 'models/comment'
+import { Comment } from 'models/comment'
 import { data2AntPageData } from '@/utils/tools'
 import { useGraphQL } from '@/services/http'
 
@@ -14,15 +13,15 @@ query commentPages($page: Int, $pageSize: Int, $order: pageOrder, $description: 
 }`
 
 export const useList = () => {
-  const [form] = Form.useForm<QueryForm>()
+  const [form] = Form.useForm()
   
   const [loading, setLoading] = useState(false)
-  const [pageData, setPageData] = useState(data2AntPageData<IComment>())
+  const [pageData, setPageData] = useState(data2AntPageData<Comment>())
 
   const onQuery = (page = 1, pageSize = 10, order = {createdAt: 'DESC'}) => {
     const vals = form.getFieldsValue()
     setLoading(true)
-    useGraphQL<{comments: IComment}, true>(
+    useGraphQL<{comments: Comment}, true>(
       query,
       {
         page,

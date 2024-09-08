@@ -1,9 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Form } from 'antd'
-import { serialize } from '@utils/params'
-import { startOfDay, endOfDay } from 'date-fns'
-import { GRAPHQL_API } from '@constants/index'
-import { ArticleType, QueryForm } from 'types/articleType'
+import { ArticleType } from '@models/articleType'
 import { data2AntPageData } from '@/utils/tools'
 import { useGraphQL } from '@/services/http'
 
@@ -16,7 +13,7 @@ query articleTypePages($page: Int, $pageSize: Int, $order: pageOrder, $name: Str
 }`
 
 export const useArticleType = () => {
-  const [form] = Form.useForm<QueryForm>()
+  const [form] = Form.useForm()
   
   const [loading, setLoading] = useState(false)
   const [pageData, setPageData] = useState(data2AntPageData<ArticleType>())

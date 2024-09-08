@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Form } from 'antd'
-import { GRAPHQL_API } from '@constants/index'
-import { QueryForm } from '@/types/articleType'
-import { ILeaveMsg } from 'models/leaveMsg'
+import { LeaveMsg } from 'models/leaveMsg'
 import { data2AntPageData } from '@/utils/tools'
 import { useGraphQL } from '@/services/http'
 
@@ -15,15 +13,15 @@ query leaveMsgPages($page: Int, $pageSize: Int, $order: pageOrder, $description:
 }`
 
 export const useList = () => {
-  const [form] = Form.useForm<QueryForm>()
+  const [form] = Form.useForm()
   
   const [loading, setLoading] = useState(false)
-  const [pageData, setPageData] = useState(data2AntPageData<ILeaveMsg>())
+  const [pageData, setPageData] = useState(data2AntPageData<LeaveMsg>())
 
   const onQuery = (page = 1, pageSize = 10, order = {createdAt: 'DESC'}) => {
     const vals = form.getFieldsValue()
     setLoading(true)
-    useGraphQL<{leaveMsgs: ILeaveMsg}, true>(
+    useGraphQL<{leaveMsgs: LeaveMsg}, true>(
       query,
       {
         page,

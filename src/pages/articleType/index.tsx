@@ -5,7 +5,7 @@ import {
   TableColumnProps, Flex, Space, Spin,
 } from 'antd'
 import { DatePicker } from 'components/datePicker'
-import { IArticleType } from '@models/articleType'
+import { ArticleType } from '@models/articleType'
 import { useArticleType } from './useArticleType'
 
 
@@ -28,7 +28,7 @@ const ArticleTypePage: React.FC = () => {
     detailInfo: {}
   }
 
-  const columns: TableColumnProps<IArticleType>[] = [{
+  const columns: TableColumnProps<ArticleType>[] = [{
     title: 'ID',
     dataIndex: 'id',
     // sorter: true,
@@ -56,11 +56,11 @@ const ArticleTypePage: React.FC = () => {
     title: '操作',
     dataIndex: '',
     width: '80px',
-    render: (text: string, record: IArticleType, index: number) => <Button size="small" type="primary" onClick={() => onView(record)}>详情</Button>
+    render: (text: string, record, index) => <Button size="small" type="primary" onClick={() => onView(record)}>详情</Button>
   }]
 
-  const onView = (data: IArticleType) => {
-    navigate(`${data.id}`)
+  const onView = (data: ArticleType) => {
+    navigate(`${data}`)
   }
 
   return <Spin spinning={loading}>

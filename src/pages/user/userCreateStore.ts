@@ -24,7 +24,7 @@ class userCreateStore {
 
   @action save = (cb: Function) => {
     if (!this.pwdPass) {
-      $msg.warn('密码长度必须大于6，且必须相同')
+      $msg.warning('密码长度必须大于6，且必须相同')
       return
     } else {
       this.mainData['password'] = this.password.pwd
@@ -49,13 +49,13 @@ class userCreateStore {
   }
 
   @action pwdChange = (value: string, type: string) => {
-    this.password[type] = value
+    this.password[type as keyof typeof this.password] = value
     if (this.password.pwd.length > 0 &&
       this.password.confirmPwd.length > 0 &&
       this.password.pwd !== this.password.confirmPwd) {
       clearTimeout(this.timer)
       this.timer = setTimeout(() => {
-        $msg.warn('密码不一致！')
+        $msg.warning('密码不一致！')
       }, 600)
     } else if (this.password.pwd === this.password.confirmPwd) {
       clearTimeout(this.timer)

@@ -20,7 +20,7 @@ class ballChartStore {
   @observable reds: number[] = []
   @observable blues: number[] = []
 
-  chart: HTMLElement = null
+  chart: HTMLElement | null = null
 
   setChart = (ref: HTMLElement) => {
     this.chart = ref

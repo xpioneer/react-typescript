@@ -1,9 +1,9 @@
 import * as React from 'react'
 import {inject, observer} from 'mobx-react'
 import { Row, Col, Form, Input, Button, Table, Modal, Badge, } from 'antd'
-// import { DatePicker } from 'components/datePicker'
+import { DatePicker } from 'components/datePicker'
 import { ColumnProps } from 'antd/lib/table'
-import { ILeaveMsg } from '@models/leaveMsg'
+import { LeaveMsg } from '@models/leaveMsg'
 
 const FormItem = Form.Item
 
@@ -20,7 +20,7 @@ export default class LeaveMsgList extends React.Component<ICommonProps> {
     detailInfo: {}
   }
 
-  columns: ColumnProps<ILeaveMsg>[] = [{
+  columns: ColumnProps<LeaveMsg>[] = [{
     title: 'ID',
     dataIndex: 'id',
     width: '15%',
@@ -42,10 +42,10 @@ export default class LeaveMsgList extends React.Component<ICommonProps> {
     title: '操作',
     dataIndex: '',
     width: '80px',
-    render: (text: string, record: ILeaveMsg, index: number) => <Button size="small" type="primary" onClick={() => this.viewDetail(record)}>详情</Button>
+    render: (text: string, record) => <Button size="small" type="primary" onClick={() => this.viewDetail(record)}>详情</Button>
   }]
 
-  viewDetail (data: ILeaveMsg) {
+  viewDetail (data: LeaveMsg) {
     this.props.history.push(`/blog/message/detail/${data.id}`)
   }
   

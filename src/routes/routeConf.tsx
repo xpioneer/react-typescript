@@ -16,29 +16,29 @@ const LogApi = lazy(() => import( /* webpackChunkName:"logApi" */ '@pages/logs/a
 const LogErrors = lazy(() => import( /* webpackChunkName:"logErrors" */ '@pages/logs/errorsNew'))
 const ArticleList = lazy(() => import( /* webpackChunkName:"articleList" */ '@pages/article'))
 const ArticleDetail = lazy(() => import( /* webpackChunkName:"articleDetail" */ '@pages/article/detail'))
-const ArticleCreate = lazy(() => import( /* webpackChunkName:"articleCreate" */ '@pages/article/articleCreate'))
+// const ArticleCreate = lazy(() => import( /* webpackChunkName:"articleCreate" */ '@pages/article/articleCreate'))
 const ArticleTypeList = lazy(() => import( /* webpackChunkName:"articleTypeList" */ '@pages/articleType'))
 const ArticleTypeDetail = lazy(() => import( /* webpackChunkName:"articleTypeDeital" */ '@pages/articleType/detail'))
-const ArticleTypeCreate = lazy(() => import( /* webpackChunkName:"articleTypeCreate" */ '@pages/articleType/articleTypeCreate'))
+// const ArticleTypeCreate = lazy(() => import( /* webpackChunkName:"articleTypeCreate" */ '@pages/articleType/articleTypeCreate'))
 const TagList = lazy(() => import( /* webpackChunkName:"tagList" */ '@pages/tag'))
 const TagDetail = lazy(() => import( /* webpackChunkName:"tagEdit" */ '@pages/tag/detail'))
-const TagCreate = lazy(() => import( /* webpackChunkName:"tagCreate" */ '@pages/tag/tagCreate'))
+// const TagCreate = lazy(() => import( /* webpackChunkName:"tagCreate" */ '@pages/tag/tagCreate'))
 const CommentList = lazy(() => import( /* webpackChunkName:"commentList" */ '@pages/comment'))
 const CommentEdit = lazy(() => import( /* webpackChunkName:"commentEdit" */ '@pages/comment/commentEdit'))
 const LeaveMsgList = lazy(() => import( /* webpackChunkName:"leaveMsgList" */ '@pages/leaveMsg'))
 const LeaveMsgEdit = lazy(() => import( /* webpackChunkName:"leaveMsgEdit" */ '@pages/leaveMsg/leaveMsgEdit'))
 const UserList = lazy(() => import( /* webpackChunkName:"userList" */ '@pages/user'))
-const UserEdit = lazy(() => import( /* webpackChunkName:"userEdit" */ '@pages/user/userEdit'))
-const UserCreate = lazy(() => import( /* webpackChunkName:"userCreate" */ '@pages/user/userCreate'))
+const UserDetail = lazy(() => import( /* webpackChunkName:"userEdit" */ '@pages/user/detail'))
+// const UserCreate = lazy(() => import( /* webpackChunkName:"userCreate" */ '@pages/user/userCreate'))
 const BallList = lazy(() => import( /* webpackChunkName:"ballList" */ '@pages/lottery/ballListNew'))
 const BallDetail = lazy(() => import( /* webpackChunkName:"ballDetail" */ '@pages/lottery/detail'))
-const BallEdit = lazy(() => import( /* webpackChunkName:"ballEdit" */ '@pages/lottery/ballEdit'))
+// const BallEdit = lazy(() => import( /* webpackChunkName:"ballEdit" */ '@pages/lottery/ballEdit'))
 const BallTrend = lazy(() => import( /* webpackChunkName:"ballTrend" */ '@pages/lottery/trend'))
 const BallChart = lazy(() => import( /* webpackChunkName:"ballChart" */ '@pages/lottery/chart'))
 const StockList = lazy(() => import( /* webpackChunkName:"StockList" */ '@pages/stocks'))
 const StockDetail = lazy(() => import( /* webpackChunkName:"StockDetail" */ '@pages/stocks/detail'))
 const StockHistories = lazy(() => import( /* webpackChunkName:"StockList" */ '@pages/stocks/history'))
-const StockHistoriesDetail = lazy(() => import( /* webpackChunkName:"StockList" */ '@pages/stocks/historyDetail'))
+// const StockHistoriesDetail = lazy(() => import( /* webpackChunkName:"StockList" */ '@pages/stocks/historyDetail'))
 const StockKLine = lazy(() => import( /* webpackChunkName:"StockKLine" */ '@pages/stocks/kLine'))
 
 // demos
@@ -164,12 +164,12 @@ const routesConf: XRouteObject[] = [
         element: <UserList />,
       },
       {
-        path: 'user/create',
-        element: <UserCreate />,
+        path: 'user-new',
+        element: <UserDetail />,
       },
       {
-        path: 'user/detail/:id',
-        element: <UserEdit />,
+        path: 'user/:id',
+        element: <UserDetail />,
       },
     ]
   },

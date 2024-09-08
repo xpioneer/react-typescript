@@ -25,7 +25,7 @@ class errorLogStore {
         return index > 0 ? endOfDay(d) : startOfDay(d)
       }).join(',')
     } else {
-      this.value[type] = value.trim()
+      (this.value as any)[type] = value.trim()
     }
   }
 

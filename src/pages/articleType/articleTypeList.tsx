@@ -3,7 +3,7 @@ import {inject, observer} from 'mobx-react'
 import { Row, Col, Form, Input, Button, Table, Modal, DatePicker, } from 'antd'
 // import { DatePicker } from 'components/datePicker'
 import { ColumnProps } from 'antd/lib/table'
-import { IArticleType } from '@models/articleType'
+import { ArticleType } from '@models/articleType'
 
 const FormItem = Form.Item
 
@@ -20,7 +20,7 @@ export default class ArticleTypeList extends React.Component<ICommonProps> {
     detailInfo: {}
   }
 
-  columns: ColumnProps<IArticleType>[] = [{
+  columns: ColumnProps<ArticleType>[] = [{
     title: 'ID',
     dataIndex: 'id',
     // sorter: true,
@@ -48,10 +48,10 @@ export default class ArticleTypeList extends React.Component<ICommonProps> {
     title: '操作',
     dataIndex: '',
     width: '80px',
-    render: (text: string, record: IArticleType, index: number) => <Button size="small" type="primary" onClick={() => this.viewDetail(record)}>详情</Button>
+    render: (text: string, record, index) => <Button size="small" type="primary" onClick={() => this.viewDetail(record)}>详情</Button>
   }]
 
-  viewDetail (data: IArticleType) {
+  viewDetail (data: ArticleType) {
     this.props.history.push(`/blog/type/detail/${data.id}`)
   }
 

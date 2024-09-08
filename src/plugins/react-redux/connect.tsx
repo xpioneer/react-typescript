@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { ICreateStore } from '../redux'
 import {} from './provider'
 
+const PropTypes = require('prop-types')
+
 export function connect<T> (
-  mapStateToProps?: Function,
+  mapStateToProps: (...args: any) => any,
   mapDispatchToProps?: Function
 ) {
   
@@ -58,7 +59,7 @@ export function connect<T> (
 
 
 export function connect1<T> (
-  mapStateToProps?: Function,
+  mapStateToProps: (...args: any) => any,
   mapDispatchToProps?: Function
 ) {
   

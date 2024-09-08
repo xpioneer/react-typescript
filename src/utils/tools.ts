@@ -1,6 +1,6 @@
 import { EXCLUDE_KEYS, JWT_TOKEN } from '@/constants'
 import { format } from 'date-fns'
-import { EDateFormat } from 'types/base'
+import { DateFormat } from 'types/base'
 
 export const object2Str = (o: string|object): string => {
   return typeof o === 'string' ? o : JSON.stringify(o)
@@ -102,14 +102,14 @@ export const data2AntPageData = <T = any>(
   }
 }
 
-export const object2Options = <T, K extends keyof T>(obj: T, keys: K[] = Object.keys(obj) as K[], noNum = true) => {
-  return keys.filter(key => noNum ? isNaN(+key) : true).map(key => ({
+export const object2Options = <T extends object, K extends keyof T>(obj: T, keys: K[] = Object.keys(obj) as K[], noNum = true) => {
+  return keys.filter(key => noNum ? isNaN(Number(key)) : true).map(key => ({
     label: key,
     value: obj[key]
   }))
 }
 
-export const dateFormat = (date: number | string | Date, pattern = EDateFormat.Date) => {
+export const dateFormat = (date: number | string | Date, pattern = DateFormat.Date) => {
   let str = ''
   try {
     if(date) {
