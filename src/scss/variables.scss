@@ -1,0 +1,19 @@
+$main-color: #fff;
+
+:root {
+  --main-bg-color: #fff;
+  --main-txt-color: #333;
+  --main-border-color: #eee;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --main-bg-color: #000;
+    --main-txt-color: #ddd;
+  }
+}
+
+body[theme="dark"] {
+  --main-bg-color: #000;
+  --main-txt-color: #ddd;
+}

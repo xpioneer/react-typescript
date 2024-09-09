@@ -1,19 +1,22 @@
-$main-color: #fff;
 
-:root {
-  --main-bg-color: #fff;
-  --main-txt-color: #333;
-  --main-border-color: #eee;
-}
-
+/* dark mode */
 @media (prefers-color-scheme: dark) {
-  :root {
-    --main-bg-color: #000;
-    --main-txt-color: #ddd;
+  body {
+    background-color: var(--main-bg-color);
+    color: var(--main-txt-color);
+  }
+
+  a {
+    color: #4e9eff;
   }
 }
 
-body[theme="dark"] {
-  --main-bg-color: #000;
-  --main-txt-color: #ddd;
+/* custom dark mode */
+body[theme=dark] {
+  background-color: var(--main-bg-color);
+  color: var(--main-txt-color);
+
+  a {
+    color: #4e9eff;
+  }
 }

@@ -1,4 +1,4 @@
-import { Store } from 'types/global'
+import { Store, Theme } from 'types/global'
 import { User } from 'models/user'
 import { ACTION_TYPE, Action, } from './actions'
 
@@ -6,12 +6,12 @@ export const reducer = (
   state: Store,
   { type, payload }: Action
 ): Store => {
-  // console.log(type, payload)
+  console.log(type, payload)
   switch(type) {
-    case ACTION_TYPE.SET_DARK:
+    case ACTION_TYPE.SET_THEME:
       return {
         ...state,
-        dark: payload as boolean
+        theme: payload as Theme
       }
     case ACTION_TYPE.SET_PRIMARY:
       return {

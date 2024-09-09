@@ -9,27 +9,35 @@ import {
   Flex,
   ColorPicker,
   Tag,
+  Segmented,
+  SegmentedProps,
+  theme as antdTheme,
+  ConfigProvider,
 } from 'antd'
-import { Color } from 'antd/lib/color-picker'
 import {
   UserOutlined,
-  SunFilled,
-  MoonFilled,
+  SunOutlined,
+  MoonOutlined,
+  AppleOutlined,
 } from '@ant-design/icons'
-import { useAppStore, setLang, setDark, setPrimary } from 'stores'
+import { useAppStore, setLang, setTheme, setPrimary } from 'stores'
 import { onLogout } from 'services/account'
-import { LangI18n } from 'types/global'
+import { LangI18n, Theme, themeOpts } from 'types/global'
 import { storage } from '@/utils/tools'
-import { COLOR_PRIMARY_KEY, CUSTOM_DARK_MODE, PRIMARY_COLOR } from '@/constants'
+import { COLOR_PRIMARY_KEY, THEME_MODE, PRIMARY_COLOR } from '@/constants'
 
 
 const { Header } = Layout
 
 export const HeaderComponent: React.FC = () => {
 
+  const {
+    token,
+  } = antdTheme.useToken();
+
   const [{
     lang,
-    dark,
+    theme,
     colorPrimary,
   },
   dispatch
@@ -66,10 +74,9 @@ export const HeaderComponent: React.FC = () => {
     dispatch(setPrimary(color))
   }
 
-  const onToggleDark = () => {
-    const value = !dark
-    storage.set(CUSTOM_DARK_MODE, `${value ? 1 : 0}`)
-    dispatch(setDark(value))
+  const onToggleDark = (value: Theme) => {
+    storage.set(THEME_MODE, `${value}`)
+    dispatch(setTheme(value))
   }
 
   return (<Header className='pdr16'>
@@ -96,14 +103,17 @@ export const HeaderComponent: React.FC = () => {
             onChangeComplete={(value) => onChangePrimary(value.toHexString())}
           />
         </Flex>
-        <Button
-          ghost
-          shape="circle"
-          icon={ dark ? <MoonFilled /> : <SunFilled/> }
-          onClick={onToggleDark}
+        <Segmented
+          value={theme}
+          onChange={(value) => onToggleDark(value as Theme)}
+          options={Object.values(Theme).map(i => ({
+            value: i,
+            icon: i === Theme.Light ? <SunOutlined /> : <MoonOutlined />,
+          }))
+        }
         />
         <Dropdown menu={{items}} arrow>
-          <Button ghost shape="circle" icon={<UserOutlined />} />
+          <Button type="primary" ghost shape="circle" icon={<UserOutlined />} />
         </Dropdown>
       </Space>
     </Flex>

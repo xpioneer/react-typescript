@@ -1,10 +1,10 @@
-import { Store, LangKeys } from 'types/global'
+import { Store, LangKeys, Theme, getSystemTheme } from 'types/global'
 import { User } from 'models/user'
 
 export type ValueOfStore = Store[keyof Store]
 
 export enum ACTION_TYPE {
-  SET_DARK,
+  SET_THEME,
   SET_PRIMARY,
   SET_AUTHORIZED,
   SET_LANG,
@@ -18,8 +18,8 @@ export type Action<T = ValueOfStore> = {
 }
 
 // actions
-export const setDark = (payload = false) => ({
-  type: ACTION_TYPE.SET_DARK,
+export const setTheme = (payload = getSystemTheme()) => ({
+  type: ACTION_TYPE.SET_THEME,
   payload
 })
 

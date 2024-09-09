@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
-import { ConfigProvider, theme, App } from 'antd'
+import { ConfigProvider, theme as antdTheme, App } from 'antd'
 import zh_CN from 'antd/lib/locale/zh_CN'
 import en_CN from 'antd/lib/locale/en_US'
-import { useAppStore, setDark } from 'stores'
+import { useAppStore, setTheme } from 'stores'
 import { Routes } from './pageRoutes'
-import { LangKeys } from 'types/global'
-import { PREFERS_COLOR_SCHEME_DARK } from '@/constants'
+import { LangKeys, Theme } from 'types/global'
+import { PREFERS_COLOR_SCHEME_DARK, THEME_MODE } from '@/constants'
+import { storage } from '@/utils/tools'
 
 
 const AntdLocale: Record<LangKeys, typeof zh_CN> = {
@@ -17,19 +18,19 @@ export const Navigation: React.FC = () => {
 
   const [{
     lang,
-    dark,
+    theme,
     colorPrimary,
   }, dispatch] = useAppStore()
 
   useEffect(() => {
     const matchMedia = window.matchMedia(PREFERS_COLOR_SCHEME_DARK)
 
-    if(dark && !matchMedia.matches) {
-      document.body.setAttribute('theme', 'dark')
-    }
+    document.body.setAttribute('theme', theme)
 
     const onChange = ({ matches }: MediaQueryListEvent) => {
-      dispatch(setDark(matches))
+      const changedTheme = matches ? Theme.Dark : Theme.Light
+      dispatch(setTheme(changedTheme))
+      storage.set(THEME_MODE, changedTheme)
     }
     matchMedia.addEventListener('change', onChange)
     return () => {
@@ -41,7 +42,7 @@ export const Navigation: React.FC = () => {
     <ConfigProvider
       locale={AntdLocale[lang]}
       theme={{
-        algorithm: dark ? theme.darkAlgorithm : theme.defaultAlgorithm,
+        algorithm: theme === Theme.Dark ? antdTheme.darkAlgorithm : antdTheme.defaultAlgorithm,
         token: {
           colorPrimary,
         },
