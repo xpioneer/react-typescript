@@ -20,11 +20,12 @@ import {
   MoonOutlined,
   AppleOutlined,
 } from '@ant-design/icons'
-import { useAppStore, setLang, setTheme, setPrimary } from 'stores'
+import { useAppStore, setLang, setPrimary } from 'stores'
 import { onLogout } from 'services/account'
-import { LangI18n, Theme, themeOpts } from 'types/global'
+import { LangI18n, Theme } from 'types/global'
 import { storage } from '@/utils/tools'
-import { COLOR_PRIMARY_KEY, THEME_MODE, PRIMARY_COLOR } from '@/constants'
+import { COLOR_PRIMARY_KEY, PRIMARY_COLOR } from '@/constants'
+import { useTheme } from '@/stores/hooks'
 
 
 const { Header } = Layout
@@ -74,11 +75,6 @@ export const HeaderComponent: React.FC = () => {
     dispatch(setPrimary(color))
   }
 
-  const onToggleDark = (value: Theme) => {
-    storage.set(THEME_MODE, `${value}`)
-    dispatch(setTheme(value))
-  }
-
   return (<Header className='pdr16'>
     <Flex justify="flex-end">
       <Space align='center'>
@@ -88,6 +84,7 @@ export const HeaderComponent: React.FC = () => {
               <Space direction="vertical">
                   <Space>
                     Default: <Tag
+                    title='Click to set as default'
                     style={{cursor: 'pointer'}}
                     color={PRIMARY_COLOR}
                     onClick={() => onChangePrimary(PRIMARY_COLOR)}
@@ -105,7 +102,7 @@ export const HeaderComponent: React.FC = () => {
         </Flex>
         <Segmented
           value={theme}
-          onChange={(value) => onToggleDark(value as Theme)}
+          onChange={(value) => useTheme(value as Theme, dispatch)}
           options={Object.values(Theme).map(i => ({
             value: i,
             icon: i === Theme.Light ? <SunOutlined /> : <MoonOutlined />,
