@@ -9,6 +9,7 @@ import { getErrorLogs } from 'services/api'
 export const useErrors = () => {
   const [form] = Form.useForm<ErrorQuery>()
   
+  const [data, setData] = useState<ErrorLog>()
   const [loading, setLoading] = useState(false)
   const [pageData, setPageData] = useState(data2PageData<ErrorLog>())
 
@@ -37,5 +38,7 @@ export const useErrors = () => {
     loading,
     pageData,
     onQuery,
+    data,
+    setData,
   }
 }

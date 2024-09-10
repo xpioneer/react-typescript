@@ -9,9 +9,9 @@ import { object2Str } from '@utils/tools'
 import { ErrorLog } from 'types/apiError'
 import { RequestStatus } from 'types/api'
 import { useErrors } from './useErrors'
-import styles from './style.module.scss'
 import { JSONView } from 'components/jsonView'
 import { modal } from 'components/message'
+import { LogDetailDrawer } from './drawer'
 
 const ErrorsLogPage: React.FC = () => {
 
@@ -20,6 +20,8 @@ const ErrorsLogPage: React.FC = () => {
     loading,
     pageData,
     onQuery,
+    data,
+    setData,
   } = useErrors()
 
   const columns: TableColumnProps<ErrorLog>[] = [{
@@ -29,18 +31,18 @@ const ErrorsLogPage: React.FC = () => {
     // render: (name: any) => `${name.first} ${name.last}`,
     width: '120px',
   }, {
-  //   title: 'Path',
-  //   dataIndex: 'path',
-  //   // filters: [
-  //   //   { text: 'Male', value: 'male' },
-  //   //   { text: 'Female', value: 'female' },
-  //   // ],
-  //   width: '100px',
-  // }, {
+    title: 'Path',
+    dataIndex: 'path',
+    // filters: [
+    //   { text: 'Male', value: 'male' },
+    //   { text: 'Female', value: 'female' },
+    // ],
+    width: '100px',
+  }, {
     title: 'Url',
     dataIndex: 'url',
     width: '120px',
-    render: (value: string, record) => <div onClick={() => showParamsDetail(value, 'url')} className="textflow-4"> {value} </div>,
+    render: (value: string, record) => <div className="textflow-4"> {value} </div>,
   }, {
     title: '请求方式',
     dataIndex: 'method',
@@ -48,11 +50,11 @@ const ErrorsLogPage: React.FC = () => {
   }, {
     title: '参数',
     dataIndex: 'params',
-    render: (value: string, record) => <div onClick={() => showParamsDetail(value, '参数')} className="textflow-4"> {object2Str(value)} </div>,
+    render: (value: string, record) => <div className="textflow-4"> {object2Str(value)} </div>,
   }, {
     title: '错误信息',
     dataIndex: 'msg',
-    render: (value: string, record) => <div onClick={() => showParamsDetail(record.errors, '错误信息')} className="textflow-4"> {value} </div>,
+    render: (value: string, record) => <div className="textflow-4"> {value} </div>,
   }, {
     title: '状态',
     dataIndex: 'status',
@@ -71,35 +73,25 @@ const ErrorsLogPage: React.FC = () => {
     dataIndex: '',
     width: '60px',
     fixed: 'right',
-    render: (text: string, record) => <Button size="small" type="primary" onClick={() => onViewDetail(record)}>详情</Button>,
+    render: (text: string, record) => <Button size="small" type="primary" onClick={() => setData(record)}>详情</Button>,
   }]
 
-  // 查看Url/参数详情
-  const showParamsDetail = (data: any, title: string) => {
-    if(typeof data === 'string') {
-      modal.info({
-        title,
-        content: data,
-      })
-    } else {
-      modal.info({
-        title,
-        width: '75%',
-        className: styles.large,
-        content: <JSONView data={data} />,
-      })
-    }
-  }
-
-  // 查看日志详情
-  const onViewDetail = (data: any) => {
-    modal.info({
-      title: '日志详情',
-      width: '75%',
-      className: styles.large,
-      content: wrapHtml(data)
-    })
-  }
+  // // 查看Url/参数详情
+  // const showParamsDetail = (data: any, title: string) => {
+  //   if(typeof data === 'string') {
+  //     modal.info({
+  //       title,
+  //       content: data,
+  //     })
+  //   } else {
+  //     modal.info({
+  //       title,
+  //       width: '75%',
+  //       className: styles.large,
+  //       content: <JSONView data={data} />,
+  //     })
+  //   }
+  // }
 
   // 日志详情页面
   const wrapHtml = (data: ErrorLog) => {
@@ -235,11 +227,13 @@ const ErrorsLogPage: React.FC = () => {
       size='small'
       scroll={{x: 1600}}
       columns={columns}
-      rowKey={(record: any) => record.id}
+      rowKey={record => record.id}
+      onRow={(r) => ({onClick: () => setData(r)})}
       dataSource={pageData.data}
       pagination={pageData.meta}
       onChange={({current, pageSize}) => onQuery(current, pageSize)}
     />
+    <LogDetailDrawer data={data!} onClose={() => setData(undefined)} />
   </Spin>
 }
 
