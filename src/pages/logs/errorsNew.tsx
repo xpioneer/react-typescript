@@ -76,113 +76,15 @@ const ErrorsLogPage: React.FC = () => {
     render: (text: string, record) => <Button size="small" type="primary" onClick={() => setData(record)}>详情</Button>,
   }]
 
-  // // 查看Url/参数详情
-  // const showParamsDetail = (data: any, title: string) => {
-  //   if(typeof data === 'string') {
-  //     modal.info({
-  //       title,
-  //       content: data,
-  //     })
-  //   } else {
-  //     modal.info({
-  //       title,
-  //       width: '75%',
-  //       className: styles.large,
-  //       content: <JSONView data={data} />,
-  //     })
-  //   }
-  // }
-
-  // 日志详情页面
-  const wrapHtml = (data: ErrorLog) => {
-    if (data !== null && Object.keys(data).length > 0) {
-      return <React.Fragment>
-        <div className="row">
-          <div>ID：</div><div>{data.id}</div>
-        </div>
-        <div className="row">
-          <div>IP：</div><div>{data.ip}</div>
-        </div>
-        <div className="row">
-          <div>错误信息：</div><div>{data.msg}</div>
-        </div>
-        <div className="row">
-          <div>堆栈信息：</div>
-          <div>
-            <JSONView data={data.errors} />
-          </div>
-        </div>
-        <div className="row">
-          <div>Url：</div><div>{data.url}</div>
-        </div>
-        <div className="row">
-          <div>Path：</div><div>{data.path}</div>
-        </div>
-        <div className="row">
-          <div>参数：</div>
-          <div>
-            <JSONView data={data.params} />
-          </div>
-        </div>
-        <div className="row">
-          <div>请求头：</div>
-          <div>
-            <JSONView data={data.headers} />
-          </div>
-        </div>
-        <div className="row">
-          <div>响应头：</div>
-          <div>
-            <JSONView data={data.resHeaders} />
-          </div>
-        </div>
-        <div className="row">
-          <div>响应参数：</div>
-          <JSONView data={data.resData}/>
-        </div>
-        <div className="row">
-          <div>创建时间：</div><div>{data.createdAt}</div>
-        </div>
-        <div className="row">
-          <div>状态：</div><div>{data.status}</div>
-        </div>
-        <div className="row">
-          <div>耗时：</div><div>{data.time}ms</div>
-        </div>
-      </React.Fragment>
-    } else {
-      return ''
-    }
-  }
-
   // 获取状态badge
   const getStatus = (status: any): RequestStatus => {
     let info: RequestStatus = 'default'
-    switch (status) {
-      case 200 :
-      case 201 :
-        info = 'success'
-        break
-      case 400 :
-      case 401 :
-      case 403 :
-      case 404 :
-      case 405 :
-      case 406 :
-        info = 'warning'
-        break
-      case 500 :
-      case 501 :
-      case 502 :
-      case 503 :
-      case 504 :
-      case 505 :
-        info = 'error'
-        break
-
-      default :
-        info = 'default'
-        break
+    if(/^2\d{2}/.test(status)) {
+      info = 'success'
+    } else if(/^4\d{2}/.test(status)) {
+      info = 'warning'
+    } else if(/^5\d{2}/.test(status)) {
+      info = 'error'
     }
     return info
   }
@@ -207,14 +109,14 @@ const ErrorsLogPage: React.FC = () => {
           </Form.Item>
         </Col>
         <Col span={6}>
-          <Form.Item>
+          <Form.Item name="createdAt">
             <DatePicker.RangePicker />
           </Form.Item>
         </Col>
       </Row>
       <Flex className='mgb16' justify={'end'}>
         <Space>
-          <Button onClick={() => form.resetFields()}>
+          <Button htmlType='reset'>
             清空
           </Button>
           <Button type="primary" onClick={() => onQuery()}>
