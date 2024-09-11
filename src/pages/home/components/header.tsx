@@ -26,6 +26,8 @@ import { LangI18n, Theme } from 'types/global'
 import { storage } from '@/utils/tools'
 import { COLOR_PRIMARY_KEY, PRIMARY_COLOR } from '@/constants'
 import { useTheme } from '@/stores/hooks'
+import styles from './header.module.scss'
+import classNames from 'classnames'
 
 
 const { Header } = Layout
@@ -75,7 +77,7 @@ export const HeaderComponent: React.FC = () => {
     dispatch(setPrimary(color))
   }
 
-  return (<Header className='pdr16'>
+  return (<Header className={classNames('pdr16', styles.header)}>
     <Flex justify="flex-end">
       <Space align='center'>
         <Flex>

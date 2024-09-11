@@ -43,16 +43,14 @@ export const SiderBar: React.FC = () => {
   return (
     <Sider collapsible width={220}>
       <div className={styles.logo}>
-        <div>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="-11.5 -10.23174 23 20.46348">
-            <circle cx="0" cy="0" r="2.05" fill="#61dafb"/>
-            <g stroke="#61dafb" strokeWidth="1" fill="none">
-              <ellipse rx="11" ry="4.2"/>
-              <ellipse rx="11" ry="4.2" transform="rotate(60)"/>
-              <ellipse rx="11" ry="4.2" transform="rotate(120)"/>
-            </g>
-          </svg>
-        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="-25 -25 50 50">
+          <circle cx="0" cy="0" r="4.45" fill="#61dafb"/>
+          <g stroke="#61dafb" stroke-width="2.1" fill="none">
+            <ellipse rx="23.91" ry="9"/>
+            <ellipse rx="23.91" ry="9" transform="rotate(60)"/>
+            <ellipse rx="23.91" ry="9" transform="rotate(120)"/>
+          </g>
+        </svg>
       </div>
       <Menu
         theme="dark"

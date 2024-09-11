@@ -1,62 +1,93 @@
 import React, { useState, useEffect } from 'react'
-import { Row, Col, Form, Input, Button, Table, Badge, Flex, Space, Spin } from 'antd'
+import {
+  Row, Col, Form, Input, Button, Table, Badge, Flex, Space, Spin,
+  Tooltip,
+} from 'antd'
 import { ColumnProps } from 'antd/lib/table'
-import styles from './style.module.scss'
-import { APILog, RequestStatus } from 'types/api'
-import { useApi } from './useApi'
+// import styles from './style.module.scss'
+import { RequestStatus } from 'types/api'
+import { dateFormat } from '@/utils/tools'
+import { SystemLog } from 'types/geolog'
+import { useList } from './useList'
 import { DatePicker } from 'components/datePicker'
 import { JSONView } from 'components/jsonView'
 import { modal } from 'components/message'
-import { dateFormat } from '@/utils/tools'
 import { DateFormat } from '@/types/base'
 
-const APILogPage: React.FC = () => {
+const GeographyLogPage: React.FC = () => {
 
   const {
     form,
     loading,
     pageData,
     onQuery,
-  } = useApi()
+  } = useList()
 
-  const columns: ColumnProps<APILog>[] = [{
+  const columns: ColumnProps<SystemLog>[] = [{
     title: 'ID',
     dataIndex: 'id',
     // render: (name: any) => `${name.first} ${name.last}`,
     width: '12%',
   }, {
-  //   title: 'Path',
-  //   dataIndex: 'path',
-  //   // filters: [
-  //   //   { text: 'Male', value: 'male' },
-  //   //   { text: 'Female', value: 'female' },
-  //   // ],
-  //   width: '100px',
-  // }, {
+    title: 'IP',
+    dataIndex: 'request_ip',
+    width: '100px',
+  }, {
+    title: 'Client',
+    dataIndex: 'client_type',
+    width: '100px',
+    render: (v, data) => <Tooltip title={data.client_version}><div className='textflow-4'>{v}</div></Tooltip>
+  }, {
     title: 'Url',
-    dataIndex: 'url',
+    dataIndex: 'request_url',
     width: '120px',
-    render: (text: string, record, index: number) => <div onClick={() => {showParamsDetail(record.url, 'Url')}} className="textflow-4"> {text} </div>,
+    render: (v) => <Tooltip title={v}><div className='textflow-4'>{v}</div></Tooltip>
   }, {
     title: '请求方式',
-    dataIndex: 'method',
+    dataIndex: 'request_method',
     width: '60px',
   }, {
     title: '参数',
-    width: 400,
-    dataIndex: 'params',
-    render: (text: string, record, index: number) => <div onClick={() => showParamsDetail(record.params, '参数')} className="textflow-4"> {object2Str(text)} </div>,
+    // width: 400,
+    dataIndex: 'request_params',
+    // render: (text: string, record, index: number) => <div onClick={() => showParamsDetail(record.params, '参数')} className="textflow-4"> {object2Str(text)} </div>,
+  }, {
+    title: 'geography',
+    dataIndex: 'continent_code',
+    width: '160px',
+    render: (text: string, record) => [
+      record.continent_name_en,
+      record.country_name_en,
+      record.subdivisions_name_en,
+      record.city_name_en,
+    ].join(','),
+  }, {
+    title: '地理位置',
+    dataIndex: 'continent_name_en',
+    width: '160px',
+    render: (text: string, record) => [
+      record.continent_name_zh,
+      record.country_name_zh,
+      record.subdivisions_name_zh,
+      record.city_name_zh,
+    ].join(','),
+  }, {
+    title: '经纬度',
+    dataIndex: 'latitude',
+    render: (v, data) => {
+      return [data.latitude || '-', data.longitude || '-'].join(',')
+    }
   }, {
     title: '状态',
     dataIndex: 'status',
     width: '60px',
-    render: (text: string, record, index: number) => <Badge status={getStatus(text)} text={text}/>,
+    render: (text: string, record) => <Badge status={getStatus(text)} text={text}/>,
   }, {
     title: '创建时间',
     width: '120px',
-    dataIndex: 'createdAt',
+    dataIndex: 'created_at',
     sorter: true,
-    render: (value: string) => dateFormat(value, DateFormat.DateTimeMS),
+    render: (v) => dateFormat(v, DateFormat.DateTimeM)
   }, {
     title: '耗时(ms)',
     dataIndex: 'time',
@@ -69,33 +100,12 @@ const APILogPage: React.FC = () => {
     render: (text: string, record, index: number) => <Button size="small" type="primary" onClick={() => onViewDetail(record)}>详情</Button>,
   }]
 
-  const object2Str = (o: string|object): string => {
-    return typeof o === 'string' ? o : JSON.stringify(o)
-  }
-
-  // 查看Url/参数详情
-  const showParamsDetail = (data: any, title: string) => {
-    if(typeof data === 'string') {
-      modal.info({
-        title,
-        content: data,
-      })
-    } else {
-      modal.info({
-        title,
-        width: '75%',
-        className: styles.large,
-        content: <JSONView data={data} />,
-      })
-    }
-  }
-
   // 查看日志详情
   const onViewDetail = (data: any) => {
     modal.info({
       title: '日志详情',
       width: '75%',
-      className: styles.large,
+      // className: styles.large,
       content: wrapHtml(data)
     })
   }
@@ -172,7 +182,7 @@ const APILogPage: React.FC = () => {
       form={form}
       className="form"
     >
-      <h3>API请求日志</h3>
+      <h3>Website geographic information</h3>
       <Row gutter={24}>
         <Col span={6}>
           <Form.Item name="path">
@@ -213,4 +223,4 @@ const APILogPage: React.FC = () => {
   </Spin>
 }
 
-export default APILogPage
+export default GeographyLogPage

@@ -2,8 +2,8 @@
 @import './theme.scss';
 @import './functions.scss';
 
-#app {
-  // height: 100%;
+#app,.ant-app,.ant-layout {
+  height: 100%;
 }
 
 #not-found {
@@ -23,7 +23,7 @@
 }
 
 /* table-list */
-.table-list {
+// .table-list {
   @for $i from 1 to 10 {
     .textflow-#{$i} {
       cursor: pointer;
@@ -42,7 +42,7 @@
   .ant-table-tbody > tr > td {
     padding: 0 6px;
   }
-}
+// }
 
 
 /* user-menu */

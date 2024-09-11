@@ -1,11 +1,12 @@
 
 .logo {
-  height: 60px;
+  height: 64px;
   display: flex;
   align-items: center;
   padding-left: 20px;
 
-  div {
+  svg {
+    display: block;
     width: 40px;
     height: 36px;
     // background: url('../imgs/logo.svg') center center no-repeat;

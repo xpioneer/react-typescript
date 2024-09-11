@@ -4,7 +4,7 @@ import { NotFound }  from '@components/notFound'
 import {
   AreaChartOutlined, BarChartOutlined, BulbOutlined, DollarOutlined, ExperimentOutlined, FileSearchOutlined,
   BookOutlined, FormOutlined, FrownOutlined, FundOutlined, HomeOutlined, MehOutlined, SmileOutlined, StockOutlined,
-  LineChartOutlined,
+  LineChartOutlined, BaiduOutlined,
 } from '@ant-design/icons'
 import { MenuProps } from 'antd'
 
@@ -13,6 +13,7 @@ const {lazy} = React
 const Dashboard = lazy(() => import( /* webpackChunkName:"dashboard" */ '@pages/dashboard/dashboard'))
 const Chart = lazy(() => import( /* webpackChunkName:"charts" */ '@pages/charts'))
 const LogApi = lazy(() => import( /* webpackChunkName:"logApi" */ '@pages/logs/apiNew'))
+const GeoLog = lazy(() => import( /* webpackChunkName:"geography" */ '@pages/logs/geography'))
 const LogErrors = lazy(() => import( /* webpackChunkName:"logErrors" */ '@pages/logs/errorsNew'))
 const ArticleList = lazy(() => import( /* webpackChunkName:"articleList" */ '@pages/article'))
 const ArticleDetail = lazy(() => import( /* webpackChunkName:"articleDetail" */ '@pages/article/detail'))
@@ -87,6 +88,12 @@ const routesConf: XRouteObject[] = [
         path: 'errors',
         icon: <FrownOutlined/>,
         element: <LogErrors />,
+      },
+      {
+        title: 'Geography',
+        path: 'geo',
+        icon: <BaiduOutlined />,
+        element: <GeoLog />,
       },
     ]
   },

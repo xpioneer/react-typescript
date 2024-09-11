@@ -113,7 +113,7 @@ export const dateFormat = (date: number | string | Date, pattern = DateFormat.Da
   let str = ''
   try {
     if(date) {
-      const msTimestamp = +date
+      const msTimestamp = +new Date(date)
       if(!isNaN(msTimestamp)) {
         str = format(new Date(msTimestamp), pattern)
       }

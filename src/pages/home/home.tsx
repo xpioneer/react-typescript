@@ -5,6 +5,8 @@ import { HeaderComponent } from './components/header'
 import Footer from './components/footer'
 import { SiderBar } from './components/siderbar'
 import { useAppStore } from '@/stores/global'
+import classNames from 'classnames'
+import styles from './style.module.scss'
 
 const { Content } = Layout
 
@@ -18,9 +20,9 @@ const HomePage: React.FC = () => {
   return (
       <Layout>
         <SiderBar/>
-        <Layout>
+        <Layout className={styles.right}>
           <HeaderComponent/>
-          <Content className='pd16'>
+          <Content className={classNames('pdr16', styles.main)}>
             <Outlet />
           </Content>
           <Footer/>

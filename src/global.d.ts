@@ -1,3 +1,4 @@
+/// <reference types="react" />
 
   interface IResponseData<T = any> {
     data: T
@@ -45,4 +46,13 @@ declare const styles: { [className: string]: string }
 
 declare module '*.scss' {
   export default styles;
+}
+
+declare module '*.svg' {
+
+  export const ReactComponent: React.FunctionComponent<React.SVGProps<
+    SVGSVGElement
+  > & { title?: string }>;
+  const src: string
+  export default src;
 }
