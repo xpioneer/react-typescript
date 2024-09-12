@@ -1,8 +1,14 @@
 import * as React from 'react'
-import { Layout, Flex } from 'antd'
+import { Layout, Flex, theme } from 'antd'
 
 const { Footer } = Layout
 
-export default () => <Footer>
-  <Flex justify='center'>Copyright by xpioneer</Flex>
-</Footer>
+export default () => {
+  const { token: { boxShadow } } = theme.useToken()
+  return <Footer style={{boxShadow}}>
+    <Flex justify='center'>
+      Copyright by&#160;
+      <a target='_blank' href="https://github.com/xpioneer">xpioneer</a>
+    </Flex>
+  </Footer>
+}

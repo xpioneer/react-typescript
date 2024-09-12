@@ -22,7 +22,7 @@ const HomePage: React.FC = () => {
         <SiderBar/>
         <Layout className={styles.right}>
           <HeaderComponent/>
-          <Content className={classNames('pdr16', styles.main)}>
+          <Content className={classNames('pd16', styles.main)}>
             <Outlet />
           </Content>
           <Footer/>

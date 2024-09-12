@@ -25,7 +25,7 @@ class HttpHelper {
         } else if (path[0] === '/graphql' && errors) {
           $msg.error(errors[0].message) // graphql status:200 response contain errors
         } else {
-          $msg.success('操作成功')
+          $msg.success('Succeed')
         }
         break
       default :

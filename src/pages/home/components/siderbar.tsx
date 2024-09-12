@@ -16,24 +16,19 @@ export const SiderBar: React.FC = () => {
   const { pathname } = useLocation()
   const [openKeys, setOpenKeys] = useState<string[]>([])
   const [selectedKeys, setSelectedKeys] = useState<string[]>([])
-  const [menuList, setMenuList] = useState<MenuItem[]>([])
+  const [menuList, setMenuList] = useState<MenuItem[]>(LeftMenuConfig())
 
   useEffect(() => {
     // window.USER.headerMenuKey为头部菜单选中项，根据配置拿到对应左侧菜单，过滤出有权限的左侧菜单
     const pathList = pathname.split('/').filter(p => p)
 
-    // console.log(pathList, 'realMenus', realMenus, pathname)
+    // console.log(pathList, 'realMenus', menuList, pathname)
     // 路由更新时更新左侧菜单选中和展开项
-      const _openKeys = setMenuKeys(pathList, 1)
-      const _selectedKeys = setMenuKeys(pathList).slice(-1)
-      setOpenKeys(_openKeys)
-      setSelectedKeys(_selectedKeys)
+    const _openKeys = setMenuKeys(pathList, 1)
+    const _selectedKeys = setMenuKeys(pathList).slice(-1)
+    setOpenKeys(_openKeys)
+    setSelectedKeys(_selectedKeys.length ? _selectedKeys : [''])
   }, [pathname])
-
-  useEffect(() => {
-    const realMenus = LeftMenuConfig()
-    setMenuList(realMenus)
-  }, [])
 
   const onOpenChange = (keys: string[]): void => {
     setOpenKeys(keys)
@@ -45,12 +40,13 @@ export const SiderBar: React.FC = () => {
       <div className={styles.logo}>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="-25 -25 50 50">
           <circle cx="0" cy="0" r="4.45" fill="#61dafb"/>
-          <g stroke="#61dafb" stroke-width="2.1" fill="none">
+          <g stroke="#61dafb" strokeWidth="2.1" fill="none">
             <ellipse rx="23.91" ry="9"/>
             <ellipse rx="23.91" ry="9" transform="rotate(60)"/>
             <ellipse rx="23.91" ry="9" transform="rotate(120)"/>
           </g>
         </svg>
+        <div className={styles.title}>My Zone</div>
       </div>
       <Menu
         theme="dark"
@@ -58,27 +54,8 @@ export const SiderBar: React.FC = () => {
         openKeys={openKeys}
         selectedKeys={selectedKeys}
         onOpenChange={onOpenChange}
-        style={{ height: '100%', borderRight: 0 }}
         items={menuList}
       >
-        {/* {menuList.map((item) => {
-          if (item.subRoute && item.subRoute.length > 0) {
-            return (
-              <SubMenu key={String(item.path)} title={item.title} icon={item.icon}>
-                {item.subRoute.map(child => (
-                  <Menu.Item key={String(child.path)} icon={child.icon}>
-                    <Link to={String(child.path)}>{child.title}</Link>
-                  </Menu.Item>
-                ))}
-              </SubMenu>
-            )
-          }
-          return (
-            <Menu.Item key={String(item.path)} icon={item.icon}>
-              <Link to={String(item.path)}>{item.title}</Link>
-            </Menu.Item>
-          )
-        })} */}
       </Menu>
     </Sider>
   )

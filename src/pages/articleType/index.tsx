@@ -60,7 +60,7 @@ const ArticleTypePage: React.FC = () => {
   }]
 
   const onView = (data: ArticleType) => {
-    navigate(`${data}`)
+    navigate(`${data.id}`)
   }
 
   return <Spin spinning={loading}>

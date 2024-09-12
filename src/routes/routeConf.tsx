@@ -25,9 +25,9 @@ const TagList = lazy(() => import( /* webpackChunkName:"tagList" */ '@pages/tag'
 const TagDetail = lazy(() => import( /* webpackChunkName:"tagEdit" */ '@pages/tag/detail'))
 // const TagCreate = lazy(() => import( /* webpackChunkName:"tagCreate" */ '@pages/tag/tagCreate'))
 const CommentList = lazy(() => import( /* webpackChunkName:"commentList" */ '@pages/comment'))
-const CommentEdit = lazy(() => import( /* webpackChunkName:"commentEdit" */ '@pages/comment/commentEdit'))
+const CommentDetail = lazy(() => import( /* webpackChunkName:"commentDetail" */ '@pages/comment/detail'))
 const LeaveMsgList = lazy(() => import( /* webpackChunkName:"leaveMsgList" */ '@pages/leaveMsg'))
-const LeaveMsgEdit = lazy(() => import( /* webpackChunkName:"leaveMsgEdit" */ '@pages/leaveMsg/leaveMsgEdit'))
+const LeaveMsgDetail = lazy(() => import( /* webpackChunkName:"leaveMsgDetail" */ '@pages/leaveMsg/detail'))
 const UserList = lazy(() => import( /* webpackChunkName:"userList" */ '@pages/user'))
 const UserDetail = lazy(() => import( /* webpackChunkName:"userEdit" */ '@pages/user/detail'))
 // const UserCreate = lazy(() => import( /* webpackChunkName:"userCreate" */ '@pages/user/userCreate'))
@@ -62,7 +62,7 @@ type XRouteObject = RouteObject & {
 const routesConf: XRouteObject[] = [
   {
     title: 'Dashboard',
-    path: '/',
+    path: '',
     icon: <HomeOutlined/>,
     element: <Dashboard />,
   },
@@ -152,7 +152,7 @@ const routesConf: XRouteObject[] = [
       },
       {
         path: 'comment/:id',
-        element: <CommentEdit />,
+        element: <CommentDetail />,
       },
       {
         title: 'Message',
@@ -162,7 +162,7 @@ const routesConf: XRouteObject[] = [
       },
       {
         path: 'message/:id',
-        element: <LeaveMsgEdit />,
+        element: <LeaveMsgDetail />,
       },
       {
         title: 'User',
