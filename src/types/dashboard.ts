@@ -14,3 +14,10 @@ export class StatsData {
     errCnt: Stats[]
   }
 }
+
+export type GeographicStats = {
+  city_en: string
+  latitude: string
+  longitude: string
+  total: string
+}

@@ -16,6 +16,8 @@ import {
   DataZoomComponent,
   DataZoomComponentOption,
   LegendComponent,
+  GeoComponent,
+  GeoComponentOption,
 } from 'echarts/components'
 import {
   BarChart,
@@ -23,11 +25,17 @@ import {
   LineChart,
   LineSeriesOption,
   RadarChart,
+  ScatterChart
 } from 'echarts/charts'
+import { GlobalToken, theme } from 'antd'
 import { CanvasRenderer } from 'echarts/renderers'
-import { format } from 'date-fns'
-import { StatsData } from 'types/dashboard'
-import { useRequest } from "@/services/http"
+import { GeographicStats, StatsData } from 'types/dashboard'
+import 'echarts/extension/bmap/bmap';
+import { getGeoGPSStats } from '@/services/geography'
+import { getMongoLogsStats } from 'services/api'
+import { PointLayer, Scene } from '@antv/l7';
+import { GaodeMap } from '@antv/l7-maps';
+// import ChinaMapSVG from '@assets/china.svg'
 
 
 Echarts.use([
@@ -43,6 +51,8 @@ Echarts.use([
   LegendComponent,
   LineChart,
   RadarChart,
+  GeoComponent,
+  ScatterChart,
 ])
 
 type EChartsOption = Echarts.ComposeOption<
@@ -57,6 +67,15 @@ type EChartsOption = Echarts.ComposeOption<
   | LineSeriesOption
 >
 
+function hexToRgba(hex: string) {
+  hex = hex.replace(/^#/, '').padStart(6, '0');
+
+  const r = parseInt(hex.slice(0, 2), 16);
+  const g = parseInt(hex.slice(2, 4), 16);
+  const b = parseInt(hex.slice(4, 6), 16);
+
+  return (alpha = 1) => `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
 
 const xAxisData = ['total', 200, 204, 400, 401, 403, 404, 405, 406, 500, 501, 502, 503, 504, 505]
 
@@ -199,11 +218,119 @@ const setOptions = (data: {
   }).setOption(option)
 }
 
+const setGeoOption = (data: GeographicStats[], el: HTMLDivElement, {colorPrimary}: GlobalToken) => {
+  const color = hexToRgba(colorPrimary)
+  const values = data.map<number>(i => +i.total)
+  const max = Math.max(...values)
+  const scene = new Scene({
+    id: el,
+    map: new GaodeMap({
+      pitch: 0,
+      style: 'dark',
+      center: [120, 34],
+      zoom: 3,
+      token: '6f025e700cbacbb0bb866712d20bb35c',
+    }),
+  });
+  scene.on('loaded', () => {
+    const pointLayer = new PointLayer({})
+      .source(data, {
+        parser: {
+          type: 'json',
+          x: 'longitude',
+          y: 'latitude',
+        }
+      })
+      .shape('circle')
+      .size('total', (t) => {
+        if(isNaN(t)) {
+          return 0
+        }
+        if(t <= 4) {
+          return 2
+        } else {
+          const v = +t/2 + 2
+          return Math.floor(v <= 100 ? v : v / 10)
+        }
+      })
+      // .shape('cylinder')
+      // .size('total', function (level) {
+      //   return [2, 2, level];
+      // })
+      .color('total', (c) => {
+        return color(Math.ceil(+c/max * 16))
+      })
+      .active(true)
+      .style({
+        opacity: 0.6,
+        strokeWidth: 0.5,
+      });
+    scene.addLayer(pointLayer);
+  })
+
+  // Echarts.registerMap("china", {svg: ChinaMapSVG})
+  // Echarts.init(el).setOption({
+  //   title: {
+  //     text: 'Geographic Location of Requests Worldwide',
+  //     left: 'center',
+  //     // textStyle: {
+  //     //   color: '#fff'
+  //     // }
+  //   },
+  //   geo: {
+  //     map: 'china',
+  //     roam: true,
+  //     label: {
+  //       emphasis: {
+  //         show: false
+  //       }
+  //     },
+  //     silent: true,
+  //     itemStyle: {
+  //       normal: {
+  //         areaColor: '#323c48',
+  //         borderColor: '#111'
+  //       },
+  //       emphasis: {
+  //         areaColor: '#2a333d'
+  //       }
+  //     }
+  //   },
+  //   series: [
+  //     {
+  //       name: 'GPS Location',
+  //       type: 'scatterGL',
+  //       // progressive: 1e6,
+  //       coordinateSystem: 'geo',
+  //       // symbolSize: 1,
+  //       // zoomScale: 0.002,
+  //       blendMode: 'lighter',
+  //       large: true,
+  //       itemStyle: {
+  //         color: 'rgb(20, 15, 2)'
+  //       },
+  //       postEffect: {
+  //         enable: true
+  //       },
+  //       silent: true,
+  //       // dimensions: ['lng', 'lat'],
+  //       data: data.map(i => ({
+  //         name: i.city_en,
+  //         symbolSize: i.total,
+  //         value: [i.longitude, i.latitude]
+  //       }))
+  //     }
+  //   ]
+  // })
+}
 
 export const useData = () => {
+
+  const { token } = theme.useToken()
+
+  const geoRef = useRef<HTMLDivElement>(null)
   const pathRef = useRef<HTMLDivElement>(null)
   const statusRef = useRef<HTMLDivElement>(null)
-  const scatterRef = useRef<HTMLDivElement>(null)
 
   const setChartData = (data: StatsData) => {
     const normalMap = data.statusCnt.apiCnt.reduce<AnyObject<number>>((p, c) => {
@@ -357,15 +484,16 @@ export const useData = () => {
       ]
     })
   }
-  const onQuery = () => {
-    useRequest<StatsData>('/log/stats').then(r => r.data).then(setChartData)
-  }
 
   useEffect(() => {
-    onQuery()
+    getMongoLogsStats().then(setChartData)
+    getGeoGPSStats().then(r => {
+      setGeoOption(r, geoRef.current!, token)
+    })
   }, [])
 
   return {
+    geoRef,
     pathRef,
     statusRef,
   }

@@ -6,10 +6,11 @@
 
   h2 {
     text-align: center;
-    padding: 20px;
+    padding-bottom: 8px;
   }
 
   .chart {
+    position: relative;
     height: 400px;
     width: 100%;
     padding: 8px;

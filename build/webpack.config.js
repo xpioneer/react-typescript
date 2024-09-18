@@ -24,7 +24,9 @@ module.exports = {
     publicPath: '/', // root Dir
     sourceMapFilename: '[name].map',
     chunkFilename: 'static/js/[name].[chunkhash:8].js',
-    filename: 'static/js/[name].[contenthash:8].js'
+    filename: 'static/js/[name].[contenthash:8].js',
+    assetModuleFilename: 'static/assets/[hash][ext][query]',
+    clean: true,
   },
 
   resolveLoader: {
@@ -82,19 +84,19 @@ module.exports = {
       ...styleRules,
       {
         test: /\.(eot|woff|woff2|ttf)(\?\S*)?$/,
-        loader: "url-loader",
-        options: {
-          name: "assets/fonts/[name].[contenthash:8].[ext]",
-          limit: 2048
-        }
+        type: 'asset/resource',
+        // generator: {
+        //   filename: 'static/fonts/[name][ext][query]' // 输出到 fonts 目录
+        // }
       },
       {
         test: /\.(svg|png|jpe?g|gif)(\?\S*)?$/,
-        loader: "url-loader",
-        options: {
-          name: "assets/imgs/[name].[contenthash:8].[ext]",
-          limit: 2048
-        }
+        type: 'asset',
+        parser: {
+          dataUrlCondition: {
+            maxSize: 4 * 1024, // 4 KB
+          },
+        },
       }
     ]
   },

@@ -1,6 +1,5 @@
 import { MessageInstance } from 'antd/lib/message/interface'
 import { NotificationInstance } from 'antd/lib/notification/interface'
-import { RouteComponentProps } from 'react-router-dom'
 import { AxiosStatic } from 'axios'
 
 declare global {
@@ -11,7 +10,7 @@ declare global {
   
   const $notice: NotificationInstance
   
-  interface ICommonProps<P extends AnyObject = any> extends RouteComponentProps<P>, AnyObject {
-    [key: string]: any
+  interface ICommonProps<P extends AnyObject = any> {
+    [key: string]: P
   }
 }

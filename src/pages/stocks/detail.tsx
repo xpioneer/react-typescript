@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react'
 import { getStockDetail } from 'services/stock'
 import { Stock, EBlock, EMarket } from 'types/stock'
 
-const StockDetailPage: React.FC<ICommonProps<{id: number}>> = ({
+const StockDetailPage: React.FC<ICommonProps<any>> = ({
   history,
   match: {params: {id}}
 }) => {

@@ -17,7 +17,7 @@ module.exports = merge(baseWebpackConfig, {
     minimizer: [new TerserPlugin()]
   },
   plugins: [
-    new CleanWebpackPlugin(['dist'], {root: path.resolve(__dirname, '../')}),
+    // new CleanWebpackPlugin(['dist'], {root: path.resolve(__dirname, '../')}),
     new OptimizeCSSAssetsPlugin({
       // cssProcessor: require('cssnano')({ autoprefixer: false })
     }),

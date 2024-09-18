@@ -3,7 +3,7 @@ import { Form } from 'antd'
 import { startOfDay, endOfDay } from 'date-fns'
 import { SystemLog } from 'types/geolog'
 import { data2PageData, pageData2Params, data2AntPageData } from '@/utils/tools'
-import { getGeologs } from 'services/api'
+import { getGeologs } from 'services/geography'
 
 
 export const useList = () => {
