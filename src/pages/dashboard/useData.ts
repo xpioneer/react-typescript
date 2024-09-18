@@ -27,7 +27,6 @@ import {
   RadarChart,
   ScatterChart
 } from 'echarts/charts'
-import { GlobalToken, theme } from 'antd'
 import { CanvasRenderer } from 'echarts/renderers'
 import { GeographicStats, StatsData } from 'types/dashboard'
 import 'echarts/extension/bmap/bmap';
@@ -35,6 +34,7 @@ import { getGeoGPSStats } from '@/services/geography'
 import { getMongoLogsStats } from 'services/api'
 import { PointLayer, Scene } from '@antv/l7';
 import { GaodeMap } from '@antv/l7-maps';
+import { useAppStore } from '@/stores'
 // import ChinaMapSVG from '@assets/china.svg'
 
 
@@ -218,55 +218,45 @@ const setOptions = (data: {
   }).setOption(option)
 }
 
-const setGeoOption = (data: GeographicStats[], el: HTMLDivElement, {colorPrimary}: GlobalToken) => {
+let geoScene: Scene | null = null
+
+const setGeoOption = (data: GeographicStats[], colorPrimary: string) => {
   const color = hexToRgba(colorPrimary)
   const values = data.map<number>(i => +i.total)
   const max = Math.max(...values)
-  const scene = new Scene({
-    id: el,
-    map: new GaodeMap({
-      pitch: 0,
-      style: 'dark',
-      center: [120, 34],
-      zoom: 3,
-      token: '6f025e700cbacbb0bb866712d20bb35c',
-    }),
-  });
-  scene.on('loaded', () => {
-    const pointLayer = new PointLayer({})
-      .source(data, {
-        parser: {
-          type: 'json',
-          x: 'longitude',
-          y: 'latitude',
-        }
-      })
-      .shape('circle')
-      .size('total', (t) => {
-        if(isNaN(t)) {
-          return 0
-        }
-        if(t <= 4) {
-          return 2
-        } else {
-          const v = +t/2 + 2
-          return Math.floor(v <= 100 ? v : v / 10)
-        }
-      })
-      // .shape('cylinder')
-      // .size('total', function (level) {
-      //   return [2, 2, level];
-      // })
-      .color('total', (c) => {
-        return color(Math.ceil(+c/max * 16))
-      })
-      .active(true)
-      .style({
-        opacity: 0.6,
-        strokeWidth: 0.5,
-      });
-    scene.addLayer(pointLayer);
-  })
+  const pointLayer = new PointLayer({})
+    .source(data, {
+      parser: {
+        type: 'json',
+        x: 'longitude',
+        y: 'latitude',
+      }
+    })
+    .shape('circle')
+    .size('total', (t) => {
+      if(isNaN(t)) {
+        return 0
+      }
+      if(t <= 4) {
+        return 2
+      } else {
+        const v = +t/2 + 2
+        return Math.floor(v <= 100 ? v : v / 10)
+      }
+    })
+    // .shape('cylinder')
+    // .size('total', function (level) {
+    //   return [2, 2, level];
+    // })
+    .color('total', (c) => {
+      return color(Math.ceil(+c/max * 16))
+    })
+    .active(true)
+    .style({
+      opacity: 0.6,
+      strokeWidth: 0.5,
+    });
+  geoScene!.addLayer(pointLayer);
 
   // Echarts.registerMap("china", {svg: ChinaMapSVG})
   // Echarts.init(el).setOption({
@@ -326,11 +316,14 @@ const setGeoOption = (data: GeographicStats[], el: HTMLDivElement, {colorPrimary
 
 export const useData = () => {
 
-  const { token } = theme.useToken()
+  const [{colorPrimary}] = useAppStore()
+  const [loading, setLoading] = useState(false)
 
   const geoRef = useRef<HTMLDivElement>(null)
   const pathRef = useRef<HTMLDivElement>(null)
   const statusRef = useRef<HTMLDivElement>(null)
+
+  const dataRef = useRef<GeographicStats[]>([])
 
   const setChartData = (data: StatsData) => {
     const normalMap = data.statusCnt.apiCnt.reduce<AnyObject<number>>((p, c) => {
@@ -487,10 +480,34 @@ export const useData = () => {
 
   useEffect(() => {
     getMongoLogsStats().then(setChartData)
-    getGeoGPSStats().then(r => {
-      setGeoOption(r, geoRef.current!, token)
+    setLoading(true)
+    getGeoGPSStats().then((r) => {
+      dataRef.current = r;
+      geoScene = new Scene({
+        id: geoRef.current!,
+        map: new GaodeMap({
+          pitch: 0,
+          style: 'dark',
+          center: [120, 34],
+          zoom: 3,
+          token: '6f025e700cbacbb0bb866712d20bb35c',
+        }),
+      });
     })
+    .then(() => {
+      geoScene!.on('loaded', () => {
+        console.log('loaded..', Date.now())
+        setLoading(false)
+      });
+    })
+    .finally(() => {console.log('finally~', Date.now())})
   }, [])
+
+  useEffect(() => {
+    if(!loading && dataRef.current.length) {
+      setGeoOption(dataRef.current, colorPrimary)
+    }
+  }, [colorPrimary, loading])
 
   return {
     geoRef,
