@@ -7,8 +7,8 @@ import { data2AntPageData } from '@/utils/tools'
 import { useGraphQL } from '@/services/http'
 
 const query = `
-query articlePages($page: Int, $pageSize: Int, $order: pageOrder, $title: String, $abstract: String, $tag: String, $createdAt: [String]){
-  articles(page: $page, pageSize: $pageSize, order: $order, title: $title, abstract: $abstract, tag: $tag, createdAt: $createdAt){
+query articlePages($page: Int, $pageSize: Int, $order: pageOrder, $title: String, $abstract: String, $tag: String, $typeId: String, $createdAt: [String]){
+  articles(page: $page, pageSize: $pageSize, order: $order, title: $title, abstract: $abstract, tag: $tag, typeId: $typeId, createdAt: $createdAt){
     list{id,title,abstract,createdAt,typeId,tag,createdBy}
     meta{current,total,pageSize}
   }

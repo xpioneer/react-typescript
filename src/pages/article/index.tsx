@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
-  Row, Col, Form, Input, Button, Table, Modal,
+  Row, Col, Form, Input, Button, Table, Select,
   Flex, Space, Spin,
 } from 'antd'
 import { DatePicker } from 'components/datePicker'
@@ -116,6 +116,14 @@ const CommentPage: React.FC = () => {
         <Col span={6}>
           <Form.Item name='tag'>
             <Input placeholder="标签" />
+          </Form.Item>
+        </Col>
+        <Col span={6}>
+          <Form.Item name='typeId'>
+            <Select
+              placeholder="文章类型"
+              options={types.map(i => ({value: i.id, label: i.name}))}
+            />
           </Form.Item>
         </Col>
         <Col span={6}>
