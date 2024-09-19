@@ -56,3 +56,9 @@ declare module '*.svg' {
   const src: string
   export default src;
 }
+
+
+declare module '*.xml' {
+  const content: string
+  export default content;
+}

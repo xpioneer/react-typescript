@@ -16,5 +16,9 @@
     padding: 8px;
     margin-bottom: 24px;
     border: 1px solid var(--main-border-color);
+
+    :global(.amap-container) {
+      left: 0;
+    }
   }
 }

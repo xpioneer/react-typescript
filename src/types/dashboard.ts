@@ -16,7 +16,7 @@ export class StatsData {
 }
 
 export type GeographicStats = {
-  city_en: string
+  name_en: string
   latitude: string
   longitude: string
   total: string

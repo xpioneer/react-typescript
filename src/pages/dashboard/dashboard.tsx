@@ -10,7 +10,7 @@ export default function Dashboard() {
     statusRef,
   } = useData()
 
-  return <div className={styles.dashboard} style={{width: '100%'}}>
+  return <div className={styles.dashboard}>
     <h2>Welcome to Dashboard!</h2>
     <div className={styles.chart} style={{height: 600}} ref={geoRef}></div>
     <Row>

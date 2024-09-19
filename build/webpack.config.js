@@ -90,14 +90,19 @@ module.exports = {
         // }
       },
       {
-        test: /\.(svg|png|jpe?g|gif)(\?\S*)?$/,
+        test: /\.(png|jpe?g|gif)(\?\S*)?$/,
         type: 'asset',
         parser: {
           dataUrlCondition: {
             maxSize: 4 * 1024, // 4 KB
           },
         },
-      }
+        type: 'javascript/auto'
+      },
+      {
+        test: /\.(svg|xml)$/,
+        type: 'asset/source'
+      },
     ]
   },
 
