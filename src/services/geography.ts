@@ -14,3 +14,11 @@ export const getGeoGPSStats = () => {
 export const getGeoGPSChina = () => {
   return useRequest<GeographicStats[]>('/log/geo/china').then(r => r.data)
 }
+
+export const getGeoVisit = () => {
+  return useRequest<GeographicStats[]>('/log/geo/visit').then(r => r.data)
+}
+
+export const getGeoMapStats = () => {
+  return Promise.all([getGeoVisit(), getGeoGPSStats()])
+}

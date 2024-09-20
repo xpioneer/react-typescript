@@ -1,39 +1,41 @@
 import { useState, useEffect, useRef } from 'react'
 import { GeographicStats } from 'types/dashboard'
-import { getGeoGPSStats, getGeoGPSChina } from '@/services/geography'
+import { getGeoGPSStats, getGeoGPSChina, getGeoVisit, getGeoMapStats } from '@/services/geography'
 import { getMongoLogsStats } from 'services/api'
 import { useAppStore } from '@/stores'
 import { setChartData } from './echarts'
-import { setGeoOption, setGeoScene } from './antv'
+import { setGeoOptions, setGeoScene } from './antv'
+
 
 export const useData = () => {
 
-  const [{colorPrimary}] = useAppStore()
+  const [{ colorPrimary }] = useAppStore()
   const [loading, setLoading] = useState(false)
 
+  const visitRef = useRef<HTMLDivElement>(null)
   const geoRef = useRef<HTMLDivElement>(null)
   const pathRef = useRef<HTMLDivElement>(null)
   const statusRef = useRef<HTMLDivElement>(null)
 
-  const dataRef = useRef<GeographicStats[]>([])
+  const dataRef = useRef<GeographicStats[][]>([[], []])
 
   useEffect(() => {
     getMongoLogsStats().then(r => setChartData(r, [statusRef.current!, pathRef.current!]))
     setLoading(true)
-    getGeoGPSStats().then((r) => {
-      dataRef.current = r;
-      return setGeoScene(geoRef.current!)
-    })
-    .finally(() => setLoading(false))
+    getGeoMapStats().then(r => {
+      dataRef.current = r
+      return setGeoScene([visitRef.current!, geoRef.current!])
+    }).finally(() => setLoading(false))
   }, [])
 
   useEffect(() => {
-    if(!loading && dataRef.current.length) {
-      setGeoOption(dataRef.current, colorPrimary)
+    if (!loading && dataRef.current.every(i => i.length)) {
+      setGeoOptions(dataRef.current, colorPrimary)
     }
   }, [colorPrimary, loading])
 
   return {
+    visitRef,
     geoRef,
     pathRef,
     statusRef,

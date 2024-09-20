@@ -5,6 +5,7 @@ import { Col, Row } from 'antd'
 
 export default function Dashboard() {
   const {
+    visitRef,
     geoRef,
     pathRef,
     statusRef,
@@ -12,6 +13,7 @@ export default function Dashboard() {
 
   return <div className={styles.dashboard}>
     <h2>Welcome to Dashboard!</h2>
+    <div className={styles.chart} style={{height: 600}} ref={visitRef}></div>
     <div className={styles.chart} style={{height: 600}} ref={geoRef}></div>
     <Row>
       <Col span={24}>
