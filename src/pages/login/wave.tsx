@@ -1,8 +1,10 @@
 import React, { useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
+import { useAppStore } from '@/stores';
 
-const Wave = () => {
+const Wave = ({color}: {color: THREE.Color}) => {
+
   const meshRef = useRef<THREE.Mesh>(null);
   const geometryRef = useRef<THREE.PlaneGeometry>(null);
 
@@ -32,19 +34,25 @@ const Wave = () => {
   return (
     <mesh ref={meshRef} rotation={[-Math.PI / 2, 0, 0]}>
       <planeGeometry ref={geometryRef} args={[800, 800, 500, 500]} />
-      <meshPhongMaterial color={0x087ea4ee} wireframe />
+      <meshPhongMaterial color={color} wireframe />
     </mesh>
   );
 };
 
 export const WaveComponent: React.FC = () => {
+
+  const [{colorPrimary}] = useAppStore()
+
+  const color = new THREE.Color(colorPrimary)
+  const rgb = [color.r, color.g, color.b].map(i => Math.round(i * 255))
+
   return <Canvas
     gl={{
       antialias: true,
       alpha: true,
     }}
     style={{
-      backgroundColor: 'rgba(8, 126, 164, 0.06)',
+      backgroundColor: `rgba(${rgb.join()}, 0.05)`,
       width: '100%',
       height: '100%',
     }}
@@ -52,6 +60,6 @@ export const WaveComponent: React.FC = () => {
   >
     <ambientLight intensity={0.5} />
     <directionalLight position={[50, 100, 75]} intensity={1} />
-    <Wave />
+    <Wave color={color} />
   </Canvas>
 }
