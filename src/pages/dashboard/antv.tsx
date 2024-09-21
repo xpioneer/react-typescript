@@ -37,7 +37,6 @@ export const setGeoScene = (el: HTMLDivElement[]) => {
     const cb = () => {
       count++;
       if(count === 2){
-        console.log('HHH')
         resolve(1)
       }
     }

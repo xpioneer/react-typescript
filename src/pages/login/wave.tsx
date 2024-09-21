@@ -32,7 +32,7 @@ const Wave = ({color}: {color: THREE.Color}) => {
   });
 
   return (
-    <mesh ref={meshRef} rotation={[-Math.PI / 2, 0, 0]}>
+    <mesh ref={meshRef} rotation={[-Math.PI/4, 0, 0]}>
       <planeGeometry ref={geometryRef} args={[800, 800, 500, 500]} />
       <meshPhongMaterial color={color} wireframe />
     </mesh>
@@ -56,10 +56,10 @@ export const WaveComponent: React.FC = () => {
       width: '100%',
       height: '100%',
     }}
-    camera={{ position: [-50, 50, 100], near: 0.1, far: 1000 }}
+    camera={{ position: [0, 0, 60], near: 0.1, far: 1000 }}
   >
     <ambientLight intensity={0.5} />
-    <directionalLight position={[50, 100, 75]} intensity={1} />
+    <directionalLight position={[-100, -100, 1000]} intensity={1} />
     <Wave color={color} />
   </Canvas>
 }
