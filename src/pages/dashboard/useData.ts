@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { getGeoMapStats } from '@/services/geography'
 import { getMongoLogsStats } from 'services/api'
 import { useAppStore } from '@/stores'
-import { setChartData } from './echarts'
+import { setChartData, setEarthMap } from './echarts'
 import { setGeoOptions, setGeoScene, SetChartData } from './antv'
 
 const data2List = (data: SetChartData[1]) => {
@@ -51,6 +51,7 @@ export const useData = () => {
   const earthRef = useRef<HTMLDivElement>(null)
   const pathRef = useRef<HTMLDivElement>(null)
   const statusRef = useRef<HTMLDivElement>(null)
+  const earthBDRef = useRef<HTMLDivElement>(null)
 
   const dataRef = useRef<SetChartData>([[], []])
 
@@ -66,6 +67,7 @@ export const useData = () => {
   useEffect(() => {
     if (!loading && dataRef.current.every(i => i.length)) {
       setGeoOptions(dataRef.current, colorPrimary)
+      // setEarthMap(dataRef.current[0], earthBDRef.current!)
     }
   }, [colorPrimary, loading])
 
@@ -75,5 +77,6 @@ export const useData = () => {
     earthRef,
     pathRef,
     statusRef,
+    earthBDRef,
   }
 }

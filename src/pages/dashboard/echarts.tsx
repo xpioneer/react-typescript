@@ -24,11 +24,15 @@ import {
   LineChart,
   LineSeriesOption,
   RadarChart,
-  ScatterChart
+  ScatterChart,
 } from 'echarts/charts'
 import { CanvasRenderer } from 'echarts/renderers'
 import { StatsData } from '@/types/dashboard'
-
+import worldImg from '@/assets/imgs/world.bd.jpg'
+import starfieldImg from '@/assets/imgs/starfield.jpg'
+import { GeographicStats } from 'types/dashboard'
+import 'echarts-gl/lib/chart/lines3D';
+import 'echarts-gl/lib/component/globe';
 
 Echarts.use([
   DatasetComponent,
@@ -45,6 +49,8 @@ Echarts.use([
   RadarChart,
   GeoComponent,
   ScatterChart,
+  // Lines3DChart,
+  // GlobeComponent,
 ])
 
 type EChartsOption = Echarts.ComposeOption<
@@ -319,6 +325,43 @@ const setScatterData = (data: StatsData, el: HTMLDivElement) => {
         }
       }
     ]
+  })
+}
+
+
+export const setEarthMap = (data: AnyObject<string>[], el: HTMLDivElement) => {
+  Echarts.init(el).setOption({
+    backgroundColor: '#000',
+    globe: {
+      baseTexture: worldImg,
+      environment: starfieldImg,
+      atmosphere: {
+        show: true
+      },
+      shading: 'lambert',
+      light: {
+        ambient: {
+          intensity: 0.4
+        },
+        main: {
+          intensity: 0.4
+        }
+      },
+      viewControl: {
+        autoRotate: false
+      }
+    },
+    series: {
+      type: 'lines3D',
+      coordinateSystem: 'globe',
+      blendMode: 'lighter',
+      lineStyle: {
+        width: 1,
+        color: 'rgb(50, 50, 150)',
+        opacity: 0.1
+      },
+      data: data.map(i => [[i.x, i.y], [i.x1, i.y1]])
+    }
   })
 }
 

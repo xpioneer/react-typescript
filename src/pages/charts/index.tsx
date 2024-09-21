@@ -6,7 +6,7 @@ export default function ChartPage() {
 
   return (
     <div className={styles.chartW}>
-      <h2>Request for information from around the world</h2>
+      <h2>Date Matrix and Line Graphs of Requests from Around the World</h2>
       <DayChart />
     </div>
   )

@@ -47,7 +47,7 @@ export const setGeoScene = (el: HTMLDivElement[]) => {
         resolve(1)
       }
     }
-    visitScene = initScene(el[0], {pitch: 30, zoom: 2, center: [10, 40]});
+    visitScene = initScene(el[0], {pitch: 40, zoom: 2, center: [10, 40]});
     geoScene = initScene(el[1]);
     
     earthScene = new Scene({

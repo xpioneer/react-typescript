@@ -32,6 +32,9 @@ dependencies:
   echarts:
     specifier: ^5.4.3
     version: 5.4.3
+  echarts-gl:
+    specifier: ^2.0.9
+    version: 2.0.9(echarts@5.4.3)
   lodash:
     specifier: ^4.17.21
     version: 4.17.21
@@ -3466,6 +3469,10 @@ packages:
     resolution: {integrity: sha512-saHYOzhIQs6wy2sVxTM6bUDsQO4F50V9RQ22qBpEdCW+I+/Wmke2HOl6lS6dTpdxVhb88/I6+Hs+438c3lfUow==}
     dev: false
 
+  /claygl@1.3.0:
+    resolution: {integrity: sha512-+gGtJjT6SSHD2l2yC3MCubW/sCV40tZuSs5opdtn79vFSGUgp/lH139RNEQ6Jy078/L0aV8odCw8RSrUcMfLaQ==}
+    dev: false
+
   /clean-css@5.3.3:
     resolution: {integrity: sha512-D5J+kHaVb/wKSFcyyV75uCn8fiY4sV38XJoe4CUyGQ+mOU/fMVYUdH1hJC+CJQ5uY3EnW27SbJYS4X8BiLrAFg==}
     engines: {node: '>= 10.0'}
@@ -4267,6 +4274,16 @@ packages:
 
   /earcut@2.2.4:
     resolution: {integrity: sha512-/pjZsA1b4RPHbeWZQn66SWS8nZZWLQQ23oE3Eam7aroEFGEvwKAsJfZ9ytiEMycfzXWpca4FA9QIOehf7PocBQ==}
+    dev: false
+
+  /echarts-gl@2.0.9(echarts@5.4.3):
+    resolution: {integrity: sha512-oKeMdkkkpJGWOzjgZUsF41DOh6cMsyrGGXimbjK2l6Xeq/dBQu4ShG2w2Dzrs/1bD27b2pLTGSaUzouY191gzA==}
+    peerDependencies:
+      echarts: ^5.1.2
+    dependencies:
+      claygl: 1.3.0
+      echarts: 5.4.3
+      zrender: 5.4.4
     dev: false
 
   /echarts@5.4.3:

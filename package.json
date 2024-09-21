@@ -31,6 +31,7 @@
     "classnames": "^2.5.1",
     "date-fns": "^2.30.0",
     "echarts": "^5.4.3",
+    "echarts-gl": "^2.0.9",
     "lodash": "^4.17.21",
     "mobx": "^6.13.2",
     "mobx-react": "^9.1.1",
