@@ -7,6 +7,7 @@ export default function Dashboard() {
   const {
     visitRef,
     geoRef,
+    earthRef,
     pathRef,
     statusRef,
   } = useData()
@@ -15,6 +16,7 @@ export default function Dashboard() {
     <h2>Welcome to Dashboard!</h2>
     <div className={styles.chart} style={{height: 600}} ref={visitRef}></div>
     <div className={styles.chart} style={{height: 600}} ref={geoRef}></div>
+    <div className={styles.chart} style={{height: 600}} ref={earthRef}></div>
     <Row>
       <Col span={24}>
         <div className={styles.chart} ref={pathRef}></div>

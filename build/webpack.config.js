@@ -97,7 +97,7 @@ module.exports = {
             maxSize: 4 * 1024, // 4 KB
           },
         },
-        type: 'javascript/auto'
+        // type: 'javascript/auto'
       },
       {
         test: /\.(svg|xml)$/,
