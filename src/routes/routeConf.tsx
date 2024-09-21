@@ -4,7 +4,7 @@ import { NotFound }  from '@components/notFound'
 import {
   AreaChartOutlined, BarChartOutlined, BulbOutlined, DollarOutlined, ExperimentOutlined, FileSearchOutlined,
   BookOutlined, FormOutlined, FrownOutlined, FundOutlined, HomeOutlined, MehOutlined, SmileOutlined, StockOutlined,
-  LineChartOutlined, BaiduOutlined,
+  LineChartOutlined, BaiduOutlined, GlobalOutlined,
 } from '@ant-design/icons'
 import { MenuProps } from 'antd'
 
@@ -41,6 +41,7 @@ const StockDetail = lazy(() => import( /* webpackChunkName:"StockDetail" */ '@pa
 const StockHistories = lazy(() => import( /* webpackChunkName:"StockList" */ '@pages/stocks/history'))
 // const StockHistoriesDetail = lazy(() => import( /* webpackChunkName:"StockList" */ '@pages/stocks/historyDetail'))
 const StockKLine = lazy(() => import( /* webpackChunkName:"StockKLine" */ '@pages/stocks/kLine'))
+const ThreeJS = lazy(() => import( /* webpackChunkName:"ThreeJS" */ '@pages/threejs'))
 
 // demos
 const Demo = lazy(() => import( /* webpackChunkName:"demo" */ '@pages/demos/demoNew'))
@@ -71,6 +72,12 @@ const routesConf: XRouteObject[] = [
     path: 'charts',
     icon: <AreaChartOutlined/>,
     element: <Chart />,
+  },
+  {
+    title: 'ThreeJS',
+    path: 'threejs',
+    icon: <GlobalOutlined />,
+    element: <ThreeJS />,
   },
   {
     title: 'Log',
