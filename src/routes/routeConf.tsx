@@ -6,6 +6,8 @@ import {
   BookOutlined, FormOutlined, FrownOutlined, FundOutlined, HomeOutlined, MehOutlined, SmileOutlined, StockOutlined,
   LineChartOutlined, BaiduOutlined, GlobalOutlined,
 } from '@ant-design/icons'
+// import ThreejsIcon from '@/assets/icons/threejs.svg'
+import {ThreejsIcon} from '@/assets/icons/threejs'
 import { MenuProps } from 'antd'
 
 const {lazy} = React
@@ -76,7 +78,7 @@ const routesConf: XRouteObject[] = [
   {
     title: 'ThreeJS',
     path: 'threejs',
-    icon: <GlobalOutlined />,
+    icon: <ThreejsIcon />,
     element: <ThreeJS />,
   },
   {
