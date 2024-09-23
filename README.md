@@ -2,7 +2,7 @@
 
 ### 项目概况
 ***
-使用Ant-Design开发的一套后台管理系统，主要用到了React、Typescript、Mobx、PWA等技术，使用webpack5打包构建，包含React16的一些新特性。
+使用Ant-Design开发的一套后台管理系统，主要用到了React、Typescript、Mobx、PWA等技术，使用webpack5打包构建，包含React18的一些新特性。
 
 ### 项目主要技术结构
 
@@ -10,7 +10,7 @@
 * react
 * typescript
 * antd
-* mobx
+* hooks
 * webpack5
 * react-router5
 * pwa
