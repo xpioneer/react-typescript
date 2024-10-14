@@ -1,0 +1,26 @@
+
+.face {
+  height: 100%;
+
+  img, canvas {
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+.wrap {
+  height: 100%;
+
+  &> div {
+    width: 45%;
+    height: 100%;
+  }
+}
+.result {
+  border: 1px dashed red;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

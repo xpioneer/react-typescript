@@ -47,6 +47,9 @@ declare const styles: { [className: string]: string }
 declare module '*.scss' {
   export default styles;
 }
+declare module '*.less' {
+  export default styles;
+}
 
 declare module '*.svg' {
 

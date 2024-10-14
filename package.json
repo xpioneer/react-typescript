@@ -26,6 +26,7 @@
     "@antv/l7": "^2.22.1",
     "@antv/l7-maps": "^2.22.1",
     "@react-three/fiber": "^8.17.6",
+    "@vladmandic/face-api": "^1.7.14",
     "antd": "^5.13.2",
     "axios": "^1.6.5",
     "classnames": "^2.5.1",

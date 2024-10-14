@@ -2,9 +2,12 @@ import * as React from 'react'
 import { RouteObject, Link } from 'react-router-dom'
 import { NotFound }  from '@components/notFound'
 import {
-  AreaChartOutlined, BarChartOutlined, BulbOutlined, DollarOutlined, ExperimentOutlined, FileSearchOutlined,
-  BookOutlined, FormOutlined, FrownOutlined, FundOutlined, HomeOutlined, MehOutlined, SmileOutlined, StockOutlined,
+  AreaChartOutlined, BarChartOutlined, BulbOutlined,
+  DollarOutlined, ExperimentOutlined, FileSearchOutlined,
+  BookOutlined, FormOutlined, FrownOutlined, FundOutlined,
+  HomeOutlined, MehOutlined, SmileOutlined, StockOutlined,
   LineChartOutlined, BaiduOutlined, GlobalOutlined,
+  SmileFilled,
 } from '@ant-design/icons'
 // import ThreejsIcon from '@/assets/icons/threejs.svg'
 import {ThreejsIcon} from '@/assets/icons/threejs'
@@ -44,6 +47,7 @@ const StockHistories = lazy(() => import( /* webpackChunkName:"StockList" */ '@p
 // const StockHistoriesDetail = lazy(() => import( /* webpackChunkName:"StockList" */ '@pages/stocks/historyDetail'))
 const StockKLine = lazy(() => import( /* webpackChunkName:"StockKLine" */ '@pages/stocks/kLine'))
 const ThreeJS = lazy(() => import( /* webpackChunkName:"ThreeJS" */ '@pages/threejs'))
+const FaceRecognition = lazy(() => import( /* webpackChunkName:"Face" */ '@pages/face'))
 
 // demos
 const Demo = lazy(() => import( /* webpackChunkName:"demo" */ '@pages/demos/demoNew'))
@@ -250,6 +254,12 @@ const routesConf: XRouteObject[] = [
         element: <StockKLine />,
       },
     ]
+  },
+  {
+    title: 'Face',
+    path: 'face',
+    icon: <SmileFilled />,
+    element: <FaceRecognition />
   },
   {
     title: 'Demos',

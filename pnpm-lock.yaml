@@ -17,6 +17,9 @@ dependencies:
   '@react-three/fiber':
     specifier: ^8.17.6
     version: 8.17.6(react-dom@18.2.0)(react@18.2.0)(three@0.168.0)
+  '@vladmandic/face-api':
+    specifier: ^1.7.14
+    version: 1.7.14
   antd:
     specifier: ^5.13.2
     version: 5.13.2(date-fns@2.30.0)(react-dom@18.2.0)(react@18.2.0)
@@ -2613,6 +2616,11 @@ packages:
       '@typescript-eslint/types': 6.19.1
       eslint-visitor-keys: 3.4.3
     dev: true
+
+  /@vladmandic/face-api@1.7.14:
+    resolution: {integrity: sha512-WTechvIQ+t7JS7ASQ2n1XaTCNSXQiqdTQmtWAuGrpClAIHIP18FVV66dPWDA8/0XIdotbWnzGjuS3WzybxVlJw==}
+    engines: {node: '>=14.0.0'}
+    dev: false
 
   /@webassemblyjs/ast@1.11.6:
     resolution: {integrity: sha512-IN1xI7PwOvLPgjcf180gC1bqn3q/QaOCwYUahIOhbYUu8KA/3tw2RT/T0Gidi1l7Hhj5D/INhJxiICObqpMu4Q==}
