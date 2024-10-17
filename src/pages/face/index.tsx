@@ -38,9 +38,12 @@ const FacePage: React.FC = () => {
     }
   }
 
-  const onDetect = async () => {
+  const onLoad = async () => {
     if(loaded.current) {
       const image = inputImg.current!;
+      if(!inputImg.current!.src) {
+        return;
+      }
       const container = ouputRef.current!;
       const detections = await detectFaceInImage(image);
 
@@ -49,12 +52,18 @@ const FacePage: React.FC = () => {
         message.success('Successfully recognized the face!')
         const dpr = window.devicePixelRatio || 1;
         const createdCanvas = FaceApi.createCanvasFromMedia(image);
-        createdCanvas.width = image.naturalWidth * dpr;
-        createdCanvas.height = image.naturalHeight * dpr;
-        createdCanvas.style.width = `${image.naturalWidth}px`;
-        createdCanvas.style.height = `${image.naturalHeight}px`;
+        // createdCanvas.width = image.width * dpr;
+        // createdCanvas.height = image.height * dpr;
+        // createdCanvas.style.width = `${image.naturalWidth}px`;
+        // createdCanvas.style.height = `${image.naturalHeight}px`;
         container.replaceChildren();
         container.appendChild(createdCanvas);
+        // draw image
+        const ctx = createdCanvas.getContext('2d');
+        if (ctx) {
+          ctx.drawImage(image, 0, 0, image.naturalWidth, image.naturalHeight);
+        }
+        // draw detections
         FaceApi.draw.drawDetections(createdCanvas, detections!);
         FaceApi.draw.drawFaceLandmarks(createdCanvas, detections!);
       } else {
@@ -78,17 +87,16 @@ const FacePage: React.FC = () => {
     <h2>Face Recognition</h2>
     <Flex align='center' justify='space-between' className={styles.wrap}>
       <div>
-        <Upload
-          listType='text'
-          showUploadList={false}
-          onChange={onChange}
-          customRequest={customRequest}
-        >
-          Choose your face pictrue
-        </Upload>
-        <img ref={inputImg}/>
+        <img ref={inputImg} onLoad={onLoad}/>
       </div>
-      <Button onClick={onDetect}>Detect</Button>
+      <Upload
+        listType='text'
+        showUploadList={false}
+        onChange={onChange}
+        customRequest={customRequest}
+      >
+        <Button>Choose pictrue</Button>
+      </Upload>
       <div className={styles.result} ref={ouputRef}>
       </div>
     </Flex>

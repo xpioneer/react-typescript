@@ -13,14 +13,16 @@
   height: 100%;
 
   &> div {
-    width: 45%;
+    width: 44%;
     height: 100%;
+    border: 1px dashed #ccc;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    &.result {
+      border-color:red;
+    }
   }
-}
-.result {
-  border: 1px dashed red;
-  border-radius: 4px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
