@@ -51,8 +51,8 @@ const FaceRecognition = lazy(() => import( /* webpackChunkName:"Face" */ '@pages
 
 // demos
 const Demo = lazy(() => import( /* webpackChunkName:"demo" */ '@pages/demos/demoNew'))
-const DemoMobx = lazy(() => import( /* webpackChunkName:"demo" */ '@pages/demos/demoMobx'))
-const DemoRedux = lazy(() => import( /* webpackChunkName:"demo" */ '@pages/demos/demoRedux'))
+const DemoMobx = lazy(() => import( /* webpackChunkName:"demoMobx" */ '@pages/demos/demoMobx'))
+const DemoRedux = lazy(() => import( /* webpackChunkName:"demoRedux" */ '@pages/demos/demoRedux'))
 
 type XRouteObject = RouteObject & {
   title?: string

@@ -1,0 +1,9 @@
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+  transition: width 0.02s;
+}
