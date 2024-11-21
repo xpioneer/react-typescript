@@ -4,9 +4,9 @@ import { Action, } from './actions'
 
 export const initState = new Store
 
-type AppContextProps = [Store, Dispatch<Action>]
+type AppContextProps = [Store, Dispatch<Action>] | undefined
 
-export const AppStore = createContext<AppContextProps | undefined>(undefined)
+export const AppStore = createContext<AppContextProps>(undefined)
 
 export const useAppStore = () => {
   const store = useContext(AppStore)
