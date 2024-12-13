@@ -40,7 +40,7 @@ const LoginPage: React.FC = () => {
       form={form}
       onFinish={onFinish}
     >
-      <h2>管理后台</h2>
+      <h2>Content Management System</h2>
       <Form.Item name="username" rules={[{required: true}]}>
         <Input prefix={<UserOutlined />} placeholder="Username"/>
       </Form.Item>

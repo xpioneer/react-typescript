@@ -143,48 +143,45 @@ const BallListPage: React.FC = () => {
     onQuery(current, pageSize, _order)
   }
 
-  return <Spin spinning={loading}>
-    <Form
-      form={form}
-      className="form"
-    >
-      <h3>双色球列表</h3>
-      <Row gutter={24}>
-        <Col span={6}>
-          <Form.Item name="issue">
-            <Input placeholder="期号查询，如:(18001,18010)"/>
-          </Form.Item>
-        </Col>
-        <Col span={6}>
-          <Form.Item name="drawDate">
-            <DatePicker.RangePicker/>
-          </Form.Item>
-        </Col>
-      </Row>
-      <Flex justify={'end'}>
-        <Space>
-          <Button type='primary' ghost onClick={() => navigate('ball-create')}>
-            Create
-          </Button>
-          <Button htmlType='reset'>
-            清空
-          </Button>
-          <Button type="primary" onClick={() => onQuery()}>
-            搜索
-          </Button>
-        </Space>
-      </Flex>
-    </Form>
-    <Table
-      bordered
-      size='small'
-      columns={columns}
-      rowKey={(record: any) => record.id}
-      dataSource={pageData.data}
-      pagination={pageData.meta}
-      onChange={onChange}
-    />
-  </Spin>
+  return (
+    <Spin spinning={loading}>
+      <Form form={form} className="form">
+        <h3>双色球列表</h3>
+        <Row gutter={24}>
+          <Col span={6}>
+            <Form.Item name="issue">
+              <Input placeholder="期号查询，如:(18001,18010)" />
+            </Form.Item>
+          </Col>
+          <Col span={6}>
+            <Form.Item name="drawDate">
+              <DatePicker.RangePicker />
+            </Form.Item>
+          </Col>
+        </Row>
+        <Flex justify={'end'}>
+          <Space>
+            <Button type="primary" ghost onClick={() => navigate('/lottery/ball-create')}>
+              Create
+            </Button>
+            <Button htmlType="reset">清空</Button>
+            <Button type="primary" onClick={() => onQuery()}>
+              搜索
+            </Button>
+          </Space>
+        </Flex>
+      </Form>
+      <Table
+        bordered
+        size="small"
+        columns={columns}
+        rowKey={(record: any) => record.id}
+        dataSource={pageData.data}
+        pagination={pageData.meta}
+        onChange={onChange}
+      />
+    </Spin>
+  )
 }
 
 export default BallListPage

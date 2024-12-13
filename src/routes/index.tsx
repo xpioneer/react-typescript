@@ -39,6 +39,7 @@ export const Navigation: React.FC = () => {
 
   return (
     <ConfigProvider
+      componentSize='middle'
       locale={AntdLocale[lang]}
       theme={{
         algorithm: theme === Theme.Dark ? antdTheme.darkAlgorithm : antdTheme.defaultAlgorithm,

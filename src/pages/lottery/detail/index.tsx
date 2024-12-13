@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { 
   Row, Col, Form, Input, Button, InputNumber, Modal, Checkbox,
   Flex, Space, Spin, TableColumnProps, TableColumnsType, TablePaginationConfig,
