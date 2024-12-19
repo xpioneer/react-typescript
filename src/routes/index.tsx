@@ -1,17 +1,19 @@
 import React, { useEffect } from 'react'
 import { ConfigProvider, theme as antdTheme, App } from 'antd'
 import zh_CN from 'antd/lib/locale/zh_CN'
-import en_CN from 'antd/lib/locale/en_US'
+import en_US from 'antd/lib/locale/en_US'
+import zh_TW from 'antd/lib/locale/zh_TW'
 import { useAppStore } from 'stores'
 import { Routes } from './pageRoutes'
-import { LangKeys, Theme } from 'types/global'
+import { LangI18n, Theme } from 'types/global'
 import { PREFERS_COLOR_SCHEME_DARK } from '@/constants'
 import { useTheme } from '@/stores/hooks'
 
 
-const AntdLocale: Record<LangKeys, typeof zh_CN> = {
-  'zh-CN': zh_CN,
-  'en-US': en_CN,
+const AntdLocale: Record<LangI18n, typeof zh_CN> = {
+  zh_CN,
+  en_US,
+  zh_TW,
 }
 
 export const Navigation: React.FC = () => {

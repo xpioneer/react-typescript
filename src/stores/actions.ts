@@ -1,4 +1,4 @@
-import { Store, LangKeys, Theme, getSystemTheme } from 'types/global'
+import { Store, LangI18n, Theme, getSystemTheme } from 'types/global'
 import { User } from 'models/user'
 
 export type ValueOfStore = Store[keyof Store]
@@ -33,9 +33,9 @@ export const setAuthorized = (payload = false) => ({
   payload
 })
 
-export const setLang = (payload: LangKeys = 'zh-CN') => ({
+export const setLang = (payload = LangI18n.简体中文) => ({
   type: ACTION_TYPE.SET_LANG,
-  payload
+  payload,
 })
 
 export const setLoading = (payload = false) => ({

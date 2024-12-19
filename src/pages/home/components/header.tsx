@@ -1,5 +1,5 @@
 import React, { useState} from 'react'
-import { Link } from 'react-router-dom'
+import { invert } from 'lodash'
 import {
   App,
   Layout, Space,
@@ -50,7 +50,7 @@ export const HeaderComponent: React.FC = () => {
 
   const items: MenuProps['items'] = [
     {
-      label: <div onClick={() => setLang(lang)}>{LangI18n[lang]}</div>,
+      label: <div onClick={() => setLang(lang)}>{invert(LangI18n)[lang]}</div>,
       key: '1',
     },
     {
@@ -66,9 +66,9 @@ export const HeaderComponent: React.FC = () => {
             return onLogout().then(() => {
               console.log('退出..')
             })
-          }
+          },
         })
-      }
+      },
     },
   ]
 

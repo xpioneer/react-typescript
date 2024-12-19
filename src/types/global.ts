@@ -1,13 +1,18 @@
 import { isLogged, object2Options, storage } from '@/utils/tools'
 import { User } from 'models/user'
-import { PREFERS_COLOR_SCHEME_DARK, PRIMARY_COLOR, COLOR_PRIMARY_KEY, THEME_MODE } from '@/constants'
+import {
+  PREFERS_COLOR_SCHEME_DARK,
+  PRIMARY_COLOR,
+  COLOR_PRIMARY_KEY,
+  THEME_MODE,
+  SYS_LANG,
+} from '@/constants'
 
 export enum LangI18n {
-  'zh-CN' = '简体中文',
-  'en-US' = 'English',
+  '简体中文' = 'zh_CN',
+  'English' = 'en_US',
+  '繁体中文' = 'zh_TW',
 }
-
-export type LangKeys = keyof typeof LangI18n
 
 export enum Theme {
   Light = 'light',
@@ -34,11 +39,26 @@ const getCurrentColor = () => {
   return storage.get(COLOR_PRIMARY_KEY) || PRIMARY_COLOR
 }
 
+
+const getSystemLang = () => {
+  const language = window.navigator.language
+  return /^en/g.test(language) ? LangI18n.English : LangI18n.简体中文
+}
+
+export const getCurrentLang = () => {
+  const lang = storage.get(SYS_LANG) as LangI18n
+  if (Object.keys(LangI18n).includes(lang)) {
+    return lang
+  }
+  // if user not set language, use system language
+  return getSystemLang()
+}
+
 export class Store {
   theme = getCurrentTheme()
   colorPrimary = getCurrentColor()
-  lang: LangKeys = 'zh-CN'
+  lang = getCurrentLang()
   authorized = isLogged()
   loading = false
-  userInfo = new User
+  userInfo = new User()
 }

@@ -6,6 +6,7 @@ import 'antd/dist/reset.css'
 import 'quill/dist/quill.snow.css'
 import serviceWorker from './serviceWorker'
 import { setRem } from 'utils/tools'
+import 'utils/i18n'
 
 // setRem();
 

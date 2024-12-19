@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Form, Input, Button, Checkbox, Space, Flex } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
@@ -9,14 +9,18 @@ import { JWT_TOKEN, REDIRECT_URL } from '@constants/index'
 import { useAppStore, setAuthorized } from '@/stores'
 import { WaveComponent } from './wave'
 import styles from './style.module.scss'
+import Typed from 'typed.js'
+import { useTranslation } from 'react-i18next'
 
 const LoginPage: React.FC = () => {
+  const { t } = useTranslation()
   const navigate = useNavigate()
 
   const [, dispatch] = useAppStore()
 
   const [form] = Form.useForm<LoginForm>()
 
+  const el = useRef<HTMLHeadingElement>(null)
   const [loading, setLoading] = useState(false)
 
   const onFinish = (values: LoginForm) => {
@@ -30,11 +34,26 @@ const LoginPage: React.FC = () => {
       .finally(() => setLoading(false))
   }
 
+  useEffect(() => {
+    const typed = new Typed(el.current, {
+      strings: [t('introduction')],
+      startDelay: 200,
+      typeSpeed: 30,
+      loop: true,
+    })
+
+    return () => {
+      // Destroy Typed instance during cleanup to stop animation
+      typed.destroy()
+    }
+  }, [])
+
   return (
     <div className={styles.login}>
       <div className={styles.waveW}>
         <WaveComponent />
       </div>
+      <div ref={el} className={styles.intro}></div>
       <Form className={styles.form} form={form} onFinish={onFinish}>
         <h2>Content Management System</h2>
         <Form.Item name="username" rules={[{ required: true }]}>
