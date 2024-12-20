@@ -41,9 +41,7 @@ const LoginPage: React.FC = () => {
       typeSpeed: 30,
       loop: true,
     })
-
     return () => {
-      // Destroy Typed instance during cleanup to stop animation
       typed.destroy()
     }
   }, [])
