@@ -55,8 +55,7 @@ export const SiderBar: React.FC = () => {
         selectedKeys={selectedKeys}
         onOpenChange={onOpenChange}
         items={menuList}
-      >
-      </Menu>
+      />
     </Sider>
   )
 }

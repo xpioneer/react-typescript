@@ -51,7 +51,9 @@ const LoginPage: React.FC = () => {
       <div className={styles.waveW}>
         <WaveComponent />
       </div>
-      <div ref={el} className={styles.intro}></div>
+      <div className={styles.intro}>
+        <span ref={el}></span>
+      </div>
       <Form className={styles.form} form={form} onFinish={onFinish}>
         <h2>Content Management System</h2>
         <Form.Item name="username" rules={[{ required: true }]}>
