@@ -23,7 +23,7 @@ export const setTheme = (payload = getSystemTheme()) => ({
   payload
 })
 
-export const setPrimary = (payload = '#e87722') => ({
+export const setPrimary = (payload: string) => ({
   type: ACTION_TYPE.SET_PRIMARY,
   payload
 })

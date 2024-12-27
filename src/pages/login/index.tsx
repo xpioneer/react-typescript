@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Form, Input, Button, Checkbox, Space, Flex } from 'antd'
+import { Form, Input, Button, Checkbox, Space, Flex, theme } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { onLogin } from '../../services/account'
 import { LoginForm } from '@/types/account'
@@ -13,6 +13,9 @@ import Typed from 'typed.js'
 import { useTranslation } from 'react-i18next'
 
 const LoginPage: React.FC = () => {
+  const {
+    token: { colorBgBase },
+  } = theme.useToken()
   const { t } = useTranslation()
   const navigate = useNavigate()
 
@@ -48,7 +51,7 @@ const LoginPage: React.FC = () => {
 
   return (
     <div className={styles.login}>
-      <div className={styles.waveW}>
+      <div className={styles.waveW} style={{ background: colorBgBase }}>
         <WaveComponent />
       </div>
       <div className={styles.intro}>

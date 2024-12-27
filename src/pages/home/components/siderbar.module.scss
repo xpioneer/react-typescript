@@ -7,8 +7,6 @@
 
   svg {
     display: block;
-    width: 40px;
-    height: 40px;
     animation: logoRotate 6s linear 0s infinite normal running none;
 
     &:hover {
@@ -18,7 +16,6 @@
 
   .title {
     color: #fff;
-    font-size: 20px;
     margin-left: 20px;
     font-weight: bold;
   }
