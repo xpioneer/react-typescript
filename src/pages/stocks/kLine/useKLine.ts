@@ -160,8 +160,8 @@ export const useKLine = () => {
         {
           name: 'Volume',
           type: 'bar',
-          xAxisIndex: 1,
-          yAxisIndex: 1,
+          xAxisIndex: 0,
+          yAxisIndex: 0,
           itemStyle: {
             color: '#7fbe9e'
           },
@@ -304,7 +304,7 @@ export const useKLine = () => {
         }
       ]
     }
-     Echarts.init(chartRef.current).setOption(option)
+    Echarts.init(chartRef.current).setOption(option)
   }
 
   const onQuery = (id: number) => {

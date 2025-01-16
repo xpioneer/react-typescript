@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styles from './style.module.scss'
 import * as FaceApi from '@vladmandic/face-api'
-import { Button, Flex, Upload } from 'antd'
+import { Button, Flex, Spin, Upload } from 'antd'
 import { UploadChangeParam, UploadFile } from 'antd/lib/upload'
 import { message } from '@/components/message'
 
@@ -9,6 +9,7 @@ const FacePage: React.FC = () => {
   const loaded = useRef(false)
   const inputImg = useRef<HTMLImageElement>(null)
   const ouputRef = useRef<HTMLDivElement>(null)
+  const [loading, setLoading] = useState(false)
 
   const onLoadModels = () => {
     Promise.all([
@@ -28,6 +29,7 @@ const FacePage: React.FC = () => {
   }
 
   const onChange = (info: UploadChangeParam<UploadFile<any>>) => {
+    setLoading(true)
     const file = info.file.originFileObj
     if (file) {
       const reader = new FileReader();
@@ -40,8 +42,9 @@ const FacePage: React.FC = () => {
 
   const onLoad = async () => {
     if(loaded.current) {
-      const image = inputImg.current!;
-      if(!inputImg.current!.src) {
+      const imgEl = inputImg.current!
+      const image = imgEl;
+      if(!imgEl.src) {
         return;
       }
       const container = ouputRef.current!;
@@ -69,6 +72,7 @@ const FacePage: React.FC = () => {
       } else {
         message.warning('Face not recognized!')
       }
+      setLoading(false)
     } else {
       message.warning('Wait models loading...')
     }
@@ -83,24 +87,25 @@ const FacePage: React.FC = () => {
     onLoadModels()
   }, [])
 
-  return <Flex vertical className={styles.face}>
-    <h2>Face Recognition</h2>
-    <Flex align='center' justify='space-between' className={styles.wrap}>
-      <div>
-        <img ref={inputImg} onLoad={onLoad}/>
-      </div>
-      <Upload
-        listType='text'
-        showUploadList={false}
-        onChange={onChange}
-        customRequest={customRequest}
-      >
-        <Button>Choose pictrue</Button>
-      </Upload>
-      <div className={styles.result} ref={ouputRef}>
-      </div>
+  return (
+    <Flex vertical className={styles.face}>
+      <h2>Face Recognition</h2>
+      <Flex align="center" justify="space-between" className={styles.wrap}>
+        <div>
+          <img ref={inputImg} onLoad={onLoad} />
+        </div>
+        <Upload
+          listType="text"
+          showUploadList={false}
+          onChange={onChange}
+          customRequest={customRequest}
+        >
+          <Button loading={loading}>Choose pictrue</Button>
+        </Upload>
+        <div className={styles.result} ref={ouputRef}></div>
+      </Flex>
     </Flex>
-  </Flex>
+  )
 }
 
 export default FacePage

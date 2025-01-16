@@ -38,7 +38,7 @@ const StockList: React.FC = () => {
 
   return <Spin spinning={loading}>
     <StockChart/>
-    <Form className="mgb16" form={form}>
+    <Form className="pdtb16" form={form}>
       <Row gutter={16}>
         <Col span={6}>
           <Form.Item name="code">

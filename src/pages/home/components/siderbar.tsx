@@ -35,7 +35,6 @@ export const SiderBar: React.FC = () => {
     setOpenKeys(keys)
   }
 
-console.log(colorPrimary, '>>>colorPrimary')
   return (
     <Sider collapsible width={Math.max(controlHeight * 6, 220)}>
       <div className={styles.logo} style={{ height: controlHeight * 2 }}>
@@ -52,7 +51,7 @@ console.log(colorPrimary, '>>>colorPrimary')
           </g>
         </svg>
         <div className={styles.title} style={{ fontSize: fontSizeLG }}>
-          My Zone{controlHeight}
+          My Zone
         </div>
       </div>
       <Menu

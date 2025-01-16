@@ -122,9 +122,11 @@ export const StockChart: React.FC = () => {
   }, [])
 
 
-  return <Row className="mgb8">
-    <Col span={24}>
-      <div className='chart-w' ref={chartRef}></div>
-    </Col>
-  </Row>
+  return (
+    <Row>
+      <Col span={24}>
+        <div style={{ height: 320, backgroundColor: '#fff' }} ref={chartRef}></div>
+      </Col>
+    </Row>
+  )
 }
