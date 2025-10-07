@@ -4,7 +4,7 @@ import {
   Row, Col, Form, Input, Button, Table, Modal,
   TableColumnProps, Flex, Space, Spin,
 } from 'antd'
-import { DatePicker } from 'components/datePicker'
+import { DatePicker } from '@components/datePicker'
 import { ArticleType } from '@models/articleType'
 import { useArticleType } from './useArticleType'
 

@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import { Form } from 'antd'
 import { startOfDay, endOfDay } from 'date-fns'
-import { ErrorLog, ErrorQuery } from 'types/apiError'
+import { ErrorLog, ErrorQuery } from '@/types/apiError'
 import { data2PageData, pageData2Params, data2AntPageData } from '@/utils/tools'
-import { getErrorLogs } from 'services/api'
+import { getErrorLogs } from '@/services/api'
 
 
 export const useErrors = () => {

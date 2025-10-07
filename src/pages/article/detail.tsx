@@ -9,9 +9,9 @@ import {
   Checkbox,
 } from 'antd'
 import { useDetail } from './useDetail'
-import { Article } from 'models/article'
-import { QuillEditor } from 'components/editor/new'
-import { DatePicker } from 'components/datePicker'
+import { Article } from '@models/article'
+import { QuillEditor } from '@components/editor/new'
+import { DatePicker } from '@components/datePicker'
 
 const formLayout: FormItemProps = {
   labelCol: {

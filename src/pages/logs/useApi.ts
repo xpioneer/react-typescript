@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import { Form } from 'antd'
 import { startOfDay, endOfDay } from 'date-fns'
-import { APILog, APIQuery } from 'types/api'
+import { APILog, APIQuery } from '@/types/api'
 import { data2PageData, pageData2Params, data2AntPageData } from '@/utils/tools'
-import { getApiLogs } from 'services/api'
+import { getApiLogs } from '@/services/api'
 
 
 export const useApi = () => {

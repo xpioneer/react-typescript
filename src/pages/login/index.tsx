@@ -37,17 +37,17 @@ const LoginPage: React.FC = () => {
       .finally(() => setLoading(false))
   }
 
-  useEffect(() => {
-    const typed = new Typed(el.current, {
-      strings: [t('introduction')],
-      startDelay: 200,
-      typeSpeed: 30,
-      loop: true,
-    })
-    return () => {
-      typed.destroy()
-    }
-  }, [])
+  // useEffect(() => {
+  //   const typed = new Typed(el.current, {
+  //     strings: [t('introduction')],
+  //     startDelay: 200,
+  //     typeSpeed: 30,
+  //     loop: true,
+  //   })
+  //   return () => {
+  //     typed.destroy()
+  //   }
+  // }, [])
 
   return (
     <div className={styles.login}>

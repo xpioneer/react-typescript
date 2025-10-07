@@ -1,5 +1,5 @@
-import { LangI18n, Store, Theme } from 'types/global'
-import { User } from 'models/user'
+import { LangI18n, Store, Theme } from '@/types/global'
+import { User } from '@/models/user'
 import { ACTION_TYPE, Action, } from './actions'
 
 export const reducer = (

@@ -11,11 +11,11 @@ export const getMongoLogsStats = () => {
 
 
 export const getApiLogs = (params: APIQuery & IPageParams) => {
-  return $http.get<any, IPageData<APILog>>('/api/log-api', { params })
+  return useRequest<APILog, true>('/log-api', { params })
 }
 
 
 export const getErrorLogs = (params: ErrorQuery & IPageParams) => {
-  return $http.get<any, IPageData<ErrorLog>>('/api/log-errors', { params })
+  return useRequest<ErrorLog, true>('/log-errors', { params })
 }
 

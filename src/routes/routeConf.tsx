@@ -238,7 +238,7 @@ const routesConf: XRouteObject[] = [
         element: <StockList />,
       },
       {
-        path: 'detail/:id',
+        path: 'list/:id',
         element: <StockDetail />,
       },
       {

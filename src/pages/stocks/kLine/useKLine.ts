@@ -27,10 +27,10 @@ import {
 } from 'echarts/charts'
 import { CanvasRenderer } from 'echarts/renderers'
 import { format } from 'date-fns'
-import { stockPageList } from 'services/stock'
-import { stockHistoryList } from 'services/stockHistory'
-import { debounce } from 'utils/debounce'
-import { StockHistory } from 'types/stockHistory'
+import { stockPageList } from '@/services/stock'
+import { stockHistoryList } from '@/services/stockHistory'
+import { debounce } from '@utils/debounce'
+import { StockHistory } from '@/types/stockHistory'
 
 Echarts.use([
   DatasetComponent,
@@ -185,7 +185,7 @@ export const useKLine = () => {
           markPoint: {
             label: {
               formatter: (param) => {
-                return param != null ? Math.round(+param.value) + '' : '';
+                return param != null ? Math.round(Number(param.value)) + '' : '';
               }
             },
             data: [

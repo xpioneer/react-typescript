@@ -1,7 +1,7 @@
 import * as React from 'react'
 import {inject, observer} from 'mobx-react'
 import { Row, Col, Form, Input, Button, Table, Modal, Badge, } from 'antd'
-import { DatePicker } from 'components/datePicker'
+import { DatePicker } from '@components/datePicker'
 import { ColumnProps } from 'antd/lib/table'
 import { LeaveMsg } from '@models/leaveMsg'
 

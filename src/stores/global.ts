@@ -1,5 +1,5 @@
 import { createContext, Dispatch, useContext, useReducer } from 'react'
-import { Store } from 'types/global'
+import { Store } from '@/types/global'
 import { Action, } from './actions'
 
 export const initState = new Store

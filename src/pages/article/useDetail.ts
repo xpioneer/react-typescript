@@ -1,9 +1,9 @@
 import { Form } from 'antd'
 import { useState, useEffect, useRef } from 'react'
 import { useParams } from 'react-router-dom'
-import { Article, ArticlesData } from 'models/article'
-import { ArticleType } from 'models/articleType'
-import { Tag } from 'models/tag'
+import { Article, ArticlesData } from '@models/article'
+import { ArticleType } from '@models/articleType'
+import { Tag } from '@models/tag'
 import { useGraphQL } from '@/services/http'
 import { parseISO } from 'date-fns'
 

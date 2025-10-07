@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Form } from 'antd'
-import { Comment } from 'models/comment'
+import { Comment } from '@models/comment'
 import { data2AntPageData } from '@/utils/tools'
 import { useGraphQL } from '@/services/http'
 

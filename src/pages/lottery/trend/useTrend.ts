@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { Form } from 'antd'
-import { Ball } from 'models/ball'
+import { Ball } from '@models/ball'
 import { data2AntPageData } from '@/utils/tools'
-import { useGraphQL } from 'services/http'
+import { useGraphQL } from '@/services/http'
 
 const query = `
 query ballPages($page: Int, $pageSize: Int, $order: pageOrder, $issue: String, $drawDate: [String]){

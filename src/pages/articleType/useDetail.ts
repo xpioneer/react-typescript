@@ -1,7 +1,7 @@
 import { Form } from 'antd'
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { ArticleType } from 'models/articleType'
+import { ArticleType } from '@models/articleType'
 import { useGraphQL } from '@/services/http'
 
 const query = `

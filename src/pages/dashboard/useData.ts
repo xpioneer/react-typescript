@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { getGeoMapStats } from '@/services/geography'
-import { getMongoLogsStats } from 'services/api'
+import { getMongoLogsStats } from '@/services/api'
 import { useAppStore } from '@/stores'
 import { setChartData, setEarthMap } from './echarts'
 import { setGeoOptions, setGeoScene, SetChartData } from './antv'
@@ -60,7 +60,7 @@ export const useData = () => {
     setLoading(true)
     getGeoMapStats().then(r => {
       dataRef.current = [data2List(r[0]), r[1]]
-      return setGeoScene([visitRef.current!, geoRef.current!, earthRef.current!])
+      return setGeoScene([visitRef.current!, geoRef.current!])
     }).finally(() => setLoading(false))
   }, [])
 

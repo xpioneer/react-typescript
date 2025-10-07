@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
 import { Form } from 'antd'
 import { useParams, useNavigate } from 'react-router-dom'
-import { debounce } from 'utils/debounce'
-import { Ball } from 'models/ball'
+import { debounce } from '@utils/debounce'
+import { Ball } from '@models/ball'
 import { parseISO } from 'date-fns'
-import { useGraphQL } from 'services/http'
+import { useGraphQL } from '@/services/http'
 
 const mutation = `
 mutation saveBall($input: ballInput!){

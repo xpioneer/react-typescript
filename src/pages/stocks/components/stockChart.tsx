@@ -14,7 +14,7 @@ import { PieChart, PieSeriesOption, BarChart, BarSeriesOption } from 'echarts/ch
 import { CanvasRenderer } from 'echarts/renderers'
 import { LabelLayout } from 'echarts/features'
 import { getStockChartCount } from '../../../services/stock'
-import { EBlock, StockStats } from 'types/stock'
+import { Board, StockStats } from '@/types/stock'
 
 Echart.use([
   PieChart,
@@ -45,7 +45,7 @@ export const StockChart: React.FC = () => {
       return p + Number(c.total)
     }, 0)
     const vals = res.map(i => ({
-      name: EBlock[i.block],
+      name: Board[i.block],
       value: i.total,
     }))
     const options: EchartsOption = {
@@ -77,7 +77,7 @@ export const StockChart: React.FC = () => {
       yAxis: {
         name: '板块',
         // type: 'name',
-        data: res.map(i => EBlock[i.block])
+        data: res.map(i => Board[i.block])
       },
       series: [
         {
@@ -104,7 +104,7 @@ export const StockChart: React.FC = () => {
           type: 'pie',
           radius: '50%',
           center: ["80%", "50%"],
-          data: res.map(i => ({name: EBlock[i.block], value: i.total})),
+          data: res.map(i => ({name: Board[i.block], value: i.total})),
           itemStyle: {
             color: (param) => {
               return colors[param.dataIndex % colors.length]

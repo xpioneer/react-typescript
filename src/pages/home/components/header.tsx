@@ -20,9 +20,9 @@ import {
   MoonOutlined,
   AppleOutlined,
 } from '@ant-design/icons'
-import { useAppStore, setLang, setPrimary } from 'stores'
-import { onLogout } from 'services/account'
-import { LangI18n, Theme } from 'types/global'
+import { useAppStore, setLang, setPrimary } from '@/stores'
+import { onLogout } from '@/services/account'
+import { LangI18n, Theme } from '@/types/global'
 import { storage } from '@/utils/tools'
 import { COLOR_PRIMARY_KEY, PRIMARY_COLOR } from '@/constants'
 import { useTheme } from '@/stores/hooks'

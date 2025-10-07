@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Form } from 'antd'
-import { LeaveMsg } from 'models/leaveMsg'
+import { LeaveMsg } from '@models/leaveMsg'
 import { data2AntPageData } from '@/utils/tools'
 import { useGraphQL } from '@/services/http'
 

@@ -4,7 +4,7 @@ import {
   Row, Col, Form, Input, Button, Table, Modal,
   Flex, Space, Spin,
 } from 'antd'
-import { DatePicker } from 'components/datePicker'
+import { DatePicker } from '@components/datePicker'
 import { Comment } from '@models/comment'
 import { useList } from './useList'
 import { ColumnsType, TablePaginationConfig, SorterResult, SortOrder } from 'antd/lib/table/interface'

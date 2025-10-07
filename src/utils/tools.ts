@@ -1,6 +1,6 @@
 import { EXCLUDE_KEYS, JWT_TOKEN } from '@/constants'
 import { format, isDate, isValid, parseISO } from 'date-fns'
-import { DateFormat } from 'types/base'
+import { DateFormat } from '@/types/base'
 
 export const object2Str = (o: string|object): string => {
   return typeof o === 'string' ? o : JSON.stringify(o)

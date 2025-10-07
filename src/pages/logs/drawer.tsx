@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Drawer } from 'antd'
 import { ErrorLog } from 'types/apiError'
 import styles from './style.module.scss'
-import { JSONView } from 'components/jsonView'
+import { JSONView } from '@components/jsonView'
 
 interface IProps {
   data?: ErrorLog

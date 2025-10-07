@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Form } from 'antd'
-import { Ball } from 'models/ball'
+import { Ball } from '@models/ball'
 import { data2AntPageData } from '@/utils/tools'
 import { useGraphQL } from '@/services/http'
 

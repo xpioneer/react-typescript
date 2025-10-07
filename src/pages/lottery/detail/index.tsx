@@ -5,7 +5,7 @@ import {
   Flex, Space, Spin, TableColumnProps, TableColumnsType, TablePaginationConfig,
   FormItemProps,
 } from 'antd'
-import { DatePicker } from 'components/datePicker'
+import { DatePicker } from '@components/datePicker'
 import { useDetail } from './useDetail'
 import styles from './style.module.scss'
 import classNames from 'classnames'

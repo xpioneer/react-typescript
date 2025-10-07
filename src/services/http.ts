@@ -1,4 +1,5 @@
 import { Method, APIType } from '@/types/demo'
+import { $http } from '@/utils/http'
 
 
 /**

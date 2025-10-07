@@ -4,7 +4,7 @@ import {
   RouterProvider,
   RouteObject
 } from 'react-router-dom'
-import useAntApp from 'components/message'
+import useAntApp from '@components/message'
 import Loading from '@components/loading'
 import { routes } from './routeConf'
 import { Progress } from '@/components/progress'
