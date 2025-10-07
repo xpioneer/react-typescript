@@ -34,6 +34,8 @@ export default defineConfig({
     },
   },
   build: {
-    outDir: 'dist4vite',
+    outDir: 'dist',
+    target: 'es2015',
+    minify: 'terser', // need more time
   },
 })

@@ -88,6 +88,7 @@
     "style-loader": "^2.0.0",
     "stylelint": "^13.13.1",
     "stylelint-config-standard": "^20.0.0",
+    "terser": "^5.44.0",
     "terser-webpack-plugin": "^5.3.10",
     "typescript": "^5.7.2",
     "uglifyjs-webpack-plugin": "^2.2.0",
