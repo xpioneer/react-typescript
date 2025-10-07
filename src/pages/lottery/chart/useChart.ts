@@ -7,8 +7,8 @@ import {
   BarChart, LineChart,
 } from 'echarts/charts'
 import { CanvasRenderer } from 'echarts/renderers'
-import { useGraphQL } from 'services/http'
-import { BallChart, ChartOption } from 'models/ball'
+import { useGraphQL } from '@/services/http'
+import { BallChart, ChartOption } from '@models/ball'
 
 const query = `
 fragment common on ballChartType { name value }

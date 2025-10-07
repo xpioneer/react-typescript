@@ -1,6 +1,6 @@
 // @import './variables.scss';
 // @import './theme.scss';
-@import './functions.scss';
+@use './functions.scss' as *;
 
 #app {
   height: 100%;

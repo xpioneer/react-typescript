@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useLocation, } from 'react-router-dom'
 import { Layout, Menu, theme } from 'antd'
-import { MenuItem, LeftMenuConfig } from 'routes/routeConf'
+import { MenuItem, LeftMenuConfig } from '@/routes/routeConf'
 import styles from './siderbar.module.scss'
 
 const { Sider } = Layout

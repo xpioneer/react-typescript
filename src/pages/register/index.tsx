@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Form, Input, Button, Checkbox } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
-import { onCreate } from 'services/account'
+import { onCreate } from '@/services/account'
 import { LoginForm, RegisterForm } from '@/types/account'
 import { storage } from "@utils/tools"
 import { JWT_TOKEN, REDIRECT_URL } from "@constants/index"

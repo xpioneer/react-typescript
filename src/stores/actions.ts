@@ -1,5 +1,5 @@
-import { Store, LangI18n, Theme, getSystemTheme } from 'types/global'
-import { User } from 'models/user'
+import { Store, LangI18n, Theme, getSystemTheme } from '@/types/global'
+import { User } from '@/models/user'
 
 export type ValueOfStore = Store[keyof Store]
 

@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
 import { Form } from 'antd'
-import { ArticleType } from 'models/articleType'
-import { Tag } from 'models/tag'
-import { Article, ArticlesData } from 'models/article'
+import { ArticleType } from '@models/articleType'
+import { Tag } from '@models/tag'
+import { Article, ArticlesData } from '@models/article'
 import { data2AntPageData } from '@/utils/tools'
 import { useGraphQL } from '@/services/http'
 

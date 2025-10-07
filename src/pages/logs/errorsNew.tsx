@@ -4,13 +4,13 @@ import {
   Table, Badge, TableColumnProps,
   Spin,
 } from 'antd'
-import { DatePicker } from 'components/datePicker'
+import { DatePicker } from '@/components/datePicker'
 import { dateFormat, object2Str } from '@utils/tools'
 import { ErrorLog } from 'types/apiError'
 import { RequestStatus } from 'types/api'
 import { useErrors } from './useErrors'
-import { JSONView } from 'components/jsonView'
-import { modal } from 'components/message'
+import { JSONView } from '@/components/jsonView'
+import { modal } from '@/components/message'
 import { LogDetailDrawer } from './drawer'
 import { DateFormat } from '@/types/base'
 

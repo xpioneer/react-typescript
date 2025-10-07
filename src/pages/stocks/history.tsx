@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { Row, Col, Form, Table, Input, Button, Spin, Select } from 'antd'
-import { DatePicker } from 'components/datePicker'
+import { DatePicker } from '@components/datePicker'
 import { historyColumns } from './util'
 import { stockHistoryPageList, stockHistoryTotal } from '../../services/stockHistory'
 import { data2PageData, pageData2Params } from '../../utils/tools'
 import { StockHistory } from '../../types/stockHistory'
 import { debounce } from 'lodash'
-import { stockPageList } from 'services/stock'
-import { StockQuery } from 'types/stock'
+import { stockPageList } from '@/services/stock'
+import { StockQuery } from '@/types/stock'
 
 const StockHistoryList: React.FC = () => {
 

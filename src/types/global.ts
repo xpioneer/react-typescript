@@ -1,5 +1,5 @@
 import { isLogged, object2Options, storage } from '@/utils/tools'
-import { User } from 'models/user'
+import { User } from '@models/user'
 import {
   PREFERS_COLOR_SCHEME_DARK,
   PRIMARY_COLOR,

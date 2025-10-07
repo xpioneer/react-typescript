@@ -1,7 +1,7 @@
 import { Form } from 'antd'
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { User } from 'models/user'
+import { User } from '@models/user'
 import { useGraphQL } from '@/services/http'
 
 const query = `

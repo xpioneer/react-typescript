@@ -7,7 +7,7 @@ import {
 import { ColumnProps } from 'antd/lib/table'
 import { Ball } from '@models/ball'
 import { useList } from './useTrend'
-import { modal } from 'components/message'
+import { modal } from '@components/message'
 
 const FormItem = Form.Item
 

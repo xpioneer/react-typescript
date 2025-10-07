@@ -9,7 +9,7 @@ import {
 } from 'echarts/charts'
 import { dateFormat } from '@/utils/tools'
 import { CanvasRenderer } from 'echarts/renderers'
-import { getEveryDay } from 'services/chart'
+import { getEveryDay } from '@/services/chart'
 import { DayChart } from '@/types/chart'
 import { DateFormat } from '@/types/base'
 import { useAppStore } from '@/stores'

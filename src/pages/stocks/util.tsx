@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { ColumnProps } from 'antd/lib/table'
-import { Stock, EMarket, EBlock } from '../../types/stock'
-import { StockHistory } from 'types/stockHistory'
+import { Stock, Market, Board } from '../../types/stock'
+import { StockHistory } from '@/types/stockHistory'
 import { Button, Tag } from 'antd'
 
 const blockObj = {
@@ -29,12 +29,12 @@ export const listColumns = (onOpts: (data: Stock) => void): ColumnProps<Stock>[]
     {
       title: 'Market',
       dataIndex: 'market',
-      render: (v, data) => EMarket[data.market]
+      render: (v, data) => Market[data.market]
     },
     {
       title: 'Block',
       dataIndex: 'block',
-      render: (v, data) => <Tag color={blockObj[data.block]}>{EBlock[data.block]}</Tag>
+      render: (v, data) => <Tag color={blockObj[data.block]}>{Board[data.block]}</Tag>
     },
     // {
     //   title: 'Options',

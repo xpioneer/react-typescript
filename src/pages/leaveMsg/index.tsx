@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Row, Col, Form, Input, Button, Table, Flex, Spin, Space } from 'antd'
-import { DatePicker } from 'components/datePicker'
+import { DatePicker } from '@/components/datePicker'
 import { LeaveMsg } from '@models/leaveMsg'
 import { useList } from './useList'
 import { ColumnsType, TablePaginationConfig, SorterResult, SortOrder } from 'antd/lib/table/interface'

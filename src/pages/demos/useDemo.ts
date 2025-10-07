@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { Form, message, UploadFile } from 'antd'
-import { APIFormTest, APIType, Method } from 'types/demo'
+import { APIFormTest, APIType, Method } from '@/types/demo'
 
 const defaultParams: AnyObject = {
   query: '{}',

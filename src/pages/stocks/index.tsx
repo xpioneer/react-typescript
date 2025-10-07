@@ -3,7 +3,7 @@ import { Row, Col, Form, Table, Input, Button, Spin, Select } from 'antd'
 import { listColumns } from './util'
 import { stockPageList, StockQuery } from '../../services/stock'
 import { data2PageData, pageData2Params } from '../../utils/tools'
-import { Stock, EMarket, EBlock } from '../../types/stock'
+import { Stock, Market, Board } from '../../types/stock'
 import { object2Options } from '@utils/tools'
 import { StockChart } from './components/stockChart'
 import { useNavigate } from 'react-router-dom'
@@ -16,8 +16,8 @@ const StockList: React.FC = () => {
 
   const [loading, setLoading] = useState(false)
   const [pageData, setPageData] = useState(data2PageData<Stock>())
-  const [marketOpts] = useState(object2Options(EMarket))
-  const [blockOpts] = useState(object2Options(EBlock))
+  const [marketOpts] = useState(object2Options(Market))
+  const [blockOpts] = useState(object2Options(Board))
 
   const onQuery = (params = pageData2Params(pageData.meta)) => {
     const vals = form.getFieldsValue()

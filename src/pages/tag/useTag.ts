@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Form } from 'antd'
-import { Tag } from 'models/tag'
+import { Tag } from '@models/tag'
 import { data2AntPageData } from '@/utils/tools'
 import { useGraphQL } from '@/services/http'
 

@@ -50,19 +50,19 @@ export const setGeoScene = (el: HTMLDivElement[]) => {
     visitScene = initScene(el[0], {pitch: 40, zoom: 2, center: [10, 40]});
     geoScene = initScene(el[1]);
     
-    earthScene = new Scene({
-      id: el[2],
-      map: new Earth({
-        style: 'dark'
-      }),
-      logoVisible: false,
-    });
-    earthScene.setBgColor("#333")
+    // earthScene = new Scene({
+    //   id: el[2],
+    //   map: new Earth({
+    //     style: 'dark'
+    //   }),
+    //   logoVisible: false,
+    // });
+    // earthScene.setBgColor("#333")
     // earthScene.setMapStyle('dark');
     
     visitScene.on('loaded', cb);
     geoScene.on('loaded', cb);
-    earthScene.on('loaded', cb);
+    // earthScene.on('loaded', cb);
   })
 }
 
@@ -232,11 +232,11 @@ const setEarthMap = (data: AnyObject<string>[], color: string) => {
       globalArcHeight: 10,
     });
 
-  earthScene.removeAllLayer();
-  earthScene.addLayer(earthlayer);
-  earthScene.addLayer(atomLayer);
-  earthScene.addLayer(bloomLayer);
-  earthScene.addLayer(flyLine);
+  // earthScene.removeAllLayer();
+  // earthScene.addLayer(earthlayer);
+  // earthScene.addLayer(atomLayer);
+  // earthScene.addLayer(bloomLayer);
+  // earthScene.addLayer(flyLine);
 
   // earthlayer.setEarthTime(4.0)
 }
@@ -244,5 +244,5 @@ const setEarthMap = (data: AnyObject<string>[], color: string) => {
 export const setGeoOptions = (data: SetChartData, color: string) => {
   setVisitOption(data[0], color)
   setGPSOption(data[1], color)
-  setEarthMap(data[0], color)
+  // setEarthMap(data[0], color)
 }

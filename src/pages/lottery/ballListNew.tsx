@@ -4,11 +4,11 @@ import {
   Row, Col, Form, Input, Button, Table,
   Flex, Space, Spin, TableColumnsType
 } from 'antd'
-import { DatePicker } from 'components/datePicker'
+import { DatePicker } from '@components/datePicker'
 import { Ball } from '@models/ball'
 import { useList } from './useBallList'
 import { ColumnsType, TablePaginationConfig, SorterResult, SortOrder } from 'antd/lib/table/interface'
-import { modal } from 'components/message'
+import { modal } from '@components/message'
 
 
 const BallListPage: React.FC = () => {
