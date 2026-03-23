@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { QuillOptionsStatic } from 'quill'
 import * as Q from 'quill'
+import DOMPurify from 'dompurify'
+
 // const ImageResize = require('quill-image-resize-module/src/ImageResize.js');
 // console.log(ImageResize, 'imageresize')
 interface IQuillOptions extends QuillOptionsStatic {
@@ -46,7 +48,7 @@ export const QuillEditor: React.FC<IEditor> = ({
   onChange
 }) => {
   const divRef = useRef<HTMLDivElement>(null)
-  const editorRef = useRef<typeof Quill>(null)
+  const editorRef = useRef<any>(null)
   const oldVal = useRef('')
 
   const quillOptions: IQuillOptions = {
@@ -81,7 +83,7 @@ export const QuillEditor: React.FC<IEditor> = ({
   const changeEditorText = () => {
     // 赋值
     if (oldVal.current !== value && value !== undefined && editorRef.current) {
-      editorRef.current.root.innerHTML = value
+      editorRef.current.root.innerHTML = DOMPurify.sanitize(value)
       oldVal.current = value
     }
   }

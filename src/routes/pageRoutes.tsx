@@ -31,9 +31,11 @@ const globalRoutes: RouteObject[] = [
     }),
   }
 ]
+
+// only create once
+const router = createBrowserRouter(globalRoutes)
 export const Routes: React.FC = () => {
   const app = useAntApp() // just init
-  const router = createBrowserRouter(globalRoutes)
 
   return <Suspense fallback={<Loading size="large"/>}>
     <RouterProvider router={router}/>

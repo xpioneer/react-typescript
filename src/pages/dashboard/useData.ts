@@ -3,7 +3,7 @@ import { getGeoMapStats } from '@/services/geography'
 import { getMongoLogsStats } from '@/services/api'
 import { useAppStore } from '@/stores'
 import { setChartData, setEarthMap } from './echarts'
-import { setGeoOptions, setGeoScene, SetChartData } from './antv'
+import { setGeoOptions, setGeoScene, SetChartData, earthScene, geoScene, visitScene } from './antv'
 
 const data2List = (data: SetChartData[1]) => {
   const dest = {
@@ -60,8 +60,13 @@ export const useData = () => {
     setLoading(true)
     getGeoMapStats().then(r => {
       dataRef.current = [data2List(r[0]), r[1]]
-      return setGeoScene([visitRef.current!, geoRef.current!])
+      return setGeoScene([visitRef.current!, geoRef.current!, earthRef.current!])
     }).finally(() => setLoading(false))
+    return () => {
+      geoScene && geoScene.destroy()
+      visitScene && visitScene.destroy()
+      earthScene && earthScene.destroy()
+    }
   }, [])
 
   useEffect(() => {

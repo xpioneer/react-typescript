@@ -18,9 +18,9 @@ function hexToRgba(hex: string) {
   return (alpha = 1) => `rgba(${r}, ${g}, ${b}, ${alpha})`;
 }
 
-let earthScene: Scene
-let geoScene: Scene | null = null
-let visitScene: Scene
+export let earthScene: Scene
+export let geoScene: Scene
+export let visitScene: Scene
 
 const initScene = (el: HTMLDivElement, config: Partial<IMapConfig> = {
   pitch: 0,
@@ -232,13 +232,13 @@ const setEarthMap = (data: AnyObject<string>[], color: string) => {
       globalArcHeight: 10,
     });
 
-  // earthScene.removeAllLayer();
-  // earthScene.addLayer(earthlayer);
-  // earthScene.addLayer(atomLayer);
-  // earthScene.addLayer(bloomLayer);
-  // earthScene.addLayer(flyLine);
+  earthScene.removeAllLayer();
+  earthScene.addLayer(earthlayer);
+  earthScene.addLayer(atomLayer);
+  earthScene.addLayer(bloomLayer);
+  earthScene.addLayer(flyLine);
 
-  // earthlayer.setEarthTime(4.0)
+  earthlayer.setEarthTime(4.0)
 }
 
 export const setGeoOptions = (data: SetChartData, color: string) => {
