@@ -118,7 +118,7 @@ export const useChart = () => {
           itemStyle: {
             borderWidth: 0.5,
             color: 'rgba(255,255,255,0.7)'
-          },
+          }
         },
         {
           top: 320,
@@ -129,7 +129,7 @@ export const useChart = () => {
           itemStyle: {
             borderWidth: 0.5,
             color: 'rgba(255,255,255,0.7)'
-          },
+          }
         },
       ],
       series: [

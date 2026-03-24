@@ -7,7 +7,6 @@ import { useAppState } from '@/stores'
 import { Routes } from './pageRoutes'
 import { LangI18n, Theme } from '@/types/global'
 import { PREFERS_COLOR_SCHEME_DARK } from '@/constants'
-import { useTheme } from '@/stores/hooks'
 import { useThemeConfig } from '@/utils/themeConfig'
 
 const AntdLocale: Record<LangI18n, typeof zh_CN> = {

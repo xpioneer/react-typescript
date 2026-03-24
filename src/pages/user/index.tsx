@@ -69,11 +69,12 @@ const UserPage: React.FC = () => {
     navigate(`${data.id}`)
   }
 
-  const onChange = ({current, pageSize}: TablePaginationConfig, filters: any, sorter: any) => {
-    const order = sorter.order, _order: AnyObject = {}
-    if(order) {
-      const field = sorter.columnKey!
-      _order[field] = sorter.order === 'ascend' ? 'ASC' : 'DESC'
+  const onChange = ({ current, pageSize }: TablePaginationConfig, filters: AnyObject, sorter: any) => {
+    const s = sorter as SorterResult<User>
+    const order = s.order, _order: AnyObject = {}
+    if (order) {
+      const field = s.columnKey as string
+      _order[field] = s.order === 'ascend' ? 'ASC' : 'DESC'
     }
     onQuery(current, pageSize, _order)
   }

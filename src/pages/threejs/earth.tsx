@@ -5,7 +5,7 @@ import worldImg from '@/assets/imgs/world.bd.jpg'
 import moonImg from '@/assets/imgs/moon.jpg'
 import { debounce } from '@/utils/debounce';
 
-function setSence(el: HTMLDivElement) {
+function setScene(el: HTMLDivElement) {
   const { clientWidth, clientHeight } = el
     // 创建场景
     const scene = new THREE.Scene();
@@ -64,9 +64,11 @@ function setSence(el: HTMLDivElement) {
     // controls.minAzimuthAngle = -Math.PI / 4; // 最小水平旋转角度，限制在 -45°
     // controls.maxAzimuthAngle = Math.PI / 4;  // 最大水平旋转角度，限制在 45°
 
+    let rafId: number;
+
     // 渲染循环
     function renderScene() {
-      requestAnimationFrame(renderScene);
+      rafId = requestAnimationFrame(renderScene);
       
       // 地球旋转，每帧旋转一个小角度
       earth.rotation.y += 0.003; // 调整这个值来控制旋转速度
@@ -90,6 +92,7 @@ function setSence(el: HTMLDivElement) {
       renderer,
       renderScene,
       cleanup: () => {
+        cancelAnimationFrame(rafId);
         controls.dispose();
         renderer.dispose();
         el.removeChild(renderer.domElement);
@@ -104,7 +107,7 @@ export const EarthMap: React.FC = () => {
   const divRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-      let sence: any = {
+      let scene: any = {
         camera: new THREE.PerspectiveCamera,
         renderer: new THREE.WebGLRenderer,
         renderScene: emptyFn,
@@ -114,7 +117,7 @@ export const EarthMap: React.FC = () => {
       requestIdleCallback(() => {
         // const { clientWidth, clientHeight } = divRef.current!
         // console.log('requestIdleCallback:', Date.now(), { clientWidth, clientHeight })
-        sence = setSence(divRef.current!)
+        scene = setScene(divRef.current!)
       })
       // requestAnimationFrame(() => {
       //   const { clientWidth, clientHeight } = divRef.current!
@@ -132,17 +135,17 @@ export const EarthMap: React.FC = () => {
       const handleResize = debounce(() => {
         if (divRef.current) {
           const { clientWidth, clientHeight } = divRef.current;
-          sence.camera.aspect = clientWidth / clientHeight;
-          sence.camera.updateProjectionMatrix();
-          sence.renderer.setSize(clientWidth, clientHeight);
-          sence.renderScene();
+          scene.camera.aspect = clientWidth / clientHeight;
+          scene.camera.updateProjectionMatrix();
+          scene.renderer.setSize(clientWidth, clientHeight);
+          scene.renderScene();
         }
       }, 500);
 
       // window.addEventListener('resize', handleResize);
     
       return () => {
-        sence.cleanup();
+        scene.cleanup();
         window.removeEventListener('resize', handleResize);
       };
   });

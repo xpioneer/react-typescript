@@ -20,12 +20,10 @@ import {
   MoonOutlined,
   AppleOutlined,
 } from '@ant-design/icons'
-import { useAppStore, useAppState, setLang, setPrimary } from '@/stores'
+import { useAppState } from '@/stores'
 import { onLogout } from '@/services/account'
 import { LangI18n, Theme } from '@/types/global'
-import { storage } from '@/utils/tools'
-import { COLOR_PRIMARY_KEY, PRIMARY_COLOR } from '@/constants'
-import { useTheme } from '@/stores/hooks'
+import { PRIMARY_COLOR } from '@/constants'
 import styles from './header.module.scss'
 import classNames from 'classnames'
 
@@ -38,19 +36,13 @@ export const HeaderComponent: React.FC = () => {
     token,
   } = antdTheme.useToken();
 
-  // const [{
-  //   lang,
-  //   theme,
-  //   colorPrimary,
-  // },
-  // dispatch
-  // ] = useAppStore()
   const {
     lang,
     theme,
     colorPrimary,
     setPrimary,
-    setTheme
+    setTheme,
+    setLang
   } = useAppState()
 
   const { modal } = App.useApp();
@@ -80,7 +72,6 @@ export const HeaderComponent: React.FC = () => {
   ]
 
   const onChangePrimary = (color: string) => {
-    // storage.set(COLOR_PRIMARY_KEY, color)
     setPrimary(color)
   }
 
