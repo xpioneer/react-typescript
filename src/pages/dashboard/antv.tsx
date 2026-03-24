@@ -21,6 +21,11 @@ function hexToRgba(hex: string) {
 export let earthScene: Scene
 export let geoScene: Scene
 export let visitScene: Scene
+export interface IScenes {
+  visitScene: Scene
+  geoScene: Scene
+  earthScene?: Scene
+}
 
 const initScene = (el: HTMLDivElement, config: Partial<IMapConfig> = {
   pitch: 0,
@@ -38,17 +43,27 @@ const initScene = (el: HTMLDivElement, config: Partial<IMapConfig> = {
   })
 }
 
-export const setGeoScene = (el: HTMLDivElement[]) => {
+export interface IScenes {
+  visitScene: Scene
+  geoScene: Scene
+  earthScene?: Scene
+}
+
+// init scene
+export const setGeoScene = (el: HTMLDivElement[]): Promise<IScenes> => {
   return new Promise((resolve, reject) => {
     let count = 0
+    const activeScenes: Scene[] = []
+    
     const cb = () => {
       count++;
-      if(count === el.length){
-        resolve(1)
+      if(count === activeScenes.length){
+        resolve({ visitScene, geoScene, earthScene })
       }
     }
     visitScene = initScene(el[0], {pitch: 40, zoom: 2, center: [10, 40]});
     geoScene = initScene(el[1]);
+    activeScenes.push(visitScene, geoScene)
     
     // earthScene = new Scene({
     //   id: el[2],
@@ -67,7 +82,7 @@ export const setGeoScene = (el: HTMLDivElement[]) => {
 }
 
 
-const setGPSOption = (list: SetChartData[1], color: string) => {
+const setGPSOption = (geoScene: Scene, list: SetChartData[1], color: string) => {
   const setAlpha = hexToRgba(color)
   const values = list.map<number>(i => +i.total)
   const max = Math.max(...values)
@@ -156,7 +171,7 @@ const setGPSOption = (list: SetChartData[1], color: string) => {
 }
 
 
-const setVisitOption = (data: AnyObject<string>[], colorPrimary: string) => {
+const setVisitOption = (visitScene: Scene, data: AnyObject<string>[], colorPrimary: string) => {
   const layer = new LineLayer({
     blend: 'normal',
   }).source(data, {
@@ -184,7 +199,7 @@ const setVisitOption = (data: AnyObject<string>[], colorPrimary: string) => {
   visitScene.addLayer(layer);
 }
 
-const setEarthMap = (data: AnyObject<string>[], color: string) => {
+const setEarthMap = (earthScene: Scene, data: AnyObject<string>[], color: string) => {
   const earthlayer = new EarthLayer()
     .source(worldImg, {
       parser: {
@@ -241,8 +256,9 @@ const setEarthMap = (data: AnyObject<string>[], color: string) => {
   earthlayer.setEarthTime(4.0)
 }
 
-export const setGeoOptions = (data: SetChartData, color: string) => {
-  setVisitOption(data[0], color)
-  setGPSOption(data[1], color)
-  // setEarthMap(data[0], color)
+// set options for all scene
+export const setGeoOptions = (scenes: IScenes, data: SetChartData, color: string) => {
+  setVisitOption(scenes.visitScene, data[0], color)
+  setGPSOption(scenes.geoScene, data[1], color)
+  // if (scenes.earthScene) setEarthMap(scenes.earthScene, data[0], color)
 }
