@@ -20,7 +20,7 @@ import {
   MoonOutlined,
   AppleOutlined,
 } from '@ant-design/icons'
-import { useAppStore, setLang, setPrimary } from '@/stores'
+import { useAppStore, useAppState, setLang, setPrimary } from '@/stores'
 import { onLogout } from '@/services/account'
 import { LangI18n, Theme } from '@/types/global'
 import { storage } from '@/utils/tools'
@@ -38,13 +38,20 @@ export const HeaderComponent: React.FC = () => {
     token,
   } = antdTheme.useToken();
 
-  const [{
+  // const [{
+  //   lang,
+  //   theme,
+  //   colorPrimary,
+  // },
+  // dispatch
+  // ] = useAppStore()
+  const {
     lang,
     theme,
     colorPrimary,
-  },
-  dispatch
-  ] = useAppStore()
+    setPrimary,
+    setTheme
+  } = useAppState()
 
   const { modal } = App.useApp();
 
@@ -73,8 +80,8 @@ export const HeaderComponent: React.FC = () => {
   ]
 
   const onChangePrimary = (color: string) => {
-    storage.set(COLOR_PRIMARY_KEY, color)
-    dispatch(setPrimary(color))
+    // storage.set(COLOR_PRIMARY_KEY, color)
+    setPrimary(color)
   }
 
   return (<Header className={classNames('pdr16', styles.header)}>
@@ -104,7 +111,7 @@ export const HeaderComponent: React.FC = () => {
         </Flex>
         <Segmented
           value={theme}
-          onChange={(value) => useTheme(value as Theme, dispatch)}
+          onChange={setTheme}
           options={Object.values(Theme).map(i => ({
             value: i,
             icon: i === Theme.Light ? <SunOutlined /> : <MoonOutlined />,

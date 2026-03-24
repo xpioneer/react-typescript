@@ -86,6 +86,9 @@ importers:
       typed.js:
         specifier: ^2.1.0
         version: 2.1.0
+      zustand:
+        specifier: ^5.0.12
+        version: 5.0.12(@types/react@18.3.26)(react@18.3.1)(use-sync-external-store@1.6.0(react@18.3.1))
     devDependencies:
       '@babel/core':
         specifier: ^7.23.7
@@ -6162,6 +6165,24 @@ packages:
       react: '>=16.8'
     peerDependenciesMeta:
       react:
+        optional: true
+
+  zustand@5.0.12:
+    resolution: {integrity: sha512-i77ae3aZq4dhMlRhJVCYgMLKuSiZAaUPAct2AksxQ+gOtimhGMdXljRT21P5BNpeT4kXlLIckvkPM029OljD7g==}
+    engines: {node: '>=12.20.0'}
+    peerDependencies:
+      '@types/react': '>=18.0.0'
+      immer: '>=9.0.6'
+      react: '>=18.0.0'
+      use-sync-external-store: '>=1.2.0'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      immer:
+        optional: true
+      react:
+        optional: true
+      use-sync-external-store:
         optional: true
 
   zwitch@1.0.5:
@@ -13098,5 +13119,11 @@ snapshots:
   zustand@3.7.2(react@18.3.1):
     optionalDependencies:
       react: 18.3.1
+
+  zustand@5.0.12(@types/react@18.3.26)(react@18.3.1)(use-sync-external-store@1.6.0(react@18.3.1)):
+    optionalDependencies:
+      '@types/react': 18.3.26
+      react: 18.3.1
+      use-sync-external-store: 1.6.0(react@18.3.1)
 
   zwitch@1.0.5: {}

@@ -50,7 +50,8 @@
     "react-json-view-lite": "^1.4.0",
     "react-router-dom": "^6.26.1",
     "three": "^0.168.0",
-    "typed.js": "^2.1.0"
+    "typed.js": "^2.1.0",
+    "zustand": "^5.0.12"
   },
   "devDependencies": {
     "@babel/core": "^7.23.7",

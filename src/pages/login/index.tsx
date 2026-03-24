@@ -6,7 +6,7 @@ import { onLogin } from '../../services/account'
 import { LoginForm } from '@/types/account'
 import { storage } from '@utils/tools'
 import { JWT_TOKEN, REDIRECT_URL } from '@constants/index'
-import { useAppStore, setAuthorized } from '@/stores'
+import { useAppState } from '@/stores'
 import { WaveComponent } from './wave'
 import styles from './style.module.scss'
 import Typed from 'typed.js'
@@ -19,7 +19,7 @@ const LoginPage: React.FC = () => {
   const { t } = useTranslation()
   const navigate = useNavigate()
 
-  const [, dispatch] = useAppStore()
+  const { setAuthorized } = useAppState()
 
   const [form] = Form.useForm<LoginForm>()
 
@@ -31,7 +31,7 @@ const LoginPage: React.FC = () => {
     onLogin(values)
       .then((res) => {
         storage.set(JWT_TOKEN, res) // store jwt token
-        dispatch(setAuthorized(true))
+        setAuthorized(true)
         navigate(sessionStorage.getItem(REDIRECT_URL) || '/')
       })
       .finally(() => setLoading(false))

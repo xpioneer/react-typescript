@@ -3,7 +3,7 @@ import { ConfigProvider, theme as antdTheme, App, ThemeConfig } from 'antd'
 import zh_CN from 'antd/lib/locale/zh_CN'
 import en_US from 'antd/lib/locale/en_US'
 import zh_TW from 'antd/lib/locale/zh_TW'
-import { useAppStore } from '@/stores'
+import { useAppState } from '@/stores'
 import { Routes } from './pageRoutes'
 import { LangI18n, Theme } from '@/types/global'
 import { PREFERS_COLOR_SCHEME_DARK } from '@/constants'
@@ -17,7 +17,7 @@ const AntdLocale: Record<LangI18n, typeof zh_CN> = {
 }
 
 export const Navigation: React.FC = () => {
-  const [{ lang, theme, colorPrimary }, dispatch] = useAppStore()
+  const { lang, theme, colorPrimary, setTheme } = useAppState()
   const themeConfig = useThemeConfig()
 
   useEffect(() => {
@@ -26,7 +26,7 @@ export const Navigation: React.FC = () => {
 
     const onChange = ({ matches }: MediaQueryListEvent) => {
       const changedTheme = matches ? Theme.Dark : Theme.Light
-      useTheme(changedTheme, dispatch)
+      setTheme(changedTheme)
     }
     matchMedia.addEventListener('change', onChange)
     return () => {

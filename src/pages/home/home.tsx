@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom'
 import { HeaderComponent } from './components/header'
 import Footer from './components/footer'
 import { SiderBar } from './components/siderbar'
-import { useAppStore } from '@/stores/global'
+import { useAppState } from '@/stores'
 import classNames from 'classnames'
 import styles from './style.module.scss'
 
@@ -12,9 +12,9 @@ const { Content } = Layout
 
 const HomePage: React.FC = () => {
 
-  const [{
+  const {
     authorized
-  }] = useAppStore()
+  } = useAppState()
 
 
   return (

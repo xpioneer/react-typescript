@@ -1,5 +1,5 @@
 import { PRIMARY_COLOR } from '@/constants'
-import { useAppStore } from '@/stores'
+import { useAppState } from '@/stores'
 import { Theme } from '@/types/global'
 import { theme as antdTheme, ThemeConfig } from 'antd'
 import { AliasToken } from 'antd/lib/theme/interface'
@@ -66,6 +66,7 @@ const getTokenConfig = (): ThemeConfig => {
 }
 
 export const useThemeConfig = () => {
+  const { theme } = useAppState()
   const [themeConfig, setThemeConfig] = useState(getTokenConfig())
 
   useEffect(() => {

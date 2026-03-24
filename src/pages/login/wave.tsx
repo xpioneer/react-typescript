@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
-import { useAppStore } from '@/stores'
+import { useAppState } from '@/stores'
 
 const Wave = ({ color }: { color: THREE.Color }) => {
   const meshRef = useRef<THREE.Mesh>(null)
@@ -40,7 +40,7 @@ const Wave = ({ color }: { color: THREE.Color }) => {
 }
 
 export const WaveComponent: React.FC = () => {
-  const [{ colorPrimary }] = useAppStore()
+  const { colorPrimary } = useAppState()
 
   const color = new THREE.Color(colorPrimary)
   const rgb = [color.r, color.g, color.b].map((i) => Math.round(i * 255))

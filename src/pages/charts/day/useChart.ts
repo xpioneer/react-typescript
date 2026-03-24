@@ -12,7 +12,7 @@ import { CanvasRenderer } from 'echarts/renderers'
 import { getEveryDay } from '@/services/chart'
 import { DayChart } from '@/types/chart'
 import { DateFormat } from '@/types/base'
-import { useAppStore } from '@/stores'
+import { useAppState } from '@/stores'
 
 Echart.use([
   BarChart,
@@ -33,7 +33,7 @@ let heatChart: Echart.ECharts | null = null
 
 export const useChart = () => {
 
-  const [{colorPrimary}] = useAppStore()
+  const { colorPrimary } = useAppState()
 
   const chartRef = useRef<HTMLDivElement>(null)
   const heatRef = useRef<HTMLDivElement>(null)

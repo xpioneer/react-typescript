@@ -1,4 +1,4 @@
-import { useAppStore } from '@/stores'
+import { useAppState } from '@/stores'
 import React, { useEffect, useLayoutEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import styles from './style.module.scss'
@@ -11,9 +11,9 @@ export const ProgressComponent: React.FC<Required<ProgressProps>> = ({
   size
 }) => {
 
-  const [{
+  const {
     colorPrimary,
-  }] = useAppStore()
+  } = useAppState()
 
   const el = useRef<HTMLDivElement>(null)
   const sizes: Record<Exclude<ProgressProps['size'], undefined>, number> = {

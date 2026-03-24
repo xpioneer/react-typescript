@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { getGeoMapStats } from '@/services/geography'
 import { getMongoLogsStats } from '@/services/api'
-import { useAppStore } from '@/stores'
+import { useAppState } from '@/stores'
 import { setChartData, setEarthMap } from './echarts'
 import { setGeoOptions, setGeoScene, SetChartData, earthScene, geoScene, visitScene } from './antv'
 
@@ -43,7 +43,7 @@ const data2List = (data: SetChartData[1]) => {
 
 export const useData = () => {
 
-  const [{ colorPrimary }] = useAppStore()
+  const { colorPrimary } = useAppState()
   const [loading, setLoading] = useState(false)
 
   const visitRef = useRef<HTMLDivElement>(null)
