@@ -73,9 +73,10 @@ export const useThemeConfig = () => {
     const onResize = debounce(() => {
       setThemeConfig(getTokenConfig())
     }, 350)
-    window.onresize = onResize
+
+    window.addEventListener('resize', onResize)
     return () => {
-      window.onresize = null
+      window.removeEventListener('resize', onResize)
     }
   }, [])
 
