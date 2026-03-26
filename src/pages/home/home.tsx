@@ -5,7 +5,7 @@ import { HeaderComponent } from './components/header'
 import Footer from './components/footer'
 import { SiderBar } from './components/siderbar'
 import { useAppState } from '@/stores'
-import classNames from 'classnames'
+import clsx from 'clsx'
 import styles from './style.module.scss'
 
 const { Content } = Layout
@@ -18,16 +18,16 @@ const HomePage: React.FC = () => {
 
 
   return (
-      <Layout>
-        <SiderBar/>
-        <Layout className={styles.right}>
-          <HeaderComponent/>
-          <Content className={classNames('pd16', styles.main)}>
-            <Outlet />
-          </Content>
-          <Footer/>
-        </Layout>
+    <Layout>
+      <SiderBar />
+      <Layout className={styles.right}>
+        <HeaderComponent />
+        <Content className={clsx('pd16', styles.main)}>
+          <Outlet />
+        </Content>
+        <Footer />
       </Layout>
+    </Layout>
   )
 }
 
