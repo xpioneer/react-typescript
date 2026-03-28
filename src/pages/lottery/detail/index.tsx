@@ -8,7 +8,7 @@ import {
 import { DatePicker } from '@components/datePicker'
 import { useDetail } from './useDetail'
 import styles from './style.module.scss'
-import classNames from 'classnames'
+import clsx from 'clsx'
 
 interface IProps {
   total?: number
@@ -65,7 +65,7 @@ const BallSelectList: React.FC<IProps> = ({
           justify='center'
           align='center'
           key={ball}
-          className={classNames(styles.ball, {
+          className={clsx(styles.ball, {
             [styles.blue]: !red,
             [styles.active]: value.includes(ball)
           })}

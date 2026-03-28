@@ -25,7 +25,7 @@ import { onLogout } from '@/services/account'
 import { LangI18n, Theme } from '@/types/global'
 import { PRIMARY_COLOR } from '@/constants'
 import styles from './header.module.scss'
-import classNames from 'classnames'
+import clsx from 'clsx'
 
 
 const { Header } = Layout
@@ -75,7 +75,7 @@ export const HeaderComponent: React.FC = () => {
     setPrimary(color)
   }
 
-  return (<Header className={classNames('pdr16', styles.header)}>
+  return (<Header className={clsx('pdr16', styles.header)}>
     <Flex justify="flex-end">
       <Space align='center'>
         <Flex>
