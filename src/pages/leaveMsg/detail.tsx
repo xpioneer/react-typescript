@@ -1,9 +1,13 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Row, Col, Form, Input, Button, FormItemProps } from 'antd'
+import { Row, Col, Form, Input, Button,
+  Spin,
+  FormProps,
+  Space
+} from 'antd'
 import { useDetail } from './useDetail'
 
-const formLayout: FormItemProps = {
+const formLayout: FormProps = {
   labelCol: {
     span: 4,
   },

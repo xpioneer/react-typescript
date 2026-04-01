@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { 
   Row, Col, Form, Input, Button, InputNumber, Modal, Checkbox,
   Flex, Space, Spin, TableColumnProps, TableColumnsType, TablePaginationConfig,
-  FormItemProps,
+  FormProps, Select,
 } from 'antd'
 import { DatePicker } from '@components/datePicker'
 import { useDetail } from './useDetail'
@@ -17,12 +17,12 @@ interface IProps {
   onChange?: (value?: number[]) => void
 }
 
-const formLayout: FormItemProps = {
+const formLayout: FormProps = {
   labelCol: {
     span: 4,
   },
   wrapperCol: {
-    span: 8
+    span: 16
   }
 }
 

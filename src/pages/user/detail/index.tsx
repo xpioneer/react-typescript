@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import {
   Row, Col, Form, Input, Button,
   Spin,
-  FormItemProps,
+  FormProps,
   Space,
   Select,
 } from 'antd'
@@ -11,12 +11,12 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { useUserDetail } from './useDetail'
 import { User, userSexOpts, userTypeOpts } from '@/models/user'
 
-const formLayout: FormItemProps = {
+const formLayout: FormProps = {
   labelCol: {
-    span: 6,
+    span: 4,
   },
   wrapperCol: {
-    span: 12
+    span: 16
   }
 }
 

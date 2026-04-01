@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import {
   Row, Col, Form, Input, Button,
   Spin,
-  FormItemProps,
+  FormProps,
   Space,
   Select,
   Checkbox,
@@ -13,7 +13,7 @@ import { Article } from '@models/article'
 import { QuillEditor } from '@components/editor/new'
 import { DatePicker } from '@components/datePicker'
 
-const formLayout: FormItemProps = {
+const formLayout: FormProps = {
   labelCol: {
     span: 4,
   },

@@ -25,12 +25,12 @@
     "lintcss:fix": "stylelint --syntax scss src/**/*.scss --fix"
   },
   "dependencies": {
-    "@ant-design/icons": "^5.4.0",
+    "@ant-design/icons": "^6.1.1",
     "@antv/l7": "^2.22.1",
     "@antv/l7-maps": "^2.22.1",
     "@react-three/fiber": "^8.17.6",
     "@vladmandic/face-api": "^1.7.14",
-    "antd": "^5.13.2",
+    "antd": "^6.3.5",
     "axios": "^1.6.5",
     "clsx": "^2.1.1",
     "date-fns": "^2.30.0",
