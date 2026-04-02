@@ -4,7 +4,7 @@ import { GeographicStats } from 'types/dashboard'
 import { Earth } from '@antv/l7-maps';
 import worldImg from '@/assets/imgs/world.jpg'
 
-export type SetChartData = [AnyObject<string>[], GeographicStats[]]
+export type SetChartData = [any[], GeographicStats[]]
 
 const token = '6f025e700cbacbb0bb866712d20bb35c'
 
@@ -183,17 +183,23 @@ const setVisitOption = (visitScene: Scene, data: AnyObject<string>[], colorPrima
       y1: 'y1',
     },
   })
-  .size(1)
+  .size('total', (t) => {
+    // 既然是一条线代表多次访问，我们通过粗细来体现“分量感”
+    // 这样既省 CPU，视觉上也能体现出哪里访问更频繁
+    if (t > 100) return 3;
+    if (t > 50) return 2;
+    return 1;
+  })
   .shape('arc3d')
   .animate({
     enable: true,
     interval: 0.1,
     trailLength: 0.5,
-    duration: 2,
+    duration: 3,
   })
   .color(colorPrimary)
   .style({
-    opacity: 0.8,
+    opacity: 0.6, // 稍微提高一点透明度，让线条更有质感
   });
   visitScene.removeAllLayer();
   visitScene.addLayer(layer);

@@ -2,10 +2,11 @@ import { useState, useEffect, useRef } from 'react'
 import { getGeoMapStats } from '@/services/geography'
 import { getMongoLogsStats } from '@/services/api'
 import { useAppState } from '@/stores'
-import { setChartData, setEarthMap } from './echarts'
+import { GeographicStats } from '@/types/dashboard'
+import { setChartData } from './echarts'
 import { setGeoOptions, setGeoScene, SetChartData, IScenes } from './antv'
 
-const data2List = (data: SetChartData[1]) => {
+const data2List = (data: GeographicStats[]) => {
   const dest = {
     "name_en": "Matawan",
     "ip": "45.77.218.105",
@@ -14,31 +15,19 @@ const data2List = (data: SetChartData[1]) => {
     "latitude": "40.4169",
     "longitude": "-74.2579"
   }
-  const list: SetChartData[0] = [];
-
-  data.forEach(i => {
-    if(i.ip !== dest.ip) {
-      const total = +i.total || 1
-      const visit = {
-        from: i.name_en || 'Unknow',
-        to: dest.name_en,
-        value: i.total,
-        type: 'move_out',
-        x: i.longitude,
-        y: i.latitude,
-        x1: dest.longitude,
-        y1: dest.latitude,
-      }
-      const arr = []
-      for(let i = 0; i < total; i++) {
-        arr.push(visit)
-      }
-      list.push(...arr)
-    }
-  })
-
-  console.log(data.length, list.length)
-  return list
+  
+  // 优化点：原来的1691条原始数据会变成7810条，不再通过循环 push 来倍增数据。
+  return data.filter(i => i.ip !== dest.ip).map(i => ({
+    from: i.name_en || 'Unknown',
+    to: dest.name_en,
+    total: +i.total || 1, // 将数量作为属性传下去，由图层 size 控制粗细
+    value: i.total,
+    type: 'move_out',
+    x: i.longitude,
+    y: i.latitude,
+    x1: dest.longitude,
+    y1: dest.latitude,
+  }))
 }
 
 export const useData = () => {
