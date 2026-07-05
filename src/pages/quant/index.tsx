@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Row, Col, Card, Table, Button, Space, Select, DatePicker, Tag, Progress, Spin } from 'antd'
 import { PlayCircleOutlined, BarChartOutlined, CheckCircleOutlined, WarningOutlined } from '@ant-design/icons'
+import { useNavigate } from 'react-router-dom'
 import type { ColumnsType } from 'antd/es/table'
 import * as Echarts from 'echarts/core'
 import { TitleComponent, TooltipComponent, GridComponent, DataZoomComponent } from 'echarts/components'
@@ -96,6 +97,7 @@ const QuantificationPage: React.FC<ICommonProps> = () => {
   const [klineData, setKlineData] = useState<KlinePoint[]>([])
   const [loadingKline, setLoadingKline] = useState(false)
   const chartRef = useRef<HTMLDivElement>(null)
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchKlineData = async () => {
@@ -362,6 +364,14 @@ const QuantificationPage: React.FC<ICommonProps> = () => {
 
   return (
     <div className={styles.quantContainer}>
+      <Card style={{ marginBottom: 16 }}>
+        <Space wrap>
+          <Button type="primary" onClick={() => navigate('/quant/dashboard')}>Dashboard 介绍</Button>
+          <Button onClick={() => navigate('/quant/stock')}>单只股票页面</Button>
+          <Button onClick={() => navigate('/quant/backtest')}>策略回测页面</Button>
+        </Space>
+      </Card>
+
       <Row gutter={16} className={styles.headerRow}>
         <Col span={8}>
           <Card className={styles.statCard}>

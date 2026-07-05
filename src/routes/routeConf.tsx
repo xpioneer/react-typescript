@@ -56,6 +56,9 @@ const DemoRedux = lazy(() => import( /* webpackChunkName:"demoRedux" */ '@pages/
 
 // quantitative trading
 const Quant = lazy(() => import( /* webpackChunkName:"quant" */ '@pages/quant'))
+const QuantDashboard = lazy(() => import( /* webpackChunkName:"quantDashboard" */ '@pages/quant/dashboard'))
+const QuantStock = lazy(() => import( /* webpackChunkName:"quantStock" */ '@pages/quant/stock'))
+const QuantBacktest = lazy(() => import( /* webpackChunkName:"quantBacktest" */ '@pages/quant/backtest'))
 
 type XRouteObject = RouteObject & {
   title?: string
@@ -268,7 +271,27 @@ const routesConf: XRouteObject[] = [
     title: 'Quant',
     path: 'quant',
     icon: <AccountBookOutlined />,
-    element: <Quant />,
+    // element: <Quant />,
+    subRoute: [
+      {
+        title: 'Dashboard',
+        path: 'dashboard',
+        icon: <BarChartOutlined />,
+        element: <QuantDashboard />,
+      },
+      {
+        title: 'Single Stock',
+        path: 'stock',
+        icon: <StockOutlined />,
+        element: <QuantStock />,
+      },
+      {
+        title: 'Backtest',
+        path: 'backtest',
+        icon: <ExperimentOutlined />,
+        element: <QuantBacktest />,
+      },
+    ],
   },
   {
     title: 'Demos',
