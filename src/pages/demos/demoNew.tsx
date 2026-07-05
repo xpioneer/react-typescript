@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Row, Col, Button, Badge, Form, Input, Select, Space, Upload, UploadFile, Flex } from 'antd'
 import { MinusCircleOutlined, PlusCircleOutlined, PlusCircleFilled, PlusOutlined } from '@ant-design/icons'
 import { useDemoState } from './useDemo'
-import { apiTypeOpts, methodOpts, APIFormTest, Method, APIType } from '@/types/demo'
+import { apiSourceOpts, methodOpts, APIFormTest, Method, APISource } from '@/types/demo'
 import { JSONView } from '@/components/jsonView'
 import styles from './demo.module.scss'
 import { DatePicker } from '@components/datePicker'
@@ -17,7 +17,7 @@ const formItemLayout = {
   },
   wrapperCol: {
     xs: { span: 24 },
-    sm: { span: 12 },
+    sm: { span: 16 },
   },
 }
 
@@ -84,7 +84,7 @@ const Demo: React.FC<ICommonProps> = () => {
         form={form}
         initialValues={{
           method: Method.GET,
-          apiType: APIType.RESTful
+          apiType: APISource.RESTful
         }}
         onFinish={onFinish}
       >
@@ -98,17 +98,17 @@ const Demo: React.FC<ICommonProps> = () => {
           <Row gutter={16}>
             <Col span={14}>
               <Form.Item noStyle name='url' rules={[{required: true}]}>
-                <Input placeholder="请输入url" disabled={apiType === APIType.Graphql}/>
+                <Input placeholder="请输入url" disabled={apiType === APISource.Graphql}/>
               </Form.Item>
             </Col>
             <Col span={5}>
-              {apiType === APIType.RESTful && <Form.Item noStyle name='method'>
+              {apiType !== APISource.Graphql && <Form.Item noStyle name='method'>
                 <Select options={methodOpts}/>
               </Form.Item>}
             </Col>
             <Col span={5}>
               <Form.Item noStyle name="apiType">
-                <Select options={apiTypeOpts}/>
+                <Select options={apiSourceOpts}/>
               </Form.Item>
             </Col>
           </Row>

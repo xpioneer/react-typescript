@@ -3,6 +3,7 @@ import { AxiosResponse, AxiosError } from 'axios'
 import { storage } from '@utils/tools'
 import { JWT_TOKEN } from '@constants/index'
 import helper from './httpHelper'
+import { APISource } from '@/types/demo'
 
 export const $http = axios.create({
   baseURL: '',
@@ -12,6 +13,10 @@ export const $http = axios.create({
 
 $http.interceptors.request.use(config => {
   config.headers.Authorization = 'Bearer ' + storage.get(JWT_TOKEN)
+  if (config.baseURL?.startsWith(APISource.Quantification)) {
+    config.data = helper.transformKeysToSnake(config.data)
+    config.params = helper.transformKeysToSnake(config.params)
+  }
   return config
 }, error => {
   return Promise.reject(error)

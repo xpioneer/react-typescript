@@ -4,12 +4,13 @@ import { message as $msg } from '@components/message'
 import { storage } from './tools'
 
 class HttpHelper {
-
-  public successHelper (res: AxiosResponse<any>): void {
+  public successHelper(res: AxiosResponse<any>): void {
     const url = res.config.url?.split('?')[0]!
-    const {data: { errors }} = res
+    const {
+      data: { errors },
+    } = res
     switch (res.status) {
-      case 200 :
+      case 200:
         const path = url.split('/api')
         if (path[1] === '/login') {
           $msg.success('登陆成功')
@@ -28,18 +29,18 @@ class HttpHelper {
           $msg.success('Succeed')
         }
         break
-      default :
+      default:
         //
         break
     }
   }
 
-  public errorHelper (err: AxiosResponse): void {
+  public errorHelper(err: AxiosResponse): void {
     // console.log(err, 'err.data.msg.statusText')
     const path = err.config.url?.split('?')[0]!
     const data = err.data // server response data
     switch (err.status) {
-      case 400 :
+      case 400:
         const arr = path.split('/api')
         if (arr[1] === '/login') {
           $msg.error('用户名或密码错误')
@@ -51,7 +52,7 @@ class HttpHelper {
           $msg.error(data.msg || err.statusText)
         }
         break
-      case 401 :
+      case 401:
         storage.clear(true)
         $msg.error('请重新登录')
         sessionStorage.setItem(REDIRECT_URL, location.pathname)
@@ -59,32 +60,68 @@ class HttpHelper {
           location.href = '/login'
         }, 1000)
         break
-      case 403 :
+      case 403:
         $msg.error(data.msg || '错误, 禁止访问')
         break
-      case 404 :
+      case 404:
         $msg.error('未找到, 未找到资源,请检查')
         break
-      case 405 :
+      case 405:
         $msg.error('错误, 此方法不允许')
         break
-      case 406 :
+      case 406:
         $msg.error('错误, 此方法不接受,请检查')
         break
-      case 500 :
+      case 500:
         $msg.error(data.msg || data.errors[0])
         break
-      case 503 :
+      case 503:
         $msg.error('连接被拒绝, 服务不可用')
         break
-      case 504 :
+      case 504:
         $msg.error('网关超时, 请与运维小郭联系')
         break
-      default :
+      default:
         $msg.error('错误, 服务端未知错误')
         break
     }
   }
+
+  private camelToSnake(str: string): string {
+    return str.replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`)
+  }
+  transformKeysToSnake(obj: any): any {
+    if (Array.isArray(obj)) {
+      return obj.map(this.transformKeysToSnake)
+    }
+    if (obj !== null && typeof obj === 'object' && !(obj instanceof FormData)) {
+      return Object.keys(obj).reduce((acc, key) => {
+        const snakeKey = this.camelToSnake(key)
+        acc[snakeKey] = this.transformKeysToSnake(obj[key])
+        return acc
+      }, {} as any)
+    }
+    return obj
+  }
+
+  private snakeToCamel(str: string): string {
+    return str.replace(/([-_][a-z])/g, (group) =>
+      group.toUpperCase().replace('-', '').replace('_', ''),
+    )
+  }
+  transformKeysToCamel(obj: any): any {
+    if (Array.isArray(obj)) {
+      return obj.map(this.transformKeysToCamel)
+    }
+    if (obj !== null && typeof obj === 'object') {
+      return Object.keys(obj).reduce((acc, key) => {
+        const camelKey = this.snakeToCamel(key)
+        acc[camelKey] = this.transformKeysToCamel(obj[key])
+        return acc
+      }, {} as any)
+    }
+    return obj
+  }
 }
 
-export default new HttpHelper
+export default new HttpHelper()

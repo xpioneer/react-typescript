@@ -1,11 +1,18 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { Form, message, UploadFile } from 'antd'
-import { APIFormTest, APIType, Method } from '@/types/demo'
+import { APIFormTest, APISource, Method } from '@/types/demo'
+import { $http } from '@/utils/http'
 
 const defaultParams: AnyObject = {
   query: '{}',
   varibles: '{}',
   operationName: null
+}
+
+const RESTfulDefaultParams = {
+  testField: 'this is testField value',
+  age: 123,
+  paid: true
 }
 
 
@@ -20,21 +27,11 @@ export const useDemoState = () => {
   
   useEffect(() => {
     console.log('watch type', apiType)
-    if(apiType === APIType.Graphql) {
-      form.setFieldsValue({
-        url: apiType,
-        params: JSON.stringify(defaultParams, null, 4)
-      })
-    } else {
-      form.setFieldsValue({
-        url: '/api',
-        params: JSON.stringify({
-          testField: 'this is testField value',
-          age: 123,
-          paid: true
-        }, null, 4)
-      })
-    }
+    const tempParams = apiType === APISource.Graphql ? defaultParams : RESTfulDefaultParams
+    form.setFieldsValue({
+      url: apiType,
+      params: JSON.stringify(tempParams, null, 4)
+    });
   }, [apiType])
 
   const onRequest = useCallback((data: APIFormTest) => {

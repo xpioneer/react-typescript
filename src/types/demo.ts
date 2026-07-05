@@ -3,7 +3,7 @@ import { object2Options } from '@utils/tools'
 export interface APIFormTest {
   url: string
   method: Method
-  apiType: APIType
+  apiSource: APISource
   params: string
 }
 
@@ -17,9 +17,10 @@ export enum Method {
 
 export const methodOpts = object2Options(Method)
 
-export enum APIType {
-  'RESTful' = '/api',
-  'Graphql' = '/graphql'
+export enum APISource {
+  RESTful = '/api',
+  Graphql = '/graphql',
+  Quantification = '/py-api'
 }
 
-export const apiTypeOpts = object2Options(APIType)
+export const apiSourceOpts = object2Options(APISource)

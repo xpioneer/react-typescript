@@ -7,7 +7,7 @@ import {
   BookOutlined, FormOutlined, FrownOutlined, FundOutlined,
   HomeOutlined, MehOutlined, SmileOutlined, StockOutlined,
   LineChartOutlined, BaiduOutlined, GlobalOutlined,
-  SmileFilled,
+  SmileFilled, AccountBookOutlined,
 } from '@ant-design/icons'
 // import ThreejsIcon from '@/assets/icons/threejs.svg'
 import {ThreejsIcon} from '@/assets/icons/threejs'
@@ -53,6 +53,9 @@ const FaceRecognition = lazy(() => import( /* webpackChunkName:"Face" */ '@pages
 const Demo = lazy(() => import( /* webpackChunkName:"demo" */ '@pages/demos/demoNew'))
 const DemoMobx = lazy(() => import( /* webpackChunkName:"demoMobx" */ '@pages/demos/demoMobx'))
 const DemoRedux = lazy(() => import( /* webpackChunkName:"demoRedux" */ '@pages/demos/demoRedux'))
+
+// quantitative trading
+const Quant = lazy(() => import( /* webpackChunkName:"quant" */ '@pages/quant'))
 
 type XRouteObject = RouteObject & {
   title?: string
@@ -260,6 +263,12 @@ const routesConf: XRouteObject[] = [
     path: 'face',
     icon: <SmileFilled />,
     element: <FaceRecognition />
+  },
+  {
+    title: 'Quant',
+    path: 'quant',
+    icon: <AccountBookOutlined />,
+    element: <Quant />,
   },
   {
     title: 'Demos',

@@ -1,0 +1,95 @@
+.quantContainer {
+  padding: 16px;
+}
+
+.headerRow {
+  margin-bottom: 16px;
+}
+
+.statCard {
+  .statContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    .statLabel {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 8px;
+    }
+    
+    .statValue {
+      font-size: 28px;
+      font-weight: 600;
+      color: #1890ff;
+    }
+  }
+}
+
+.filterCard {
+  margin-bottom: 16px;
+}
+
+.klineCard {
+  margin-bottom: 16px;
+}
+
+.chartBox {
+  width: 100%;
+  height: 360px;
+}
+
+.chartPlaceholder {
+  width: 100%;
+  height: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+}
+
+.tableCard {
+  margin-bottom: 16px;
+}
+
+.detailRow {
+  .chartCard {
+    .progressItem {
+      margin-bottom: 24px;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+      
+      .progressHeader {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        
+        .progressValue {
+          font-weight: 600;
+        }
+      }
+    }
+    
+    .riskItem {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid #f0f0f0;
+      
+      &:last-child {
+        border-bottom: none;
+      }
+      
+      .riskLabel {
+        color: #666;
+      }
+      
+      .riskValue {
+        font-weight: 600;
+        color: #1890ff;
+      }
+    }
+  }
+}
