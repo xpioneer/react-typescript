@@ -21,6 +21,7 @@ import {
   AppleOutlined,
 } from '@ant-design/icons'
 import { useAppState } from '@/stores'
+import { useShallow } from 'zustand/react/shallow'
 import { onLogout } from '@/services/account'
 import { LangI18n, Theme } from '@/types/global'
 import { PRIMARY_COLOR } from '@/constants'
@@ -43,7 +44,14 @@ export const HeaderComponent: React.FC = () => {
     setPrimary,
     setTheme,
     setLang
-  } = useAppState()
+  } = useAppState(useShallow(state => ({
+    lang: state.lang,
+    theme: state.theme,
+    colorPrimary: state.colorPrimary,
+    setPrimary: state.setPrimary,
+    setTheme: state.setTheme,
+    setLang: state.setLang,
+  })))
 
   const { modal } = App.useApp();
 

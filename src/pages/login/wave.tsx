@@ -40,7 +40,7 @@ const Wave = ({ color }: { color: THREE.Color }) => {
 }
 
 export const WaveComponent: React.FC = () => {
-  const { colorPrimary } = useAppState()
+  const colorPrimary = useAppState(state => state.colorPrimary)
 
   const color = new THREE.Color(colorPrimary)
   const rgb = [color.r, color.g, color.b].map((i) => Math.round(i * 255))

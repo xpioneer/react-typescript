@@ -12,9 +12,7 @@ const { Content } = Layout
 
 const HomePage: React.FC = () => {
 
-  const {
-    authorized
-  } = useAppState()
+  const authorized = useAppState(state => state.authorized)
 
 
   return (

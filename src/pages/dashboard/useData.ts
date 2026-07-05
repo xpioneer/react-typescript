@@ -32,7 +32,7 @@ const data2List = (data: GeographicStats[]) => {
 
 export const useData = () => {
 
-  const { colorPrimary } = useAppState()
+  const colorPrimary = useAppState(state => state.colorPrimary)
   const [loading, setLoading] = useState(false)
 
   const visitRef = useRef<HTMLDivElement>(null)

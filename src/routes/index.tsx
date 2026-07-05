@@ -4,6 +4,7 @@ import zh_CN from 'antd/lib/locale/zh_CN'
 import en_US from 'antd/lib/locale/en_US'
 import zh_TW from 'antd/lib/locale/zh_TW'
 import { useAppState } from '@/stores'
+import { useShallow } from 'zustand/react/shallow'
 import { Routes } from './pageRoutes'
 import { LangI18n, Theme } from '@/types/global'
 import { PREFERS_COLOR_SCHEME_DARK } from '@/constants'
@@ -16,7 +17,12 @@ const AntdLocale: Record<LangI18n, typeof zh_CN> = {
 }
 
 export const Navigation: React.FC = () => {
-  const { lang, theme, colorPrimary, setTheme } = useAppState()
+  const { lang, theme, colorPrimary, setTheme } = useAppState(useShallow(state => ({
+    lang: state.lang,
+    theme: state.theme,
+    colorPrimary: state.colorPrimary,
+    setTheme: state.setTheme,
+  })))
   const themeConfig = useThemeConfig()
 
   useEffect(() => {

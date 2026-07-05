@@ -11,9 +11,7 @@ export const ProgressComponent: React.FC<Required<ProgressProps>> = ({
   size
 }) => {
 
-  const {
-    colorPrimary,
-  } = useAppState()
+  const colorPrimary = useAppState(state => state.colorPrimary)
 
   const el = useRef<HTMLDivElement>(null)
   const sizes: Record<Exclude<ProgressProps['size'], undefined>, number> = {

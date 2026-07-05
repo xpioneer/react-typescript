@@ -19,7 +19,7 @@ const LoginPage: React.FC = () => {
   const { t } = useTranslation()
   const navigate = useNavigate()
 
-  const { setAuthorized } = useAppState()
+  const setAuthorized = useAppState(state => state.setAuthorized)
 
   const [form] = Form.useForm<LoginForm>()
 

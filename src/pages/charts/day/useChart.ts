@@ -33,7 +33,7 @@ let heatChart: Echart.ECharts | null = null
 
 export const useChart = () => {
 
-  const { colorPrimary } = useAppState()
+  const colorPrimary = useAppState(state => state.colorPrimary)
 
   const chartRef = useRef<HTMLDivElement>(null)
   const heatRef = useRef<HTMLDivElement>(null)

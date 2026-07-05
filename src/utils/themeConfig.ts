@@ -66,7 +66,7 @@ const getTokenConfig = (): ThemeConfig => {
 }
 
 export const useThemeConfig = () => {
-  const { theme } = useAppState()
+  const theme = useAppState(state => state.theme)
   const [themeConfig, setThemeConfig] = useState(getTokenConfig())
 
   useEffect(() => {
