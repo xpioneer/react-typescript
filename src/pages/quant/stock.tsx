@@ -1,7 +1,8 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
-import { Card, Col, Drawer, Row, Select, Spin, Table, Tag } from 'antd'
+import { Button, Card, Col, Drawer, Row, Select, Spin, Table, Tag } from 'antd'
+import { format } from 'date-fns'
 import type { ColumnsType } from 'antd/es/table'
-import { getStockData } from '@/services/quant'
+import { getStockData, getStrategyData } from '@/services/quant'
 import styles from './style.module.scss'
 import * as Echarts from 'echarts/core'
 import {
@@ -12,6 +13,8 @@ import {
 } from 'echarts/components'
 import { CandlestickChart, LineChart, BarChart } from 'echarts/charts'
 import { CanvasRenderer } from 'echarts/renderers'
+import { object2Options } from '@/utils/tools'
+import { StrategyData } from 'types/quant'
 
 Echarts.use([
   TitleComponent,
@@ -33,25 +36,48 @@ interface KlinePoint {
   volume: number
 }
 
+enum Stock {
+  Apple = 'AAPL',
+  美的集团 = '000333',
+}
+
+const options = object2Options(Stock)
+
+enum Strategy {
+  MACross = 'ma_cross',
+  RSI = 'rsi',
+}
+
+
+const strategyOpts = object2Options(Strategy)
+
 const StockQuantPage: React.FC = () => {
   const chartRef = useRef<HTMLDivElement>(null)
 
-  const [symbol, setSymbol] = useState('000333')
+  const [symbol, setSymbol] = useState(Stock.美的集团)
   const [loading, setLoading] = useState(false)
   const [rows, setRows] = useState<KlinePoint[]>([])
   const [open, setOpen] = useState(false)
   const [size, setSize] = useState(900)
+  const [strategy, setStrategy] = useState(Strategy.RSI)
+  const [strategyData, setStrategyData] = useState<StrategyData | undefined>(undefined)
+  const [open1, setOpen1] = useState(false)
 
   useEffect(() => {
     setLoading(true)
     getStockData({
       symbol,
-      startDate: '20260603',
+      startDate: '20120603',
       endDate: '20260703',
     }).then(({ rows }) => {
-      setRows(rows ?? [])
+      setRows((rows ?? []).map((i: KlinePoint) => ({ ...i, date: format(new Date(i.date), 'yyyyMMdd') })))
     }).finally(() => setLoading(false))
   }, [symbol])
+
+
+  useEffect(() => {
+    getStrategyData({ strategy_type: strategy, symbol }).then(setStrategyData)
+  }, [strategy, symbol])
 
   useEffect(() => {
     if (!chartRef.current || rows.length === 0) {
@@ -118,7 +144,7 @@ const StockQuantPage: React.FC = () => {
 
     chart.setOption({
       title: {
-        text: 'AAPL K线策略图',
+        text: `${symbol} K线策略图`,
         left: 'center',
       },
       tooltip: {
@@ -246,17 +272,66 @@ const StockQuantPage: React.FC = () => {
     { title: '成交量', dataIndex: 'volume', key: 'volume', render: (value) => Number(value).toLocaleString() },
   ]
 
+  const equityCurveColumns: ColumnsType<StrategyData['equityCurve'][0]> = [
+    {
+      title: '日期',
+      dataIndex: 'date',
+      key: 'date',
+      render: (value: string) => value || '—',
+    },
+    {
+      title: '是否交易',
+      dataIndex: 'trade',
+      key: 'trade',
+      render: (value: number, data) => {
+        const item = strategyData?.trades?.find(
+          (trade) => format(new Date(trade.date), 'yyyy-MM-dd') === data.date,
+        )
+        return item ? item.type : '否'
+      },
+    },
+    {
+      title: '持仓',
+      dataIndex: 'shares',
+      key: 'shares',
+      render: (value: number, data) => {
+        const item = strategyData?.trades?.find(
+          (trade) => format(new Date(trade.date), 'yyyy-MM-dd') <= data.date,
+        )
+        return item ? item.shares : 0
+      },
+    },
+
+    {
+      title: '净值 / 资金曲线',
+      dataIndex: 'portfolioValue',
+      key: 'portfolioValue',
+      render: (value: number) => Number(value).toFixed(2),
+    },
+  ]
+
+  const equityCurveData = useMemo(() => {
+    if (!strategyData?.equityCurve?.length) {
+      return []
+    }
+
+    return strategyData.equityCurve.map((item) => ({
+      ...item,
+      date: item.date ? format(new Date(item.date), 'yyyy-MM-dd') : '—',
+    }))
+  }, [strategyData])
+
   return (
     <div className={styles.quantContainer}>
       <Card title="单只股票量化分析" style={{ marginBottom: 16 }}>
-        <Row gutter={16} align="middle">
+        <Row gutter={[16, 16]} align="middle">
           <Col span={6}>
-            <Select value={symbol} onChange={setSymbol} style={{ width: '100%' }}>
-              <Select.Option value="AAPL">AAPL</Select.Option>
-              <Select.Option value="MSFT">MSFT</Select.Option>
-              <Select.Option value="TSLA">TSLA</Select.Option>
-              <Select.Option value="000333">000333</Select.Option>
-            </Select>
+            <Select
+              value={symbol}
+              onChange={setSymbol}
+              style={{ width: '100%' }}
+              options={options}
+            />
           </Col>
           <Col span={6}>
             <div style={{ color: '#666' }}>
@@ -270,6 +345,46 @@ const StockQuantPage: React.FC = () => {
           </Col>
           <Col span={6}>
             <Tag color="blue">成交量：{summary.volume ? summary.volume.toLocaleString() : '—'}</Tag>
+          </Col>
+          <Col span={6}>
+            <Select
+              value={strategy}
+              onChange={setStrategy}
+              style={{ width: '100%' }}
+              options={strategyOpts}
+            />
+          </Col>
+          <Col span={6}>
+            <div
+              style={{
+                color:
+                  strategyData?.totalReturn && strategyData?.totalReturn >= 0
+                    ? '#cf1322'
+                    : '#52c41a',
+              }}
+            >
+              总收益率：{strategyData?.totalReturn}%
+            </div>
+          </Col>
+          <Col span={6}>
+            <div style={{ color: 'red' }}>最大回撤：{strategyData?.maxDrawdown}%</div>
+          </Col>
+          <Col span={6}>
+            <Tag color="blue">夏普比率：{strategyData?.sharpeRatio}%</Tag>
+          </Col>
+          <Col span={6}>
+            <Tag color="blue">总交易次数：{strategyData?.totalTrades}</Tag>
+          </Col>
+          <Col span={6}>
+            <Tag color="blue">初始金额：{strategyData?.initialCapital}</Tag>
+          </Col>
+          <Col span={6}>
+            <Tag color="blue">最终金额：{strategyData?.finalValue}</Tag>
+          </Col>
+          <Col span={6}>
+            <Button type="primary" onClick={() => setOpen1(true)}>
+              资金曲线详情
+            </Button>
           </Col>
         </Row>
       </Card>
@@ -293,6 +408,29 @@ const StockQuantPage: React.FC = () => {
           rowKey="date"
           pagination={false}
           size="small"
+        />
+      </Drawer>
+      <Drawer
+        title={'资金曲线详情'}
+        placement="left"
+        open={open1}
+        size={size}
+        onClose={() => setOpen1(false)}
+        resizable={{
+          onResize: (newSize) => setSize(newSize),
+        }}
+      >
+        <div style={{ marginBottom: 12, color: '#666' }}>
+          当前策略的资金曲线明细，展示每个时间点的净值变化。
+        </div>
+        <Table
+          loading={loading}
+          columns={equityCurveColumns}
+          dataSource={equityCurveData}
+          rowKey="date"
+          pagination={false}
+          size="small"
+          scroll={{ x: 480 }}
         />
       </Drawer>
     </div>

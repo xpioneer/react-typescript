@@ -1,6 +1,6 @@
 import { Method } from '@/types/demo'
 import { pageData2Params } from '@utils/tools'
-import { StockStats, Stock } from 'types/stock'
+import { StrategyData } from 'types/quant'
 import { useQuantRequest } from './http'
 
 export type QuantQuery = {
@@ -17,6 +17,7 @@ export type QuantData = {
   close: number
   volume: number
   symbol: string
+  local?: boolean
 }
 
 type QuantKLineData<T = unknown> = {
@@ -26,5 +27,15 @@ type QuantKLineData<T = unknown> = {
 }
 
 export const getStockData = ({ symbol, ...restParams }: QuantQuery) => {
-  return useQuantRequest<QuantKLineData<QuantData>>(`/market/kline/${symbol}`, restParams)
+  return useQuantRequest<QuantKLineData<QuantData>>(`/market/stock/${symbol}`, restParams)
 }
+
+export const getStrategyData = (data: AnyObject) => {
+  return useQuantRequest<StrategyData>(
+    `/strategy/backtest`,
+    data,
+    Method.POST,
+  )
+}
+
+

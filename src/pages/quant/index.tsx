@@ -40,6 +40,7 @@ interface KlinePoint {
   low: number
   close: number
   volume: number
+  local?: boolean
 }
 
 const { Option } = Select
@@ -128,7 +129,10 @@ const QuantificationPage: React.FC<ICommonProps> = () => {
     const dates = klineData.map((item) => item.date)
     const candles = klineData.map((item) => [item.open, item.close, item.low, item.high])
     const closes = klineData.map((item) => item.close)
-    const volumes = klineData.map((item) => item.volume)
+    const volumes = klineData.map((item) => ({
+      value: item.volume,
+      itemStyle: { color: item.close >= item.open ? '#ef5350' : '#26a69a' },
+    }))
 
     const calcMA = (period: number) => {
       const result: (number | null)[] = []
