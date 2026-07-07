@@ -36,7 +36,7 @@ export const SiderBar: React.FC = () => {
   }
 
   return (
-    <Sider collapsible width={Math.max(controlHeight * 6, 220)}>
+    <Sider collapsible width={Math.max(controlHeight * 6, 220)} style={{height: '100vh'}}>
       <div className={styles.logo} style={{ height: controlHeight * 2 }}>
         <svg
           xmlns="http://www.w3.org/2000/svg"

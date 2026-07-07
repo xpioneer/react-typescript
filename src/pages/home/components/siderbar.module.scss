@@ -25,6 +25,10 @@
   display: none;
 }
 
+:global(.ant-layout-sider-children){
+  overflow: auto;
+}
+
 @keyframes logoRotate {
   from {
     transform: rotateZ(0);

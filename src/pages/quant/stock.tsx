@@ -48,6 +48,15 @@ enum Strategy {
   RSI = 'rsi',
 }
 
+enum DateTime {
+  yyyyMMdd = 'yyyyMMdd',
+  yyyy_MM_dd = 'yyyy-MM-dd',
+}
+
+enum Colors {
+  Red = '#ef5350',
+  Green = '#26a69a',
+}
 
 const strategyOpts = object2Options(Strategy)
 
@@ -69,11 +78,17 @@ const StockQuantPage: React.FC = () => {
       symbol,
       startDate: '20120603',
       endDate: '20260703',
-    }).then(({ rows }) => {
-      setRows((rows ?? []).map((i: KlinePoint) => ({ ...i, date: format(new Date(i.date), 'yyyyMMdd') })))
-    }).finally(() => setLoading(false))
+    })
+      .then(({ rows }) => {
+        setRows(
+          (rows ?? []).map((i: KlinePoint) => ({
+            ...i,
+            date: format(new Date(i.date), DateTime.yyyyMMdd),
+          })),
+        )
+      })
+      .finally(() => setLoading(false))
   }, [symbol])
-
 
   useEffect(() => {
     getStrategyData({ strategy_type: strategy, symbol }).then(setStrategyData)
@@ -89,6 +104,12 @@ const StockQuantPage: React.FC = () => {
     const candles = rows.map((item) => [item.open, item.close, item.low, item.high])
     const closes = rows.map((item) => item.close)
     const volumes = rows.map((item) => item.volume)
+
+    // K 线颜色也改成"收盘价比前一天高 → 红，否则绿"
+    const candleColors = rows.map((item, index) => {
+      if (index === 0) return Colors.Red
+      return item.close > rows[index - 1].close ? Colors.Red : Colors.Green
+    })
 
     const calcMA = (period: number) => {
       const result: (number | null)[] = []
@@ -108,6 +129,7 @@ const StockQuantPage: React.FC = () => {
     const ma10 = calcMA(10)
     const ma20 = calcMA(20)
 
+    // ===== 信号点 =====
     const signalPoints = [] as Array<{
       name: string
       value: number
@@ -127,7 +149,7 @@ const StockQuantPage: React.FC = () => {
             value: closes[i],
             xAxis: dates[i],
             yAxis: rows[i].low * 0.98,
-            itemStyle: { color: '#26a69a' },
+            itemStyle: { color: Colors.Red },
           })
         }
         if (prevShort >= prevLong && currShort < currLong) {
@@ -136,11 +158,18 @@ const StockQuantPage: React.FC = () => {
             value: closes[i],
             xAxis: dates[i],
             yAxis: rows[i].high * 1.02,
-            itemStyle: { color: '#ef5350' },
+            itemStyle: { color: Colors.Green },
           })
         }
       }
     }
+
+    // ===== 资金曲线数据 =====
+    const equityCurve = strategyData?.equityCurve ?? []
+    const equityDates = equityCurve.map((item) =>
+      item.date ? format(new Date(item.date), DateTime.yyyyMMdd) : '',
+    )
+    const equityValues = equityCurve.map((item) => item.portfolioValue)
 
     chart.setOption({
       title: {
@@ -154,12 +183,12 @@ const StockQuantPage: React.FC = () => {
         },
       },
       legend: {
-        data: ['K线', 'MA5', 'MA10', 'MA20', '成交量'],
+        data: ['K线', 'MA5', 'MA10', 'MA20', '成交量', '资金曲线'],
         top: 30,
       },
       grid: [
-        { left: '6%', right: '3%', top: '20%', bottom: '35%' },
-        { left: '6%', right: '3%', top: '75%', bottom: '5%' },
+        { left: '6%', right: '8%', top: '20%', bottom: '35%' },
+        { left: '6%', right: '8%', top: '75%', bottom: '5%' },
       ],
       xAxis: [
         {
@@ -180,8 +209,33 @@ const StockQuantPage: React.FC = () => {
         },
       ],
       yAxis: [
-        { type: 'value', name: '价格', gridIndex: 0, scale: true },
-        { type: 'value', name: '成交量', gridIndex: 1, scale: true },
+        {
+          type: 'value',
+          name: '价格',
+          gridIndex: 0,
+          scale: true,
+        },
+        {
+          type: 'value',
+          name: '成交量',
+          gridIndex: 1,
+          scale: true,
+        },
+        {
+          type: 'value',
+          name: '资产(元)',
+          gridIndex: 0,
+          scale: true,
+          splitLine: { show: false }, // 不显示分割线，避免干扰
+          axisLabel: {
+            formatter: (value: number) => {
+              if (value >= 10000) {
+                return (value / 10000).toFixed(1) + '万'
+              }
+              return value.toFixed(0)
+            },
+          },
+        },
       ],
       dataZoom: [
         { type: 'inside', start: 70, end: 100 },
@@ -193,10 +247,10 @@ const StockQuantPage: React.FC = () => {
           type: 'candlestick',
           data: candles,
           itemStyle: {
-            color: '#ef5350',
-            color0: '#26a69a',
-            borderColor: '#ef5350',
-            borderColor0: '#26a69a',
+            color: Colors.Red,
+            color0: Colors.Green,
+            borderColor: Colors.Red,
+            borderColor0: Colors.Green,
           },
           markPoint: {
             label: { formatter: '{b}' },
@@ -233,7 +287,32 @@ const StockQuantPage: React.FC = () => {
           xAxisIndex: 1,
           yAxisIndex: 1,
           data: volumes,
-          itemStyle: { color: '#91caff' },
+          itemStyle: {
+            color: (params: any) => {
+              console.log('params', params)
+              return candleColors[params.dataIndex]
+            },
+          },
+        },
+        // ===== 资金曲线（右侧Y轴）=====
+        {
+          name: '资金曲线',
+          type: 'line',
+          data: equityValues,
+          smooth: true,
+          yAxisIndex: 2, // 使用第三个 Y 轴（右侧）
+          lineStyle: {
+            width: 2,
+            color: '#ff9800',
+          },
+          itemStyle: { color: '#ff9800' },
+          areaStyle: {
+            color: new Echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              { offset: 0, color: 'rgba(255, 152, 0, 0.3)' },
+              { offset: 1, color: 'rgba(255, 152, 0, 0.05)' },
+            ]),
+          },
+          connectNulls: true,
         },
       ],
     })
@@ -245,7 +324,7 @@ const StockQuantPage: React.FC = () => {
       window.removeEventListener('resize', resizeChart)
       chart.dispose()
     }
-  }, [rows])
+  }, [rows, strategyData])
 
   const summary = useMemo(() => {
     if (!rows.length) {
@@ -268,8 +347,18 @@ const StockQuantPage: React.FC = () => {
     { title: '开盘', dataIndex: 'open', key: 'open', render: (value) => Number(value).toFixed(2) },
     { title: '最高', dataIndex: 'high', key: 'high', render: (value) => Number(value).toFixed(2) },
     { title: '最低', dataIndex: 'low', key: 'low', render: (value) => Number(value).toFixed(2) },
-    { title: '收盘', dataIndex: 'close', key: 'close', render: (value) => Number(value).toFixed(2) },
-    { title: '成交量', dataIndex: 'volume', key: 'volume', render: (value) => Number(value).toLocaleString() },
+    {
+      title: '收盘',
+      dataIndex: 'close',
+      key: 'close',
+      render: (value) => Number(value).toFixed(2),
+    },
+    {
+      title: '成交量',
+      dataIndex: 'volume',
+      key: 'volume',
+      render: (value) => Number(value).toLocaleString(),
+    },
   ]
 
   const equityCurveColumns: ColumnsType<StrategyData['equityCurve'][0]> = [
@@ -383,7 +472,7 @@ const StockQuantPage: React.FC = () => {
           </Col>
           <Col span={6}>
             <Button type="primary" onClick={() => setOpen1(true)}>
-              资金曲线详情
+              资金明细
             </Button>
           </Col>
         </Row>
@@ -404,14 +493,14 @@ const StockQuantPage: React.FC = () => {
         <Table
           loading={loading}
           columns={columns}
-          dataSource={rows.slice(-10).reverse()}
+          dataSource={rows}
           rowKey="date"
           pagination={false}
           size="small"
         />
       </Drawer>
       <Drawer
-        title={'资金曲线详情'}
+        title={'资金明细'}
         placement="left"
         open={open1}
         size={size}
