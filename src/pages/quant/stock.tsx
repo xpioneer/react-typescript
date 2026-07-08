@@ -15,6 +15,7 @@ import { CandlestickChart, LineChart, BarChart } from 'echarts/charts'
 import { CanvasRenderer } from 'echarts/renderers'
 import { object2Options } from '@/utils/tools'
 import { StrategyData } from 'types/quant'
+import { DatePicker } from '@/components/datePicker'
 
 Echarts.use([
   TitleComponent,
@@ -38,14 +39,29 @@ interface KlinePoint {
 
 enum Stock {
   Apple = 'AAPL',
+  Microsoft = 'MSFT',
+  Google = 'GOOGL',
+  Tesla = 'TSLA',
+  NVDA = 'NVDA',
   美的集团 = '000333',
+  贵州茅台 = '600519',
+  中际旭创 = '300308',
+  宁德时代 = '300750',
+  中信证券 = '600030',
+  药明康德 = '603259',
 }
 
 const options = object2Options(Stock)
 
 enum Strategy {
-  MACross = 'ma_cross',
-  RSI = 'rsi',
+  MACross = 'ma_cross', // 双均线策略（趋势跟踪）
+  MACD = 'macd', // MACD 策略（趋势跟踪）
+  VWAP = 'vwap', // VWAP 策略（趋势跟踪）
+  RSI = 'rsi', // RSI 策略（超买超卖）
+  ZScore = 'z_score', // Z-Score 策略（均值回归）
+  BollingerBands = 'bollinger_bands', // 布林带策略（均值回归）
+  Turtle = 'turtle', // 海龟交易法则（突破策略）
+  DoubleBottom = 'double_bottom', // 双底/双顶形态识别（形态学）
 }
 
 enum DateTime {
@@ -64,11 +80,12 @@ const StockQuantPage: React.FC = () => {
   const chartRef = useRef<HTMLDivElement>(null)
 
   const [symbol, setSymbol] = useState(Stock.美的集团)
+  const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([new Date('2024-07-01'), new Date])
   const [loading, setLoading] = useState(false)
   const [rows, setRows] = useState<KlinePoint[]>([])
   const [open, setOpen] = useState(false)
   const [size, setSize] = useState(900)
-  const [strategy, setStrategy] = useState(Strategy.RSI)
+  const [strategy, setStrategy] = useState(Strategy.MACross)
   const [strategyData, setStrategyData] = useState<StrategyData | undefined>(undefined)
   const [open1, setOpen1] = useState(false)
 
@@ -76,8 +93,8 @@ const StockQuantPage: React.FC = () => {
     setLoading(true)
     getStockData({
       symbol,
-      startDate: '20120603',
-      endDate: '20260703',
+      startDate: dateRange[0] ? format(dateRange[0], DateTime.yyyyMMdd) : '20210101',
+      endDate: dateRange[1] ? format(dateRange[1], DateTime.yyyyMMdd) : format(new Date(), DateTime.yyyyMMdd),
     })
       .then(({ rows }) => {
         setRows(
@@ -88,11 +105,17 @@ const StockQuantPage: React.FC = () => {
         )
       })
       .finally(() => setLoading(false))
-  }, [symbol])
+  }, [symbol, dateRange])
 
   useEffect(() => {
-    getStrategyData({ strategy_type: strategy, symbol }).then(setStrategyData)
-  }, [strategy, symbol])
+    getStrategyData({
+      strategy_type: strategy,
+      symbol,
+      startDate: dateRange[0] ? format(dateRange[0], DateTime.yyyyMMdd) : '20210101',
+      endDate: dateRange[1] ? format(dateRange[1], DateTime.yyyyMMdd) : format(new Date(),
+      DateTime.yyyyMMdd)
+    }).then(setStrategyData)
+  }, [strategy, symbol, dateRange])
 
   useEffect(() => {
     if (!chartRef.current || rows.length === 0) {
@@ -366,17 +389,21 @@ const StockQuantPage: React.FC = () => {
       title: '日期',
       dataIndex: 'date',
       key: 'date',
+      width: 120,
       render: (value: string) => value || '—',
     },
     {
       title: '是否交易',
       dataIndex: 'trade',
       key: 'trade',
+      width: 120,
+      align: 'center',
       render: (value: number, data) => {
         const item = strategyData?.trades?.find(
           (trade) => format(new Date(trade.date), 'yyyy-MM-dd') === data.date,
         )
-        return item ? item.type : '否'
+        // return item ? item.type : '否'
+        return item ? <Tag color={item.type === 'buy' ? 'red' : 'green'}>{item.type}</Tag> : '-'
       },
     },
     {
@@ -474,6 +501,13 @@ const StockQuantPage: React.FC = () => {
             <Button type="primary" onClick={() => setOpen1(true)}>
               资金明细
             </Button>
+          </Col>
+          <Col span={6}>
+            <DatePicker.RangePicker
+              style={{ width: '100%' }}
+              value={dateRange}
+              onChange={(dates) => setDateRange(dates as [Date | null, Date | null])}
+            />
           </Col>
         </Row>
       </Card>
