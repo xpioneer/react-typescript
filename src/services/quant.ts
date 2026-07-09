@@ -17,7 +17,7 @@ export type QuantData = {
   close: number
   volume: number
   symbol: string
-  local?: boolean
+  amount: number
 }
 
 type QuantKLineData<T = unknown> = {

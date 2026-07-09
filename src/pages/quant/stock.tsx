@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
-import { Button, Card, Col, Drawer, Row, Select, Spin, Table, Tag } from 'antd'
+import { Button, Card, Col, Drawer, Flex, Row, Select, Spin, Table, Tag } from 'antd'
 import { format } from 'date-fns'
 import type { ColumnsType } from 'antd/es/table'
-import { getStockData, getStrategyData } from '@/services/quant'
+import { getStockData, getStrategyData, QuantData } from '@/services/quant'
 import styles from './style.module.scss'
 import * as Echarts from 'echarts/core'
 import {
@@ -10,6 +10,7 @@ import {
   TooltipComponent,
   GridComponent,
   DataZoomComponent,
+  LegendComponent,
 } from 'echarts/components'
 import { CandlestickChart, LineChart, BarChart } from 'echarts/charts'
 import { CanvasRenderer } from 'echarts/renderers'
@@ -22,20 +23,12 @@ Echarts.use([
   TooltipComponent,
   GridComponent,
   DataZoomComponent,
+  LegendComponent,
   CandlestickChart,
   LineChart,
   BarChart,
   CanvasRenderer,
 ])
-
-interface KlinePoint {
-  date: string
-  open: number
-  high: number
-  low: number
-  close: number
-  volume: number
-}
 
 enum Stock {
   Apple = 'AAPL',
@@ -80,9 +73,12 @@ const StockQuantPage: React.FC = () => {
   const chartRef = useRef<HTMLDivElement>(null)
 
   const [symbol, setSymbol] = useState(Stock.美的集团)
-  const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([new Date('2024-07-01'), new Date])
+  const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([
+    new Date('2024-07-01'),
+    new Date(),
+  ])
   const [loading, setLoading] = useState(false)
-  const [rows, setRows] = useState<KlinePoint[]>([])
+  const [rows, setRows] = useState<QuantData[]>([])
   const [open, setOpen] = useState(false)
   const [size, setSize] = useState(900)
   const [strategy, setStrategy] = useState(Strategy.MACross)
@@ -94,11 +90,13 @@ const StockQuantPage: React.FC = () => {
     getStockData({
       symbol,
       startDate: dateRange[0] ? format(dateRange[0], DateTime.yyyyMMdd) : '20210101',
-      endDate: dateRange[1] ? format(dateRange[1], DateTime.yyyyMMdd) : format(new Date(), DateTime.yyyyMMdd),
+      endDate: dateRange[1]
+        ? format(dateRange[1], DateTime.yyyyMMdd)
+        : format(new Date(), DateTime.yyyyMMdd),
     })
       .then(({ rows }) => {
         setRows(
-          (rows ?? []).map((i: KlinePoint) => ({
+          (rows ?? []).map((i) => ({
             ...i,
             date: format(new Date(i.date), DateTime.yyyyMMdd),
           })),
@@ -112,8 +110,9 @@ const StockQuantPage: React.FC = () => {
       strategy_type: strategy,
       symbol,
       startDate: dateRange[0] ? format(dateRange[0], DateTime.yyyyMMdd) : '20210101',
-      endDate: dateRange[1] ? format(dateRange[1], DateTime.yyyyMMdd) : format(new Date(),
-      DateTime.yyyyMMdd)
+      endDate: dateRange[1]
+        ? format(dateRange[1], DateTime.yyyyMMdd)
+        : format(new Date(), DateTime.yyyyMMdd),
     }).then(setStrategyData)
   }, [strategy, symbol, dateRange])
 
@@ -195,10 +194,10 @@ const StockQuantPage: React.FC = () => {
     const equityValues = equityCurve.map((item) => item.portfolioValue)
 
     chart.setOption({
-      title: {
-        text: `${symbol} K线策略图`,
-        left: 'center',
-      },
+      // title: {
+      //   text: `${symbol} K线策略图`,
+      //   left: 'center',
+      // },
       tooltip: {
         trigger: 'axis',
         axisPointer: {
@@ -351,7 +350,7 @@ const StockQuantPage: React.FC = () => {
 
   const summary = useMemo(() => {
     if (!rows.length) {
-      return { latest: null, change: null, volume: 0 }
+      return { latest: null, change: null, volume: 0, amount: 0 }
     }
 
     const latest = rows[rows.length - 1]
@@ -362,10 +361,11 @@ const StockQuantPage: React.FC = () => {
       latest,
       change,
       volume: latest.volume,
+      amount: latest.amount,
     }
   }, [rows])
 
-  const columns: ColumnsType<KlinePoint> = [
+  const columns: ColumnsType<QuantData> = [
     { title: '日期', dataIndex: 'date', key: 'date' },
     { title: '开盘', dataIndex: 'open', key: 'open', render: (value) => Number(value).toFixed(2) },
     { title: '最高', dataIndex: 'high', key: 'high', render: (value) => Number(value).toFixed(2) },
@@ -439,9 +439,17 @@ const StockQuantPage: React.FC = () => {
 
   return (
     <div className={styles.quantContainer}>
-      <Card title="单只股票量化分析" style={{ marginBottom: 16 }}>
+      <Card
+        title="单只股票量化分析"
+        style={{ marginBottom: 16 }}
+        extra={
+          <Button type="primary" onClick={() => setOpen1(true)}>
+            资金明细
+          </Button>
+        }
+      >
         <Row gutter={[16, 16]} align="middle">
-          <Col span={6}>
+          <Col span={4}>
             <Select
               value={symbol}
               onChange={setSymbol}
@@ -449,20 +457,22 @@ const StockQuantPage: React.FC = () => {
               options={options}
             />
           </Col>
-          <Col span={6}>
+          <Col span={4}>
             <div style={{ color: '#666' }}>
               最新收盘：{summary.latest ? Number(summary.latest.close).toFixed(2) : '—'}
             </div>
           </Col>
-          <Col span={6}>
+          <Col span={4}>
             <div style={{ color: summary.change && summary.change >= 0 ? '#52c41a' : '#cf1322' }}>
               日变动：{summary.change !== null ? `${summary.change.toFixed(2)}%` : '—'}
             </div>
           </Col>
-          <Col span={6}>
+          <Col span={4}>
             <Tag color="blue">成交量：{summary.volume ? summary.volume.toLocaleString() : '—'}</Tag>
           </Col>
-          <Col span={6}>
+        </Row>
+        <Row gutter={[16, 16]} align="middle" style={{ marginTop: 16 }}>
+          <Col span={4}>
             <Select
               value={strategy}
               onChange={setStrategy}
@@ -470,7 +480,7 @@ const StockQuantPage: React.FC = () => {
               options={strategyOpts}
             />
           </Col>
-          <Col span={6}>
+          <Col span={4}>
             <div
               style={{
                 color:
@@ -482,36 +492,35 @@ const StockQuantPage: React.FC = () => {
               总收益率：{strategyData?.totalReturn}%
             </div>
           </Col>
-          <Col span={6}>
+          <Col span={4}>
             <div style={{ color: 'red' }}>最大回撤：{strategyData?.maxDrawdown}%</div>
           </Col>
-          <Col span={6}>
+          <Col span={4}>
             <Tag color="blue">夏普比率：{strategyData?.sharpeRatio}%</Tag>
           </Col>
-          <Col span={6}>
+          <Col span={4}>
             <Tag color="blue">总交易次数：{strategyData?.totalTrades}</Tag>
           </Col>
-          <Col span={6}>
+          <Col span={4}>
             <Tag color="blue">初始金额：{strategyData?.initialCapital}</Tag>
           </Col>
-          <Col span={6}>
+          <Col span={4}>
             <Tag color="blue">最终金额：{strategyData?.finalValue}</Tag>
-          </Col>
-          <Col span={6}>
-            <Button type="primary" onClick={() => setOpen1(true)}>
-              资金明细
-            </Button>
-          </Col>
-          <Col span={6}>
-            <DatePicker.RangePicker
-              style={{ width: '100%' }}
-              value={dateRange}
-              onChange={(dates) => setDateRange(dates as [Date | null, Date | null])}
-            />
           </Col>
         </Row>
       </Card>
-      <Card title="K 线数据" extra={<a onClick={() => setOpen(true)}>查看表格</a>}>
+      <Card
+        title={`${symbol} K线策略图`}
+        extra={
+          <Flex gap={8} align="center">
+            <DatePicker.RangePicker
+              value={dateRange}
+              onChange={(dates) => setDateRange(dates as [Date | null, Date | null])}
+            />
+            <Button onClick={() => setOpen(true)}>查看表格</Button>
+          </Flex>
+        }
+      >
         <div ref={chartRef} className={styles.chartBox} />
       </Card>
 
