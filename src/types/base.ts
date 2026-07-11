@@ -11,9 +11,10 @@ export class BaseModel {
 
 
 export enum DateFormat {
+  yyyyMMdd = 'yyyyMMdd',
   Date = 'yyyy-MM-dd',
   DateDiagonal = 'yyyy/MM/dd',
   DateTime = 'yyyy-MM-dd HH:mm:ss',
   DateTimeM = 'yyyy-MM-dd HH:mm',
-  DateTimeMS = 'yyyy-MM-dd HH:mm:SSS'
+  DateTimeMS = 'yyyy-MM-dd HH:mm:SSS',
 }
