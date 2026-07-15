@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { Button, Card, Col, Drawer, Flex, Row, Select, Spin, Table, Tag } from 'antd'
 import styles from './style.module.scss'
-import {  stockOpts, strategyOpts } from '@/types/quant'
+import { stockOpts, Strategy, strategyOpts, strategyTypeRev } from '@/types/quant'
 import { DatePicker } from '@/components/datePicker'
 import { useStock } from './useStock'
 
@@ -23,11 +23,17 @@ const StockQuantPage: React.FC = () => {
     setSize,
     strategy,
     setStrategy,
+    compareStrategy,
+    setCompareStrategy,
     strategyData,
+    compareData,
+    compareLoading,
     summary,
     columns,
     equityCurveColumns,
     equityCurveData,
+    compareTableData,
+    compareColumns,
   } = useStock()
   
   return (
@@ -102,6 +108,34 @@ const StockQuantPage: React.FC = () => {
           </Col>
         </Row>
       </Card>
+
+      <Card
+        title="所有策略对比"
+        className="mgtb16"
+        // style={{ marginBottom: 16 }}
+        // extra={
+        //   <Select
+        //     value={compareStrategy}
+        //     onChange={setCompareStrategy}
+        //     style={{ width: 180 }}
+        //     options={strategyOpts.filter((item) => item.value !== strategy)}
+        //   />
+        // }
+      >
+        <div style={{ color: '#666', marginBottom: 12 }}>
+          当前选择的策略为 {strategyTypeRev[strategy]};
+        </div>
+        <Table
+          loading={compareLoading}
+          columns={compareColumns}
+          dataSource={compareTableData}
+          rowKey="strategy"
+          pagination={false}
+          size="small"
+          bordered
+        />
+      </Card>
+
       <Card
         title={`${symbol} K线策略图`}
         extra={

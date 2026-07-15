@@ -92,7 +92,7 @@ class HttpHelper {
   }
   transformKeysToSnake(obj: any): any {
     if (Array.isArray(obj)) {
-      return obj.map(this.transformKeysToSnake)
+      return obj.map(item => this.transformKeysToSnake(item))
     }
     if (obj !== null && typeof obj === 'object' && !(obj instanceof FormData)) {
       return Object.keys(obj).reduce((acc, key) => {
@@ -111,7 +111,7 @@ class HttpHelper {
   }
   transformKeysToCamel(obj: any): any {
     if (Array.isArray(obj)) {
-      return obj.map(this.transformKeysToCamel)
+      return obj.map(item => this.transformKeysToCamel(item))
     }
     if (obj !== null && typeof obj === 'object') {
       return Object.keys(obj).reduce((acc, key) => {

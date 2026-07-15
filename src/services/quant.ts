@@ -1,6 +1,6 @@
 import { Method } from '@/types/demo'
 import { pageData2Params } from '@utils/tools'
-import { StrategyData } from 'types/quant'
+import { StrategyCompareItem, StrategyData } from 'types/quant'
 import { useQuantRequest } from './http'
 
 export type QuantQuery = {
@@ -36,6 +36,10 @@ export const getStrategyData = (data: AnyObject) => {
     data,
     Method.POST,
   )
+}
+
+export const getStrategyCompareData = (data: AnyObject) => {
+  return useQuantRequest<StrategyCompareItem[]>(`/strategy/compare`, data, Method.POST)
 }
 
 

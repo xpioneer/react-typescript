@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { Tag } from 'antd'
 import type { ColumnsType } from 'antd/es/table'
-import { getStockData, getStrategyData, QuantData } from '@/services/quant'
+import { getStockData, getStrategyCompareData, getStrategyData, QuantData } from '@/services/quant'
 import * as Echarts from 'echarts/core'
 import {
   TitleComponent,
@@ -12,7 +12,7 @@ import {
 } from 'echarts/components'
 import { CandlestickChart, LineChart, BarChart } from 'echarts/charts'
 import { CanvasRenderer } from 'echarts/renderers'
-import { StrategyData, Stock, stockOpts, strategyOpts, Strategy } from '@/types/quant'
+import { StrategyCompareItem, StrategyData, Stock, Strategy, strategyTypeRev } from '@/types/quant'
 import { DatePicker } from '@/components/datePicker'
 import { DateFormat } from '@/types/base'
 import { dateFormat } from '@/utils/tools'
@@ -30,8 +30,9 @@ Echarts.use([
 ])
 
 enum Colors {
-  Red = '#ef5350',
+  Red = '#e7322f',
   Green = '#26a69a',
+  
 }
 
 const commonDateFormat = (date: string) => dateFormat(date, DateFormat.Date)
@@ -50,7 +51,10 @@ export const useStock = () => {
   const [open1, setOpen1] = useState(false)
   const [size, setSize] = useState(900)
   const [strategy, setStrategy] = useState(Strategy.MACross)
+  const [compareStrategy, setCompareStrategy] = useState(Strategy.MACD)
   const [strategyData, setStrategyData] = useState<StrategyData | undefined>(undefined)
+  const [compareData, setCompareData] = useState<StrategyCompareItem[] >([])
+  const [compareLoading, setCompareLoading] = useState(false)
 
   useEffect(() => {
     setLoading(true)
@@ -82,6 +86,24 @@ export const useStock = () => {
         : dateFormat(new Date(), DateFormat.yyyyMMdd),
     }).then(setStrategyData)
   }, [strategy, symbol, dateRange])
+
+  useEffect(() => {
+    setCompareLoading(true)
+    getStrategyCompareData({
+      symbol,
+      strategies: [
+        { type: strategy, params: { fast_period: 5, slow_period: 20 } },
+        { type: compareStrategy, params: { fast_period: 5, slow_period: 20 } },
+      ],
+      start_date: dateRange[0] ? dateFormat(dateRange[0], DateFormat.yyyyMMdd) : '20210101',
+      end_date: dateRange[1]
+        ? dateFormat(dateRange[1], DateFormat.yyyyMMdd)
+        : dateFormat(new Date(), DateFormat.yyyyMMdd),
+      initial_capital: 100000,
+    })
+      .then(setCompareData)
+      .finally(() => setCompareLoading(false))
+  }, [strategy, compareStrategy, symbol, dateRange])
 
   useEffect(() => {
     if (!chartRef.current || rows.length === 0) {
@@ -278,7 +300,6 @@ export const useStock = () => {
           data: volumes,
           itemStyle: {
             color: (params: any) => {
-              console.log('params', params)
               return candleColors[params.dataIndex]
             },
           },
@@ -402,7 +423,58 @@ export const useStock = () => {
       date: item.date ? commonDateFormat(item.date) : '—',
     }))
   }, [strategyData])
-  
+
+  const compareTableData = useMemo(() => {
+    if (!compareData) {
+      return []
+    }
+
+    return compareData.map(({strategy, ...item}) => ({
+      key: strategy,
+      strategy: strategy,
+      totalReturn: item.totalReturn ?? 0,
+      sharpeRatio: item.sharpeRatio ?? 0,
+      maxDrawdown: item.maxDrawdown ?? 0,
+      totalTrades: item.totalTrades ?? 0,
+      error: item.error,
+    }))
+  }, [compareData])
+
+  const compareColumns: ColumnsType<any> = [
+    {
+      title: '策略',
+      dataIndex: 'strategy',
+      key: 'strategy',
+      render: (value: Strategy, record) =>
+        record.error ? <span style={{ color: '#cf1322' }}>{value}</span> : strategyTypeRev[value],
+    },
+    {
+      title: '总收益率(%)',
+      dataIndex: 'totalReturn',
+      key: 'totalReturn',
+      render: (value: number) => (
+        <span style={{ color: value > 0 ? '#cf1322' : '#52c41a' }}>{value}</span>
+      ),
+    },
+    {
+      title: '夏普比率',
+      dataIndex: 'sharpeRatio',
+      key: 'sharpeRatio',
+      // render: (value: number) => Number(value).toFixed(2),
+    },
+    {
+      title: '最大回撤(%)',
+      dataIndex: 'maxDrawdown',
+      key: 'maxDrawdown',
+    },
+    {
+      title: '总交易次数',
+      dataIndex: 'totalTrades',
+      key: 'totalTrades',
+      render: (value: number) => value,
+    },
+  ]
+
   return {
     chartRef,
     symbol,
@@ -419,11 +491,16 @@ export const useStock = () => {
     setSize,
     strategy,
     setStrategy,
+    compareStrategy,
+    setCompareStrategy,
     strategyData,
+    compareData,
+    compareLoading,
     summary,
     columns,
     equityCurveColumns,
     equityCurveData,
+    compareTableData,
+    compareColumns,
   }
 }
-

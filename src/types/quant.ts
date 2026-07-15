@@ -58,3 +58,26 @@ export interface StrategyData extends StrategyResult {
   trades: Trade[]
   equityCurve: EquityPoint[]
 }
+
+export interface StrategyCompareItem {
+  strategy: string
+  totalReturn?: number
+  sharpeRatio?: number
+  maxDrawdown?: number
+  totalTrades?: number
+  error?: string
+}
+
+// 自动生成反转映射类型
+type Reverse<T extends Record<string, string | number>> = {
+  [K in keyof T as T[K]]: K;
+};
+
+
+function reverse<T extends Record<string, string | number>>(obj: T): Reverse<T> {
+  return Object.fromEntries(Object.entries(obj).map(([key, value]) => [value, key])) as {
+    [K in keyof T as T[K]]: K
+  }
+}
+
+export const strategyTypeRev = reverse(Strategy)

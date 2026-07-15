@@ -4,6 +4,7 @@ import { storage } from '@utils/tools'
 import { JWT_TOKEN } from '@constants/index'
 import helper from './httpHelper'
 import { APISource } from '@/types/demo'
+import { message as $msg } from '@components/message'
 
 export const $http = axios.create({
   baseURL: '',
