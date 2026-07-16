@@ -16,7 +16,7 @@ export enum Stock {
 }
 
 export const stockOpts = object2Options(Stock)
-
+export const stockReverse = reverse(Stock)
 
 export enum Strategy {
   MACross = 'ma_cross', // 双均线策略（趋势跟踪）
@@ -80,4 +80,4 @@ function reverse<T extends Record<string, string | number>>(obj: T): Reverse<T> 
   }
 }
 
-export const strategyTypeRev = reverse(Strategy)
+export const strategyReverse = reverse(Strategy)

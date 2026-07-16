@@ -1,12 +1,14 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { Button, Card, Col, Drawer, Flex, Row, Select, Spin, Table, Tag } from 'antd'
 import styles from './style.module.scss'
-import { stockOpts, Strategy, strategyOpts, strategyTypeRev } from '@/types/quant'
+import { stockOpts, stockReverse, strategyOpts, strategyReverse } from '@/types/quant'
 import { DatePicker } from '@/components/datePicker'
 import { useStock } from './useStock'
+import { dateFormat } from '@/utils/tools'
 
 
 const StockQuantPage: React.FC = () => {
+  const [openAll, setOpenAll] = useState(false)
   const {
     chartRef,
     symbol,
@@ -23,10 +25,7 @@ const StockQuantPage: React.FC = () => {
     setSize,
     strategy,
     setStrategy,
-    compareStrategy,
-    setCompareStrategy,
     strategyData,
-    compareData,
     compareLoading,
     summary,
     columns,
@@ -40,11 +39,16 @@ const StockQuantPage: React.FC = () => {
     <div className={styles.quantContainer}>
       <Card
         title="单只股票量化分析"
-        style={{ marginBottom: 16 }}
+        style={{ marginBottom: 12 }}
         extra={
-          <Button type="primary" onClick={() => setOpen1(true)}>
-            资金明细
-          </Button>
+          <Flex gap={8}>
+            <Button ghost type="primary" onClick={() => setOpenAll(true)}>
+              所有策略对比
+            </Button>
+            <Button type="primary" onClick={() => setOpen1(true)}>
+              资金明细
+            </Button>
+          </Flex>
         }
       >
         <Row gutter={[16, 16]} align="middle">
@@ -58,7 +62,7 @@ const StockQuantPage: React.FC = () => {
           </Col>
           <Col span={4}>
             <div style={{ color: '#666' }}>
-              最新收盘：{summary.latest ? Number(summary.latest.close).toFixed(2) : '—'}
+              最新收盘：{summary.latest ? summary.latest.close : '—'}
             </div>
           </Col>
           <Col span={4}>
@@ -68,6 +72,9 @@ const StockQuantPage: React.FC = () => {
           </Col>
           <Col span={4}>
             <Tag color="blue">成交量：{summary.volume ? summary.volume.toLocaleString() : '—'}</Tag>
+          </Col>
+          <Col span={4} style={{ color: '#666' }}>
+            最新日期：{summary.latest?.date}
           </Col>
         </Row>
         <Row gutter={[16, 16]} align="middle" style={{ marginTop: 16 }}>
@@ -110,34 +117,7 @@ const StockQuantPage: React.FC = () => {
       </Card>
 
       <Card
-        title="所有策略对比"
-        className="mgtb16"
-        // style={{ marginBottom: 16 }}
-        // extra={
-        //   <Select
-        //     value={compareStrategy}
-        //     onChange={setCompareStrategy}
-        //     style={{ width: 180 }}
-        //     options={strategyOpts.filter((item) => item.value !== strategy)}
-        //   />
-        // }
-      >
-        <div style={{ color: '#666', marginBottom: 12 }}>
-          当前选择的策略为 {strategyTypeRev[strategy]};
-        </div>
-        <Table
-          loading={compareLoading}
-          columns={compareColumns}
-          dataSource={compareTableData}
-          rowKey="strategy"
-          pagination={false}
-          size="small"
-          bordered
-        />
-      </Card>
-
-      <Card
-        title={`${symbol} K线策略图`}
+        title={`${stockReverse[symbol]} K线策略图`}
         extra={
           <Flex gap={8} align="center">
             <DatePicker.RangePicker
@@ -150,7 +130,25 @@ const StockQuantPage: React.FC = () => {
       >
         <div ref={chartRef} className={styles.chartBox} />
       </Card>
-
+      <Drawer
+        title="所有策略对比"
+        open={openAll}
+        size={size}
+        onClose={() => setOpenAll(false)}
+        resizable={{
+          onResize: (newSize) => setSize(newSize),
+        }}
+      >
+        <Table
+          loading={compareLoading}
+          columns={compareColumns}
+          dataSource={compareTableData}
+          rowKey="strategy"
+          pagination={false}
+          size="small"
+          bordered
+        />
+      </Drawer>
       <Drawer
         title={'table数据展示'}
         open={open}

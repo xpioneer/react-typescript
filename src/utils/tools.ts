@@ -109,6 +109,12 @@ export const object2Options = <T extends object, K extends keyof T>(obj: T, keys
   }))
 }
 
+/**
+ * 日期格式化
+ * @param date 日期
+ * @param pattern DateFormat, default: 'yyyy-MM-dd'
+ * @returns string
+ */
 export const dateFormat = (date: number | string | Date, pattern = DateFormat.Date) => {
   let str = ''
   try {

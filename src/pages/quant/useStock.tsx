@@ -12,8 +12,7 @@ import {
 } from 'echarts/components'
 import { CandlestickChart, LineChart, BarChart } from 'echarts/charts'
 import { CanvasRenderer } from 'echarts/renderers'
-import { StrategyCompareItem, StrategyData, Stock, Strategy, strategyTypeRev } from '@/types/quant'
-import { DatePicker } from '@/components/datePicker'
+import { StrategyCompareItem, StrategyData, Stock, Strategy, strategyReverse } from '@/types/quant'
 import { DateFormat } from '@/types/base'
 import { dateFormat } from '@/utils/tools'
 
@@ -32,7 +31,7 @@ Echarts.use([
 enum Colors {
   Red = '#e7322f',
   Green = '#26a69a',
-  
+  Orange = '#ff9800',
 }
 
 const commonDateFormat = (date: string) => dateFormat(date, DateFormat.Date)
@@ -51,7 +50,6 @@ export const useStock = () => {
   const [open1, setOpen1] = useState(false)
   const [size, setSize] = useState(900)
   const [strategy, setStrategy] = useState(Strategy.MACross)
-  const [compareStrategy, setCompareStrategy] = useState(Strategy.MACD)
   const [strategyData, setStrategyData] = useState<StrategyData | undefined>(undefined)
   const [compareData, setCompareData] = useState<StrategyCompareItem[] >([])
   const [compareLoading, setCompareLoading] = useState(false)
@@ -69,7 +67,7 @@ export const useStock = () => {
         setRows(
           (rows ?? []).map((i) => ({
             ...i,
-            date: dateFormat(new Date(i.date), DateFormat.yyyyMMdd),
+            // date: dateFormat(new Date(i.date), DateFormat.yyyyMMdd),
           })),
         )
       })
@@ -91,10 +89,6 @@ export const useStock = () => {
     setCompareLoading(true)
     getStrategyCompareData({
       symbol,
-      strategies: [
-        { type: strategy, params: { fast_period: 5, slow_period: 20 } },
-        { type: compareStrategy, params: { fast_period: 5, slow_period: 20 } },
-      ],
       start_date: dateRange[0] ? dateFormat(dateRange[0], DateFormat.yyyyMMdd) : '20210101',
       end_date: dateRange[1]
         ? dateFormat(dateRange[1], DateFormat.yyyyMMdd)
@@ -103,7 +97,7 @@ export const useStock = () => {
     })
       .then(setCompareData)
       .finally(() => setCompareLoading(false))
-  }, [strategy, compareStrategy, symbol, dateRange])
+  }, [strategy, symbol, dateRange])
 
   useEffect(() => {
     if (!chartRef.current || rows.length === 0) {
@@ -111,7 +105,7 @@ export const useStock = () => {
     }
 
     const chart = Echarts.init(chartRef.current)
-    const dates = rows.map((item) => item.date)
+    const dates = rows.map((item) => dateFormat(new Date(item.date), DateFormat.yyyyMMdd))
     const candles = rows.map((item) => [item.open, item.close, item.low, item.high])
     const closes = rows.map((item) => item.close)
     const volumes = rows.map((item) => item.volume)
@@ -313,9 +307,9 @@ export const useStock = () => {
           yAxisIndex: 2, // 使用第三个 Y 轴（右侧）
           lineStyle: {
             width: 2,
-            color: '#ff9800',
+            color: Colors.Orange,
           },
-          itemStyle: { color: '#ff9800' },
+          itemStyle: { color: Colors.Orange },
           areaStyle: {
             color: new Echarts.graphic.LinearGradient(0, 0, 0, 1, [
               { offset: 0, color: 'rgba(255, 152, 0, 0.3)' },
@@ -354,7 +348,7 @@ export const useStock = () => {
   }, [rows])
 
   const columns: ColumnsType<QuantData> = [
-    { title: '日期', dataIndex: 'date', key: 'date' },
+    { title: '日期', dataIndex: 'date', key: 'date', render: commonDateFormat },
     { title: '开盘', dataIndex: 'open', key: 'open', render: (value) => Number(value).toFixed(2) },
     { title: '最高', dataIndex: 'high', key: 'high', render: (value) => Number(value).toFixed(2) },
     { title: '最低', dataIndex: 'low', key: 'low', render: (value) => Number(value).toFixed(2) },
@@ -446,7 +440,7 @@ export const useStock = () => {
       dataIndex: 'strategy',
       key: 'strategy',
       render: (value: Strategy, record) =>
-        record.error ? <span style={{ color: '#cf1322' }}>{value}</span> : strategyTypeRev[value],
+        record.error ? <span style={{ color: '#cf1322' }}>{value}</span> : strategyReverse[value],
     },
     {
       title: '总收益率(%)',
@@ -491,10 +485,7 @@ export const useStock = () => {
     setSize,
     strategy,
     setStrategy,
-    compareStrategy,
-    setCompareStrategy,
     strategyData,
-    compareData,
     compareLoading,
     summary,
     columns,
