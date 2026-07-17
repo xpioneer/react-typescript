@@ -459,14 +459,12 @@ export const useStock = () => {
     {
       title: '策略',
       dataIndex: 'strategy',
-      key: 'strategy',
       render: (value: Strategy, record) =>
         record.error ? <span style={{ color: '#cf1322' }}>{value}</span> : strategyReverse[value],
     },
     {
       title: '总收益率(%)',
       dataIndex: 'totalReturn',
-      key: 'totalReturn',
       render: (value: number) => (
         <span style={{ color: value > 0 ? '#cf1322' : '#52c41a' }}>{value}</span>
       ),
@@ -474,19 +472,16 @@ export const useStock = () => {
     {
       title: '夏普比率',
       dataIndex: 'sharpeRatio',
-      key: 'sharpeRatio',
-      // render: (value: number) => Number(value).toFixed(2),
+      render: commonRender,
     },
     {
       title: '最大回撤(%)',
       dataIndex: 'maxDrawdown',
-      key: 'maxDrawdown',
+      render: commonRender,
     },
     {
       title: '总交易次数',
       dataIndex: 'totalTrades',
-      key: 'totalTrades',
-      render: (value: number) => value,
     },
   ]
 
