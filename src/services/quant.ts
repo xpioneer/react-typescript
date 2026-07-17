@@ -18,6 +18,7 @@ export type QuantData = {
   volume: number
   symbol: string
   amount: number
+  pctChange: number
 }
 
 type QuantKLineData<T = unknown> = {

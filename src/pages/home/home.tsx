@@ -20,10 +20,12 @@ const HomePage: React.FC = () => {
       <SiderBar />
       <Layout className={styles.right}>
         <HeaderComponent />
-        <Content className={clsx('pd16', styles.main)}>
-          <Outlet />
+        <Content className={styles.main}>
+          <div className="pd12">
+            <Outlet />
+          </div>
+          <Footer />
         </Content>
-        <Footer />
       </Layout>
     </Layout>
   )

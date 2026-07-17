@@ -40,14 +40,20 @@ export interface StrategyResult {
   totalTrades: number
 }
 
-interface Trade {
-  date: string
-  type: string
-  price: number
-  shares: number
-  cost: number
-  cashAfter: number
+export enum TradeType {
+  Buy = 'buy',
+  Sell = 'sell'
 }
+
+export interface Trade {
+  execPrice: number
+  totalCost: number
+  totalRevenue: number
+  date: string
+  type: TradeType
+  shares: number
+}
+export const tradeTypeRev = reverse(TradeType)
 
 interface EquityPoint {
   date: string
@@ -55,7 +61,7 @@ interface EquityPoint {
 }
 
 export interface StrategyData extends StrategyResult {
-  trades: Trade[]
+  tradeList: Trade[]
   equityCurve: EquityPoint[]
 }
 

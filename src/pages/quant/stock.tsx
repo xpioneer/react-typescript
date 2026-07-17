@@ -46,7 +46,7 @@ const StockQuantPage: React.FC = () => {
               所有策略对比
             </Button>
             <Button type="primary" onClick={() => setOpen1(true)}>
-              资金明细
+              当前策略资金明细
             </Button>
           </Flex>
         }
@@ -73,8 +73,8 @@ const StockQuantPage: React.FC = () => {
           <Col span={4}>
             <Tag color="blue">成交量：{summary.volume ? summary.volume.toLocaleString() : '—'}</Tag>
           </Col>
-          <Col span={4} style={{ color: '#666' }}>
-            最新日期：{summary.latest?.date}
+          <Col span={8} style={{ color: '#666' }}>
+            最新日期：{dateFormat(summary.latest?.date!)}
           </Col>
         </Row>
         <Row gutter={[16, 16]} align="middle" style={{ marginTop: 16 }}>
@@ -124,7 +124,7 @@ const StockQuantPage: React.FC = () => {
               value={dateRange}
               onChange={(dates) => setDateRange(dates as [Date | null, Date | null])}
             />
-            <Button onClick={() => setOpen(true)}>查看表格</Button>
+            <Button onClick={() => setOpen(true)}>K线数据表格</Button>
           </Flex>
         }
       >

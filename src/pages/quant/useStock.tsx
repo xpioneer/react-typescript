@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
-import { Tag } from 'antd'
+import { Flex, Tag } from 'antd'
 import type { ColumnsType } from 'antd/es/table'
 import { getStockData, getStrategyCompareData, getStrategyData, QuantData } from '@/services/quant'
 import * as Echarts from 'echarts/core'
@@ -12,7 +12,16 @@ import {
 } from 'echarts/components'
 import { CandlestickChart, LineChart, BarChart } from 'echarts/charts'
 import { CanvasRenderer } from 'echarts/renderers'
-import { StrategyCompareItem, StrategyData, Stock, Strategy, strategyReverse } from '@/types/quant'
+import {
+  StrategyCompareItem,
+  StrategyData,
+  Stock,
+  Strategy,
+  strategyReverse,
+  Trade,
+  TradeType,
+  tradeTypeRev,
+} from '@/types/quant'
 import { DateFormat } from '@/types/base'
 import { dateFormat } from '@/utils/tools'
 
@@ -35,6 +44,7 @@ enum Colors {
 }
 
 const commonDateFormat = (date: string) => dateFormat(date, DateFormat.Date)
+const commonRender = (value: number) => Number(value).toFixed(2)
 
 export const useStock = () => {
   const chartRef = useRef<HTMLDivElement>(null)
@@ -51,7 +61,7 @@ export const useStock = () => {
   const [size, setSize] = useState(900)
   const [strategy, setStrategy] = useState(Strategy.MACross)
   const [strategyData, setStrategyData] = useState<StrategyData | undefined>(undefined)
-  const [compareData, setCompareData] = useState<StrategyCompareItem[] >([])
+  const [compareData, setCompareData] = useState<StrategyCompareItem[]>([])
   const [compareLoading, setCompareLoading] = useState(false)
 
   useEffect(() => {
@@ -105,6 +115,7 @@ export const useStock = () => {
     }
 
     const chart = Echarts.init(chartRef.current)
+    // 20260710
     const dates = rows.map((item) => dateFormat(new Date(item.date), DateFormat.yyyyMMdd))
     const candles = rows.map((item) => [item.open, item.close, item.low, item.high])
     const closes = rows.map((item) => item.close)
@@ -171,9 +182,6 @@ export const useStock = () => {
 
     // ===== 资金曲线数据 =====
     const equityCurve = strategyData?.equityCurve ?? []
-    const equityDates = equityCurve.map((item) =>
-      item.date ? dateFormat(new Date(item.date), DateFormat.yyyyMMdd) : '',
-    )
     const equityValues = equityCurve.map((item) => item.portfolioValue)
 
     chart.setOption({
@@ -243,8 +251,8 @@ export const useStock = () => {
         },
       ],
       dataZoom: [
-        { type: 'inside', start: 70, end: 100 },
-        { type: 'slider', show: true, xAxisIndex: [0, 1], top: '92%', start: 70, end: 100 },
+        { type: 'inside', start: 0, end: 100 },
+        { type: 'slider', show: true, xAxisIndex: [0, 1], top: '10%', start: 0, end: 100 },
       ],
       series: [
         {
@@ -347,22 +355,29 @@ export const useStock = () => {
     }
   }, [rows])
 
+  const tradeMap = useMemo(() => {
+    const map = new Map<string, Trade>()
+    strategyData?.tradeList?.forEach((trade) => {
+      map.set(trade.date, trade)
+    })
+    return map
+  }, [strategyData?.tradeList])
+
   const columns: ColumnsType<QuantData> = [
-    { title: '日期', dataIndex: 'date', key: 'date', render: commonDateFormat },
-    { title: '开盘', dataIndex: 'open', key: 'open', render: (value) => Number(value).toFixed(2) },
-    { title: '最高', dataIndex: 'high', key: 'high', render: (value) => Number(value).toFixed(2) },
-    { title: '最低', dataIndex: 'low', key: 'low', render: (value) => Number(value).toFixed(2) },
+    { title: '日期', dataIndex: 'date', render: commonDateFormat },
+    { title: '开盘', dataIndex: 'open', },
+    { title: '最高', dataIndex: 'high', },
+    { title: '最低', dataIndex: 'low', },
+    { title: '收盘', dataIndex: 'close', },
+    { title: '成交量', dataIndex: 'volume', },
     {
-      title: '收盘',
-      dataIndex: 'close',
-      key: 'close',
-      render: (value) => Number(value).toFixed(2),
-    },
-    {
-      title: '成交量',
-      dataIndex: 'volume',
-      key: 'volume',
-      render: (value) => Number(value).toLocaleString(),
+      title: '涨跌幅',
+      dataIndex: 'pctChange',
+      render: (value) => (
+        <span style={{ color: value > 0 ? Colors.Red : value === 0 ? '#555' : Colors.Green }}>
+          {value}
+        </span>
+      ),
     },
   ]
 
@@ -370,40 +385,46 @@ export const useStock = () => {
     {
       title: '日期',
       dataIndex: 'date',
-      key: 'date',
       width: 120,
       render: (value: string) => value || '—',
     },
     {
       title: '是否交易',
-      dataIndex: 'trade',
       key: 'trade',
-      width: 120,
+      width: 180,
       align: 'center',
-      render: (value: number, data) => {
-        const item = strategyData?.trades?.find(
-          (trade) => commonDateFormat(trade.date) === data.date,
+      render: (value, data) => {
+        const item = tradeMap.get(data.date)
+        const isBuy = item?.type === TradeType.Buy
+        return item ? (
+          <Flex>
+            <Tag color={isBuy ? 'red' : 'green'}>
+              {tradeTypeRev[item.type]}
+              <span>
+                (交易价格:{item.execPrice}, 发生金额:{isBuy ? item.totalCost : item.totalRevenue})
+              </span>
+            </Tag>
+          </Flex>
+        ) : (
+          '-'
         )
-        return item ? <Tag color={item.type === 'buy' ? 'red' : 'green'}>{item.type}</Tag> : '-'
       },
     },
     {
-      title: '持仓',
-      dataIndex: 'shares',
-      key: 'shares',
-      render: (value: number, data) => {
-        const item = strategyData?.trades?.find(
-          (trade) => commonDateFormat(trade.date) <= data.date,
-        )
-        return item ? item.shares : 0
-      },
+      title: '持仓(股)',
+      dataIndex: 'position',
     },
-
     {
       title: '净值 / 资金曲线',
       dataIndex: 'portfolioValue',
-      key: 'portfolioValue',
-      render: (value: number) => Number(value).toFixed(2),
+      align: 'right',
+      render: commonRender,
+    },
+    {
+      title: '现金',
+      dataIndex: 'cash',
+      align: 'right',
+      render: commonRender,
     },
   ]
 
@@ -423,7 +444,7 @@ export const useStock = () => {
       return []
     }
 
-    return compareData.map(({strategy, ...item}) => ({
+    return compareData.map(({ strategy, ...item }) => ({
       key: strategy,
       strategy: strategy,
       totalReturn: item.totalReturn ?? 0,
