@@ -1,5 +1,29 @@
 import { object2Options } from '@/utils/tools'
 
+export type QuantQuery = {
+  symbol: string
+  startDate: string
+  endDate: string
+}
+
+export type QuantData = {
+  date: string
+  open: number
+  high: number
+  low: number
+  close: number
+  volume: number
+  symbol: string
+  amount: number
+  pctChange: number
+}
+
+export type QuantKLineData<T = unknown> = {
+  period: string
+  rows: T[]
+  symbol: string
+}
+
 export enum Stock {
   Apple = 'AAPL',
   Microsoft = 'MSFT',
@@ -42,7 +66,7 @@ export interface StrategyResult {
 
 export enum TradeType {
   Buy = 'buy',
-  Sell = 'sell'
+  Sell = 'sell',
 }
 
 export interface Trade {
@@ -76,9 +100,8 @@ export interface StrategyCompareItem {
 
 // 自动生成反转映射类型
 type Reverse<T extends Record<string, string | number>> = {
-  [K in keyof T as T[K]]: K;
-};
-
+  [K in keyof T as T[K]]: K
+}
 
 function reverse<T extends Record<string, string | number>>(obj: T): Reverse<T> {
   return Object.fromEntries(Object.entries(obj).map(([key, value]) => [value, key])) as {

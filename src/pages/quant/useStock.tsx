@@ -1,7 +1,12 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { Flex, Tag } from 'antd'
 import type { ColumnsType } from 'antd/es/table'
-import { getStockData, getStrategyCompareData, getStrategyData, QuantData } from '@/services/quant'
+import {
+  getStockData,
+  getStrategyCompareData,
+  getStrategyData,
+  getBTStrategies,
+} from '@/services/quant'
 import * as Echarts from 'echarts/core'
 import {
   TitleComponent,
@@ -13,6 +18,7 @@ import {
 import { CandlestickChart, LineChart, BarChart } from 'echarts/charts'
 import { CanvasRenderer } from 'echarts/renderers'
 import {
+  QuantData,
   StrategyCompareItem,
   StrategyData,
   Stock,
@@ -45,6 +51,14 @@ enum Colors {
 
 const commonDateFormat = (date: string) => dateFormat(date, DateFormat.Date)
 const commonRender = (value: number) => Number(value).toFixed(2)
+const setDefaultRange = (dateRange: [Date | null, Date | null]) => {
+  return {
+    startDate: dateRange[0] ? dateFormat(dateRange[0], DateFormat.yyyyMMdd) : '20210101',
+    endDate: dateRange[1]
+      ? dateFormat(dateRange[1], DateFormat.yyyyMMdd)
+      : dateFormat(new Date(), DateFormat.yyyyMMdd),
+  }
+}
 
 export const useStock = () => {
   const chartRef = useRef<HTMLDivElement>(null)
@@ -68,10 +82,7 @@ export const useStock = () => {
     setLoading(true)
     getStockData({
       symbol,
-      startDate: dateRange[0] ? dateFormat(dateRange[0], DateFormat.yyyyMMdd) : '20210101',
-      endDate: dateRange[1]
-        ? dateFormat(dateRange[1], DateFormat.yyyyMMdd)
-        : dateFormat(new Date(), DateFormat.yyyyMMdd),
+      ...setDefaultRange(dateRange),
     })
       .then(({ rows }) => {
         setRows(
@@ -82,16 +93,17 @@ export const useStock = () => {
         )
       })
       .finally(() => setLoading(false))
+    getBTStrategies({
+      symbol,
+      ...setDefaultRange(dateRange),
+    })
   }, [symbol, dateRange])
 
   useEffect(() => {
     getStrategyData({
       strategy_type: strategy,
       symbol,
-      startDate: dateRange[0] ? dateFormat(dateRange[0], DateFormat.yyyyMMdd) : '20210101',
-      endDate: dateRange[1]
-        ? dateFormat(dateRange[1], DateFormat.yyyyMMdd)
-        : dateFormat(new Date(), DateFormat.yyyyMMdd),
+      ...setDefaultRange(dateRange),
     }).then(setStrategyData)
   }, [strategy, symbol, dateRange])
 
@@ -99,10 +111,7 @@ export const useStock = () => {
     setCompareLoading(true)
     getStrategyCompareData({
       symbol,
-      start_date: dateRange[0] ? dateFormat(dateRange[0], DateFormat.yyyyMMdd) : '20210101',
-      end_date: dateRange[1]
-        ? dateFormat(dateRange[1], DateFormat.yyyyMMdd)
-        : dateFormat(new Date(), DateFormat.yyyyMMdd),
+      ...setDefaultRange(dateRange),
       initial_capital: 100000,
     })
       .then(setCompareData)
